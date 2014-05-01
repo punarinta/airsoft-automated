@@ -1,0 +1,26 @@
+<select class="ai-select">
+<?php
+
+if (isset ($data['teams']))
+{
+    $teams = $data['teams'];
+}
+else if (isset ($data['country_id']))
+{
+    $teams = $this->getService('Team')->findByCountryId($data['country_id']);
+}
+else if (isset ($data['region_id']))
+{
+    $teams = $this->getService('Team')->findByRegionId($data['region_id']);
+}
+else
+{
+    $teams = $this->getService('Team')->findAll();
+}
+
+foreach ($teams as $team)
+{
+    echo '<option value="' . $team->getId() . '">' . $team->getName() . '</option>';
+}
+?>
+</select>

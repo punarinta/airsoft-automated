@@ -1,0 +1,19 @@
+<select class="ai-select">
+    <?php
+
+    if (isset ($data['country_id']))
+    {
+        $regions = $this->getService('Region')->findByCountryId($data['country_id']);
+
+        foreach ($regions as $region)
+        {
+            echo '<option value="' . $region->getId() . '">' . $region->getName() . '</option>';
+        }
+    }
+    else
+    {
+        echo '<option value="0">Error: no country</option>';
+    }
+
+    ?>
+</select>
