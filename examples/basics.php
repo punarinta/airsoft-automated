@@ -2,10 +2,10 @@
 
 $t1 = microtime(true);
 
-include '../AiCore.php';
+include '../Core.php';
 
 // init The Core
-$ai = new AiCore;
+$ai = new Core;
 
 // setup randomness
 $random = rand(1, 100);

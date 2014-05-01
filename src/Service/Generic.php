@@ -246,8 +246,8 @@ class Generic
      */
     public function getService($serviceName)
     {
-        global $globalAiCore;
-        return $globalAiCore->getService($serviceName);
+        global $globalCore;
+        return $globalCore->getService($serviceName);
     }
 
     /**
@@ -260,7 +260,7 @@ class Generic
      */
     public function getConfig($varPath = '', $skipNulls = true, $root = null)
     {
-        global $globalAiCore;
-        return $globalAiCore->getConfig($varPath, $skipNulls, $root);
+        global $globalCore;
+        return $globalCore->getConfig($varPath, $skipNulls, $root);
     }
 }

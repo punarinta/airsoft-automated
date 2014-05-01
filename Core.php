@@ -8,7 +8,7 @@
 use AiCore\Loader;
 use AiCore\Model\Db;
 
-class AiCore
+class Core
 {
     protected $db = null;
     protected $config = null;
@@ -36,8 +36,8 @@ class AiCore
             $this->db = new Db($this->config['db']);
         }
 
-        global $globalAiCore;
-        $globalAiCore = $this;
+        global $globalCore;
+        $globalCore = $this;
     }
 
     /**
