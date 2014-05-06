@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'eloquent',
+	'driver' => 'database',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return array(
 	|
 	*/
 
-	'table' => 'users',
+	'table' => 'user',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -62,7 +62,7 @@ return array(
 
 		'email' => 'emails.auth.reminder',
 
-		'table' => 'password_reminders',
+		'table' => 'password_reminder',
 
 		'expire' => 60,
 
