@@ -25,7 +25,7 @@ Route::post('login', function ()
 {
     $user = array
     (
-        'username' => Input::get('username'),
+        'email' => Input::get('username'),
         'password' => Input::get('password')
     );
 
