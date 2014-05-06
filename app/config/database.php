@@ -48,7 +48,7 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => '127.0.0.1:13306',
+			'host'      => '127.0.0.1',
 			'database'  => 'test',
 			'username'  => 'root',
 			'password'  => '',

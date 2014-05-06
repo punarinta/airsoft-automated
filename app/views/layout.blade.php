@@ -12,12 +12,12 @@
 <div id="main">
     <div id="navbar">
         <ul>
-            <li><a href="{{ URL::route('home') }}">Home</a></li>
+            <li><a class="first" href="{{ URL::route('home') }}">Home</a></li>
             @if(Auth::check())
             <li><a href="{{ URL::route('user-profile') }}">Profile</a></li>
-            <li><a href="{{ URL::route('logout') }}">Logout ({{ Auth::user()->email }})</a></li>
+            <li><a class="last" href="{{ URL::route('logout') }}">Sign out</a></li>
             @else
-            <li><a href="{{ URL::route('login') }}">Login</a></li>
+            <li><a class="last" href="{{ URL::route('login') }}">Sign in</a></li>
             @endif
         </ul>
     </div>
