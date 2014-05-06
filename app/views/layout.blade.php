@@ -1,30 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Laravel Authentication Demo</title>
-    {{ HTML::style('/css/style.css') }}
+    <meta charset="utf-8">
+    <title>Laravel Demo</title>
+    {{ HTML::style('/css/common.css') }}
+    @yield('header')
+    <script src="http://use.edgefonts.net/source-sans-pro:n3,i3,n4,i4,n6,i6,n7,i7.js"></script>
+    <script src="http://use.edgefonts.net/source-code-pro.js"></script>
 </head>
 <body>
-<div id="container">
-    <div id="nav">
+<div id="main">
+    <div id="navbar">
         <ul>
-            <li>{{ URL::to('home') }}</li>
+            <li><a href="{{ URL::route('home') }}">Home</a></li>
             @if(Auth::check())
-            <li>{{ URL::to('profile') }}</li>
-            <li>{{ URL::to('logout') }} {{ Auth::user()->username }}</li>
+            <li><a href="{{ URL::route('user-profile') }}">Profile</a></li>
+            <li><a href="{{ URL::route('logout') }}">Logout ({{ Auth::user()->email }})</a></li>
             @else
-            <li>{{ URL::to('login') }}</li>
+            <li><a href="{{ URL::route('login') }}">Login</a></li>
             @endif
         </ul>
-    </div><!-- end nav -->
+    </div>
 
-    <!-- check for flash notification message -->
     @if(Session::has('flash_notice'))
     <div id="flash_notice">{{ Session::get('flash_notice') }}</div>
     @endif
 
-    @yield('content')
-</div><!-- end container -->
+    <div id="content">@yield('content')</div>
+</div>
 </body>
 </html>

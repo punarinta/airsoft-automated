@@ -1,50 +1,24 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
-
 Route::get('/', array('as' => 'home', function ()
 {
     return View::make('home');
 }));
 
-Route::get('login', array('as' => 'login', function ()
+
+Route::get('/organizer', array('as' => 'organizer-dashboard', function ()
 {
-    return View::make('login');
-}))->before('guest');
-
-Route::post('login', function ()
-{
-    $user = array
-    (
-        'email' => Input::get('username'),
-        'password' => Input::get('password')
-    );
-
-    if (Auth::attempt($user))
-    {
-        return Redirect::route('home')->with('flash_notice', 'You are successfully logged in.');
-    }
-
-    // authentication failure! lets go back to the login page
-    return Redirect::route('login')->with('flash_error', 'Your username/password combination was incorrect.')->withInput();
-});
-
-Route::get('logout', array('as' => 'logout', function ()
-{
-    Auth::logout();
-    return Redirect::route('home')->with('flash_notice', 'You are successfully logged out.');
+    return View::make('organizer.dash');
 }))->before('auth');
 
-Route::get('profile', array('as' => 'profile', function ()
+Route::get('/player', array('as' => 'player-dashboard', function ()
 {
-    return View::make('profile');
+    return View::make('player.dash');
 }))->before('auth');
+
+// User management
+
+Route::get('user/login',    array('uses' => 'UserController@loginForm',      'as' => 'login'))->before('guest');
+Route::post('user/login',   array('uses' => 'UserController@loginEndpoint',  'as' => 'login'));
+Route::get('user/logout',   array('uses' => 'UserController@logout',         'as' => 'logout'))->before('auth');
+Route::get('user/profile',  array('uses' => 'UserController@profileForm',    'as' => 'user-profile'))->before('auth');

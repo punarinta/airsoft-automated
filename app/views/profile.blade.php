@@ -1,1 +1,1 @@
-profile
+@extends('layout')

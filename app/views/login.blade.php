@@ -8,7 +8,7 @@
 <div id="flash_error">{{ Session::get('flash_error') }}</div>
 @endif
 
-{{ Form::open(array('url' => 'login', 'method' => 'post')) }}
+{{ Form::open(array('url' => 'user/login', 'method' => 'post')) }}
 
 <!-- username field -->
 <p>

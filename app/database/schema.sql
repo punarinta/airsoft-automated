@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `birth_date` date DEFAULT NULL,
   `team_id` int(10) unsigned NOT NULL DEFAULT '0',
   `is_team_manager` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `is_validated` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `created` datetime NOT NULL,
   `remember_token` varchar(64) DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
