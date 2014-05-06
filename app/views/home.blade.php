@@ -7,11 +7,8 @@
 @section('content')
 <table id="about-table">
     <tr>
-        <td>For organizers</td>
-        <td>For players</td>
-    </tr>
-    <tr>
         <td>
+            <h3>For organizers</h3>
             <ul>
                 <li>Create a game in a couple of clicks</li>
                 <li>Manage your games</li>
@@ -22,6 +19,7 @@
             </ul>
         </td>
         <td>
+            <h3>For players</h3>
             <ul>
                 <li>Manage your team</li>
                 <li>Safely book tickets</li>

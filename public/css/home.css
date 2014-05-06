@@ -1,2 +1,3 @@
-#about-table {width: 70%; margin:10px auto}
+#about-table {min-width:700px; margin:10px auto}
 #about-table td {font-family: source-sans-pro, helvetica, arial, sans-serif; font-size: 15px}
+#about-table ul {padding-left: 18px}

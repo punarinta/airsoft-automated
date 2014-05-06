@@ -1,1 +1,2 @@
-p {font-family: source-sans-pro, helvetica, arial, sans-serif}
+html,body {height:100%;overflow-x:hidden}
+body {min-height:100%;margin:0 auto;padding:0;font:14px source-sans-pro, helvetica, arial, sans-serif;color:#333;background:#f7f7f7 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQALNS8R9GGF8EKc25uUWsACMA2IzInNAAgCAZQ2P0jfaagAAAABJRU5ErkJggg==)repeat} /*83a318*/
