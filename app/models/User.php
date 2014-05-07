@@ -8,10 +8,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 	protected $table = 'user';
 	protected $hidden = array('password');
 
-    protected $email;
-    protected $password;
-    protected $remember_token;
-
 	/**
 	 * Get the unique identifier for the user.
 	 *
@@ -72,4 +68,169 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 	{
 		return $this->email;
 	}
+
+    /*
+     *   Own methods
+     */
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNick()
+    {
+        return $this->nick;
+    }
+
+    /**
+     * @param mixed $nick
+     */
+    public function setNick($nick)
+    {
+        $this->nick = $nick;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBirthDate()
+    {
+        return $this->birth_date;
+    }
+
+    /**
+     * @param mixed $birth_date
+     */
+    public function setBirthDate($birth_date)
+    {
+        $this->birth_date = $birth_date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTeamId()
+    {
+        return $this->team_id;
+    }
+
+    /**
+     * @param mixed $team_id
+     */
+    public function setTeamId($team_id)
+    {
+        $this->team_id = $team_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsTeamManager()
+    {
+        return $this->is_team_manager;
+    }
+
+    /**
+     * @param mixed $is_team_manager
+     */
+    public function setIsTeamManager($is_team_manager)
+    {
+        $this->is_team_manager = $is_team_manager;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsValidated()
+    {
+        return $this->is_validated;
+    }
+
+    /**
+     * @param mixed $is_validated
+     */
+    public function setIsValidated($is_validated)
+    {
+        $this->is_validated = $is_validated;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * @param mixed $created_at
+     */
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * @param mixed $updated_at
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
+    }
 }

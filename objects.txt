@@ -5,7 +5,7 @@ v1.0 objects
 [user]
 id
 email
-hash
+password
 nick
 birth_date
 team_id

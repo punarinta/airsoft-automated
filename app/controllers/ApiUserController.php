@@ -27,8 +27,8 @@ class ApiUserController extends BaseController
             $password = Str::random(8, 'alpha-numeric');
 
             $user = new User;
-            $user->email = $email;
-            $user->password = Hash::make($password);
+            $user->setEmail($email);
+            $user->setPassword(Hash::make($password));
             $user->save();
 
             $json = array
