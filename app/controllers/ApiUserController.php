@@ -56,6 +56,6 @@ class ApiUserController extends BaseController
             );
         }
 
-        return View::make('json')->with('data', $json);
+        return Response::json($json);
     }
 }
