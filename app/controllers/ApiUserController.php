@@ -31,6 +31,17 @@ class ApiUserController extends BaseController
             $user->setPassword(Hash::make($password));
             $user->save();
 
+        /*    Mandrill::request('messages/send', array
+            (
+                'message' => array
+                (
+                    'subject'       => 'Welcome to ' . Config::get('app.company.name') . '!',
+                    'html'          => 'Your password is ' . $password . '. We recommend you to change it.',
+                    'from_email'    => Config::get('app.emails.noreply'),
+                    'to'            => array(array('email' => $email))
+                )
+            ));*/
+
             $json = array
             (
                 'email' => $email,

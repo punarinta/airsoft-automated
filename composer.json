@@ -5,7 +5,8 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.1.*",
-        "mandrill/mandrill": "1.0.24"
+        "mandrill/mandrill": "1.0.24",
+        "doxxon/laravel-mandrill-request": "1.0.1"
 	},
 	"autoload": {
 		"classmap": [

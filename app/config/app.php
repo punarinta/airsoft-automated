@@ -120,6 +120,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+        'Doxxon\LaravelMandrillRequest\LaravelMandrillRequestServiceProvider',
 	),
 
 	/*
@@ -186,6 +187,16 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
+        'Mandrill'        => 'Doxxon\LaravelMandrillRequest\Facades\MandrillRequest',
 	),
 
+    'emails' => array
+    (
+        'noreply' => 'noreply@example.com',
+    ),
+
+    'company' => array
+    (
+        'name' => 'Test Name',
+    ),
 );
