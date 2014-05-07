@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 07, 2014 at 11:35 AM
+-- Generation Time: May 07, 2014 at 01:32 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.4.17
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `country` (
 `id` int(10) unsigned NOT NULL,
-  `name` varchar(64) NOT NULL,
+  `name` varchar(127) NOT NULL,
   `code` char(3) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
@@ -57,11 +57,23 @@ CREATE TABLE IF NOT EXISTS `game` (
 
 CREATE TABLE IF NOT EXISTS `game_party` (
 `id` int(10) unsigned NOT NULL,
-  `name` varchar(128) NOT NULL,
+  `name` varchar(127) NOT NULL,
   `game_id` int(10) unsigned NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reminder`
+--
+
+CREATE TABLE IF NOT EXISTS `password_reminder` (
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` char(32) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -87,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `payment` (
 
 CREATE TABLE IF NOT EXISTS `region` (
 `id` int(10) unsigned NOT NULL,
-  `name` varchar(128) NOT NULL,
+  `name` varchar(127) NOT NULL,
   `country_id` int(10) unsigned NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
@@ -101,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `region` (
 
 CREATE TABLE IF NOT EXISTS `team` (
 `id` int(10) unsigned NOT NULL,
-  `name` varchar(128) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `region_id` int(10) unsigned NOT NULL DEFAULT '0',
   `owner_id` int(10) unsigned NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
@@ -150,9 +162,9 @@ CREATE TABLE IF NOT EXISTS `ticket_template` (
 
 CREATE TABLE IF NOT EXISTS `user` (
 `id` int(10) unsigned NOT NULL,
-  `email` varchar(64) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` char(60) NOT NULL,
-  `nick` varchar(64) DEFAULT NULL,
+  `nick` varchar(63) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
   `team_id` int(10) unsigned NOT NULL DEFAULT '0',
   `is_team_manager` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -167,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `nick`, `birth_date`, `team_id`, `is_team_manager`, `is_validated`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'robin@jesp.ru', '$2a$04$hYpb8G.ye4mzVWqiadQW.ubE5PL7pA4Jr2VgermN4pzBaVaJe1KUK', 'Robin', NULL, 0, 0, 0, 'ubktSGrBu4QK365JERGMPsOgxgqw4gIwqWYQitT3xoxNvL9ZBMIo0Y3B0D1E', '2014-05-06 00:00:00', '2014-05-06 13:56:45');
+(1, 'robin@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Robin', NULL, 0, 0, 0, '2YZsIxosaG3D0c3wkHVNPVhfIvGl1fX2WsOUsmeTc7AldyZHVoc3sLoAcFNS', '2014-05-06 00:00:00', '2014-05-07 13:29:55');
 
 --
 -- Indexes for dumped tables
@@ -190,6 +202,12 @@ ALTER TABLE `game`
 --
 ALTER TABLE `game_party`
  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_reminder`
+--
+ALTER TABLE `password_reminder`
+ ADD KEY `password_reminder_email_index` (`email`), ADD KEY `password_reminder_token_index` (`token`);
 
 --
 -- Indexes for table `payment`
