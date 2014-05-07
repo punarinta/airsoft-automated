@@ -22,6 +22,7 @@ Route::get('user/login',    array('uses' => 'UserController@loginForm',      'as
 Route::post('user/login',   array('uses' => 'UserController@loginEndpoint',  'as' => 'login'));
 Route::get('user/logout',   array('uses' => 'UserController@logout',         'as' => 'logout'))->before('auth');
 Route::get('user/profile',  array('uses' => 'UserController@profileForm',    'as' => 'user-profile'))->before('auth');
+Route::get('api/user/register/{email}', array('uses' => 'ApiUserController@register'))->before('guest');
 
 // Team management
 
