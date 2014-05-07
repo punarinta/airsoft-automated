@@ -14,14 +14,27 @@ class ApiUserController extends BaseController
         {
             // check that email is not used
 
-            if (User::where('email', $email)->first())
+            $validator = Validator::make(array('email' => $email), array
+            (
+                'email' => 'required|email|unique:user',
+            ));
+
+            if (!$validator->passes())
             {
                 throw new \Exception('Email is in use');
             }
 
+            $password = Str::random(8, 'alpha-numeric');
+
+            $user = new User;
+            $user->email = $email;
+            $user->password = Hash::make($password);
+            $user->save();
+
             $json = array
             (
                 'email' => $email,
+                'password' => $password,
             );
         }
         catch (\Exception $e)
