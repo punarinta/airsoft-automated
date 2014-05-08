@@ -4,6 +4,7 @@ class GamesController extends BaseController
 {
     public function index()
     {
-        return View::make('games');
+        $games = Game::orderBy('starts_at', 'DESC')->get();
+        return View::make('games', array('games' => $games));
     }
 }

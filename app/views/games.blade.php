@@ -6,6 +6,9 @@
 
 @section('content')
 
-games
+@foreach ($games as $game)
+{{ $game->getName(); }}
+<br/>
+@endforeach
 
 @stop

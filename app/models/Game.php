@@ -99,4 +99,36 @@ class Game extends Eloquent
     {
         $this->update_at = $update_at;
     }
+
+    /**
+     * @return string
+     */
+    public function getStartsAt()
+    {
+        return $this->starts_at;
+    }
+
+    /**
+     * @param string $starts_at
+     */
+    public function setStartsAt($starts_at)
+    {
+        $this->starts_at = $starts_at;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEndsAt()
+    {
+        return $this->ends_at;
+    }
+
+    /**
+     * @param string $ends_at
+     */
+    public function setEndsAt($ends_at)
+    {
+        $this->ends_at = $ends_at;
+    }
 }
