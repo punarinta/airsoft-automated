@@ -16,7 +16,6 @@
 [ ] activate links to dashboards after registering
 [ ] show links to dashboards when logged-in (both at home and menu)
 [ ] add language switch (English only for now)
-[ ] add Sweden and its regions
 [ ] /games view (games calendar with filter and "Create own game" button), add butoon to menu
 [ ] team geopicker view
 

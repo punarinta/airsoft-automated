@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 07, 2014 at 01:32 PM
+-- Generation Time: May 08, 2014 at 07:20 AM
 -- Server version: 5.5.20
 -- PHP Version: 5.4.17
 
@@ -32,7 +32,14 @@ CREATE TABLE IF NOT EXISTS `country` (
   `code` char(3) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `country`
+--
+
+INSERT INTO `country` (`id`, `name`, `code`, `created_at`, `updated_at`) VALUES
+(1, 'Sweden', 'SWE', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -59,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `game_party` (
 `id` int(10) unsigned NOT NULL,
   `name` varchar(127) NOT NULL,
   `game_id` int(10) unsigned NOT NULL,
+  `players_limit` int(10) unsigned NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -103,7 +111,34 @@ CREATE TABLE IF NOT EXISTS `region` (
   `country_id` int(10) unsigned NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+
+--
+-- Dumping data for table `region`
+--
+
+INSERT INTO `region` (`id`, `name`, `country_id`, `created_at`, `updated_at`) VALUES
+(1, 'Stockholm', 1, NULL, NULL),
+(2, 'Västerbotten', 1, NULL, NULL),
+(3, 'Norrbotten', 1, NULL, NULL),
+(4, 'Uppsala', 1, NULL, NULL),
+(5, 'Östergötland', 1, NULL, NULL),
+(6, 'Östergötland', 1, NULL, NULL),
+(7, 'Jönköping', 1, NULL, NULL),
+(8, 'Kronoberg', 1, NULL, NULL),
+(9, 'Kalmar', 1, NULL, NULL),
+(10, 'Gotland', 1, NULL, NULL),
+(11, 'Blekinge', 1, NULL, NULL),
+(12, 'Skåne', 1, NULL, NULL),
+(13, 'Halland', 1, NULL, NULL),
+(14, 'Västra Götaland', 1, NULL, NULL),
+(15, 'Värmland', 1, NULL, NULL),
+(16, 'Örebro', 1, NULL, NULL),
+(17, 'Västmanland', 1, NULL, NULL),
+(18, 'Dalarna', 1, NULL, NULL),
+(19, 'Gävleborg', 1, NULL, NULL),
+(20, 'Västernorrland', 1, NULL, NULL),
+(21, 'Jämtland', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -144,7 +179,8 @@ CREATE TABLE IF NOT EXISTS `ticket` (
 
 CREATE TABLE IF NOT EXISTS `ticket_template` (
 `id` int(10) unsigned NOT NULL,
-  `game_party_id` int(10) unsigned NOT NULL,
+  `game_id` int(10) unsigned NOT NULL,
+  `game_party_id` int(10) unsigned NOT NULL DEFAULT '0',
   `price` int(10) unsigned NOT NULL,
   `price_date_start` datetime DEFAULT NULL,
   `price_date_end` datetime DEFAULT NULL,
@@ -179,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `nick`, `birth_date`, `team_id`, `is_team_manager`, `is_validated`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'robin@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Robin', NULL, 0, 0, 0, '2YZsIxosaG3D0c3wkHVNPVhfIvGl1fX2WsOUsmeTc7AldyZHVoc3sLoAcFNS', '2014-05-06 00:00:00', '2014-05-07 13:29:55');
+(1, 'robin@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Robin', NULL, 0, 0, 0, 'gUhGceAUdeL16xShJdhxNzHhdQ6cHagcF3oO5ikVtE78W6mb7krbzRJPNWG1', '2014-05-06 00:00:00', '2014-05-08 07:07:05');
 
 --
 -- Indexes for dumped tables
@@ -253,7 +289,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `country`
 --
 ALTER TABLE `country`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `game`
 --
@@ -273,7 +309,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `region`
 --
 ALTER TABLE `region`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `team`
 --
