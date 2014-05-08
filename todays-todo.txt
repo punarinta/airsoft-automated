@@ -15,8 +15,5 @@
 [ ] allow organizer-dash only for is_validated users (others see message)
 [ ] activate links to dashboards after registering
 [ ] show links to dashboards when logged-in (both at home and menu)
-[ ] add language switch (English only for now)
-[ ] /games view (games calendar with filter and "Create own game" button), add butoon to menu
+[ ] /games view (games calendar with filter and "Create own game" button), add button to menu
 [ ] team geopicker view
-
-move flash notice to the menu

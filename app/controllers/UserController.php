@@ -69,7 +69,6 @@ class UserController extends BaseController
             'created_at' => \Carbon\Carbon::now(),
         ));
 
-
         if (Config::get('mail.mandrill_on'))
         {
             Mandrill::request('messages/send', array

@@ -5,13 +5,14 @@ class ApiUserController extends BaseController
     /**
      * Quickly register user by providing his email only
      *
-     * @param null $email
      * @return \Illuminate\View\View
      */
-    public function register($email = null)
+    public function register()
     {
         try
         {
+            $email = Input::json('email');
+
             // check that email is not used
 
             $validator = Validator::make(array('email' => $email), array
