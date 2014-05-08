@@ -23,6 +23,22 @@ class TicketTemplate extends Eloquent
     /**
      * @return string
      */
+    public function getGameId()
+    {
+        return $this->game_id;
+    }
+
+    /**
+     * @param string $game_id
+     */
+    public function setGameId($game_id)
+    {
+        $this->game_id = $game_id;
+    }
+
+    /**
+     * @return string
+     */
     public function getGamePartyId()
     {
         return $this->game_party_id;

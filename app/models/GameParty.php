@@ -83,4 +83,20 @@ class GameParty extends Eloquent
     {
         $this->update_at = $update_at;
     }
+
+    /**
+     * @return string
+     */
+    public function getPlayersLimit()
+    {
+        return $this->players_limit;
+    }
+
+    /**
+     * @param string $players_limit
+     */
+    public function setPlayersLimit($players_limit)
+    {
+        $this->players_limit = $players_limit;
+    }
 }
