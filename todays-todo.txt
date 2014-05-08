@@ -12,5 +12,3 @@
 /about                         -- info about the service
 /api/{user,team,game,game_party,ticket_template}
 
-[ ] /games view (games calendar with filter and "Create own game" button), add button to menu
-[ ] team geopicker view
