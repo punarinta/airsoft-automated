@@ -194,6 +194,7 @@ return array(
     (
         'noreply' => 'noreply@example.com',
         'office'  => 'office@example.com',
+        'support' => 'support@example.com',
     ),
 
     'company' => array
