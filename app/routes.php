@@ -1,20 +1,22 @@
 <?php
 
+// simple pages
 Route::get('/', array('as' => 'home', function ()
 {
     return View::make('home');
 }));
-
-
-Route::get('/organizer', array('as' => 'organizer-dashboard', function ()
+Route::get('/about', array('as' => 'about', function ()
 {
-    return View::make('organizer.dash');
-}))->before('auth');
+    return View::make('about');
+}));
 
-Route::get('/player', array('as' => 'player-dashboard', function ()
-{
-    return View::make('player.dash');
-}))->before('auth');
+
+Route::get('games', array('uses' => 'GamesController@index', 'as' => 'games'));
+Route::get('game/edit/{game_id?}', array('uses' => 'GameController@editForm', 'as' => 'game-edit'))->before('auth');
+Route::get('game/book/{game_id}', array('uses' => 'GameController@bookForm', 'as' => 'game-book'))->before('auth');
+Route::get('game/briefing/{game_id}', array('uses' => 'GameController@briefingForm', 'as' => 'game-briefing'))->before('auth');
+Route::get('player', array('uses' => 'DashboardController@playerForm', 'as' => 'player-dashboard'))->before('auth');
+Route::get('organizer', array('uses' => 'DashboardController@organizerForm', 'as' => 'organizer-dashboard'))->before('auth');
 
 
 // User management
@@ -22,14 +24,10 @@ Route::get('user/login', array('uses' => 'UserController@loginForm', 'as' => 'lo
 Route::post('user/login', array('uses' => 'UserController@loginEndpoint', 'as' => 'login'));
 Route::get('user/logout', array('uses' => 'UserController@logout', 'as' => 'logout'))->before('auth');
 Route::get('user/profile', array('uses' => 'UserController@profileForm', 'as' => 'user-profile'))->before('auth');
-Route::get('user/remind-password', array('uses' => 'UserController@remindForm', 'as' => 'user-remind-password'))->before('guest');
-Route::post('user/remind-password', array('uses' => 'UserController@remindFormEndpoint', 'as' => 'user-remind-password'))->before('guest');
+Route::get('user/restore-password', array('uses' => 'UserController@restoreForm', 'as' => 'user-restore-password'))->before('guest');
+Route::post('user/restore-password', array('uses' => 'UserController@restoreFormEndpoint', 'as' => 'user-restore-password'))->before('guest');
 Route::get('user/reset-password/{token}', array('uses' => 'UserController@resetForm', 'as' => 'user-reset-password'))->before('guest');
 Route::post('user/reset-password', array('uses' => 'UserController@resetFormEndpoint', 'as' => 'user-reset-password'))->before('guest');
 
-Route::get('api/user/register/{email}', array('uses' => 'ApiUserController@register'))->before('guest');
+Route::post('api/user', array('uses' => 'ApiUserController@register'))->before('guest');
 
-// Team management
-
-// Game management
-Route::post('game/check-in', array('uses' => 'GameController@checkIn', 'as' => 'check-in'));

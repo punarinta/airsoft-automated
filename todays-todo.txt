@@ -6,7 +6,7 @@
 /user/profile                  -- password, nick, team, birth date
 /user/login                    -- login box + restore pass
 /user/restore-password         -- dialog with email
-/user/password-reset           -- dialog with email, new pass and confirmation
+/user/reset-password           -- dialog with email, new pass and confirmation
 /player                        -- my booked games (ticket list), links to briefings
 /organizer                     -- my organized games, links to editor, money stats
 /about                         -- info about the service
@@ -19,4 +19,5 @@
 [ ] add Sweden and its regions
 [ ] /games view (games calendar with filter and "Create own game" button), add butoon to menu
 [ ] team geopicker view
-[ ] about
+
+move flash notice to the menu

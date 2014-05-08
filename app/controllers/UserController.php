@@ -40,9 +40,9 @@ class UserController extends BaseController
      *
      * @return Response
      */
-    public function remindForm()
+    public function restoreForm()
     {
-        return View::make('user.remind');
+        return View::make('user.restore');
     }
 
     /**
@@ -50,7 +50,7 @@ class UserController extends BaseController
      *
      * @return Response
      */
-    public function remindFormEndpoint()
+    public function restoreFormEndpoint()
     {
         $email = Input::input('email');
         $user = User::where('email', '=', $email)->first();

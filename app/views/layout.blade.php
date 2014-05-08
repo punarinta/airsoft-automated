@@ -11,20 +11,32 @@
 <body>
 <div id="main">
     <div id="navbar">
-        <ul>
+        <ul style="float:left">
             <li><a class="first" href="{{ URL::route('home') }}">Home</a></li>
+            <li><a href="{{ URL::route('games') }}">Games</a></li>
             @if(Auth::check())
-            <li><a href="{{ URL::route('user-profile') }}">Profile</a></li>
-            <li><a class="last" href="{{ URL::route('logout') }}">Sign out</a></li>
+            <li><a href="{{ URL::route('player-dashboard') }}">Player</a></li>
+            <li><a href="{{ URL::route('organizer-dashboard') }}">Organizer</a></li>
+            <li><a href="{{ URL::route('user-profile') }}">Settings</a></li>
+            @endif
+            <li><a class="last" href="{{ URL::route('about') }}">About</a></li>
+        </ul>
+
+        @if(Session::has('flash_notice'))
+        <span class="flashbar" id="flash_notice">{{ Session::get('flash_notice') }}</span>
+        @endif
+        @if (Session::has('flash_error'))
+        <span class="flashbar" id="flash_error">{{ Session::get('flash_error') }}</span>
+        @endif
+
+        <ul style="float:right">
+            @if(Auth::check())
+            <li><a class="alone" href="{{ URL::route('logout') }}">Sign out</a></li>
             @else
-            <li><a class="last" href="{{ URL::route('login') }}">Sign in</a></li>
+            <li><a class="alone" href="{{ URL::route('login') }}">Sign in</a></li>
             @endif
         </ul>
     </div>
-
-    @if(Session::has('flash_notice'))
-    <div id="flash_notice">{{ Session::get('flash_notice') }}</div>
-    @endif
 
     <div id="content">@yield('content')</div>
 </div>
