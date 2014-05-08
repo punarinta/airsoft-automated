@@ -69,16 +69,20 @@ class UserController extends BaseController
             'created_at' => \Carbon\Carbon::now(),
         ));
 
-    /*    Mandrill::request('messages/send', array
-        (
-            'message' => array
+
+        if (Config::get('mail.mandrill_on'))
+        {
+            Mandrill::request('messages/send', array
             (
-                'subject'       => 'Password reminder',
-                'html'          => 'Go through this link to reset your password: ' . URL::to('user/reset-password', array($token)),
-                'from_email'    => Config::get('app.emails.noreply'),
-                'to'            => array(array('email' => $email))
-            )
-        ));*/
+                'message' => array
+                (
+                    'subject'       => 'Password reminder',
+                    'html'          => 'Go through this link to reset your password: ' . URL::to('user/reset-password', array($token)),
+                    'from_email'    => Config::get('app.emails.noreply'),
+                    'to'            => array(array('email' => $email))
+                )
+            ));
+        }
 
         return Redirect::back()->with('flash_notice', Lang::get('OK'));
     }

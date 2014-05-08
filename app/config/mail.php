@@ -2,6 +2,11 @@
 
 return array(
 
+    /*
+     Set to 'true' to switch on Mandrill transmission
+     */
+    'mandrill_on' => false,
+
 	/*
 	|--------------------------------------------------------------------------
 	| Mail Driver
