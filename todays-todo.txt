@@ -13,7 +13,5 @@
 /api/{user,team,game,game_party,ticket_template}
 
 [ ] allow organizer-dash only for is_validated users (others see message)
-[ ] activate links to dashboards after registering
-[ ] show links to dashboards when logged-in (both at home and menu)
 [ ] /games view (games calendar with filter and "Create own game" button), add button to menu
 [ ] team geopicker view

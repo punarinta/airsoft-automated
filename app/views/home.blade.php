@@ -30,6 +30,18 @@
             </ul>
         </td>
     </tr>
+    <tr>
+        <td>
+            <div @if(!Auth::check()) class="guest-hidden" @endif>
+                <a href="{{ URL::route('player-dashboard') }}">Player dashboard</a>
+            </div>
+        </td>
+        <td>
+            <div @if(!Auth::check()) class="guest-hidden" @endif>
+                <a href="{{ URL::route('organizer-dashboard') }}">Organizer dashboard</a>
+            </div>
+        </td>
+    </tr>
 </table>
 
 @stop
