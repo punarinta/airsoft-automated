@@ -192,9 +192,10 @@ return array(
 
     'emails' => array
     (
-        'noreply' => 'noreply@example.com',
-        'office'  => 'office@example.com',
-        'support' => 'support@example.com',
+        'noreply'   => 'noreply@example.com',
+        'office'    => 'office@example.com',
+        'support'   => 'support@example.com',
+        'moderator' => 'moderator@example.com',
     ),
 
     'company' => array

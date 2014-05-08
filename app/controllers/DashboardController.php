@@ -15,6 +15,12 @@ class DashboardController extends BaseController
      */
     public function organizerForm()
     {
+        if (!Auth::user()->getIsValidated())
+        {
+            // you are not validated by admins
+            return View::make('user.validation-required');
+        }
+
         return View::make('dashboard.organizer');
     }
 }

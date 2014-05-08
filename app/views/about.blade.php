@@ -1,12 +1,12 @@
 @extends('layout')
 
 @section('content')
-<div class="padded_content">
+<div class="padded_content" style="max-width:800px">
     <h3>About</h3>
     <p>
         I'm playing airsoft for 10 years and programming for 15 years. I'm bad at design, but not so bad at UX.
         The idea of this service is to automate as much in airsoft as possible, helping both those who play and those who arrange games.
-        I've started with some basic automation, no don't expect too much right now, but the development is ongoing all the time.
+        I've started with some basic things, so don't expect too much right now. But the development is ongoing all the time and I'm always opened for your proposals.
     </p>
 
     <h3>Cookies</h3>
