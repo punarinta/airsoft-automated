@@ -6,18 +6,22 @@
 
 @section('content')
 <div class="padded-content">
-    <fieldset class="my-fieldset">
+    <fieldset class="my-fieldset" style="float:left">
         <legend>Status</legend>
         @if (Auth::user()->getIsValidated())
-        You can organize games.
+        1. You have passed validation and can organize games.
         @else
-        You cannot organize games. <a href="{{ URL::route('organizer-dashboard') }}">Read here how to become an organizer.</a>
+        1. You cannot organize games. <a href="{{ URL::route('organizer-dashboard') }}">Read here how to validate yourself.</a>
+        @endif
+        <br/>
+        @if ($team_editable)
+        2. You can edit your team as it was you who added it to the system.
+        @else
+        2. You cannot edit your team, as you did not create it.
         @endif
     </fieldset>
 
-    <br/>
-
-    <fieldset class="my-fieldset" style="display: inline" id="form-profile">
+    <fieldset class="my-fieldset" style="float:left" id="form-profile">
         <legend>Your profile</legend>
         <table>
             <tr>
@@ -49,7 +53,7 @@
         </table>
     </fieldset>
 
-    <fieldset class="my-fieldset" style="display: inline" id="form-team">
+    <fieldset class="my-fieldset" style="float:left" id="form-team">
         <legend>Your team</legend>
         <table>
             @if ($team_editable)
@@ -81,6 +85,9 @@
                 </td>
             </tr>
             @else
+            <tr>
+                <td colspan="3"><span class="warn-span">Only team creator can edit the team</span></td>
+            </tr>
             <tr>
                 <td>Name:</td>
                 <td>&nbsp;</td>
