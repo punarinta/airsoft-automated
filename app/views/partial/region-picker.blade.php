@@ -7,8 +7,8 @@ $defaults = isset ($defaults) ? $defaults : array(0,0);
 ?>
 
 <div style="{{$style}}">
-    <select id="{{$prefix}}country-ddb"></select>
-    <select id="{{$prefix}}region-ddb"></select>
+    <select class="my-select" id="{{$prefix}}country-ddb"></select>
+    <select class="my-select" id="{{$prefix}}region-ddb"></select>
 </div>
 <script>
     var {{$prefix}}region_picker =
@@ -64,7 +64,7 @@ $defaults = isset ($defaults) ? $defaults : array(0,0);
 
         loadDdbR: function(countryId, callback)
         {
-            $.get('api/region/by-country/' + countryId, function(json)
+            $.get('/api/region/by-country/' + countryId, function(json)
             {
                 var i, html = '', sel
                 for (i in json.data)

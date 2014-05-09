@@ -1,26 +1,26 @@
 <?php
 
-class ApiRegionController extends BaseController
+class ApiTeamController extends BaseController
 {
     /**
-     * @param $country_id
+     * @param $region_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function findByCountry($country_id = 0)
+    public function findByRegion($region_id = 0)
     {
         try
         {
-            $regionsData = [];
-            $regions = Region::where('country_id', '=', $country_id)->get(array('id', 'name'));
+            $teamsData = [];
+            $teams = Team::where('region_id', '=', $region_id)->get(array('id', 'name'));
 
-            foreach ($regions as $region)
+            foreach ($teams as $team)
             {
-                $regionsData[] = $region->toArray();
+                $teamsData[] = $team->toArray();
             }
 
             $json = array
             (
-                'data' => $regionsData,
+                'data' => $teamsData,
             );
         }
         catch (\Exception $e)

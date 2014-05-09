@@ -9,7 +9,7 @@
         <tr>
             <td>{{ Form::label('username', 'Username:') }}</td>
             <td>&nbsp;</td>
-            <td><input class="my-input" name="username" type="text" id="username" value="{{ Input::old('username') }}"></td>
+            <td><input class="my-input" name="username" type="text" id="username" value="{{ Input::old('username') }}" autofocus></td>
         </tr>
         <tr>
             <td>{{ Form::label('password', 'Password:') }}</td>

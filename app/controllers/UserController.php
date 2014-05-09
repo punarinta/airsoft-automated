@@ -2,12 +2,18 @@
 
 class UserController extends BaseController
 {
-	public function loginForm()
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function loginForm()
 	{
         return View::make('user.login');
 	}
 
-	public function loginEndpoint()
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function loginEndpoint()
 	{
         $user = array
         (
@@ -24,15 +30,27 @@ class UserController extends BaseController
         return Redirect::route('login')->with('flash_error', 'Your username/password combination was incorrect.')->withInput();
 	}
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout()
     {
         Auth::logout();
         return Redirect::route('home')->with('flash_notice', 'You are successfully logged out.');
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function profileForm()
     {
-        return View::make('user.profile');
+
+        return View::make('user.profile', array
+        (
+            'team_country' => 1,
+            'team_region' => 1,
+            'team_id' => 1,
+        ));
     }
 
     /**

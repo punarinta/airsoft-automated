@@ -10,7 +10,7 @@
             <tr>
                 <td>Your email:</td>
                 <td>&nbsp;</td>
-                <td><input class="my-input" type="email" name="email"></td>
+                <td><input class="my-input" type="email" name="email" autofocus></td>
             </tr>
             <tr>
                 <td colspan="3">&nbsp;</td>

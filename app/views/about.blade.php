@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="padded_content" style="max-width:800px">
+<div class="padded-content" style="max-width:800px">
     <h3>About</h3>
     <p>
         I'm playing airsoft for 10 years and programming for 15 years. I'm bad at design, but not so bad at software development.
