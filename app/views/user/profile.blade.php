@@ -71,7 +71,13 @@
             </tr>
             <tr>
                 <td colspan="3">
-                    <a href="#" class="my-btn save">Save team</a>
+                    <a href="#" class="my-btn save">
+                        @if ($team_id)
+                        Save team
+                        @else
+                        Create team
+                        @endif
+                    </a>
                 </td>
             </tr>
             @else
@@ -115,7 +121,7 @@
 
     $('#form-team .save').click(function()
     {
-        @if ($team_editable)
+        @if ($team_id)
         $.ajax(
         {
             url: '/api/team/{{ $team_id }}',
@@ -132,6 +138,12 @@
             }
         })
         @else
+
+        if (!confirm('We recommend you to check that your team does not exist in the system. Have you done it?'))
+        {
+            return false
+        }
+
         $.ajax(
         {
             url: '/api/team',

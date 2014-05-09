@@ -54,6 +54,10 @@ class ApiTeamController extends BaseController
             $team->setOwnerId(Auth::user()->getId());
             $team->save();
 
+            $user = Auth::getUser();
+            $user->setTeamId($team->getId());
+            $user->save();
+
             $json = array
             (
             );
