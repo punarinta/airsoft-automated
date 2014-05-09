@@ -2,47 +2,92 @@
 $style = isset ($style) ? $style : '';
 $prefix = isset ($prefix) ? $prefix : '';
 $defaults = isset ($defaults) ? $defaults : array(0,0);
+
+// TODO: compress JS
 ?>
 
 <div style="{{$style}}">
-    <select id="{{$prefix}}country-ddb">
-        <option value="0">Any</option>
-    </select>
-    <select id="{{$prefix}}region-ddb">
-        <option value="0">Any</option>
-    </select>
+    <select id="{{$prefix}}country-ddb"></select>
+    <select id="{{$prefix}}region-ddb"></select>
 </div>
 <script>
-    var ddbC = $('#{{$prefix}}country-ddb'),
-        ddbR = $('#{{$prefix}}region-ddb')
-
-    $.get('/api/country', function(json)
+    var {{$prefix}}region_picker =
     {
-        var i, html = '', sel, defCountryId = {{$defaults[0]}}, defRegionId = {{$defaults[1]}};
-        for (i in json.data)
-        {
-            sel = (json.data[i].id == defCountryId) ? 'selected' : ''
-            html += '<option ' + sel + ' value="' + json.data[i].id + '">' + json.data[i].name + '</option>'
-        }
+        ddbC: $('#{{$prefix}}country-ddb'),
+        ddbR: $('#{{$prefix}}region-ddb'),
+        defCountryId: {{$defaults[0]}},
+        defRegionId: {{$defaults[1]}},
+        callback: null,
 
-        ddbC.html(ddbC.html() + html)
-
-        if (!defRegionId)
+        init: function()
         {
-            // no default country => get the first from the list
-            defRegionId = json.data[0].id
-        }
-
-        $.get('api/region/by-country/' + defCountryId, function(json)
-        {
-            var i, html = '', sel
-            for (i in json.data)
+            $.get('/api/country', function(json)
             {
-                sel = (json.data[i].id == defRegionId) ? 'selected' : ''
-                html += '<option ' + sel + ' value="' + json.data[i].id + '">' + json.data[i].name + '</option>'
-            }
+                var i, sel, html = '';
+                for (i in json.data)
+                {
+                    sel = (json.data[i].id == {{$prefix}}region_picker.defCountryId) ? 'selected' : ''
+                    html += '<option ' + sel + ' value="' + json.data[i].id + '">' + json.data[i].name + '</option>'
+                }
 
-            ddbR.html(ddbR.html() + html)
-        })
-    })
+                {{$prefix}}region_picker.ddbC.html('<option value="0">Any</option>' + html)
+
+                if (!{{$prefix}}region_picker.defRegionId)
+                {
+                    // no default country => get the first from the list
+                    defRegionId = json.data[0].id
+                }
+
+                {{$prefix}}region_picker.loadDdbR({{$prefix}}region_picker.defCountryId)
+            })
+
+            {{$prefix}}region_picker.ddbC.change(function()
+            {
+                var countryId = $('option:selected', this).val()
+                {{$prefix}}region_picker.loadDdbR(countryId, function()
+                {
+                    if ({{$prefix}}region_picker.callback)
+                    {
+                        {{$prefix}}region_picker.callback({{$prefix}}region_picker.getLocation())
+                    }
+                })
+            })
+
+            {{$prefix}}region_picker.ddbR.change(function()
+            {
+                if ({{$prefix}}region_picker.callback)
+                {
+                    {{$prefix}}region_picker.callback({{$prefix}}region_picker.getLocation())
+                }
+            })
+        },
+
+        loadDdbR: function(countryId, callback)
+        {
+            $.get('api/region/by-country/' + countryId, function(json)
+            {
+                var i, html = '', sel
+                for (i in json.data)
+                {
+                    sel = (json.data[i].id == {{$prefix}}region_picker.defRegionId) ? 'selected' : ''
+                    html += '<option ' + sel + ' value="' + json.data[i].id + '">' + json.data[i].name + '</option>'
+                }
+
+                {{$prefix}}region_picker.ddbR.html('<option value="0">Any</option>' + html)
+
+                if (callback) callback()
+            })
+        },
+
+        getLocation: function()
+        {
+            return [$('option:selected', {{$prefix}}region_picker.ddbC).val(), $('option:selected', {{$prefix}}region_picker.ddbR).val()]
+        },
+
+        change: function(callback)
+        {
+            {{$prefix}}region_picker.callback = callback
+        }
+    }
+    {{$prefix}}region_picker.init()
 </script>
