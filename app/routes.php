@@ -30,4 +30,5 @@ Route::get('user/reset-password/{token}', array('uses' => 'UserController@resetF
 Route::post('user/reset-password', array('uses' => 'UserController@resetFormEndpoint', 'as' => 'user-reset-password'))->before('guest');
 
 Route::post('api/user', array('uses' => 'ApiUserController@register'))->before('guest');
-
+Route::get('api/country/{country_id?}', array('uses' => 'ApiCountryController@index'));
+Route::get('api/region/by-country/{country_id}', array('uses' => 'ApiRegionController@byCountry'));

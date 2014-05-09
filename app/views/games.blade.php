@@ -8,7 +8,7 @@
 <div class="padded_content">
     <div id="calendar">
         <div id="calendar-bar">
-            @include('partial/region-picker', ['placement' => 'horizontal', 'style' => 'float:left', 'prefix' => ''])
+            @include('partial/region-picker', ['placement' => 'horizontal', 'defaults' => [1,0]])
             <div style="float:right">
                 <a href="{{ URL::route('game-edit') }}">Create your own!</a>
             </div>
@@ -37,6 +37,5 @@
         </table>
     </div>
 </div>
-
 
 @stop
