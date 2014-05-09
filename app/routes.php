@@ -34,3 +34,5 @@ Route::put('api/user/{user_id}', array('uses' => 'ApiUserController@update'))->b
 Route::get('api/country/{country_id?}', array('uses' => 'ApiCountryController@index'));
 Route::get('api/region/by-country/{country_id}', array('uses' => 'ApiRegionController@findByCountry'));
 Route::get('api/team/by-region/{region_id}', array('uses' => 'ApiTeamController@findByRegion'));
+Route::post('api/team', array('uses' => 'ApiTeamController@create'));
+Route::put('api/team/{user_id}', array('uses' => 'ApiTeamController@update'));

@@ -48,18 +48,31 @@ class UserController extends BaseController
 
         $teamData = DB::table('team')
             ->join('region', 'region.id', '=', 'team.region_id')
-            ->select(array('region.id AS region_id', 'region.country_id AS country_id'))
+            ->join('country', 'country.id', '=', 'region.country_id')
+            ->select(array
+            (
+                'region.id AS team_region_id',
+                'region.country_id AS team_country_id',
+                'region.name AS team_region_name',
+                'country.name AS team_country_name',
+                'team.name AS team_name',
+                'team.owner_id AS owner_id',
+            ))
             ->where('team.id', '=', $teamId)
             ->first();
 
         return View::make('user.profile', array
         (
-            'user_id'       => Auth::user()->getId(),
-            'nick'          => Auth::user()->getNick(),
-            'birth_date'    => Auth::user()->getBirthDate(),
-            'team_country'  => $teamData ? $teamData->country_id : 0,
-            'team_region'   => $teamData ? $teamData->region_id : 0,
-            'team_id'       => $teamId,
+            'user_id'           => Auth::user()->getId(),
+            'nick'              => Auth::user()->getNick(),
+            'birth_date'        => Auth::user()->getBirthDate(),
+            'team_country_id'   => $teamData ? $teamData->team_country_id : 0,
+            'team_region_id'    => $teamData ? $teamData->team_region_id : 0,
+            'team_country_name' => $teamData ? $teamData->team_country_name : '',
+            'team_region_name'  => $teamData ? $teamData->team_region_name : '',
+            'team_id'           => $teamId,
+            'team_name'         => $teamData ? $teamData->team_name : '',
+            'team_editable'     => (!$teamData || Auth::user()->getId() == $teamData->owner_id),
         ));
     }
 

@@ -34,7 +34,7 @@
                 <td>Team:</td>
                 <td>&nbsp;</td>
                 <td>
-                    @include('partial/team-picker', ['placement' => 'vertical', 'defaults' => [$team_country, $team_region, $team_id], 'prefix' => 'me_'])
+                    @include('partial/team-picker', ['placement' => 'vertical', 'defaults' => [$team_country_id, $team_region_id, $team_id], 'prefix' => 'me_'])
                     <input type="hidden" class="team-id" value="{{ $team_id }}"/>
                 </td>
             </tr>
@@ -51,6 +51,42 @@
 
     <fieldset class="my-fieldset" style="display: inline" id="form-team">
         <legend>Your team</legend>
+        <table>
+            @if ($team_editable)
+            <tr>
+                <td>Name:</td>
+                <td>&nbsp;</td>
+                <td><input type="text" class="my-input name" value="{{ $team_name }}"/></td>
+            </tr>
+            <tr>
+                <td>Region:</td>
+                <td>&nbsp;</td>
+                <td>
+                    @include('partial/region-picker', ['placement' => 'vertical', 'defaults' => [$team_country_id, $team_region_id,], 'prefix' => 'team_'])
+                    <input type="hidden" class="team-id" value="{{ $team_id }}"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <a href="#" class="my-btn save">Save team</a>
+                </td>
+            </tr>
+            @else
+            <tr>
+                <td>Name:</td>
+                <td>&nbsp;</td>
+                <td>{{ $team_name }}</td>
+            </tr>
+            <tr>
+                <td>Region:</td>
+                <td>&nbsp;</td>
+                <td>{{ $team_country_name }}, {{ $team_region_name }}</td>
+            </tr>
+            @endif
+        </table>
     </fieldset>
 </div>
 
@@ -70,12 +106,48 @@
             }),
             success: function(json)
             {
-                if (!json.errMsg)
-                {
-                    alert('Saved')
-                }
+                alert(json.errMsg ? json.errMsg : 'Saved')
             }
         })
+
+        return false
+    })
+
+    $('#form-team .save').click(function()
+    {
+        @if ($team_editable)
+        $.ajax(
+        {
+            url: '/api/team/{{ $team_id }}',
+            type: 'PUT',
+            dataType: 'json',
+            data: JSON.stringify(
+            {
+                name: $('#form-team .name').val(),
+                region_id: team_region_picker.getLocation()[1]
+            }),
+            success: function(json)
+            {
+                alert(json.errMsg ? json.errMsg : 'Saved')
+            }
+        })
+        @else
+        $.ajax(
+        {
+            url: '/api/team',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(
+            {
+                name: $('#form-team .name').val(),
+                region_id: team_region_picker.getLocation()[1]
+            }),
+            success: function(json)
+            {
+                alert(json.errMsg ? json.errMsg : 'Saved')
+            }
+        })
+        @endif
 
         return false
     })

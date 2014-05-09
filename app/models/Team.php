@@ -55,17 +55,17 @@ class Team extends Eloquent
     /**
      * @return string
      */
-    public function getOwner()
+    public function getOwnerId()
     {
-        return $this->owner;
+        return $this->owner_id;
     }
 
     /**
-     * @param string $owner
+     * @param string $owner_id
      */
-    public function setOwner($owner)
+    public function setOwnerId($owner_id)
     {
-        $this->owner = $owner;
+        $this->owner_id = $owner_id;
     }
 
     /**
