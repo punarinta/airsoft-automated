@@ -8,7 +8,7 @@
 <div class="padded_content">
     <div id="calendar">
         <div id="calendar-bar">
-            @include('partial/region-picker', ['placement' => 'horizontal', 'defaults' => [1,1], 'prefix' => 'games_'])
+            @include('partial/region-picker', ['placement' => 'horizontal', 'defaults' => [1,0], 'prefix' => 'games_'])
             <div style="float:right">
                 <a href="{{ URL::route('game-edit') }}">Create your own!</a>
             </div>
@@ -24,9 +24,11 @@
             <tr>
                 <td>{{ date('Y.m.d', strtotime($game->starts_at)); }}</td>
                 <td>{{ $game->name; }}</td>
-                <td>{{ $game->region_name; }}</td>
+                <td>{{ $game->country_name }}, {{ $game->region_name; }}</td>
                 <td>
-                    @if ($game->bookable)
+                    @if ($game->editable)
+                    <a href="{{ URL::route('game-edit', $game->id) }}">edit</a>
+                    @elseif ($game->bookable)
                     <a href="{{ URL::route('game-book', $game->id) }}">book</a>
                     @else
                     no tickets
