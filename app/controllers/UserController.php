@@ -44,12 +44,22 @@ class UserController extends BaseController
      */
     public function profileForm()
     {
+        $teamId = Auth::user()->getTeamId();
+
+        $teamData = DB::table('team')
+            ->join('region', 'region.id', '=', 'team.region_id')
+            ->select(array('region.id AS region_id', 'region.country_id AS country_id'))
+            ->where('team.id', '=', $teamId)
+            ->first();
 
         return View::make('user.profile', array
         (
-            'team_country' => 1,
-            'team_region' => 1,
-            'team_id' => 1,
+            'user_id'       => Auth::user()->getId(),
+            'nick'          => Auth::user()->getNick(),
+            'birth_date'    => Auth::user()->getBirthDate(),
+            'team_country'  => $teamData ? $teamData->country_id : 0,
+            'team_region'   => $teamData ? $teamData->region_id : 0,
+            'team_id'       => $teamId,
         ));
     }
 

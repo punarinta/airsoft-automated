@@ -8,6 +8,9 @@ $defaults = isset ($defaults) ? $defaults : array(0,0);
 
 <div style="{{$style}}">
     <select class="my-select" id="{{$prefix}}country-ddb"></select>
+    @if($placement == 'vertical')
+    <br/>
+    @endif
     <select class="my-select" id="{{$prefix}}region-ddb"></select>
 </div>
 <script>

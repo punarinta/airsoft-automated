@@ -29,7 +29,8 @@ Route::post('user/restore-password', array('uses' => 'UserController@restoreForm
 Route::get('user/reset-password/{token}', array('uses' => 'UserController@resetForm', 'as' => 'user-reset-password'))->before('guest');
 Route::post('user/reset-password', array('uses' => 'UserController@resetFormEndpoint', 'as' => 'user-reset-password'))->before('guest');
 
-Route::post('api/user', array('uses' => 'ApiUserController@register'))->before('guest');
+Route::post('api/user', array('uses' => 'ApiUserController@create'))->before('guest');
+Route::put('api/user/{user_id}', array('uses' => 'ApiUserController@update'))->before('auth');
 Route::get('api/country/{country_id?}', array('uses' => 'ApiCountryController@index'));
 Route::get('api/region/by-country/{country_id}', array('uses' => 'ApiRegionController@findByCountry'));
 Route::get('api/team/by-region/{region_id}', array('uses' => 'ApiTeamController@findByRegion'));

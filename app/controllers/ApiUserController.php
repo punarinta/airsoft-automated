@@ -7,7 +7,7 @@ class ApiUserController extends BaseController
      *
      * @return \Illuminate\View\View
      */
-    public function register()
+    public function create()
     {
         try
         {
@@ -50,6 +50,41 @@ class ApiUserController extends BaseController
             (
                 'email' => $email,
                 'password' => $password,
+            );
+        }
+        catch (\Exception $e)
+        {
+            $json = array
+            (
+                'errMsg' => $e->getMessage(),
+            );
+        }
+
+        return Response::json($json);
+    }
+
+    /**
+     * @param int $user_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update($user_id = 0)
+    {
+        try
+        {
+            // you can update only yourself for now
+            if (Auth::user()->getId() != $user_id)
+            {
+                throw new \Exception('Access denied.');
+            }
+
+            $user = User::find($user_id);
+            $user->setNick(Input::json('nick'));
+            $user->setBirthDate(Input::json('birth_date'));
+            $user->setTeamId(Input::json('team_id'));
+            $user->save();
+
+            $json = array
+            (
             );
         }
         catch (\Exception $e)

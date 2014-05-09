@@ -44,3 +44,5 @@ body {min-height:100%;margin:0 auto;padding:0;font:14px source-sans-pro, helveti
 
 .dialog-box-1 {width:640px;margin:100px auto;border-radius:5px;border:1px solid #999;background-color:#fff;padding:9px 12px}
 fieldset.dialog-box-1 legend {font-size:24px}
+
+.team-picker select {width:170px}

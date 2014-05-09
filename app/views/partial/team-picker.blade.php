@@ -5,10 +5,15 @@ $defaults = isset ($defaults) ? $defaults : array(0,0);
 
 // TODO: compress JS
 ?>
-
-<div style="{{$style}}">
+<div style="{{$style}}" class="team-picker">
     <select class="my-select" id="{{$prefix}}country-ddb"></select>
+    @if($placement == 'vertical')
+    <br/>
+    @endif
     <select class="my-select" id="{{$prefix}}region-ddb"></select>
+    @if($placement == 'vertical')
+    <br/>
+    @endif
     <select class="my-select" id="{{$prefix}}team-ddb"></select>
 </div>
 <script>

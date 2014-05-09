@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 09, 2014 at 08:19 AM
+-- Generation Time: May 09, 2014 at 11:07 AM
 -- Server version: 5.5.20
 -- PHP Version: 5.4.17
 
@@ -164,7 +164,14 @@ CREATE TABLE IF NOT EXISTS `team` (
   `owner_id` int(10) unsigned NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `team`
+--
+
+INSERT INTO `team` (`id`, `name`, `region_id`, `owner_id`, `created_at`, `updated_at`) VALUES
+(1, 'PPU', 1, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -226,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `nick`, `birth_date`, `team_id`, `is_team_manager`, `is_validated`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'robin@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Robin', NULL, 0, 0, 0, 'cYfky86eZxxupTII0QXauoIzzuXHc2OxNAGyzNv23AQuHs0fLewI6wNa2iAB', '2014-05-06 00:00:00', '2014-05-08 15:12:23');
+(1, 'robin@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Robin', '1986-01-17', 1, 0, 1, 'SDjOr9PqlDmEUGldKCqRe4INt4D25K0hTbBgl8qCaqvQROOERUc81D1TDjsy', '2014-05-06 00:00:00', '2014-05-09 11:05:54');
 
 --
 -- Indexes for dumped tables
@@ -325,7 +332,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `ticket`
 --
