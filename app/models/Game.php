@@ -131,4 +131,20 @@ class Game extends Eloquent
     {
         $this->ends_at = $ends_at;
     }
+
+    /**
+     * @return string
+     */
+    public function getIsVisible()
+    {
+        return $this->is_visible;
+    }
+
+    /**
+     * @param string $is_visible
+     */
+    public function setIsVisible($is_visible)
+    {
+        $this->is_visible = $is_visible;
+    }
 }

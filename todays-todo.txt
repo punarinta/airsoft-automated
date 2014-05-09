@@ -12,9 +12,6 @@
 /about                         -- info about the service
 /api/{user,team,game,game_party,ticket_template}
 
-
-[ ]geopicker JS
-[ ]user profile view/edit
-[ ]game create/update
-[ ]game is_visible flag, 1 by default
-[ ]booking dialogue
+[ ] user profile view/edit
+[ ] game create/update
+[ ] booking dialogue
