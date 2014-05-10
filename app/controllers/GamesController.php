@@ -26,7 +26,7 @@ class GamesController extends BaseController
             $gameData[$game->getId()]->region_name = $geo->region_name;
             $gameData[$game->getId()]->country_name = $geo->country_name;
             $gameData[$game->getId()]->bookable = true;
-            $gameData[$game->getId()]->editable = ($game->getOwnerId() == Auth::user()->getId());
+            $gameData[$game->getId()]->editable = (Auth::user() && $game->getOwnerId() == Auth::user()->getId());
         }
 
         return View::make('games', array('games' => $gameData));
