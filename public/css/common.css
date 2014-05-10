@@ -15,8 +15,8 @@ body {min-height:100%;margin:0 auto;padding:0;font:14px source-sans-pro, helveti
 .my-select option {font-weight:normal}
 
 .my-table {border-collapse:collapse}
-.my-table th {border:1px solid #ccc;font-weight:normal;background:#f3f3f3;color:#222;padding:5px 5px 6px;font-size:11px;white-space:nowrap}
-.my-table td {border:1px solid #ccc;padding:2px 5px;font-size:12px;text-align:center}
+.my-table th {border:1px solid #ccc;font-weight:normal;background:#f3f3f3;color:#222;padding:5px;font-size:13px;white-space:nowrap}
+.my-table td {border:1px solid #ccc;padding:2px 5px;font-size:14px;text-align:center}
 
 .my-link {color:#15c;border-bottom:1px dashed #15c;cursor:pointer;text-decoration:none}
 .my-link:hover {color:#DD4B39;border-color:#DD4B39}

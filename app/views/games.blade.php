@@ -13,7 +13,7 @@
                 <a href="{{ URL::route('game-edit') }}">Create your own!</a>
             </div>
         </div>
-        <table>
+        <table class="my-table">
             <tr>
                 <th>Date</th>
                 <th>Name</th>
