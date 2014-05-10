@@ -21,6 +21,26 @@ class DashboardController extends BaseController
             return View::make('user.validation-required');
         }
 
-        return View::make('dashboard.organizer');
+        $gameData = [];
+        $games = Game::where('owner_id', '=', Auth::user()->getId())->get();
+
+        // enrich it
+        foreach ($games as $game)
+        {
+            // get game text geo-data
+            $geo = DB::table('region')
+                ->join('country', 'country.id', '=', 'region.country_id')
+                ->select(array('region.name AS region_name', 'country.name AS country_name'))
+                ->where('region.id', '=', $game->getRegionId())
+                ->first();
+
+            $gameData[$game->getId()] = $game;
+            $gameData[$game->getId()]->region_name = $geo->region_name;
+            $gameData[$game->getId()]->country_name = $geo->country_name;
+            $gameData[$game->getId()]->total_booked = 0;
+            $gameData[$game->getId()]->total_earned = 0;
+        }
+
+        return View::make('dashboard.organizer', array('games' => $gameData));
     }
 }

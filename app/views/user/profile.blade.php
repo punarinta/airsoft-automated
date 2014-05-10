@@ -63,7 +63,7 @@
                 <td><input type="text" class="my-input name" value="{{ $team_name }}"/></td>
             </tr>
             <tr>
-                <td>Region:</td>
+                <td>Location:</td>
                 <td>&nbsp;</td>
                 <td>
                     @include('partial/region-picker', ['placement' => 'vertical', 'defaults' => [$team_country_id, $team_region_id,], 'prefix' => 'team_'])
