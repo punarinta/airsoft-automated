@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-<div class="padded-content">
+<div class="window-box-1">
     <div id="calendar">
         <div id="calendar-bar">
             @include('partial/region-picker', ['placement' => 'horizontal', 'defaults' => [1,0], 'prefix' => 'games_', 'style' => 'float:left'])

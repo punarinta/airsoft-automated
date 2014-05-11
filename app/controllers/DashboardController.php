@@ -7,7 +7,15 @@ class DashboardController extends BaseController
      */
     public function playerForm()
     {
-        return View::make('dashboard.player');
+        $gameData = DB::table('game')
+            ->join('ticket', 'ticket.game_id', '=', 'game.id')
+            ->join('region', 'region.id', '=', 'game.region_id')
+            ->join('country', 'country.id', '=', 'region.country_id')
+            ->select(array('region.name AS region_name', 'country.name AS country_name'))
+            ->where('ticket.user_id', '=', Auth::user()->getId())
+            ->get();
+
+        return View::make('dashboard.player', array('games' => $gameData));
     }
 
     /**

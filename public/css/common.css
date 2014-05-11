@@ -4,7 +4,7 @@ body {min-height:100%;margin:0 auto;padding:0;font:14px source-sans-pro, helveti
 .my-btn, .my-select, .my-img {text-decoration:none;background:#f2f2f2;color:#666;border:1px solid #d9d9d9;cursor:pointer;font:12px Arial;font-weight:bold;outline:none !important;border-radius:2px}
 .my-btn:hover, .my-select:hover, .my-img:hover {color:#333;border:1px solid #c6c6c6;box-shadow:0 1px 1px rgba(0,0,0,.1)}
 
-.my-btn {padding:5px 9px 5px 10px}
+.my-btn {padding:5px 9px 5px 10px;margin: 2px 0}
 .my-select, .my-input {padding:4px 2px;margin:2px 0}
 .my-input, .my-text {font:15px Arial,sans-serif;border:1px solid #d9d9d9;border-top:1px solid #c0c0c0;padding:3px;background:#fff;outline:none !important;border-radius:1px}
 .my-hr {border:0;height:1px;background:#e5e5e5}
@@ -42,6 +42,7 @@ body {min-height:100%;margin:0 auto;padding:0;font:14px source-sans-pro, helveti
 #content p {margin:5px 0 25px 0}
 #content h3 {margin-bottom:5px}
 .padded-content {padding:15px 25px;margin:0 auto}
+.window-box-1 {padding:16px 20px 20px;margin:55px 20px 15px;background:#fff;border-radius:5px;border:1px solid #ddd}
 
 .dialog-box-1 {width:640px;margin:100px auto;border-radius:5px;border:1px solid #999;background-color:#fff;padding:9px 12px}
 fieldset.dialog-box-1 legend {font-size:24px}

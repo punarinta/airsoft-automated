@@ -1,1 +1,2 @@
-#calendar-bar {overflow: auto; }
+#calendar-bar {overflow:auto;margin-bottom:15px}
+#calendar table {width:100%}
