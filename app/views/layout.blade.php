@@ -17,8 +17,8 @@
             <li><a class="first" href="{{ URL::route('home') }}">Home</a></li>
             <li><a href="{{ URL::route('games') }}">Games</a></li>
             @if(Auth::check())
-            <li><a href="{{ URL::route('player-dashboard') }}">Play</a></li>
-            <li><a href="{{ URL::route('organizer-dashboard') }}">Organize</a></li>
+            <li><a href="{{ URL::route('player-dashboard') }}">I play</a></li>
+            <li><a href="{{ URL::route('organizer-dashboard') }}">I organize</a></li>
             <li><a href="{{ URL::route('user-profile') }}">Profile</a></li>
             @endif
             <li><a class="last" href="{{ URL::route('about') }}">About</a></li>
