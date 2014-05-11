@@ -6,4 +6,9 @@ class GameController extends BaseController
     {
         return View::make('game.edit');
     }
+
+    public function briefingForm($game_id = 0)
+    {
+        return View::make('game.briefing');
+    }
 }

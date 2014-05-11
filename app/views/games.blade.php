@@ -20,8 +20,8 @@
             </tr>
             @foreach ($games as $game)
             <tr>
-                <td>{{ date('Y.m.d', strtotime($game->starts_at)); }}</td>
-                <td>{{ $game->name; }}</td>
+                <td>{{ date('Y.m.d', strtotime($game->starts_at)) }}</td>
+                <td>{{ $game->name }}</td>
                 <td>{{ $game->country_name }}, {{ $game->region_name; }}</td>
                 <td>
                     @if ($game->editable)

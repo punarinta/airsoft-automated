@@ -23,22 +23,6 @@ class Ticket extends Eloquent
     /**
      * @return string
      */
-    public function getGameId()
-    {
-        return $this->game_id;
-    }
-
-    /**
-     * @param string $game_id
-     */
-    public function setGameId($game_id)
-    {
-        $this->game_id = $game_id;
-    }
-
-    /**
-     * @return string
-     */
     public function getUserId()
     {
         return $this->user_id;
@@ -114,5 +98,21 @@ class Ticket extends Eloquent
     public function setUpdateAt($update_at)
     {
         $this->update_at = $update_at;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTicketTemplateId()
+    {
+        return $this->ticket_template_id;
+    }
+
+    /**
+     * @param string $ticket_template_id
+     */
+    public function setTicketTemplateId($ticket_template_id)
+    {
+        $this->ticket_template_id = $ticket_template_id;
     }
 }

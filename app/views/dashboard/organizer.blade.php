@@ -22,11 +22,11 @@
             </tr>
             @foreach ($games as $game)
             <tr>
-                <td>{{ date('Y.m.d', strtotime($game->starts_at)); }}</td>
+                <td>{{ date('Y.m.d', strtotime($game->starts_at)) }}</td>
                 <td>{{ $game->name; }}</td>
-                <td>{{ $game->country_name }}, {{ $game->region_name; }}</td>
-                <td>{{ $game->total_booked; }}</td>
-                <td>{{ $game->total_earned; }}</td>
+                <td>{{ $game->country_name }}, {{ $game->region_name }}</td>
+                <td>{{ $game->total_booked }}</td>
+                <td>{{ $game->total_earned }}</td>
                 <td><a href="{{ URL::route('game-edit', $game->id) }}">edit</a></td>
             </tr>
             @endforeach
