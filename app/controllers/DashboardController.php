@@ -26,6 +26,11 @@ class DashboardController extends BaseController
             ->where('ticket.user_id', '=', Auth::user()->getId())
             ->get();
 
+        if (empty ($tickets))
+        {
+            return View::make('dashboard.player-empty');
+        }
+
         foreach ($tickets as $ticket)
         {
             $gameObj->setId($ticket->game_id);
@@ -52,6 +57,11 @@ class DashboardController extends BaseController
 
         $gameData = [];
         $games = Game::where('owner_id', '=', Auth::user()->getId())->get();
+
+        if (empty ($games))
+        {
+            return View::make('dashboard.organizer-empty');
+        }
 
         // enrich it
         foreach ($games as $game)
