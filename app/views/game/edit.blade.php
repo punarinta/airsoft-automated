@@ -47,7 +47,7 @@
     @endif
     >
         <legend>Game parties</legend>
-        <select class="my-select party-id">
+        <select class="my-select game-party-id">
             @foreach ($game->parties as $party)
             <option value="{{ $party->id }}">{{ $party->name }}</option>
             @endforeach
@@ -55,17 +55,20 @@
         <table>
             <tr>
                 <td>Name:</td>
-                <td><input type="text" class="my-input name" value="{{ $game->parties?$game->parties[0]->name:'' }}"/></td>
+                <td><input type="text" class="my-input name" value="{{ isset($game->parties[0])?$game->parties[0]->name:'' }}"/></td>
             </tr>
             <tr>
                 <td>Players&nbsp;limit:</td>
-                <td><input type="text" class="my-input players-limit" value="{{ $game->parties?$game->parties[0]->players_limit:0 }}"/></td>
+                <td><input type="text" class="my-input players-limit" value="{{ isset($game->parties[0])?$game->parties[0]->players_limit:0 }}"/></td>
             </tr>
         </table>
 
+        @if (isset($game->parties[0]))
         <button class="my-btn save">Save</button>
-        @if ($game->parties)
         <button class="my-btn delete">Delete</button>
+        @else
+        <button class="my-btn save">Create</button>
+        <button class="my-btn delete hidden">Delete</button>
         @endif
         <button class="my-btn add">Add new</button>
     </fieldset>
@@ -86,30 +89,33 @@
             <tr>
                 <td>Game&nbsp;party:</td>
                 <td>
-                    <input type="text" class="my-input game-party-name" value="{{ $game->ticket_templates?$game->ticket_templates[0]->name:'' }}"/>
+                    <input type="text" class="my-input game-party-name" value="{{ isset($game->ticket_templates[0]) ? $game->ticket_templates[0]->name:'' }}"/>
                 </td>
             </tr>
             <tr>
                 <td>Price:</td>
-                <td><input type="text" class="my-input price" value="{{ $game->ticket_templates?$game->ticket_templates[0]->price:0 }}"/></td>
+                <td><input type="text" class="my-input price" value="{{ isset($game->ticket_templates[0]) ? $game->ticket_templates[0]->price:0 }}"/></td>
             </tr>
             <tr>
                 <td>Valid&nbsp;from:</td>
-                <td><input type="date" class="my-date price-date-start" value="{{ $game->ticket_templates?date('Y-m-d', strtotime($game->ticket_templates[0]->price_date_start)):0 }}"/></td>
+                <td><input type="date" class="my-date price-date-start" value="{{ isset($game->ticket_templates[0]) ? date('Y-m-d', strtotime($game->ticket_templates[0]->price_date_start)):0 }}"/></td>
             </tr>
             <tr>
                 <td>Valid&nbsp;to:</td>
-                <td><input type="date" class="my-date price-date-end" value="{{ $game->ticket_templates?date('Y-m-d', strtotime($game->ticket_templates[0]->price_date_end)):0 }}"/></td>
+                <td><input type="date" class="my-date price-date-end" value="{{ isset($game->ticket_templates[0]) ? date('Y-m-d', strtotime($game->ticket_templates[0]->price_date_end)):0 }}"/></td>
             </tr>
             <tr>
                 <td>Cash&nbsp;only:</td>
-                <td><input type="checkbox" class="is-cash" {{ $game->ticket_templates && $game->ticket_templates[0]->is_cash ? 'checked' : '' }}/></td>
+                <td><input type="checkbox" class="is-cash" {{ isset($game->ticket_templates[0]) && $game->ticket_templates[0]->is_cash ? 'checked' : '' }}/></td>
             </tr>
         </table>
 
+        @if (isset($game->ticket_templates[0]))
         <button class="my-btn save">Save</button>
-        @if ($game->ticket_templates)
         <button class="my-btn delete">Delete</button>
+        @else
+        <button class="my-btn save">Create</button>
+        <button class="my-btn delete hidden">Delete</button>
         @endif
         <button class="my-btn add">Add new</button>
     </fieldset>
@@ -149,11 +155,49 @@
 
     $('#form-game-party .save').click(function()
     {
+        var gamePartyId = $('#form-game-party .game-party-id').val() - 0
 
+        var data = JSON.stringify(
+        {
+            name: $('#form-game-party .name').val(),
+            players_limit: $('#form-game-party .players-limit').val()
+        })
+
+        if (!gamePartyId) az.ajaxPost('game-party', data, function(data)
+        {
+            $('#form-game-party .delete').show()
+            $('#form-game-party .save').text('Save')
+            $('#form-game-party .game-party-id').append('<option value="' + data.id + '">' + data.name + '</option>')
+        })
+        else
+        {
+            az.ajaxPut('game', gamePartyId, data)
+        }
     })
 
     $('#form-ticket-template .save').click(function()
     {
+        var ticketTemplateId = $('#form-ticket-template .ticket-template-id').val() - 0
+
+        var data = JSON.stringify(
+        {
+            name: $('#form-ticket-template .name').val(),
+            price: $('#form-ticket-template .price').val(),
+            price_date_start: $('#form-ticket-template .price-date-start').val(),
+            price_date_end: $('#form-ticket-template .price-date-end').val(),
+            is_visible: $('#form-ticket-template .is-cash').is(':checked')
+        })
+
+        if (!ticketTemplateId) az.ajaxPost('ticket-template', data, function(data)
+        {
+            $('#form-ticket-template .delete').show()
+            $('#form-ticket-template .save').text('Save')
+            $('#form-ticket-template .ticket-template-id').append('<option value="' + data.id + '">' + data.name + '</option>')
+        })
+        else
+        {
+            az.ajaxPut('ticket-template', ticketTemplateId, data)
+        }
     })
 
     /*
@@ -191,7 +235,7 @@
         On-changes
      */
 
-    $('#form-game-party .party-id').change(function()
+    $('#form-game-party .game-party-id').change(function()
     {
         az.ajaxGet('game-party', $(this).val(), function(data)
         {
