@@ -93,7 +93,7 @@
             </tr>
             <tr>
                 <td>Cash&nbsp;only:</td>
-                <td><input type="checkbox" {{ $game->ticket_templates && $game->ticket_templates[0]->is_cash ? 'checked' : '' }}/></td>
+                <td><input type="checkbox" class="is-cash" {{ $game->ticket_templates && $game->ticket_templates[0]->is_cash ? 'checked' : '' }}/></td>
             </tr>
         </table>
 
@@ -106,7 +106,11 @@
 
 </div>
 <script>
-    // save buttons
+
+    /*
+     Save buttons
+     */
+
     $('#form-game .save').click(function()
     {
         var data = JSON.stringify(
@@ -134,7 +138,10 @@
     {
     })
 
-    // delete buttons
+    /*
+        Delete buttons
+    */
+
     $('#form-game .delete').click(function()
     {
         if (confirm('Are you sure you want to completely remove game «{{ $game->name }}»?'))
@@ -159,13 +166,29 @@
         }
     })
 
-    // onchanges
+
+    /*
+        On-changes
+     */
+
     $('#form-game-party .party-id').change(function()
     {
         az.ajaxGet('game-party', $(this).val(), function(data)
         {
             $('#form-game-party .name').val(data.name)
             $('#form-game-party .players-limit').val(data.players_limit)
+        })
+    })
+
+    $('#form-ticket-template .ticket-template-id').change(function()
+    {
+        az.ajaxGet('ticket-template', $(this).val(), function(data)
+        {
+            $('#form-ticket-template .name').val(data.name)
+            $('#form-ticket-template .price').val(data.price)
+            $('#form-ticket-template .price-date-start').val(data.price_date_start)
+            $('#form-ticket-template .price-date-end').val(data.price_date_end)
+            $('#form-ticket-template .is-cash').val(data.is_cash)
         })
     })
 </script>
