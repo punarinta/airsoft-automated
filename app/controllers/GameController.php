@@ -10,7 +10,42 @@ class GameController extends BaseController
             return View::make('user.validation-required');
         }
 
-        return View::make('game.edit');
+        if ($game_id)
+        {
+            $game = Game::find($game_id);
+
+            $geo = DB::table('region')
+                ->join('country', 'country.id', '=', 'region.country_id')
+                ->select(array('region.id AS region_id', 'country.id AS country_id'))
+                ->where('region.id', '=', $game->getRegionId())
+                ->first();
+
+            $game->country_id = $geo->country_id;
+            $game->region_id = $geo->region_id;
+
+            $game->parties = GameParty::where('game_id', '=', $game_id)->get();
+            $game->ticket_templates = TicketTemplate::where('game_id', '=', $game_id)->get();
+
+            // enrich ticket templates with names
+            foreach ($game->ticket_templates as $k => $v)
+            {
+                $x = GameParty::find($v->getGamePartyId());
+
+                $game->ticket_templates[$k]->name = date('M d', strtotime($v->getPriceDateStart())) . ' – ' . date('M d', strtotime($v->getPriceDateEnd())) . ', ' . ($x?($x->name):'all parties');
+            }
+        }
+        else
+        {
+            $game = new Game;
+            $game->is_visible = 1;
+            $game->country_id = 1;
+            $game->region_id = 0;
+
+            $game->parties = [];
+            $game->ticket_templates = [];
+        }
+
+        return View::make('game.edit', array('game' => $game));
     }
 
     public function briefingForm($game_id = 0)

@@ -1,2 +1,6 @@
+/* games */
 #calendar-bar {overflow:auto;margin-bottom:15px}
 #calendar table {width:100%}
+
+/* game */
+.padded-content fieldset {margin:0 5px}
