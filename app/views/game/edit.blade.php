@@ -31,11 +31,14 @@
                 <td><input class="is-visible" type="checkbox" {{ $game->is_visible?'checked':'' }}/></td>
             </tr>
         </table>
-        <button class="my-btn save">Save</button>
         @if ($game->id)
+        <button class="my-btn save">Save</button>
         <button class="my-btn delete">Delete</button>
+        @else
+        <button class="my-btn save">Create</button>
+        <button class="my-btn delete hidden">Delete</button>
         @endif
-    </fieldset>
+        </fieldset>
     <br/>
 
     <fieldset class="my-fieldset" id="form-game-party">
@@ -57,7 +60,7 @@
         </table>
 
         <button class="my-btn save">Save</button>
-        @if ($game->id)
+        @if ($game->parties)
         <button class="my-btn delete">Delete</button>
         @endif
         <button class="my-btn add">Add new</button>
@@ -98,7 +101,7 @@
         </table>
 
         <button class="my-btn save">Save</button>
-        @if ($game->id)
+        @if ($game->ticket_templates)
         <button class="my-btn delete">Delete</button>
         @endif
         <button class="my-btn add">Add new</button>
@@ -106,6 +109,8 @@
 
 </div>
 <script>
+
+    var gameId = {{ $game->id ? $game->id : 0 }};
 
     /*
      Save buttons
@@ -116,17 +121,22 @@
         var data = JSON.stringify(
         {
             name: $('#form-game .name').val(),
-            region_id: geam_region_picker.getLocation()[1],
+            region_id: game_region_picker.getLocation()[1],
             starts_at: $('#form-game .starts-at').val(),
             ends_at: $('#form-game .ends-at').val(),
             is_visible: $('#form-game .is-visible').is(':checked')
         })
 
-        @if (!$game->id)
-        az.ajaxPost('game', data)
-        @else
-        az.ajaxPut('game', {{ $game->id }}, data)
-        @endif
+        if (!gameId) az.ajaxPost('game', data, function(data)
+        {
+            gameId = data.id
+            $('#form-game .delete').show()
+            $('#form-game .save').text('Save')
+        })
+        else
+        {
+            az.ajaxPut('game', gameId, data)
+        }
     })
 
     $('#form-game-party .save').click(function()
@@ -142,17 +152,19 @@
         Delete buttons
     */
 
+    var confText = 'Are you sure you want to completely remove '
+
     $('#form-game .delete').click(function()
     {
-        if (confirm('Are you sure you want to completely remove game «{{ $game->name }}»?'))
+        if (confirm(confText + 'game «{{ $game->name }}»?'))
         {
-            az.ajaxDelete('game', {{ $game->id }})
+            az.ajaxDelete('game', gameId)
         }
     })
 
     $('#form-game-party .delete').click(function()
     {
-        if (confirm('Are you sure you want to completely remove game party «' + $('#form-game-party .party-id option:selected').text() + '»?'))
+        if (confirm(confText + 'game party «' + $('#form-game-party .party-id option:selected').text() + '»?'))
         {
             az.ajaxDelete('game-party', $('#form-game-party .party-id').val())
         }
@@ -160,7 +172,7 @@
 
     $('#form-ticket-template .delete').click(function()
     {
-        if (confirm('Are you sure you want to completely remove ticket template «' + $('#form-ticket-template .ticket-template-id option:selected').text() + '»?'))
+        if (confirm(confText + 'ticket template «' + $('#form-ticket-template .ticket-template-id option:selected').text() + '»?'))
         {
             az.ajaxDelete('ticket-template', $('#form-ticket-template .ticket-template-id').val())
         }

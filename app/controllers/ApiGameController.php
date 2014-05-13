@@ -32,6 +32,8 @@ class ApiGameController extends BaseController
         {
             $game = new Game;
             $game->save();
+
+            return $game;
         });
     }
 

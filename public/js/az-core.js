@@ -14,7 +14,7 @@ var az =
             }
         })
     },
-    ajaxPost: function(object, data)       // creation
+    ajaxPost: function(object, data, callback)       // creation
     {
         $.ajax(
         {
@@ -22,7 +22,11 @@ var az =
             type: 'POST',
             dataType: 'json',
             data: data,
-            success: az.ajaxResult
+            success: function(json)
+            {
+                az.ajaxResult(json)
+                if (callback) callback(json.data)
+            }
         })
     },
     ajaxPut: function(object, id, data)    // editing
