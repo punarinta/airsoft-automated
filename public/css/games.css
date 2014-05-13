@@ -3,4 +3,6 @@
 #calendar table {width:100%}
 
 /* game */
-.padded-content fieldset {margin:0 5px}
+.window-box-1 fieldset {margin:0 5px}
+.window-box-1 fieldset:disabled {border: 1px solid #bbb;color:#bbb}
+.window-box-1 fieldset:disabled * {color:#bbb}

@@ -41,7 +41,11 @@
         </fieldset>
     <br/>
 
-    <fieldset class="my-fieldset" id="form-game-party">
+    <fieldset class="my-fieldset" id="form-game-party"
+    @if (!$game->id)
+    disabled
+    @endif
+    >
         <legend>Game parties</legend>
         <select class="my-select party-id">
             @foreach ($game->parties as $party)
@@ -67,7 +71,11 @@
     </fieldset>
     <br/>
 
-    <fieldset class="my-fieldset" id="form-ticket-template">
+    <fieldset class="my-fieldset" id="form-ticket-template"
+    @if (!$game->id)
+    disabled
+    @endif
+    >
         <legend>Ticket types:</legend>
         <select class="my-select ticket-template-id">
             @foreach ($game->ticket_templates as $ticket_template)
@@ -78,7 +86,6 @@
             <tr>
                 <td>Game&nbsp;party:</td>
                 <td>
-<!--                    <input type="hidden" class="my-input game-party-id" value="{{ $game->ticket_templates?$game->ticket_templates[0]->game_party_id:0 }}"/>-->
                     <input type="text" class="my-input game-party-name" value="{{ $game->ticket_templates?$game->ticket_templates[0]->name:'' }}"/>
                 </td>
             </tr>
@@ -132,6 +139,7 @@
             gameId = data.id
             $('#form-game .delete').show()
             $('#form-game .save').text('Save')
+            $('#form-game-party, #form-ticket-template').removeAttr('disabled')
         })
         else
         {
