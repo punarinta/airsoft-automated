@@ -28,16 +28,28 @@ class ApiGamePartyController extends BaseController
 
     public function store()
     {
-
+        return $this->execute(function()
+        {
+            $gameParty = new GameParty;
+            $gameParty->save();
+        });
     }
 
-    public function update()
+    public function update($game_party_id = 0)
     {
-
+        return $this->execute(function() use ($game_party_id)
+        {
+            $gameParty = GameParty::find($game_party_id);
+            $gameParty->save();
+        });
     }
 
-    public function destroy()
+    public function destroy($game_party_id = 0)
     {
-
+        return $this->execute(function() use ($game_party_id)
+        {
+            $gameParty = GameParty::find($game_party_id);
+            $gameParty->delete();
+        });
     }
 }

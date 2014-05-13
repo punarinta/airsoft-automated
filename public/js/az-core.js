@@ -48,7 +48,7 @@ var az =
     },
     ajaxResult: function(json)
     {
-        alert(json.errMsg ? json.errMsg : 'Saved')
+        alert(json.errMsg ? json.errMsg : 'Done.')
     },
 
     fillDdb: function(object, data)
