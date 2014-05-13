@@ -8,7 +8,7 @@ class ApiRegionController extends BaseController
      */
     public function findByCountry($country_id = 0)
     {
-        try
+        return $this->execute(function() use ($country_id)
         {
             $regionsData = [];
             $regions = Region::where('country_id', '=', $country_id)->get(array('id', 'name'));
@@ -18,19 +18,7 @@ class ApiRegionController extends BaseController
                 $regionsData[] = $region->toArray();
             }
 
-            $json = array
-            (
-                'data' => $regionsData,
-            );
-        }
-        catch (\Exception $e)
-        {
-            $json = array
-            (
-                'errMsg' => $e->getMessage(),
-            );
-        }
-
-        return Response::json($json);
+            return $regionsData;
+        });
     }
 }

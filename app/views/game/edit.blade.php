@@ -127,6 +127,7 @@
 
     $('#form-game-party .save').click(function()
     {
+
     })
 
     $('#form-ticket-template .save').click(function()
@@ -136,7 +137,7 @@
     // delete buttons
     $('#form-game .delete').click(function()
     {
-        if (confirm('Are you sure you want to completely remove the current game?'))
+        if (confirm('Are you sure you want to completely remove game «{{ $game->name }}»?'))
         {
             az.ajaxDelete('game', {{ $game->id }})
         }
@@ -146,7 +147,7 @@
     {
         if (confirm('Are you sure you want to completely remove game party «' + $('#form-game-party .party-id option:selected').text() + '»?'))
         {
-            az.ajaxDelete('game-party', $('#form-game-party .party-id option:selected').val())
+            az.ajaxDelete('game-party', $('#form-game-party .party-id').val())
         }
     })
 
@@ -154,8 +155,18 @@
     {
         if (confirm('Are you sure you want to completely remove ticket template «' + $('#form-ticket-template .ticket-template-id option:selected').text() + '»?'))
         {
-            az.ajaxDelete('ticket-template', $('#form-ticket-template .ticket-template-id option:selected').val())
+            az.ajaxDelete('ticket-template', $('#form-ticket-template .ticket-template-id').val())
         }
+    })
+
+    // onchanges
+    $('#form-game-party .party-id').change(function()
+    {
+        az.ajaxGet('game-party', $(this).val(), function(data)
+        {
+            $('#form-game-party .name').val(data.name)
+            $('#form-game-party .players-limit').val(data.players_limit)
+        })
     })
 </script>
 

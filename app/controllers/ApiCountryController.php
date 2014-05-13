@@ -2,43 +2,27 @@
 
 class ApiCountryController extends BaseController
 {
-    /**
-     * @param int $country_id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function index($country_id = 0)
+    public function index()
     {
-        try
+        return $this->execute(function()
         {
             $countriesData = [];
-
-            if ($country_id)
-            {
-                $countries = Country::where('id', '=', $country_id)->get(array('id', 'name'));
-            }
-            else
-            {
-                $countries = Country::all(array('id', 'name'));
-            }
+            $countries = Country::all();
 
             foreach ($countries as $country)
             {
                 $countriesData[] = $country->toArray();
             }
 
-            $json = array
-            (
-                'data' => $countriesData,
-            );
-        }
-        catch (\Exception $e)
-        {
-            $json = array
-            (
-                'errMsg' => $e->getMessage(),
-            );
-        }
+            return $countriesData;
+        });
+    }
 
-        return Response::json($json);
+    public function show($country_id = 0)
+    {
+        return $this->execute(function() use ($country_id)
+        {
+            return Country::find($country_id)->toArray();
+        });
     }
 }

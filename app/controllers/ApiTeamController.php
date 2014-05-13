@@ -8,7 +8,7 @@ class ApiTeamController extends BaseController
      */
     public function findByRegion($region_id = 0)
     {
-        try
+        return $this->execute(function() use ($region_id)
         {
             $teamsData = [];
             $teams = Team::where('region_id', '=', $region_id)->get(array('id', 'name'));
@@ -18,20 +18,8 @@ class ApiTeamController extends BaseController
                 $teamsData[] = $team->toArray();
             }
 
-            $json = array
-            (
-                'data' => $teamsData,
-            );
-        }
-        catch (\Exception $e)
-        {
-            $json = array
-            (
-                'errMsg' => $e->getMessage(),
-            );
-        }
-
-        return Response::json($json);
+            return $teamsData;
+        });
     }
 
     /**
@@ -39,9 +27,9 @@ class ApiTeamController extends BaseController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create()
+    public function store()
     {
-        try
+        return $this->execute(function()
         {
             if (!strlen($name = trim(Input::json('name'))))
             {
@@ -57,20 +45,7 @@ class ApiTeamController extends BaseController
             $user = Auth::getUser();
             $user->setTeamId($team->getId());
             $user->save();
-
-            $json = array
-            (
-            );
-        }
-        catch (\Exception $e)
-        {
-            $json = array
-            (
-                'errMsg' => $e->getMessage(),
-            );
-        }
-
-        return Response::json($json);
+        });
     }
 
     /**
@@ -79,7 +54,7 @@ class ApiTeamController extends BaseController
      */
     public function update($team_id = 0)
     {
-        try
+        return $this->execute(function() use ($team_id)
         {
             if (!strlen($name = trim(Input::json('name'))))
             {
@@ -100,19 +75,6 @@ class ApiTeamController extends BaseController
             $team->setName($name);
             $team->setRegionId(Input::json('region_id'));
             $team->save();
-
-            $json = array
-            (
-            );
-        }
-        catch (\Exception $e)
-        {
-            $json = array
-            (
-                'errMsg' => $e->getMessage(),
-            );
-        }
-
-        return Response::json($json);
+        });
     }
 }
