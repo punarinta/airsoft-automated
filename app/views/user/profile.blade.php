@@ -117,10 +117,7 @@
                 birth_date: $('#form-profile .birth-date').val(),
                 team_id: me_team_picker.getTeamId()
             }),
-            success: function(json)
-            {
-                alert(json.errMsg ? json.errMsg : 'Saved')
-            }
+            success: az.ajaxResult
         })
 
         return false
@@ -139,10 +136,7 @@
                 name: $('#form-team .name').val(),
                 region_id: team_region_picker.getLocation()[1]
             }),
-            success: function(json)
-            {
-                alert(json.errMsg ? json.errMsg : 'Saved')
-            }
+            success: az.ajaxResult
         })
         @else
 
@@ -161,10 +155,7 @@
                 name: $('#form-team .name').val(),
                 region_id: team_region_picker.getLocation()[1]
             }),
-            success: function(json)
-            {
-                alert(json.errMsg ? json.errMsg : 'Saved')
-            }
+            success: az.ajaxResult
         })
         @endif
 
