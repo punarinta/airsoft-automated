@@ -14,6 +14,11 @@ class GameController extends BaseController
         {
             $game = Game::find($game_id);
 
+            if (Auth::user()->getId() != $game->owner_id)
+            {
+                throw new \Exception('Access denied.');
+            }
+
             $geo = DB::table('region')
                 ->join('country', 'country.id', '=', 'region.country_id')
                 ->select(array('region.id AS region_id', 'country.id AS country_id'))
