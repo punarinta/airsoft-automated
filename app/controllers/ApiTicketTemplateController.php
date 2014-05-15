@@ -45,6 +45,14 @@ class ApiTicketTemplateController extends BaseController
         return $this->execute(function() use ($ticket_template_id)
         {
             $ticketTemplate = TicketTemplate::find($ticket_template_id);
+
+            // check permissions
+            $game = Game::find($ticketTemplate->getGameId());
+            if (Auth::user()->getId() != $game->getOwnerId())
+            {
+                throw new \Exception('Access denied.');
+            }
+
             $ticketTemplate->setGameId(Input::json('game_id'));
             $ticketTemplate->setGamePartyId(Input::json('game_party_id'));
             $ticketTemplate->setPrice(Input::json('price'));
@@ -59,6 +67,14 @@ class ApiTicketTemplateController extends BaseController
         return $this->execute(function() use ($ticket_template_id)
         {
             $ticketTemplate = TicketTemplate::find($ticket_template_id);
+
+            // check permissions
+            $game = Game::find($ticketTemplate->getGameId());
+            if (Auth::user()->getId() != $game->getOwnerId())
+            {
+                throw new \Exception('Access denied.');
+            }
+
             $ticketTemplate->delete();
         });
     }

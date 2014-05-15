@@ -71,7 +71,7 @@ class ApiGameController extends BaseController
         {
             $game = Game::find($game_id);
 
-            if (Auth::user()->getId() != $game->owner_id)
+            if (Auth::user()->getId() != $game->getOwnerId())
             {
                 throw new \Exception('Access denied.');
             }
@@ -96,7 +96,7 @@ class ApiGameController extends BaseController
         {
             $game = Game::find($game_id);
 
-            if (Auth::user()->getId() != $game->owner_id)
+            if (Auth::user()->getId() != $game->getOwnerId())
             {
                 throw new \Exception('Access denied.');
             }

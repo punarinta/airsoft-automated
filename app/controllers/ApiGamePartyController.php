@@ -43,6 +43,14 @@ class ApiGamePartyController extends BaseController
         return $this->execute(function() use ($game_party_id)
         {
             $gameParty = GameParty::find($game_party_id);
+
+            // check permissions
+            $game = Game::find($gameParty->getGameId());
+            if (Auth::user()->getId() != $game->getOwnerId())
+            {
+                throw new \Exception('Access denied.');
+            }
+
             $gameParty->setName(Input::json('name'));
             $gameParty->setGameId(Input::json('game_id'));
             $gameParty->setPlayersLimit(Input::json('players_limit'));
@@ -55,6 +63,14 @@ class ApiGamePartyController extends BaseController
         return $this->execute(function() use ($game_party_id)
         {
             $gameParty = GameParty::find($game_party_id);
+
+            // check permissions
+            $game = Game::find($gameParty->getGameId());
+            if (Auth::user()->getId() != $game->getOwnerId())
+            {
+                throw new \Exception('Access denied.');
+            }
+
             $gameParty->delete();
         });
     }
