@@ -31,6 +31,7 @@ class ApiTicketTemplateController extends BaseController
         return $this->execute(function()
         {
             $ticketTemplate = new TicketTemplate;
+            $ticketTemplate->
             $ticketTemplate->save();
         });
     }

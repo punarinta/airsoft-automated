@@ -89,7 +89,12 @@
             <tr>
                 <td>Game&nbsp;party:</td>
                 <td>
-                    <input type="text" class="my-input game-party-name" value="{{ isset($game->ticket_templates[0]) ? $game->ticket_templates[0]->name:'' }}"/>
+                    <select class="my-select game-party-id">
+                        <option value="0">All / Any</option>
+                        @foreach ($game->parties as $party)
+                        <option value="{{ $party->id }}">{{ $party->name }}</option>
+                        @endforeach
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -160,6 +165,7 @@
         var data = JSON.stringify(
         {
             name: $('#form-game-party .name').val(),
+            game_id: gameId,
             players_limit: $('#form-game-party .players-limit').val()
         })
 
@@ -168,6 +174,7 @@
             $('#form-game-party .delete').show()
             $('#form-game-party .save').text('Save')
             $('#form-game-party .game-party-id').append('<option value="' + data.id + '">' + data.name + '</option>')
+            $('#form-ticket-template .game-party-id').append('<option value="' + data.id + '">' + data.name + '</option>')
         })
         else
         {
@@ -181,7 +188,8 @@
 
         var data = JSON.stringify(
         {
-            name: $('#form-ticket-template .name').val(),
+            game_id: gameId,
+            game_party_id: $('#form-ticket-template .game-party-id').val(),
             price: $('#form-ticket-template .price').val(),
             price_date_start: $('#form-ticket-template .price-date-start').val(),
             price_date_end: $('#form-ticket-template .price-date-end').val(),
@@ -218,7 +226,11 @@
     {
         if (confirm(confText + 'game party «' + $('#form-game-party .party-id option:selected').text() + '»?'))
         {
-            az.ajaxDelete('game-party', $('#form-game-party .party-id').val())
+            var val = $('#form-game-party .party-id').val()
+            az.ajaxDelete('game-party', val)
+
+            // remove this game-party from ticket-template's GP list
+            $('#form-ticket-template .game-party-id option[value="' + val + '"]').remove()
         }
     })
 

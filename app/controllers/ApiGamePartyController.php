@@ -31,6 +31,9 @@ class ApiGamePartyController extends BaseController
         return $this->execute(function()
         {
             $gameParty = new GameParty;
+            $gameParty->setName(Input::json('name'));
+            $gameParty->setGameId(Input::json('game_id'));
+            $gameParty->setPlayersLimit(Input::json('players_limit'));
             $gameParty->save();
         });
     }
@@ -40,6 +43,9 @@ class ApiGamePartyController extends BaseController
         return $this->execute(function() use ($game_party_id)
         {
             $gameParty = GameParty::find($game_party_id);
+            $gameParty->setName(Input::json('name'));
+            $gameParty->setGameId(Input::json('game_id'));
+            $gameParty->setPlayersLimit(Input::json('players_limit'));
             $gameParty->save();
         });
     }
