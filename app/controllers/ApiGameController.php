@@ -39,6 +39,28 @@ class ApiGameController extends BaseController
     }
 
     /**
+     * Lists all the games in the given Region
+     *
+     * @param int $region_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function findByRegion($region_id = 0)
+    {
+        return $this->execute(function() use ($region_id)
+        {
+            $gamesData = [];
+            $games = Game::where('region', '=', $region_id)->get();
+
+            foreach ($games as $game)
+            {
+                $gamesData[] = $game->toArray();
+            }
+
+            return $gamesData;
+        });
+    }
+
+    /**
      * Creates a new Game
      *
      * @return \Illuminate\Http\JsonResponse

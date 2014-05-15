@@ -58,7 +58,7 @@ class DashboardController extends BaseController
         $gameData = [];
         $games = Game::where('owner_id', '=', Auth::user()->getId())->get();
 
-        if (empty ($games))
+        if ($games->isEmpty())
         {
             return View::make('dashboard.organizer-empty');
         }
