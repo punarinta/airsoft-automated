@@ -31,7 +31,11 @@ class ApiTicketTemplateController extends BaseController
         return $this->execute(function()
         {
             $ticketTemplate = new TicketTemplate;
-            $ticketTemplate->
+            $ticketTemplate->setGameId(Input::json('game_id'));
+            $ticketTemplate->setGamePartyId(Input::json('game_party_id'));
+            $ticketTemplate->setPrice(Input::json('price'));
+            $ticketTemplate->setPriceDateStart(Input::json('price_date_start'));
+            $ticketTemplate->setPriceDateEnd(Input::json('price_date_end'));
             $ticketTemplate->save();
         });
     }
@@ -41,6 +45,11 @@ class ApiTicketTemplateController extends BaseController
         return $this->execute(function() use ($ticket_template_id)
         {
             $ticketTemplate = TicketTemplate::find($ticket_template_id);
+            $ticketTemplate->setGameId(Input::json('game_id'));
+            $ticketTemplate->setGamePartyId(Input::json('game_party_id'));
+            $ticketTemplate->setPrice(Input::json('price'));
+            $ticketTemplate->setPriceDateStart(Input::json('price_date_start'));
+            $ticketTemplate->setPriceDateEnd(Input::json('price_date_end'));
             $ticketTemplate->save();
         });
     }
