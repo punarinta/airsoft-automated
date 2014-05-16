@@ -79,6 +79,9 @@ function fillForms(data)
         $('#game-party-id').val(data.game_party_id)
     }
 
+    $('#btn-paymill').attr('data-amount', data.price)
+    $('#btn-paymill').attr('data-submit-button', 'test')
+
     if (data.is_cash)
     {
         $('.area-btn-paymill').hide()
@@ -89,6 +92,16 @@ function fillForms(data)
         $('.area-btn-cash').hide()
         $('.area-btn-paymill').show()
     }
+
+    $('iframe + script, iframe, #btn-paymill', '.area-btn-paymill').remove()
+    delete paymill;
+  //  $('#btn-paymill').removeAttr('src')
+  //  $('#btn-paymill').attr('src', 'https://button.paymill.com/v1/')
+
+    var script = document.createElement('script')
+    script.src = 'https://button.paymill.com/v1/'
+    script.id="btn-paymill"
+    $('.area-btn-paymill form')[0].appendChild(script);
 }
 
 $('#ticket-template-id').change(function()
