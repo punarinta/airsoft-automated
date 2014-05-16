@@ -5,13 +5,13 @@
 @stop
 
 @section('content')
-<div class="window-box-1">
+<div class="dialog-box-1">
     @if ($is_organizer)
     <p>NB: you are organizing this game</p>
     @endif
 
-    <fieldset class="my-fieldset">
-        <legend>Pick a ticket</legend>
+    <fieldset class="my-fieldset" id="form-ticket">
+        <legend>Choose a ticket</legend>
         <table>
             <tr>
                 <td>Game party:</td>
@@ -35,6 +35,28 @@
             </tr>
         </table>
     </fieldset>
+
+    <div class="area-btn-paymill">
+        <form action="{{ URL::route('booking-done') }}" method="post">
+            <script
+                src="https://button.paymill.com/v1/"
+                id="btn-paymill"
+                data-label="Pay with credit card"
+                data-title="Ticket for"
+                data-description="«{{ @$game->name }}»"
+                data-submit-button="Pay 2.50 SEK"
+                data-amount="250"
+                data-currency="SEK"
+                data-public-key="795333315179a2f8da89a287920eb299"
+                data-lang="en-GB"
+                >
+            </script>
+        </form>
+    </div>
+
+    <div class="area-btn-cash">
+        <button class="my-btn">Confirm</button>
+    </div>
 </div>
 <script>
 

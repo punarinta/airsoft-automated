@@ -6,3 +6,5 @@
 .window-box-1 fieldset {margin:0 5px}
 .window-box-1 fieldset:disabled {border: 1px solid #bbb;color:#bbb}
 .window-box-1 fieldset:disabled * {color:#bbb}
+
+.area-btn-paymill {margin:16px 2px 0}

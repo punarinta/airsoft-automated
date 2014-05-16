@@ -68,10 +68,22 @@ class GameController extends BaseController
      */
     public function bookForm($game_id = 0)
     {
+        // https://github.com/paymill/paymill-paybutton-examples
+
         $game = Game::find($game_id);
+
+        if (empty ($game))
+        {
+            return Redirect::route('games')->with('flash_error', 'Game does not exist');
+        }
 
         $game->parties = GameParty::where('game_id', '=', $game_id)->get();
         $game->ticket_templates = TicketTemplate::where('game_id', '=', $game_id)->get();
+
+        if ($game->ticket_templates->isEmpty())
+        {
+            return Redirect::route('games')->with('flash_error', 'Organizer has not issued any tickets yet');
+        }
 
         // enrich ticket templates with names
         foreach ($game->ticket_templates as $k => $v)
@@ -89,7 +101,7 @@ class GameController extends BaseController
     }
 
     /**
-     * Show game information for the participant. Both public and private.
+     * Shows game information for the participant. Both public and private.
      *
      * @param int $game_id
      * @return \Illuminate\View\View
@@ -113,5 +125,16 @@ class GameController extends BaseController
         }
 
         return View::make('game.briefing', array());
+    }
+
+    /**
+     * Shows a message after the game ticket is booked (and/or paid)
+     *
+     * @param int $game_id
+     * @return \Illuminate\View\View
+     */
+    public function bookingDoneForm($game_id = 0)
+    {
+        return View::make('game.booked', array());
     }
 }
