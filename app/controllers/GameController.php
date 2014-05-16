@@ -2,6 +2,13 @@
 
 class GameController extends BaseController
 {
+    /**
+     * Create a game or edit an existing one
+     *
+     * @param int $game_id
+     * @return \Illuminate\View\View
+     * @throws Exception
+     */
     public function editForm($game_id = 0)
     {
         if (!Auth::user()->getIsValidated())
@@ -53,8 +60,25 @@ class GameController extends BaseController
         return View::make('game.edit', array('game' => $game));
     }
 
+    /**
+     * Book a ticket for the game
+     *
+     * @param int $game_id
+     * @return \Illuminate\View\View
+     */
+    public function bookForm($game_id = 0)
+    {
+        return View::make('game.book', array());
+    }
+
+    /**
+     * Show game information for the participant. Both public and private.
+     *
+     * @param int $game_id
+     * @return \Illuminate\View\View
+     */
     public function briefingForm($game_id = 0)
     {
-        return View::make('game.briefing');
+        return View::make('game.briefing', array());
     }
 }
