@@ -16,7 +16,8 @@
             <tr>
                 <td>Game party:</td>
                 <td>
-                    <select class="my-select game-party-id">
+                    <select class="my-select" id="game-party-id">
+                        <option value="0">Not specified</option>
                         @foreach ($game->parties as $party)
                         <option value="{{ $party->id }}">{{ $party->name }}</option>
                         @endforeach
@@ -26,7 +27,8 @@
             <tr>
                 <td>Available tickets:</td>
                 <td>
-                    <select class="my-select ticket-template-id">
+                    <select class="my-select" id="ticket-template-id">
+                        <option value="0">Not specified</option>
                         @foreach ($game->ticket_templates as $ticket_template)
                         <option value="{{ $ticket_template->id }}">{{ $ticket_template->name }}</option>
                         @endforeach
@@ -36,8 +38,10 @@
         </table>
     </fieldset>
 
-    <div class="area-btn-paymill">
-        <form action="{{ URL::route('booking-done') }}" method="post">
+    <div class="area-btn-paymill hidden">
+        <form action="{{ URL::route('booking-done', array($game->id)) }}" method="post">
+            <input type="hidden" name="game-party-id" class="game-party-id" value="0"/>
+            <input type="hidden" name="ticket-template-id" class="ticket-template-id" value="0"/>
             <script
                 src="https://button.paymill.com/v1/"
                 id="btn-paymill"
@@ -54,11 +58,42 @@
         </form>
     </div>
 
-    <div class="area-btn-cash">
-        <button class="my-btn">Confirm</button>
+    <div class="area-btn-cash hidden">
+        <br/>
+        <form action="{{ URL::route('booking-done', array($game->id)) }}" method="post">
+            <input type="hidden" name="game-party-id" class="game-party-id" value="0"/>
+            <input type="hidden" name="ticket-template-id" class="ticket-template-id" value="0"/>
+            <input type="submit" class="my-btn" value="Confirm"/>
+        </form>
     </div>
 </div>
 <script>
+function fillForms(data)
+{
+    $('.game-party-id').val($('#game-party-id').val())
+    $('.ticket-template-id').val($('#ticket-template-id').val())
 
+    if (data.game_party_id)
+    {
+        // just for convenience
+        $('#game-party-id').val(data.game_party_id)
+    }
+
+    if (data.is_cash)
+    {
+        $('.area-btn-paymill').hide()
+        $('.area-btn-cash').show()
+    }
+    else
+    {
+        $('.area-btn-cash').hide()
+        $('.area-btn-paymill').show()
+    }
+}
+
+$('#ticket-template-id').change(function()
+{
+    az.ajaxGet('ticket-template', $(this).val(), fillForms)
+})
 </script>
 @stop

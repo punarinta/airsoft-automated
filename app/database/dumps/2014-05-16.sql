@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 16, 2014 at 11:19 AM
+-- Generation Time: May 16, 2014 at 01:17 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.4.17
 
@@ -223,14 +223,16 @@ CREATE TABLE IF NOT EXISTS `ticket_template` (
   `notes` text,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `ticket_template`
 --
 
 INSERT INTO `ticket_template` (`id`, `game_id`, `game_party_id`, `price`, `price_date_start`, `price_date_end`, `is_cash`, `notes`, `created_at`, `updated_at`) VALUES
-(1, 1, 0, 150, '2014-06-01 00:00:00', '2014-06-08 00:00:00', 0, NULL, NULL, NULL);
+(1, 1, 0, 150, '2014-06-01 00:00:00', '2014-06-08 00:00:00', 0, NULL, NULL, NULL),
+(2, 1, 1, 100, '2014-06-01 00:00:00', '2014-06-08 00:00:00', 0, NULL, NULL, NULL),
+(3, 1, 2, 110, '2014-06-01 00:00:00', '2014-06-08 00:00:00', 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -369,7 +371,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `ticket_template`
 --
 ALTER TABLE `ticket_template`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `user`
 --
