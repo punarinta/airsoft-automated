@@ -68,7 +68,24 @@ class GameController extends BaseController
      */
     public function bookForm($game_id = 0)
     {
-        return View::make('game.book', array());
+        $game = Game::find($game_id);
+
+        $game->parties = GameParty::where('game_id', '=', $game_id)->get();
+        $game->ticket_templates = TicketTemplate::where('game_id', '=', $game_id)->get();
+
+        // enrich ticket templates with names
+        foreach ($game->ticket_templates as $k => $v)
+        {
+            $x = GameParty::find($v->getGamePartyId());
+
+            $game->ticket_templates[$k]->name = date('M d', strtotime($v->getPriceDateStart())) . ' – ' . date('M d', strtotime($v->getPriceDateEnd())) . ', ' . ($x?($x->name):'all parties');
+        }
+
+        return View::make('game.book', array
+        (
+            'game' => $game,
+            'is_organizer' => $game->getOwnerId() == Auth::user()->getId(),
+        ));
     }
 
     /**
@@ -79,6 +96,22 @@ class GameController extends BaseController
      */
     public function briefingForm($game_id = 0)
     {
+        // check if ticket is present
+        $data = DB::table('game AS g')
+            ->join('ticket_template AS tt', 'tt.game_id', '=', 'g.id')
+            ->join('ticket AS t', 't.ticket_template_id', '=', 'tt.id')
+            ->select(array('g.id'))
+            ->where('g.id', '=', $game_id)
+            ->where('t.user_id', '=', Auth::user()->getId())
+            ->first();
+
+        // TODO: check payment if tt.is_cash = 0
+
+        if (empty ($data))
+        {
+            return View::make('game.not-booked', array());
+        }
+
         return View::make('game.briefing', array());
     }
 }
