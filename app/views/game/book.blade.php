@@ -47,7 +47,7 @@
                 data-submit-button="Pay 2.50 SEK"
                 data-amount="250"
                 data-currency="SEK"
-                data-public-key="795333315179a2f8da89a287920eb299"
+                data-public-key="{{ Config::get('app.paymill.public_key') }}"
                 data-lang="en-GB"
                 >
             </script>

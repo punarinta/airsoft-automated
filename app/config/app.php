@@ -202,4 +202,9 @@ return array(
     (
         'name' => 'Test Name',
     ),
+
+    'paymill' => array
+    (
+        'public_key' => '795333315179a2f8da89a287920eb299',
+    ),
 );
