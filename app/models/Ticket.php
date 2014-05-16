@@ -115,4 +115,20 @@ class Ticket extends Eloquent
     {
         $this->ticket_template_id = $ticket_template_id;
     }
+
+    /**
+     * @return string
+     */
+    public function getGamePartyId()
+    {
+        return $this->game_party_id;
+    }
+
+    /**
+     * @param string $game_party_id
+     */
+    public function setGamePartyId($game_party_id)
+    {
+        $this->game_party_id = $game_party_id;
+    }
 }
