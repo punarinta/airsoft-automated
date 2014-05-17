@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 17, 2014 at 01:03 PM
+-- Generation Time: May 17, 2014 at 01:23 PM
 -- Server version: 5.5.37-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4
 
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `payment_id` int(10) unsigned DEFAULT NULL,
   `status` int(10) unsigned NOT NULL DEFAULT '1',
   `created_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
 -- Dumping data for table `ticket`
 --
 
-INSERT INTO `ticket` (`id`, `game_party_id`, `ticket_template_id`, `user_id`, `payment_id`, `status`, `created_at`, `update_at`) VALUES
+INSERT INTO `ticket` (`id`, `game_party_id`, `ticket_template_id`, `user_id`, `payment_id`, `status`, `created_at`, `updated_at`) VALUES
 (1, 0, 1, 2, 0, 1, NULL, NULL);
 
 -- --------------------------------------------------------

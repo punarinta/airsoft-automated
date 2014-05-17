@@ -136,6 +136,7 @@ class PaymentController extends BaseController
                 $payment->setAmount($transaction['amount']);
                 $payment->setUserId(Auth::user()->getId());
                 $payment->setStatus(Payment::STATUS_COMPLETED);
+                $payment->setProviderId(1);
                 $payment->save();
 
                 $paymentId = $payment->getId();
@@ -148,8 +149,7 @@ class PaymentController extends BaseController
         $ticket->setGamePartyId($ticketSessionData['game_party_id']);
         $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
         $ticket->setPaymentId($paymentId);
-
-        // $ticket->save();
+        $ticket->save();
 
         return View::make('payment.done', array());
     }
