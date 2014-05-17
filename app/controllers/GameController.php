@@ -124,28 +124,4 @@ class GameController extends BaseController
 
         return View::make('game.briefing', array());
     }
-
-    /**
-     * Shows a message after the game ticket is booked (and/or paid)
-     *
-     * @return \Illuminate\View\View
-     */
-    public function bookingDoneForm()
-    {
-        $ticketSessionData = Session::get('ticket-data');
-
-        // remove ticket data from the session
-        Session::forget('ticket-data');
-
-        // create a real ticket
-        $ticket = new Ticket;
-        $ticket->setUserId(Auth::user()->getId());
-        $ticket->setGamePartyId($ticketSessionData['game_party_id']);
-        $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
-
-    //    $ticket->setPaymentId(0);
-    //    $ticket->save();
-
-        return View::make('game.booked', array());
-    }
 }

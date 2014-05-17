@@ -26,11 +26,13 @@
         You will have to bring <b>{{ @$ticket_template->price_readable }} SEK</b> to the game check-in area before the game.
     </p>
     <form action="{{ URL::route('booking-done') }}" method="post">
+        <input type="hidden" name="is-cash" value="1"/>
         <input type="submit" class="my-btn" value="Confirm"/>
     </form>
     @else
     <div class="area-btn-paymill">
         <form action="{{ URL::route('booking-done') }}" method="post">
+            <input type="hidden" name="is-cash" value="0"/>
             <script
                 src="https://button.paymill.com/v1/"
                 id="btn-paymill"

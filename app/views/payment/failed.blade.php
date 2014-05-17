@@ -6,6 +6,8 @@
 
 @section('content')
 
-game booked
+payment failed
+<br/>
+Error code: {{ @$response_text }}
 
 @stop

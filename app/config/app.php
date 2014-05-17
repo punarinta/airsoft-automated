@@ -205,6 +205,7 @@ return array(
 
     'paymill' => array
     (
-        'public_key' => '795333315179a2f8da89a287920eb299',
+        'public_key'  => '5464271318220503a4e3a79dd86be19b',
+        'private_key' => 'df9a24c79a283c743235fc7803aa9294',
     ),
 );

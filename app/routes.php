@@ -19,7 +19,7 @@ Route::get('game/book/{game_id}', array('uses' => 'GameController@bookForm', 'as
 Route::get('game/briefing/{game_id}', array('uses' => 'GameController@briefingForm', 'as' => 'game-briefing'))->before('auth');
 Route::get('player', array('uses' => 'DashboardController@playerForm', 'as' => 'player-dashboard'))->before('auth');
 Route::get('organizer', array('uses' => 'DashboardController@organizerForm', 'as' => 'organizer-dashboard'))->before('auth');
-Route::post('game/booked', array('uses' => 'GameController@bookingDoneForm', 'as' => 'booking-done'))->before('auth');
+Route::post('game/booked', array('uses' => 'PaymentController@bookingDoneForm', 'as' => 'booking-done'))->before('auth');
 Route::post('game/pay-booked', array('uses' => 'PaymentController@payForm', 'as' => 'pay-booked'))->before('auth');
 
 

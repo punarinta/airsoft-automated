@@ -58,6 +58,8 @@ class PaymentController extends BaseController
         (
             'game_party_id'         => $gamePartyId,
             'ticket_template_id'    => $ticketTemplateId,
+            'price'                 => $ticketTemplate->getPrice(),
+            'payment_description'   => 'Ticket for game «' . $game->getName() . '»',
         ));
 
         return View::make('payment.pay', array
@@ -66,5 +68,76 @@ class PaymentController extends BaseController
             'game_party'        => $gameParty,
             'ticket_template'   => $ticketTemplate,
         ));
+    }
+
+
+    /**
+     * Processes payment and shows a message after the game ticket is booked (and/or paid)
+     *
+     * @return \Illuminate\View\View
+     * @throws Exception
+     */
+    public function bookingDoneForm()
+    {
+        $ticketSessionData = Session::get('ticket-data');
+
+        // remove ticket data from the session
+        Session::forget('ticket-data');
+
+        $paymentId = 0;
+
+        if (!Input::get('is-cash'))
+        {
+            // process payment provider
+            if (!$token = Input::get('paymillToken'))
+            {
+                throw new \Exception('This ticket is not from this game party');
+            }
+
+            $provider = new Paymill(Config::get('app.paymill.private_key'));
+            $client = $provider->request('clients/', array());
+
+            $payment = $provider->request
+            (
+                'payments/',
+                array
+                (
+                    'token'  => $token,
+                    'client' => $client['id'],
+                )
+            );
+
+            $transaction = $provider->request
+            (
+                'transactions/',
+                array
+                (
+                    'amount'      => $ticketSessionData['price'],
+                    'currency'    => 'SEK',
+                    'client'      => $client['id'],
+                    'payment'     => $payment['id'],
+                    'description' => $ticketSessionData['payment_description'],
+                )
+            );
+
+            $isStatusClosed = isset ($transaction['status']) && $transaction['status'] == 'closed';
+            $isResponseCodeSuccess = isset ($transaction['response_code']) && $transaction['response_code'] == 20000;
+
+            if (!$isStatusClosed || !$isResponseCodeSuccess)
+            {
+                return View::make('payment.failed', array('response_text' => $transaction['data']['response_code']));
+            }
+        }
+
+        // create a real ticket
+        $ticket = new Ticket;
+        $ticket->setUserId(Auth::user()->getId());
+        $ticket->setGamePartyId($ticketSessionData['game_party_id']);
+        $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
+        $ticket->setPaymentId($paymentId);
+
+        // $ticket->save();
+
+        return View::make('payment.done', array());
     }
 }
