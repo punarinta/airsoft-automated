@@ -3,6 +3,7 @@
 class PaymentController extends BaseController
 {
     // https://github.com/paymill/paymill-paybutton-examples
+    // https://www.paymill.com/en-gb/documentation-3/reference/testing/
 
     public function payForm()
     {
@@ -126,6 +127,18 @@ class PaymentController extends BaseController
             if (!$isStatusClosed || !$isResponseCodeSuccess)
             {
                 return View::make('payment.failed', array('response_text' => $transaction['data']['response_code']));
+            }
+            else
+            {
+                // create a payment
+                $payment = new Payment;
+                $payment->setTransactionId($transaction['id']);
+                $payment->setAmount($transaction['amount']);
+                $payment->setUserId(Auth::user()->getId());
+                $payment->setStatus(Payment::STATUS_COMPLETED);
+                $payment->save();
+
+                $paymentId = $payment->getId();
             }
         }
 

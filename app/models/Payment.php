@@ -2,6 +2,9 @@
 
 class Payment extends Eloquent
 {
+    const STATUS_NEW = 1;
+    const STATUS_COMPLETED = 16;
+
     protected $table = 'payment';
 
     /**
@@ -114,5 +117,21 @@ class Payment extends Eloquent
     public function setUpdateAt($update_at)
     {
         $this->update_at = $update_at;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTransactionId()
+    {
+        return $this->transaction_id;
+    }
+
+    /**
+     * @param string $transaction_id
+     */
+    public function setTransactionId($transaction_id)
+    {
+        $this->transaction_id = $transaction_id;
     }
 }

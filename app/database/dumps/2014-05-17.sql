@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 17, 2014 at 12:09 PM
+-- Generation Time: May 17, 2014 at 01:03 PM
 -- Server version: 5.5.37-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4
 
@@ -119,6 +119,7 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `provider_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
+  `transaction_id` varchar(64) DEFAULT NULL,
   `amount` int(10) unsigned NOT NULL,
   `status` int(10) unsigned NOT NULL DEFAULT '1',
   `created_at` datetime DEFAULT NULL,
