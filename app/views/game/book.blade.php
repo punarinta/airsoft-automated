@@ -7,7 +7,7 @@
 @section('content')
 <div class="dialog-box-1">
     @if ($is_organizer)
-    <p>NB: you are organizing this game</p>
+    <p>Note: you are organizing this game</p>
     @endif
 
     <fieldset class="my-fieldset" id="form-ticket">
@@ -38,29 +38,10 @@
         </table>
     </fieldset>
 
-    <div class="area-btn-paymill hidden">
-        <form action="{{ URL::route('booking-done', array($game->id)) }}" method="post">
-            <input type="hidden" name="game-party-id" class="game-party-id" value="0"/>
-            <input type="hidden" name="ticket-template-id" class="ticket-template-id" value="0"/>
-            <script
-                src="https://button.paymill.com/v1/"
-                id="btn-paymill"
-                data-label="Pay with credit card"
-                data-title="Ticket for"
-                data-description="«{{ @$game->name }}»"
-                data-submit-button="Pay 2.50 SEK"
-                data-amount="250"
-                data-currency="SEK"
-                data-public-key="{{ Config::get('app.paymill.public_key') }}"
-                data-lang="en-GB"
-                >
-            </script>
-        </form>
-    </div>
-
-    <div class="area-btn-cash hidden">
+    <div id="area-confirm" class="hidden">
         <br/>
-        <form action="{{ URL::route('booking-done', array($game->id)) }}" method="post">
+        <form action="{{ URL::route('pay-booked', array($game->id)) }}" method="post">
+            <input type="hidden" name="game-id" class="game-id" value="{{ $game->id }}"/>
             <input type="hidden" name="game-party-id" class="game-party-id" value="0"/>
             <input type="hidden" name="ticket-template-id" class="ticket-template-id" value="0"/>
             <input type="submit" class="my-btn" value="Confirm"/>
@@ -78,35 +59,21 @@ function fillForms(data)
         // just for convenience
         $('#game-party-id').val(data.game_party_id)
     }
-
-    $('#btn-paymill').attr('data-amount', data.price)
-    $('#btn-paymill').attr('data-submit-button', 'test')
-
-    if (data.is_cash)
-    {
-        $('.area-btn-paymill').hide()
-        $('.area-btn-cash').show()
-    }
-    else
-    {
-        $('.area-btn-cash').hide()
-        $('.area-btn-paymill').show()
-    }
-
-    $('iframe + script, iframe, #btn-paymill', '.area-btn-paymill').remove()
-    delete paymill;
-  //  $('#btn-paymill').removeAttr('src')
-  //  $('#btn-paymill').attr('src', 'https://button.paymill.com/v1/')
-
-    var script = document.createElement('script')
-    script.src = 'https://button.paymill.com/v1/'
-    script.id="btn-paymill"
-    $('.area-btn-paymill form')[0].appendChild(script);
 }
 
 $('#ticket-template-id').change(function()
 {
-    az.ajaxGet('ticket-template', $(this).val(), fillForms)
+    if ($(this).val()-0)
+    {
+        $('#area-confirm').show()
+        az.ajaxGet('ticket-template', $(this).val(), fillForms)
+    }
+    else $('#area-confirm').hide()
+})
+
+$('#game-party-id').change(function()
+{
+    $('#ticket-template-id').val(0)
 })
 </script>
 @stop
