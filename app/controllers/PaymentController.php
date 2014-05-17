@@ -57,6 +57,7 @@ class PaymentController extends BaseController
 
         Session::put('ticket-data', array
         (
+            'game_id'               => $gameId,
             'game_party_id'         => $gamePartyId,
             'ticket_template_id'    => $ticketTemplateId,
             'price'                 => $ticketTemplate->getPrice(),
@@ -126,7 +127,11 @@ class PaymentController extends BaseController
 
             if (!$isStatusClosed || !$isResponseCodeSuccess)
             {
-                return View::make('payment.failed', array('response_text' => $transaction['data']['response_code']));
+                return View::make('payment.failed', array
+                (
+                    'response_text' => $transaction['data']['response_code'],
+                    'game_id'       => $ticketSessionData['game_id'],
+                ));
             }
             else
             {
