@@ -156,6 +156,9 @@ class PaymentController extends BaseController
         $ticket->setPaymentId($paymentId);
         $ticket->save();
 
-        return View::make('payment.done', array());
+        return View::make('payment.done', array
+        (
+            'game_id' => $ticketSessionData['game_id'],
+        ));
     }
 }
