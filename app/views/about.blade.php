@@ -12,12 +12,19 @@
     <h3>Cookies</h3>
     <p>
         Yes, cookies are used here. I have to inform you about it according to the law. The only purpose for them to be used is to know if you are logged in or not.
-        Information about your activity is not used anywhere else except the internals of this site. If you are still afraid, use "incognito" mode of your web-browser.
+        Information about your activity is not used anywhere else except the internals of this site. If you are still afraid, use
+        <a rel="nofollow" target="_blank" href="http://en.wikipedia.org/wiki/Privacy_mode">"incognito" mode</a> of your web-browser.
     </p>
 
     <h3>Liability disclaimer</h3>
     <p>
-        I'm not responsible for any losses you had due to the usage of this system. That's so simple.
+        I'm not responsible for any losses you had due to the usage of this system. I will try to help you if possible in case you had them, but I bear no legal responsibility. That's so simple.
+    </p>
+
+    <h3>Payment providers</h3>
+    <p>
+        To process payments safely I delegate all this job so called payment providers. They treat your data with care and also prevent fraud.
+        They charge for it, so even if I'm not charging anything personally (due to a possible agreement with you) payment provider will still take some, usually that's around 3%.
     </p>
 
     <h3>Copyright notice</h3>
