@@ -26,6 +26,8 @@
                 <td>
                     @if ($game->editable)
                     <a href="{{ URL::route('game-edit', $game->id) }}">edit</a>
+                    @elseif ($game->is_booked)
+                    <a href="{{ URL::route('game-briefing', $game->id) }}">booked</a>
                     @elseif ($game->bookable)
                     <a href="{{ URL::route('game-book', $game->id) }}">book</a>
                     @else

@@ -68,8 +68,6 @@ class GameController extends BaseController
      */
     public function bookForm($game_id = 0)
     {
-        // https://github.com/paymill/paymill-paybutton-examples
-
         $game = Game::find($game_id);
 
         if (empty ($game))
@@ -117,7 +115,7 @@ class GameController extends BaseController
             ->where('t.user_id', '=', Auth::user()->getId())
             ->first();
 
-        // TODO: check payment if tt.is_cash = 0
+        // TODO: check that ticket exists before giving access
 
         if (empty ($data))
         {
@@ -130,11 +128,24 @@ class GameController extends BaseController
     /**
      * Shows a message after the game ticket is booked (and/or paid)
      *
-     * @param int $game_id
      * @return \Illuminate\View\View
      */
-    public function bookingDoneForm($game_id = 0)
+    public function bookingDoneForm()
     {
+        $ticketSessionData = Session::get('ticket-data');
+
+        // remove ticket data from the session
+        Session::forget('ticket-data');
+
+        // create a real ticket
+        $ticket = new Ticket;
+        $ticket->setUserId(Auth::user()->getId());
+        $ticket->setGamePartyId($ticketSessionData['game_party_id']);
+        $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
+
+    //    $ticket->setPaymentId(0);
+    //    $ticket->save();
+
         return View::make('game.booked', array());
     }
 }

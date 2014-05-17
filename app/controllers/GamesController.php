@@ -31,6 +31,16 @@ class GamesController extends BaseController
             $ticket_templates = TicketTemplate::where('game_id', '=', $game->getId())->get();
             $gameData[$game->getId()]->ticket_templates = $ticket_templates;
             $gameData[$game->getId()]->bookable = !$ticket_templates->isEmpty();
+
+            // Check that ticket is not yet booked for you
+            $ticket = DB::table('ticket AS t')
+                ->select(array('t.id'))
+                ->join('ticket_template AS tt', 'tt.id', '=', 't.ticket_template_id')
+                ->where('tt.game_id', '=', $game->getId())
+                ->where('t.user_id', '=', Auth::user()->getId())
+                ->first();
+
+            $gameData[$game->getId()]->is_booked = !empty ($ticket);
         }
 
         return View::make('games', array('games' => $gameData));

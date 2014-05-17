@@ -40,7 +40,7 @@
 
     <div id="area-confirm" class="hidden">
         <br/>
-        <form action="{{ URL::route('pay-booked', array($game->id)) }}" method="post">
+        <form action="{{ URL::route('pay-booked') }}" method="post">
             <input type="hidden" name="game-id" class="game-id" value="{{ $game->id }}"/>
             <input type="hidden" name="game-party-id" class="game-party-id" value="0"/>
             <input type="hidden" name="ticket-template-id" class="ticket-template-id" value="0"/>
@@ -51,14 +51,14 @@
 <script>
 function fillForms(data)
 {
-    $('.game-party-id').val($('#game-party-id').val())
-    $('.ticket-template-id').val($('#ticket-template-id').val())
-
-    if (data.game_party_id)
+    if (data.game_party_id-0)
     {
         // just for convenience
         $('#game-party-id').val(data.game_party_id)
     }
+
+    $('.game-party-id').val($('#game-party-id').val())
+    $('.ticket-template-id').val($('#ticket-template-id').val())
 }
 
 $('#ticket-template-id').change(function()
