@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Laravel Demo</title>
+    <title>Airsoft Zone</title>
     {{ HTML::style('/css/common.css') }}
     @yield('header')
     <script src="http://use.edgefonts.net/source-sans-pro:n3,i3,n4,i4,n6,i6,n7,i7.js"></script>
