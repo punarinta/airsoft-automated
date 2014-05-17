@@ -23,7 +23,7 @@
 
     <h3>Payment providers</h3>
     <p>
-        To process payments safely I delegate all this job so called payment providers. They treat your data with care and also prevent fraud.
+        To process payments safely I delegate all this job so called payment providers. They treat users' data with care and also prevent fraud.
         They charge for it, so even if I'm not charging anything personally (due to a possible agreement with you) payment provider will still take some, usually that's around 3%.
     </p>
 
