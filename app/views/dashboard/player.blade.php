@@ -19,7 +19,7 @@
                 <th>Logistics</th>
             </tr>
             @foreach ($games as $game)
-            <tr>
+            <tr class="region-{{$game->region_id}}">
                 <td>{{ date('Y.m.d', strtotime($game->starts_at)) }}</td>
                 <td>{{ $game->name }}</td>
                 <td>{{ $game->country_name }}, {{ $game->region_name }}</td>
@@ -29,5 +29,18 @@
         </table>
     </div>
 </div>
-
+<script>
+    games_region_picker.change(function(geo)
+    {
+        if (geo[1] - 0)
+        {
+            $('#calendar tr:gt(0)').hide()
+            $('#calendar tr.region-' + geo[1]).show()
+        }
+        else
+        {
+            $('#calendar tr').show()
+        }
+    })
+</script>
 @stop

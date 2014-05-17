@@ -17,6 +17,7 @@ class DashboardController extends BaseController
             ->join('country', 'country.id', '=', 'region.country_id')
             ->select(array
             (
+                'region.id AS region_id',
                 'region.name AS region_name',
                 'country.name AS country_name',
                 'game.id AS game_id',
@@ -36,6 +37,7 @@ class DashboardController extends BaseController
             $gameObj->setId($ticket->game_id);
             $gameObj->setName($ticket->game_name);
             $gameObj->setStartsAt($ticket->game_starts_at);
+            $gameObj->region_id = $ticket->region_id;
             $gameObj->region_name = $ticket->region_name;
             $gameObj->country_name = $ticket->country_name;
             $gameData[] = $gameObj;
