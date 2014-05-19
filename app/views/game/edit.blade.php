@@ -2,6 +2,9 @@
 
 @section('header')
 {{ HTML::style('/css/games.css') }}
+{{ HTML::style('/css/pikaday.css') }}
+{{ HTML::script('/js/moment.min.js') }}
+{{ HTML::script('/js/pikaday.js') }}
 @stop
 
 @section('content')
@@ -20,11 +23,11 @@
             </tr>
             <tr>
                 <td>Starts&nbsp;at:</td>
-                <td><input type="date" class="my-date starts-at" value="{{ date('Y-m-d', strtotime($game->starts_at)) }}"/></td>
+                <td><input type="text" class="my-input starts-at" value="{{ date('Y-m-d', strtotime($game->starts_at)) }}"/></td>
             </tr>
             <tr>
                 <td>Ends&nbsp;at:</td>
-                <td><input type="date" class="my-date ends-at" value="{{ date('Y-m-d', strtotime($game->ends_at)) }}"/></td>
+                <td><input type="text" class="my-input ends-at" value="{{ date('Y-m-d', strtotime($game->ends_at)) }}"/></td>
             </tr>
             <tr>
                 <td>Bookable:</td>
@@ -103,11 +106,11 @@
             </tr>
             <tr>
                 <td>Valid&nbsp;from:</td>
-                <td><input type="date" class="my-date price-date-start" value="{{ isset($game->ticket_templates[0]) ? date('Y-m-d', strtotime($game->ticket_templates[0]->price_date_start)):0 }}"/></td>
+                <td><input type="text" class="my-input price-date-start" value="{{ isset($game->ticket_templates[0]) ? date('Y-m-d', strtotime($game->ticket_templates[0]->price_date_start)):0 }}"/></td>
             </tr>
             <tr>
                 <td>Valid&nbsp;to:</td>
-                <td><input type="date" class="my-date price-date-end" value="{{ isset($game->ticket_templates[0]) ? date('Y-m-d', strtotime($game->ticket_templates[0]->price_date_end)):0 }}"/></td>
+                <td><input type="text" class="my-input price-date-end" value="{{ isset($game->ticket_templates[0]) ? date('Y-m-d', strtotime($game->ticket_templates[0]->price_date_end)):0 }}"/></td>
             </tr>
             <tr>
                 <td>Cash&nbsp;only:</td>
@@ -266,6 +269,32 @@
             $('#form-ticket-template .price-date-end').val(data.price_date_end)
             $('#form-ticket-template .is-cash').val(data.is_cash)
         })
+    })
+
+    // datepickers
+    new Pikaday(
+    {
+        field: $('#form-game .starts-at')[0],
+        firstDay: 1,
+        format: 'YYYY-MM-DD'
+    })
+    new Pikaday(
+    {
+        field: $('#form-game .ends-at')[0],
+        firstDay: 1,
+        format: 'YYYY-MM-DD'
+    })
+    new Pikaday(
+    {
+        field: $('#form-ticket-template .price-date-start')[0],
+        firstDay: 1,
+        format: 'YYYY-MM-DD'
+    })
+    new Pikaday(
+    {
+        field: $('#form-ticket-template .price-date-end')[0],
+        firstDay: 1,
+        format: 'YYYY-MM-DD'
     })
 </script>
 
