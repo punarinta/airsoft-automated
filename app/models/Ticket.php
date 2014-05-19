@@ -2,6 +2,10 @@
 
 class Ticket extends Eloquent
 {
+    const STATUS_NEW        = 1;
+    const STATUS_READY      = 2;
+    const STATUS_CHECKED    = 4;
+
     protected $table = 'ticket';
 
     /**

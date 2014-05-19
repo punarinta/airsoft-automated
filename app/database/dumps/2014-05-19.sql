@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 19, 2014 at 01:18 PM
+-- Generation Time: May 19, 2014 at 02:54 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.4.17
 
@@ -205,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
 --
 
 INSERT INTO `ticket` (`id`, `game_party_id`, `ticket_template_id`, `user_id`, `payment_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 2, 0, 1, NULL, NULL);
+(1, 2, 1, 2, 0, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 

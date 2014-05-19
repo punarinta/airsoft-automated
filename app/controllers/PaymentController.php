@@ -155,6 +155,7 @@ class PaymentController extends BaseController
         $ticket->setGamePartyId($ticketSessionData['game_party_id']);
         $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
         $ticket->setPaymentId($paymentId);
+        $ticket->setStatus(Ticket::STATUS_READY);
         $ticket->save();
 
         // inform user by email
