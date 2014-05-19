@@ -131,22 +131,37 @@ class ApiGameController extends BaseController
      * Outputs a ticket PNG
      *
      * @param int $game_id
-     * @return string
+     * @return \Illuminate\Http\Response
+     * @throws Exception
      */
     public function generateTicket($game_id = 0)
     {
         // http://image.intervention.io/getting_started/laravel
 
+        // get my ticket for the game
+        $ticket = DB::table('ticket AS t')
+            ->select(array('t.id AS id'))
+            ->join('ticket_template AS tt', 'tt.id', '=', 't.ticket_template_id')
+            ->where('tt.game_id', '=', $game_id)
+            ->where('t.user_id', '=', Auth::user()->getId())
+            ->first();
+
+        if (empty ($ticket))
+        {
+            throw new \Exception('No ticket exist');
+        }
+
+        $barcode = str_pad(Bit::swap15($ticket->id), 10, '0', STR_PAD_LEFT);
+        $barcodeImage = (new Barcode39($barcode))->draw();
+
         // create/resize image from file
         $image = Image::make('app/data/ticket-1.png')->resize(300, 200);
 
-        // create response and add formated image
-        $response = Response::make($image->encode('png'));
+        $image->insert($barcodeImage, 100, 100);
 
-        // set content-type
+        $response = Response::make($image->encode('png'));
         $response->header('Content-Type', 'image/png');
 
-        // et voila
         return $response;
     }
 }
