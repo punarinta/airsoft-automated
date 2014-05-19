@@ -165,7 +165,7 @@ class PaymentController extends BaseController
                 'message' => array
                 (
                     'subject'       => 'Ticket for «' . $ticketSessionData['game_name'] . '»',
-                    'html'          => 'Hi! You have purchased a ticket to the game «' . $ticketSessionData['game_name'] . '». You can always print it at ' . URL::route('game-briefing', array($ticketSessionData['game_id'])) . '.',
+                    'html'          => 'Hi! You have acquired a ticket to the game «' . $ticketSessionData['game_name'] . '». You can always print it at ' . URL::route('game-briefing', array($ticketSessionData['game_id'])) . '.',
                     'from_email'    => Config::get('app.emails.noreply'),
                     'to'            => array(array('email' => Auth::user()->getEmail()))
                 )
