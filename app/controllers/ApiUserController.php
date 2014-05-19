@@ -9,7 +9,7 @@ class ApiUserController extends BaseController
      */
     public function create()
     {
-        try
+        return $this->execute(function()
         {
             $email = Input::json('email');
 
@@ -46,21 +46,12 @@ class ApiUserController extends BaseController
                 ));
             }
 
-            $json = array
+            return array
             (
                 'email' => $email,
                 'password' => $password,
             );
-        }
-        catch (\Exception $e)
-        {
-            $json = array
-            (
-                'errMsg' => $e->getMessage(),
-            );
-        }
-
-        return Response::json($json);
+        });
     }
 
     /**
@@ -69,7 +60,7 @@ class ApiUserController extends BaseController
      */
     public function update($user_id = 0)
     {
-        try
+        return $this->execute(function() use ($user_id)
         {
             // you can update only yourself for now
             if (Auth::user()->getId() != $user_id)
@@ -82,19 +73,6 @@ class ApiUserController extends BaseController
             $user->setBirthDate(Input::json('birth_date'));
             $user->setTeamId(Input::json('team_id'));
             $user->save();
-
-            $json = array
-            (
-            );
-        }
-        catch (\Exception $e)
-        {
-            $json = array
-            (
-                'errMsg' => $e->getMessage(),
-            );
-        }
-
-        return Response::json($json);
+        });
     }
 }
