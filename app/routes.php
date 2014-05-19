@@ -40,6 +40,7 @@ Route::post('api/user', array('uses' => 'ApiUserController@create'))->before('gu
 Route::put('api/user/{user_id}', array('uses' => 'ApiUserController@update'))->before('auth');
 Route::get('api/region/by-country/{country_id}', array('uses' => 'ApiRegionController@findByCountry'));
 Route::get('api/team/by-region/{region_id}', array('uses' => 'ApiTeamController@findByRegion'));
+Route::get('api/game/ticket/{game_id}', array('after' => 'image', 'uses' => 'ApiGameController@generateTicket'));
 
 
 // REST API

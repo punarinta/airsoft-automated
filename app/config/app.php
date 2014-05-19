@@ -121,6 +121,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
         'Doxxon\LaravelMandrillRequest\LaravelMandrillRequestServiceProvider',
+        'Intervention\Image\ImageServiceProvider',
 	),
 
 	/*
@@ -188,6 +189,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
         'Mandrill'        => 'Doxxon\LaravelMandrillRequest\Facades\MandrillRequest',
+        'Image'           => 'Intervention\Image\Facades\Image',
 	),
 
     'emails' => array

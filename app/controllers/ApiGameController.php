@@ -126,4 +126,27 @@ class ApiGameController extends BaseController
             $game->delete();
         });
     }
+
+    /**
+     * Outputs a ticket PNG
+     *
+     * @param int $game_id
+     * @return string
+     */
+    public function generateTicket($game_id = 0)
+    {
+        // http://image.intervention.io/getting_started/laravel
+
+        // create/resize image from file
+        $image = Image::make('app/data/ticket-1.png')->resize(300, 200);
+
+        // create response and add formated image
+        $response = Response::make($image->encode('png'));
+
+        // set content-type
+        $response->header('Content-Type', 'image/png');
+
+        // et voila
+        return $response;
+    }
 }
