@@ -139,24 +139,49 @@ class ApiGameController extends BaseController
         // http://image.intervention.io/getting_started/laravel
 
         // get my ticket for the game
-        $ticket = DB::table('ticket AS t')
-            ->select(array('t.id AS id'))
+        $ticketData = DB::table('ticket AS t')
+            ->select(array('t.id AS id', 'g.name AS game_name', 'gp.name AS game_party_name'))
             ->join('ticket_template AS tt', 'tt.id', '=', 't.ticket_template_id')
+            ->join('game_party AS gp', 'gp.id', '=', 't.game_party_id')
+            ->join('game AS g', 'g.id', '=', 'tt.game_id')
             ->where('tt.game_id', '=', $game_id)
             ->where('t.user_id', '=', Auth::user()->getId())
             ->first();
 
-        if (empty ($ticket))
+        if (empty ($ticketData))
         {
             throw new \Exception('No ticket exist');
         }
 
-        $barcode = str_pad(Bit::swap15($ticket->id), 10, '0', STR_PAD_LEFT);
+        $barcode = str_pad(Bit::swap15($ticketData->id), 10, '0', STR_PAD_LEFT);
         $barcodeImage = (new Barcode39($barcode))->draw();
 
         // create/resize image from file
-        $image = Image::make('app/data/ticket-1.png')->resize(300, 200);
+        $image = Image::make('app/data/ticket-1.png')->resize(500, 200);
 
+        $font = function($font)
+        {
+            $font->file('app/data/deja-vu-sans.ttf');
+            $font->size(16);
+        };
+
+        $team = Team::find(Auth::user()->getTeamId());
+        if (empty ($team))
+        {
+            $teamName = '—';
+        }
+        else
+        {
+            $teamName = $team->getName();
+        }
+
+        // game/player data
+        $image->text('Game: «' . $ticketData->game_name . '»', 20, 20, $font);
+        $image->text('Game party: «' . $ticketData->game_party_name . '»', 20, 40, $font);
+        $image->text('Player: ' . Auth::user()->getNick(), 20, 60, $font);
+        $image->text('Team: ' . $teamName, 20, 80, $font);
+
+        // add barcode
         $image->insert($barcodeImage, 100, 100);
 
         $response = Response::make($image->encode('png'));
