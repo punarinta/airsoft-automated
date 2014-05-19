@@ -33,7 +33,7 @@ class ApiTicketTemplateController extends BaseController
             $ticketTemplate = new TicketTemplate;
             $ticketTemplate->setGameId(Input::json('game_id'));
             $ticketTemplate->setGamePartyId(Input::json('game_party_id'));
-            $ticketTemplate->setPrice(Input::json('price'));
+            $ticketTemplate->setPrice(Input::json('price') * 100);
             $ticketTemplate->setPriceDateStart(Input::json('price_date_start'));
             $ticketTemplate->setPriceDateEnd(Input::json('price_date_end'));
             $ticketTemplate->save();
@@ -55,7 +55,7 @@ class ApiTicketTemplateController extends BaseController
 
             $ticketTemplate->setGameId(Input::json('game_id'));
             $ticketTemplate->setGamePartyId(Input::json('game_party_id'));
-            $ticketTemplate->setPrice(Input::json('price'));
+            $ticketTemplate->setPrice(Input::json('price') * 100);
             $ticketTemplate->setPriceDateStart(Input::json('price_date_start'));
             $ticketTemplate->setPriceDateEnd(Input::json('price_date_end'));
             $ticketTemplate->save();

@@ -261,7 +261,7 @@
         az.ajaxGet('ticket-template', $(this).val(), function(data)
         {
             $('#form-ticket-template .name').val(data.name)
-            $('#form-ticket-template .price').val(data.price)
+            $('#form-ticket-template .price').val(Math.round(data.price / 100))
             $('#form-ticket-template .price-date-start').val(data.price_date_start)
             $('#form-ticket-template .price-date-end').val(data.price_date_end)
             $('#form-ticket-template .is-cash').val(data.is_cash)

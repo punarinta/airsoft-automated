@@ -44,6 +44,7 @@ class GameController extends BaseController
                 $x = GameParty::find($v->getGamePartyId());
 
                 $game->ticket_templates[$k]->name = date('M d', strtotime($v->getPriceDateStart())) . ' – ' . date('M d', strtotime($v->getPriceDateEnd())) . ', ' . ($x?($x->name):'all parties');
+                $game->ticket_templates[$k]->price = number_format($game->ticket_templates[$k]->price / 100, 0);
             }
         }
         else
