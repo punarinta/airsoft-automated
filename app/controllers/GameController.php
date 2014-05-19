@@ -87,6 +87,13 @@ class GameController extends BaseController
         // enrich ticket templates with names
         foreach ($game->ticket_templates as $k => $v)
         {
+            // remove outdated tickets
+            if (strtotime($v->getPriceDateStart()) > time() || strtotime($v->getPriceDateEnd()) < time())
+            {
+                unset ($game->ticket_templates[$k]);
+                continue;
+            }
+
             $x = GameParty::find($v->getGamePartyId());
 
             $game->ticket_templates[$k]->name = date('M d', strtotime($v->getPriceDateStart())) . ' – ' . date('M d', strtotime($v->getPriceDateEnd())) . ', ' . ($x?($x->name):'all parties');
