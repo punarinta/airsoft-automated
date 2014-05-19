@@ -122,6 +122,6 @@ class GameController extends BaseController
             return View::make('game.not-booked', array());
         }
 
-        return View::make('game.briefing', array());
+        return View::make('game.briefing', array('game_id' => $game_id));
     }
 }
