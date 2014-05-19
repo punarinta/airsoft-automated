@@ -51,3 +51,16 @@ Route::resource('api/game', 'ApiGameController');
 Route::resource('api/game-party', 'ApiGamePartyController');
 Route::resource('api/ticket-template', 'ApiTicketTemplateController');
 Route::resource('api/ticket', 'ApiTicketController');
+
+
+App::error(function(\Exception $e, $code)
+{
+    if (!Config::get('app.debug'))
+    {
+        return View::make('error', array
+        (
+            'exception' => $e,
+            'code'      => $code,
+        ));
+    }
+});
