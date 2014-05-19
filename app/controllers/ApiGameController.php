@@ -140,10 +140,11 @@ class ApiGameController extends BaseController
 
         // get my ticket for the game
         $ticketData = DB::table('ticket AS t')
-            ->select(array('t.id AS id', 'g.name AS game_name', 'gp.name AS game_party_name'))
+            ->select(array('t.id AS id', 'g.name AS game_name', 'gp.name AS game_party_name', 'u.nick AS player_nick'))
             ->join('ticket_template AS tt', 'tt.id', '=', 't.ticket_template_id')
             ->join('game_party AS gp', 'gp.id', '=', 't.game_party_id')
             ->join('game AS g', 'g.id', '=', 'tt.game_id')
+            ->join('user AS u', 'u.id', '=', 't.user_id')
             ->where('tt.game_id', '=', $game_id)
             ->where('t.user_id', '=', Auth::user()->getId())
             ->first();
@@ -178,7 +179,7 @@ class ApiGameController extends BaseController
         // game/player data
         $image->text('Game: «' . $ticketData->game_name . '»', 20, 20, $font);
         $image->text('Game party: «' . $ticketData->game_party_name . '»', 20, 40, $font);
-        $image->text('Player: ' . Auth::user()->getNick(), 20, 60, $font);
+        $image->text('Player: ' . $ticketData->player_nick, 20, 60, $font);
         $image->text('Team: ' . $teamName, 20, 80, $font);
 
         // add barcode
