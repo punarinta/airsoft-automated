@@ -62,6 +62,7 @@ class PaymentController extends BaseController
             'ticket_template_id'    => $ticketTemplateId,
             'price'                 => $ticketTemplate->getPrice(),
             'payment_description'   => 'Ticket for game «' . $game->getName() . '»',
+            'game_name'             => $game->getName(),
         ));
 
         return View::make('payment.pay', array
@@ -155,6 +156,21 @@ class PaymentController extends BaseController
         $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
         $ticket->setPaymentId($paymentId);
         $ticket->save();
+
+        // inform user by email
+        if (Config::get('mail.mandrill_on'))
+        {
+            Mandrill::request('messages/send', array
+            (
+                'message' => array
+                (
+                    'subject'       => 'Ticket for «' . $ticketSessionData['game_name'] . '»',
+                    'html'          => 'Hi! You have purchased a ticket to the game «' . $ticketSessionData['game_name'] . '». You can always print it at ' . URL::route('game-briefing', array($ticketSessionData['game_id'])) . '.',
+                    'from_email'    => Config::get('app.emails.noreply'),
+                    'to'            => array(array('email' => Auth::user()->getEmail()))
+                )
+            ));
+        }
 
         return View::make('payment.done', array
         (
