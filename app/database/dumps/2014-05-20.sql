@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 13, 2014 at 08:36 AM
+-- Generation Time: May 20, 2014 at 09:09 AM
 -- Server version: 5.5.20
 -- PHP Version: 5.4.17
 
@@ -112,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `payment` (
 `id` int(10) unsigned NOT NULL,
   `provider_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
+  `transaction_id` varchar(64) DEFAULT NULL,
   `amount` int(10) unsigned NOT NULL,
   `status` int(10) unsigned NOT NULL DEFAULT '1',
   `created_at` datetime DEFAULT NULL,
@@ -170,6 +171,7 @@ CREATE TABLE IF NOT EXISTS `team` (
   `name` varchar(255) NOT NULL,
   `region_id` int(10) unsigned NOT NULL DEFAULT '0',
   `owner_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `url` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
@@ -178,9 +180,9 @@ CREATE TABLE IF NOT EXISTS `team` (
 -- Dumping data for table `team`
 --
 
-INSERT INTO `team` (`id`, `name`, `region_id`, `owner_id`, `created_at`, `updated_at`) VALUES
-(1, 'Some team', 1, 2, NULL, NULL),
-(2, 'Org''s team', 1, 1, NULL, NULL);
+INSERT INTO `team` (`id`, `name`, `region_id`, `owner_id`, `url`, `created_at`, `updated_at`) VALUES
+(1, 'Some team', 1, 2, NULL, NULL, NULL),
+(2, 'Org''s team', 1, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -190,20 +192,21 @@ INSERT INTO `team` (`id`, `name`, `region_id`, `owner_id`, `created_at`, `update
 
 CREATE TABLE IF NOT EXISTS `ticket` (
 `id` int(10) unsigned NOT NULL,
+  `game_party_id` int(10) unsigned NOT NULL DEFAULT '0',
   `ticket_template_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `payment_id` int(10) unsigned DEFAULT NULL,
   `status` int(10) unsigned NOT NULL DEFAULT '1',
   `created_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `ticket`
 --
 
-INSERT INTO `ticket` (`id`, `ticket_template_id`, `user_id`, `payment_id`, `status`, `created_at`, `update_at`) VALUES
-(1, 1, 2, 0, 1, NULL, NULL);
+INSERT INTO `ticket` (`id`, `game_party_id`, `ticket_template_id`, `user_id`, `payment_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 2, 0, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -222,14 +225,17 @@ CREATE TABLE IF NOT EXISTS `ticket_template` (
   `notes` text,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `ticket_template`
 --
 
 INSERT INTO `ticket_template` (`id`, `game_id`, `game_party_id`, `price`, `price_date_start`, `price_date_end`, `is_cash`, `notes`, `created_at`, `updated_at`) VALUES
-(1, 1, 0, 150, '2014-06-01 00:00:00', '2014-06-08 00:00:00', 0, NULL, NULL, NULL);
+(1, 1, 0, 15000, '2014-05-01 00:00:00', '2014-06-08 00:00:00', 0, NULL, NULL, NULL),
+(2, 1, 1, 10000, '2014-05-01 00:00:00', '2014-05-31 00:00:00', 0, NULL, NULL, NULL),
+(3, 1, 2, 11000, '2014-05-01 00:00:00', '2014-06-08 00:00:00', 1, NULL, NULL, NULL),
+(4, 1, 1, 12300, '2014-06-01 00:00:00', '2014-06-08 00:00:00', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -257,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `email`, `password`, `nick`, `birth_date`, `team_id`, `is_team_manager`, `is_validated`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'org@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Organizer', '2014-05-01', 2, 0, 1, 'hSnr5umMTQzCxlvOHPxgAoJB9hTVObiDHB1jh3LePFSYByDFqcmCXvpHgGGJ', '2014-05-06 00:00:00', '2014-05-13 07:57:41'),
-(2, 'player-1@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 1', NULL, 1, 1, 0, NULL, '2014-05-06 00:00:00', '2014-05-10 15:35:39'),
+(2, 'player-1@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 1', NULL, 1, 1, 0, '5fY7bA7RWoiUC4snYRONq9Bjjes5An4lIzrOC1gqlrdRKNuutWuLx2tq7rgr', '2014-05-06 00:00:00', '2014-05-19 13:06:57'),
 (3, 'player-2@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 2', NULL, 1, 0, 0, NULL, '2014-05-06 00:00:00', '2014-05-10 15:35:39'),
 (4, 'player-3@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 3', NULL, 1, 0, 0, NULL, '2014-05-06 00:00:00', '2014-05-10 15:35:39');
 
@@ -368,7 +374,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `ticket_template`
 --
 ALTER TABLE `ticket_template`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `user`
 --
