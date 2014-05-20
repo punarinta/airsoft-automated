@@ -1,0 +1,1 @@
+http://lutro.priv.no/posts/optimizing-for-production-with-laravel-4
