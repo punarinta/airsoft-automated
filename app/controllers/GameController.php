@@ -121,6 +121,7 @@ class GameController extends BaseController
             ->select(array('g.id'))
             ->where('g.id', '=', $game_id)
             ->where('t.user_id', '=', Auth::user()->getId())
+            ->where('t.status', '=', Ticket::STATUS_READY)
             ->first();
 
         if (empty ($data))
