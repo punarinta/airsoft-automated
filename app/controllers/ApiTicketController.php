@@ -16,7 +16,7 @@ class ApiTicketController extends BaseController
 
             return array
             (
-                'is_valid' => !empty ($ticket),
+                'exists' => !empty ($ticket),
             );
         });
     }
@@ -40,6 +40,11 @@ class ApiTicketController extends BaseController
 
             $ticket->setStatus(Ticket::STATUS_CHECKED);
             $ticket->save();
+
+            return array
+            (
+                'id' => $ticket->getId(),
+            );
         });
     }
 }

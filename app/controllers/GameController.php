@@ -153,7 +153,7 @@ class GameController extends BaseController
             ->join('game AS g', 'g.id', '=', 'tt.game_id')
             ->join('user AS u', 'u.id', '=', 't.user_id')
             ->join('team AS tm', 'tm.id', '=', 'u.team_id', 'left outer')
-            ->select(array('u.nick AS nick', 'tm.name AS team_name', 'tt.is_cash AS is_cash', 't.status AS ticket_status'))
+            ->select(array('u.nick AS nick', 'tm.name AS team_name', 'tt.is_cash AS is_cash', 't.status AS ticket_status', 't.id AS id'))
             ->where('g.id', '=', $game_id)
             ->get();
 
