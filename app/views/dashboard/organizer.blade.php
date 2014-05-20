@@ -19,6 +19,7 @@
                 <th>Booked tickets</th>
                 <th>Total earned</th>
                 <th>Edit</th>
+                <th>Check-in</th>
             </tr>
             @foreach ($games as $game)
             <tr>
@@ -28,6 +29,7 @@
                 <td>{{ $game->total_booked }}</td>
                 <td>{{ $game->total_earned }}</td>
                 <td><a href="{{ URL::route('game-edit', $game->id) }}">edit</a></td>
+                <td><a href="{{ URL::route('game-check-in', $game->id) }}">check-in</a></td>
             </tr>
             @endforeach
         </table>

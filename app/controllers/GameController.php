@@ -147,6 +147,20 @@ class GameController extends BaseController
             return Redirect::route('games')->with('flash_error', 'Game does not exist or no access');
         }
 
-        return View::make('game.check-in', array('game' => $game));
+        // get enriched ticket list
+        $ticketsData = DB::table('ticket AS t')
+            ->join('ticket_template AS tt', 'tt.id', '=', 't.ticket_template_id')
+            ->join('game AS g', 'g.id', '=', 'tt.game_id')
+            ->join('user AS u', 'u.id', '=', 't.user_id')
+            ->join('team AS tm', 'tm.id', '=', 'u.team_id', 'left outer')
+            ->select(array('u.nick AS nick', 'tm.name AS team_name', 'tt.is_cash AS is_cash', 't.status AS ticket_status'))
+            ->where('g.id', '=', $game_id)
+            ->get();
+
+        return View::make('game.check-in', array
+        (
+            'game'    => $game,
+            'tickets' => $ticketsData,
+        ));
     }
 }
