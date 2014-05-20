@@ -194,10 +194,10 @@ return array(
 
     'emails' => array
     (
-        'noreply'   => 'noreply@example.com',
-        'office'    => 'office@example.com',
-        'support'   => 'support@example.com',
-        'moderator' => 'moderator@example.com',
+        'noreply'   => 'noreply@airsoft.zone',
+        'office'    => 'office@airsoft.zone',
+        'support'   => 'support@airsoft.zone',
+        'moderator' => 'moderator@airsoft.zone',
     ),
 
     'company' => array
