@@ -123,8 +123,6 @@ class GameController extends BaseController
             ->where('t.user_id', '=', Auth::user()->getId())
             ->first();
 
-        // TODO: check that ticket exists before giving access
-
         if (empty ($data))
         {
             return View::make('game.not-booked', array());
