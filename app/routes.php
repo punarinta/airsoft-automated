@@ -42,6 +42,8 @@ Route::put('api/user/{user_id}', array('uses' => 'ApiUserController@update'))->b
 Route::get('api/region/by-country/{country_id}', array('uses' => 'ApiRegionController@findByCountry'));
 Route::get('api/team/by-region/{region_id}', array('uses' => 'ApiTeamController@findByRegion'));
 Route::get('api/game/ticket/{game_id}', array('after' => 'image', 'uses' => 'ApiGameController@generateTicket', 'as' => 'game-ticket'))->before('auth');
+Route::get('api/ticket/validate/{barcode}', array('uses' => 'ApiTicketController@validate', 'as' => 'ticket-validate'))->before('auth');
+Route::get('api/ticket/check-in/{barcode}', array('uses' => 'ApiTicketController@checkIn', 'as' => 'ticket-check-in'))->before('auth');
 
 
 // REST API
