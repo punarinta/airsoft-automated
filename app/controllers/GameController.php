@@ -132,4 +132,22 @@ class GameController extends BaseController
 
         return View::make('game.briefing', array('game_id' => $game_id));
     }
+
+    /**
+     * Allows you to check-in players to the game
+     *
+     * @param int $game_id
+     * @return \Illuminate\View\View
+     */
+    public function checkInForm($game_id = 0)
+    {
+        $game = Game::find($game_id);
+
+        if (empty ($game) || $game->getOwnerId() != Auth::user()->getId())
+        {
+            return Redirect::route('games')->with('flash_error', 'Game does not exist or no access');
+        }
+
+        return View::make('game.check-in', array('game' => $game));
+    }
 }
