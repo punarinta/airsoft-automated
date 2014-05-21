@@ -202,7 +202,7 @@ return array(
 
     'company' => array
     (
-        'name' => 'Test Name',
+        'name' => 'Airsoft Zone',
     ),
 
     'paymill' => array

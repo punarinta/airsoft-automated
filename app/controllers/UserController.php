@@ -192,7 +192,7 @@ class UserController extends BaseController
      */
     public function confirmEmailForm($token = '')
     {
-        $user = User::find(Bit::decrypt(base64_decode($token), 'S=pi*r^2'));
+        $user = User::find(Bit::decrypt(base64_decode(str_replace('-', '/', $token)), 'S=pi*r^2'));
 
         if (empty($user))
         {
