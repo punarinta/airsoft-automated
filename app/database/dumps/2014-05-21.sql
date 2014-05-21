@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 21, 2014 at 10:08 AM
+-- Generation Time: May 21, 2014 at 02:48 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.4.17
 
@@ -254,6 +254,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `is_team_manager` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `is_validated` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `is_email_validated` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `settings` text,
   `remember_token` char(60) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
@@ -263,11 +264,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `password`, `nick`, `birth_date`, `team_id`, `is_team_manager`, `is_validated`, `is_email_validated`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'org@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Organizer', '2014-05-01', 2, 0, 1, 1, 'hSnr5umMTQzCxlvOHPxgAoJB9hTVObiDHB1jh3LePFSYByDFqcmCXvpHgGGJ', '2014-05-06 00:00:00', '2014-05-13 07:57:41'),
-(2, 'player-1@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 1', NULL, 1, 1, 0, 1, '5fY7bA7RWoiUC4snYRONq9Bjjes5An4lIzrOC1gqlrdRKNuutWuLx2tq7rgr', '2014-05-06 00:00:00', '2014-05-19 13:06:57'),
-(3, 'player-2@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 2', NULL, 1, 0, 0, 0, NULL, '2014-05-06 00:00:00', '2014-05-10 15:35:39'),
-(4, 'player-3@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 3', NULL, 1, 0, 0, 1, NULL, '2014-05-06 00:00:00', '2014-05-10 15:35:39');
+INSERT INTO `user` (`id`, `email`, `password`, `nick`, `birth_date`, `team_id`, `is_team_manager`, `is_validated`, `is_email_validated`, `settings`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'org@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Organizer', '2014-05-01', 2, 0, 1, 1, NULL, 'hSnr5umMTQzCxlvOHPxgAoJB9hTVObiDHB1jh3LePFSYByDFqcmCXvpHgGGJ', '2014-05-06 00:00:00', '2014-05-13 07:57:41'),
+(2, 'player-1@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 1', NULL, 1, 1, 0, 1, NULL, '5fY7bA7RWoiUC4snYRONq9Bjjes5An4lIzrOC1gqlrdRKNuutWuLx2tq7rgr', '2014-05-06 00:00:00', '2014-05-19 13:06:57'),
+(3, 'player-2@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 2', NULL, 1, 0, 0, 0, NULL, NULL, '2014-05-06 00:00:00', '2014-05-10 15:35:39'),
+(4, 'player-3@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 3', NULL, 1, 0, 0, 1, NULL, NULL, '2014-05-06 00:00:00', '2014-05-10 15:35:39');
 
 --
 -- Indexes for dumped tables

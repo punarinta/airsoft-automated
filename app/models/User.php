@@ -249,4 +249,42 @@ class User extends Eloquent implements UserInterface, RemindableInterface
     {
         $this->is_email_validated = $is_email_validated;
     }
+
+    /**
+     * @return array
+     */
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+
+    /**
+     * @param array $settings
+     */
+    public function setSettings($settings)
+    {
+        $this->settings = $settings;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSettingsArray()
+    {
+        if (!strlen($this->settings))
+        {
+            return array();
+        }
+        $array = json_decode($this->settings, true);
+
+        return is_array($array) ? $array : array();
+    }
+
+    /**
+     * @param $settings
+     */
+    public function setSettingsArray($settings)
+    {
+        $this->settings = json_encode($settings);
+    }
 }
