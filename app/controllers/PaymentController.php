@@ -161,17 +161,49 @@ class PaymentController extends BaseController
         // inform user by email
         if (Config::get('mail.mandrill_on'))
         {
-            Mandrill::request('messages/send', array
+            $email = Auth::user()->getEmail();
+            $name = strlen(Auth::user()->getNick()) ? Auth::user()->getNick() : $email;
+
+            Mandrill::request('messages/send-template', array
             (
+                'template_name'     => 'ticket-created',
+                'template_content'  => array(),
+                'acync'             => true,
                 'message' => array
                 (
                     'subject'       => 'Ticket for «' . $ticketSessionData['game_name'] . '»',
-                    'html'          => 'Hi! You have acquired a ticket to the game «' . $ticketSessionData['game_name'] . '». You can always print it at ' . URL::route('game-briefing', array($ticketSessionData['game_id'])) . '.',
                     'from_email'    => Config::get('app.emails.noreply'),
-                    'to'            => array(array('email' => Auth::user()->getEmail()))
+                    'from_name'     => Config::get('app.company.name'),
+                    'to' => array
+                    (
+                        array
+                        (
+                            'email' => $email,
+                            'name'  => $name,
+                        ),
+                    ),
+                    'global_merge_vars' => array
+                    (
+                        array
+                        (
+                            'name'      => 'nick',
+                            'content'   => $name,
+                        ),
+                        array
+                        (
+                            'name'      => 'game_name',
+                            'content'   => $ticketSessionData['game_name'],
+                        ),
+                        array
+                        (
+                            'name'      => 'ticket_url',
+                            'content'   => URL::route('game-briefing', array($ticketSessionData['game_id'])),
+                        ),
+                    ),
                 )
             ));
         }
+
 
         return View::make('payment.done', array
         (
