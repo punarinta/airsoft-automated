@@ -2,3 +2,6 @@
 #about-table td {font-family: source-sans-pro, helvetica, arial, sans-serif; font-size: 15px}
 #about-table ul {padding-left: 18px}
 .guest-hidden {display:none}
+#sign-up-form {text-align:center;padding-right:100px}
+#sign-up-form input {font-size:18px;padding:5px 7px}
+#sign-up-form button {font-size:18px}

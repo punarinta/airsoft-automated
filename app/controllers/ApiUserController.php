@@ -22,7 +22,8 @@ class ApiUserController extends BaseController
 
             if (!$validator->passes())
             {
-                throw new \Exception('Email is in use');
+                $messages = $validator->messages();
+                throw new \Exception('Email is in use: ' . $messages->first('email'));
             }
 
             $password = Str::random(8, 'alpha-numeric');
@@ -46,10 +47,15 @@ class ApiUserController extends BaseController
                 ));
             }
 
+            if (Input::json('autologin'))
+            {
+                Auth::login($user);
+            }
+
             return array
             (
-                'email' => $email,
-                'password' => $password,
+                'email'     => $email,
+                'password'  => $password,
             );
         });
     }

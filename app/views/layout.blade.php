@@ -34,7 +34,7 @@
 
         <ul style="float:right">
             @if(Auth::check())
-            <li><a class="alone" href="{{ URL::route('logout') }}">Sign out ({{ Auth::user()->nick }})</a></li>
+            <li><a class="alone" href="{{ URL::route('logout') }}">Sign out ({{ Auth::user()->nick ? Auth::user()->nick : 'no nick' }})</a></li>
             @else
             <li><a class="alone" href="{{ URL::route('login') }}">Sign in</a></li>
             @endif

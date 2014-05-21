@@ -40,6 +40,37 @@
             </div>
         </td>
     </tr>
+    @if(!Auth::check())
+    <tr>
+        <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="2" id="sign-up-form">
+            <input type="email" class="my-input email" autofocus placeholder="your email"/>
+            <button class="my-btn submit" onclick="signUp()">Sign-up now! :)</button>
+        </td>
+    </tr>
+    @endif
 </table>
+<script>
+function signUp()
+{
+    var re = /\S+@\S+\.\S+/, email = $('#sign-up-form .email').val().trim()
+    if (!re.test(email))
+    {
+        alert('Sorry, that´s not an email.')
+        return false
+    }
 
+    az.ajaxPost('user', JSON.stringify({email:email,autologin:1}), function()
+    {
+        alert('Thanks. Check your email for a password.')
+        document.location.reload()
+    })
+}
+$('#sign-up-form .email').keypress(function(e)
+{
+    if (e.keyCode == 13) signUp()
+})
+</script>
 @stop
