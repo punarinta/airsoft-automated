@@ -89,6 +89,16 @@ class UserController extends BaseController
     }
 
     /**
+     * Sign-up form.
+     *
+     * @return Response
+     */
+    public function registerForm()
+    {
+        return View::make('user.register');
+    }
+
+    /**
      * Handle a POST request to remind a user of their password.
      *
      * @return Response

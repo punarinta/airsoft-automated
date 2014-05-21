@@ -23,6 +23,7 @@
             <td colspan="3">
                 <input class="my-btn" type="submit" value="Login">
                 <a href="{{ URL::route('user-restore-password') }}" class="my-btn" >Forgot password</a>
+                <a href="{{ URL::route('user-register') }}" class="my-btn" >Register</a>
             </td>
         </tr>
     </table>

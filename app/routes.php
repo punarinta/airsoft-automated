@@ -27,6 +27,7 @@ Route::post('game/pay-booked', array('uses' => 'PaymentController@payForm', 'as'
 // User management
 
 Route::get('user/login', array('uses' => 'UserController@loginForm', 'as' => 'login'))->before('guest');
+Route::get('user/register', array('uses' => 'UserController@registerForm', 'as' => 'user-register'))->before('guest');
 Route::post('user/login', array('uses' => 'UserController@loginEndpoint', 'as' => 'login'));
 Route::get('user/logout', array('uses' => 'UserController@logout', 'as' => 'logout'))->before('auth');
 Route::get('user/profile', array('uses' => 'UserController@profileForm', 'as' => 'user-profile'))->before('auth');
