@@ -57,6 +57,23 @@ class DashboardController extends BaseController
             return View::make('user.validation-required');
         }
 
+        // get charging scheme
+        $settings = Auth::user()->getSettingsArray();
+        if (isset ($settings['charges']))
+        {
+            $transactionCoeffA  = $settings['charges']['transaction_a'];
+            $transactionCoeffB  = $settings['charges']['transaction_a'];
+            $ticketCoeffA       = $settings['charges']['ticket_a'];
+            $ticketCoeffB       = $settings['charges']['ticket_b'];
+        }
+        else
+        {
+            $transactionCoeffA  = 2.95;      // percents
+            $transactionCoeffB  = 300;       // monetary units
+            $ticketCoeffA       = 0;         // percents
+            $ticketCoeffB       = 0;         // monetary units
+        }
+
         $gameData = [];
         $games = Game::where('owner_id', '=', Auth::user()->getId())->get();
 
@@ -89,7 +106,7 @@ class DashboardController extends BaseController
             foreach ($ticketsData as $ticketData)
             {
                 $bruttoIncome += $ticketData->price;
-                $nettoIncome += $bruttoIncome * 0.9705 - 3.00;
+                $nettoIncome += $bruttoIncome * (100 - $transactionCoeffA) * (100 - $ticketCoeffA) / 10000 - $transactionCoeffB + $ticketCoeffB;
             }
 
             $gameData[$game->getId()] = $game;
