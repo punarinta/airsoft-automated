@@ -2,6 +2,8 @@
 
 @section('header')
 {{ HTML::style('/css/home.css') }}
+<link rel="prefetch" href="{{ URL::route('games') }}" />
+<link rel="prerender" href="{{ URL::route('games') }}" />
 @stop
 
 @section('content')
