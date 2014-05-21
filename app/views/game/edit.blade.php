@@ -33,6 +33,10 @@
                 <td>Bookable:</td>
                 <td><input class="is-visible" type="checkbox" {{ $game->is_visible?'checked':'' }}/></td>
             </tr>
+            <tr>
+                <td>URL:</td>
+                <td><input type="text" class="my-input url" value="{{ $game->url }}"/></td>
+            </tr>
         </table>
         @if ($game->id)
         <button class="my-btn save">Save</button>
@@ -145,7 +149,8 @@
             region_id: game_region_picker.getLocation()[1],
             starts_at: $('#form-game .starts-at').val(),
             ends_at: $('#form-game .ends-at').val(),
-            is_visible: $('#form-game .is-visible').is(':checked')
+            is_visible: $('#form-game .is-visible').is(':checked'),
+            url: $('#form-game .url').val()
         })
 
         if (!gameId) az.ajaxPost('game', data, function(data)
