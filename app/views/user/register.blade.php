@@ -24,24 +24,25 @@
     </table>
 </fieldset>
 <script>
-    function signUp()
+function signUp()
+{
+    var re = /\S+@\S+\.\S+/, email = $('#register-form .email').val().trim()
+    if (!re.test(email))
     {
-        var re = /\S+@\S+\.\S+/, email = $('#register-form .email').val().trim()
-        if (!re.test(email))
-        {
-            alert('Sorry, that´s not an email.')
-            return false
-        }
-
-        az.ajaxPost('user', JSON.stringify({email:email,autologin:1}), function()
-        {
-            alert('Thanks. Check your email for a password.')
-            document.location.reload()
-        })
+        alert('Sorry, that´s not an email.')
+        return false
     }
-    $('#register-form .email').keypress(function(e)
+
+    az.ajaxVerbosity = 1
+    az.ajaxPost('user', JSON.stringify({email:email,autologin:1}), function()
     {
-        if (e.keyCode == 13) signUp()
+        alert('Thanks. Check your email for a password.')
+        document.location.reload()
     })
+}
+$('#register-form .email').keypress(function(e)
+{
+    if (e.keyCode == 13) signUp()
+})
 </script>
 @stop
