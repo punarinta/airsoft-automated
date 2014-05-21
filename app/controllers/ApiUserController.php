@@ -22,8 +22,8 @@ class ApiUserController extends BaseController
 
             if (!$validator->passes())
             {
-                $messages = $validator->messages();
-                throw new \Exception('Email is in use: ' . $messages->first('email'));
+            //    $messages = $validator->messages();
+                throw new \Exception('Email is in use.'/* . $messages->first('email')*/);
             }
 
             $password = Str::random(8, 'alpha-numeric');
