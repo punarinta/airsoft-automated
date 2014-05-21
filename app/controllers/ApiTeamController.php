@@ -40,6 +40,7 @@ class ApiTeamController extends BaseController
             $team->setName($name);
             $team->setRegionId(Input::json('region_id'));
             $team->setOwnerId(Auth::user()->getId());
+            $team->setUrl(Input::json('url'));
             $team->save();
 
             $user = Auth::getUser();
@@ -73,6 +74,7 @@ class ApiTeamController extends BaseController
             }
 
             $team->setName($name);
+            $team->setUrl(Input::json('url'));
             $team->setRegionId(Input::json('region_id'));
             $team->save();
         });

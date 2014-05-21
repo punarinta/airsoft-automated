@@ -56,6 +56,7 @@ class UserController extends BaseController
                 'region.name AS team_region_name',
                 'country.name AS team_country_name',
                 'team.name AS team_name',
+                'team.url AS team_url',
                 'team.owner_id AS owner_id',
             ))
             ->where('team.id', '=', $teamId)
@@ -72,6 +73,7 @@ class UserController extends BaseController
             'team_region_name'  => $teamData ? $teamData->team_region_name : '',
             'team_id'           => $teamId,
             'team_name'         => $teamData ? $teamData->team_name : '',
+            'team_url'          => $teamData ? $teamData->team_url : '',
             'team_editable'     => (!$teamData || Auth::user()->getId() == $teamData->owner_id),
         ));
     }

@@ -71,6 +71,12 @@
                 </td>
             </tr>
             <tr>
+                <td>URL:</td>
+                <td>&nbsp;</td>
+                <td><input type="text" class="my-input url" value="{{ $team_url }}"/></td>
+            </tr>
+
+            <tr>
                 <td colspan="3">&nbsp;</td>
             </tr>
             <tr>
@@ -134,6 +140,7 @@
             data: JSON.stringify(
             {
                 name: $('#form-team .name').val(),
+                url: $('#form-team .url').val(),
                 region_id: team_region_picker.getLocation()[1]
             }),
             success: az.ajaxResult
@@ -153,6 +160,7 @@
             data: JSON.stringify(
             {
                 name: $('#form-team .name').val(),
+                url: $('#form-team .url').val(),
                 region_id: team_region_picker.getLocation()[1]
             }),
             success: az.ajaxResult
