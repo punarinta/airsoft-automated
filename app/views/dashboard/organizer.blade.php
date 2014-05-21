@@ -5,7 +5,6 @@
 @stop
 
 @section('content')
-
 <div class="window-box-1">
     <div id="calendar">
         <div id="calendar-bar">
@@ -35,5 +34,4 @@
         </table>
     </div>
 </div>
-
 @stop

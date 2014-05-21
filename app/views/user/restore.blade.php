@@ -1,10 +1,8 @@
 @extends('layout')
 
 @section('content')
-
 <fieldset class="dialog-box-1" style="width:280px">
     <legend>Remind password</legend>
-
     <form action="{{ action('UserController@restoreFormEndpoint') }}" method="POST">
         <table>
             <tr>
@@ -23,5 +21,4 @@
         </table>
     </form>
 </fieldset>
-
 @stop

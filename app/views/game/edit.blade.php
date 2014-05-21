@@ -8,7 +8,6 @@
 @stop
 
 @section('content')
-
 <div class="window-box-1">
     <fieldset class="my-fieldset" id="form-game">
         <legend>General</legend>
@@ -134,7 +133,6 @@
 
 </div>
 <script>
-
     var gameId = {{ $game->id ? $game->id : 0 }};
 
     /*
@@ -302,5 +300,4 @@
         format: 'YYYY-MM-DD'
     })
 </script>
-
 @stop

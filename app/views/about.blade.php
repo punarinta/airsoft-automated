@@ -34,5 +34,4 @@
         In some time I'll even add API to help you distributing data.
     </p>
 </div>
-
 @stop

@@ -1,8 +1,5 @@
 @extends('layout')
 
-@section('header')
-@stop
-
 @section('content')
 <div class="dialog-box-1">
     <table>

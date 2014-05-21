@@ -5,7 +5,6 @@
 @stop
 
 @section('content')
-
 <div class="window-box-1">
     <div id="calendar">
         <div id="calendar-bar">
@@ -30,17 +29,14 @@
     </div>
 </div>
 <script>
-    games_region_picker.change(function(geo)
+games_region_picker.change(function(geo)
+{
+    if (geo[1] - 0)
     {
-        if (geo[1] - 0)
-        {
-            $('#calendar tr:gt(0)').hide()
-            $('#calendar tr.region-' + geo[1]).show()
-        }
-        else
-        {
-            $('#calendar tr').show()
-        }
-    })
+        $('#calendar tr:gt(0)').hide()
+        $('#calendar tr.region-' + geo[1]).show()
+    }
+    else $('#calendar tr').show()
+})
 </script>
 @stop

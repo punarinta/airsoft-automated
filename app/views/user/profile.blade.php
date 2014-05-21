@@ -108,7 +108,6 @@
         </table>
     </fieldset>
 </div>
-
 <script>
     $('#form-profile .save').click(function()
     {

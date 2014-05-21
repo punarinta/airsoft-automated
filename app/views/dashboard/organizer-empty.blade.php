@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('content')
-
 <div class="dialog-box-1" style="text-align:center">
     <p>
         <br/>
@@ -11,5 +10,4 @@
         <a class="my-btn" href="{{ URL::route('game-edit') }}">Create your fist game!</a>
     </p>
 </div>
-
 @stop
