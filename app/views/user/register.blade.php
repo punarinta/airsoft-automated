@@ -34,10 +34,13 @@ function signUp()
     }
 
     az.ajaxVerbosity = 1
-    az.ajaxPost('user', JSON.stringify({email:email,autologin:1}), function()
+    az.ajaxPost('user', JSON.stringify({email:email,autologin:1}), function(data)
     {
-        alert('Thanks. Check your email for a password.')
-        document.location.reload()
+        if (data)
+        {
+            alert('Thanks. Check your email for a password.')
+            document.location.reload()
+        }
     })
 }
 $('#register-form .email').keypress(function(e)

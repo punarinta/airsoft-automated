@@ -62,10 +62,14 @@ function signUp()
         return false
     }
 
-    az.ajaxPost('user', JSON.stringify({email:email,autologin:1}), function()
+    az.ajaxVerbosity = 1
+    az.ajaxPost('user', JSON.stringify({email:email,autologin:1}), function(data)
     {
-        alert('Thanks. Check your email for a password.')
-        document.location.reload()
+        if (data)
+        {
+            alert('Thanks. Check your email for a password.')
+            document.location.reload()
+        }
     })
 }
 $('#sign-up-form .email').keypress(function(e)

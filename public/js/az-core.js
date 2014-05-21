@@ -53,9 +53,11 @@ var az =
     },
     ajaxResult: function(json)
     {
+        console.log(az.ajaxVerbosity)
+
         if (az.ajaxVerbosity == 0) return
         if (az.ajaxVerbosity == 1 && json.errMsg) alert(json.errMsg)
-        else alert(json.errMsg ? json.errMsg : 'Done.')
+        if (az.ajaxVerbosity == 2) alert(json.errMsg ? json.errMsg : 'Done.')
     },
 
     fillDdb: function(object, data)
