@@ -75,11 +75,29 @@ class DashboardController extends BaseController
                 ->where('region.id', '=', $game->getRegionId())
                 ->first();
 
+            // count tickets and income
+            $bruttoIncome = 0;
+            $nettoIncome = 0;
+
+            $ticketsData = DB::table('ticket AS t')
+                ->join('ticket_template AS tt', 'tt.id', '=', 't.ticket_template_id')
+                ->join('game AS g', 'g.id', '=', 'tt.game_id')
+                ->select(array('tt.price AS price'))
+                ->where('g.id', '=', $game->getId())
+                ->get();
+
+            foreach ($ticketsData as $ticketData)
+            {
+                $bruttoIncome += $ticketData->price;
+                $nettoIncome += $bruttoIncome * 0.9705 - 3.00;
+            }
+
             $gameData[$game->getId()] = $game;
             $gameData[$game->getId()]->region_name = $geo->region_name;
             $gameData[$game->getId()]->country_name = $geo->country_name;
-            $gameData[$game->getId()]->total_booked = 0;
-            $gameData[$game->getId()]->total_earned = 0;
+            $gameData[$game->getId()]->total_booked = count($ticketsData);
+            $gameData[$game->getId()]->total_brutto = number_format($bruttoIncome / 100, 2);
+            $gameData[$game->getId()]->total_netto  = number_format($nettoIncome / 100, 2);
         }
 
         return View::make('dashboard.organizer', array('games' => $gameData));
