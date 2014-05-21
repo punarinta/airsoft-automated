@@ -158,7 +158,8 @@ class UserController extends BaseController
     /**
      * Handle a POST request to reset a user's password.
      *
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws Exception
      */
     public function resetFormEndpoint()
     {
@@ -180,6 +181,28 @@ class UserController extends BaseController
 
             case Password::PASSWORD_RESET:
                 return Redirect::to('/');
+        }
+
+        throw new \Exception('Password resetting failed.');
+    }
+
+    /**
+     * @param string $token
+     * @return \Illuminate\View\View
+     */
+    public function confirmEmailForm($token = '')
+    {
+        $user = User::find(Bit::decrypt(base64_decode($token), 'S=pi*r^2'));
+
+        if (empty($user))
+        {
+            return View::make('user.email-validation-failed');
+        }
+        else
+        {
+            $user->setIsEmailValidated(1);
+            $user->save();
+            return View::make('user.email-validated');
         }
     }
 }

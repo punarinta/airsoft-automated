@@ -33,6 +33,9 @@ class ApiUserController extends BaseController
             $user->setPassword(Hash::make($password));
             $user->save();
 
+            $confirmationCode = base64_encode(Bit::encrypt((string) $user->getId(), 'S=pi*r^2'));
+            $confirmationLink = URL::route('confirm-email', array($confirmationCode));
+
             if (Config::get('mail.mandrill_on'))
             {
                 Mandrill::request('messages/send', array
@@ -40,7 +43,7 @@ class ApiUserController extends BaseController
                     'message' => array
                     (
                         'subject'       => 'Welcome to ' . Config::get('app.company.name') . '!',
-                        'html'          => 'Your password is ' . $password . '. We recommend you to change it.',
+                        'html'          => 'Your password is ' . $password . '. We recommend you to change it. Also please confirm your email by going via this link: <a href="' . $confirmationLink . '">' . $confirmationLink . '</a>.',
                         'from_email'    => Config::get('app.emails.noreply'),
                         'to'            => array(array('email' => $email))
                     )

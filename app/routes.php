@@ -35,6 +35,7 @@ Route::get('user/restore-password', array('uses' => 'UserController@restoreForm'
 Route::post('user/restore-password', array('uses' => 'UserController@restoreFormEndpoint', 'as' => 'user-restore-password'))->before('guest');
 Route::get('user/reset-password/{token}', array('uses' => 'UserController@resetForm', 'as' => 'user-reset-password'))->before('guest');
 Route::post('user/reset-password', array('uses' => 'UserController@resetFormEndpoint', 'as' => 'user-reset-password'))->before('guest');
+Route::get('user/confirm-email/{token}', array('uses' => 'UserController@confirmEmailForm', 'as' => 'confirm-email'));
 
 // Non-REST API
 

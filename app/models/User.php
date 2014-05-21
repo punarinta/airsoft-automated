@@ -233,4 +233,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface
     {
         $this->updated_at = $updated_at;
     }
+
+    /**
+     * @return array
+     */
+    public function getIsEmailValidated()
+    {
+        return $this->is_email_validated;
+    }
+
+    /**
+     * @param array $is_email_validated
+     */
+    public function setIsEmailValidated($is_email_validated)
+    {
+        $this->is_email_validated = $is_email_validated;
+    }
 }
