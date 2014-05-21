@@ -7,7 +7,7 @@
     {{ Form::open(array('url' => 'user/login', 'method' => 'post')) }}
     <table>
         <tr>
-            <td>{{ Form::label('username', 'Username:') }}</td>
+            <td>{{ Form::label('username', 'Email:') }}</td>
             <td>&nbsp;</td>
             <td><input class="my-input" name="username" type="text" id="username" value="{{ Input::old('username') }}" autofocus></td>
         </tr>

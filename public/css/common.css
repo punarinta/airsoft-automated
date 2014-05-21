@@ -1,28 +1,21 @@
 html,body {height:100%;overflow-x:hidden}
-body {min-height:100%;margin:0 auto;padding:0;font:14px source-sans-pro, helvetica, arial, sans-serif;color:#333;background:#f7f7f7 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQALNS8R9GGF8EKc25uUWsACMA2IzInNAAgCAZQ2P0jfaagAAAABJRU5ErkJggg==)repeat} /*83a318*/
+body {min-height:100%;margin:0 auto;padding:0;font:14px source-sans-pro, helvetica, arial, sans-serif;color:#333;background:#f7f7f7 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQALNS8R9GGF8EKc25uUWsACMA2IzInNAAgCAZQ2P0jfaagAAAABJRU5ErkJggg==)repeat}
 
 .my-btn, .my-select, .my-img {text-decoration:none;background:#f2f2f2;color:#666;border:1px solid #d9d9d9;cursor:pointer;font:12px Arial;font-weight:bold;outline:none !important;border-radius:2px}
 .my-btn:hover, .my-select:hover, .my-img:hover {color:#333;border:1px solid #c6c6c6;box-shadow:0 1px 1px rgba(0,0,0,.1)}
-
 .my-btn {padding:5px 9px 5px 10px;margin: 2px 0}
 .my-select, .my-input {padding:4px 2px;margin:2px 0}
 .my-input, .my-text {font:15px Arial,sans-serif;border:1px solid #d9d9d9;border-top:1px solid #c0c0c0;padding:3px;background:#fff;outline:none !important;border-radius:1px}
 .my-hr {border:0;height:1px;background:#e5e5e5}
 .my-text {padding:8px}
-.my-date {font:15px Arial,sans-serif;border:1px solid #d9d9d9;border-top:1px solid #c0c0c0;padding:1px 12px;background:#fff;outline:none !important;border-radius:1px;margin-left: 0px}
+.my-date {font:15px Arial,sans-serif;border:1px solid #d9d9d9;border-top:1px solid #c0c0c0;padding:1px 12px;background:#fff;outline:none !important;border-radius:1px;margin-left:0px}
 .my-input:hover, .my-text:hover, .my-date:hover {border:1px solid #b9b9b9;border-top:1px solid #a0a0a0}
 .my-input:focus, .my-text:focus, .my-date:focus {border:1px solid #4d90fe}
 .my-select option {font-weight:normal}
-
 .my-table {border-collapse:collapse}
 .my-table th {border:1px solid #ccc;font-weight:normal;background:#f3f3f3;color:#222;padding:5px;font-size:13px;white-space:nowrap}
 .my-table td {border:1px solid #ccc;padding:2px 5px;font-size:14px;text-align:center}
-
-.my-link {color:#15c;border-bottom:1px dashed #15c;cursor:pointer;text-decoration:none}
-.my-link:hover {color:#DD4B39;border-color:#DD4B39}
-
-.my-fieldset {border:1px solid #999;background: #fff;border-radius: 5px}
-.my-fieldset legend {}
+.my-fieldset {border:1px solid #999;background:#fff;border-radius: 5px}
 
 .hidden {display:none}
 
@@ -39,6 +32,9 @@ body {min-height:100%;margin:0 auto;padding:0;font:14px source-sans-pro, helveti
 #flash_notice {color:#406aeb}
 #flash_error {color:#ff4040}
 .warn-span {color:#ff4040}
+
+#modal-background {background:rgba(0,0,0,.3);position:fixed;top:0;left:0;width:100%;height:100%;display:none;z-index:1001}
+#modal {margin:20% auto 0;width:350px;background:#fff;border-radius:5px;padding:10px 15px;font-size:16px;display:none}
 
 #content {margin-top:40px;font-size:16px}
 #content p {margin:5px 0 25px 0}

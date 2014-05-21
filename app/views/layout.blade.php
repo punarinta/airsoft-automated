@@ -13,6 +13,13 @@
     <link rel="icon" href="/favicon.ico" />
 </head>
 <body>
+<div id="modal-background">
+    <div id="modal">
+        <div class="content"></div>
+        <hr class="my-hr"/>
+        <button class="my-btn">OK</button>
+    </div>
+</div>
 <div id="main">
     <div id="navbar">
         <ul style="float:left">

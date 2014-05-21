@@ -53,21 +53,18 @@ var az =
     },
     ajaxResult: function(json)
     {
-        console.log(az.ajaxVerbosity)
-
         if (az.ajaxVerbosity == 0) return
-        if (az.ajaxVerbosity == 1 && json.errMsg) alert(json.errMsg)
-        if (az.ajaxVerbosity == 2) alert(json.errMsg ? json.errMsg : 'Done.')
+        if (az.ajaxVerbosity == 1 && json.errMsg) az.showModal(json.errMsg)
+        if (az.ajaxVerbosity == 2) az.showModal(json.errMsg ? json.errMsg : 'Operation was successful.')
     },
-
-    fillDdb: function(object, data)
+    showModal: function(content)
     {
-        var i, html = ''
-        for (i in data)
-        {
-            html += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
-        }
-
-        $(object).html(html)
+        $('#modal .content').html(content)
+        $('#modal, #modal-background').show()
+        $('#modal button').unbind('click').click(az.hideModal)
+    },
+    hideModal: function()
+    {
+        $('#modal, #modal-background').hide()
     }
 }
