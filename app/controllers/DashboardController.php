@@ -57,23 +57,6 @@ class DashboardController extends BaseController
             return View::make('user.validation-required');
         }
 
-        // get charging scheme
-        $settings = Auth::user()->getSettingsArray();
-        if (isset ($settings['charges']))
-        {
-            $transactionCoeffA  = $settings['charges']['transaction_a'];
-            $transactionCoeffB  = $settings['charges']['transaction_a'];
-            $ticketCoeffA       = $settings['charges']['ticket_a'];
-            $ticketCoeffB       = $settings['charges']['ticket_b'];
-        }
-        else
-        {
-            $transactionCoeffA  = 2.95;      // percents
-            $transactionCoeffB  = 300;       // monetary units
-            $ticketCoeffA       = 0;         // percents
-            $ticketCoeffB       = 0;         // monetary units
-        }
-
         $gameData = [];
         $games = Game::where('owner_id', '=', Auth::user()->getId())->get();
 
@@ -99,14 +82,14 @@ class DashboardController extends BaseController
             $ticketsData = DB::table('ticket AS t')
                 ->join('ticket_template AS tt', 'tt.id', '=', 't.ticket_template_id')
                 ->join('game AS g', 'g.id', '=', 'tt.game_id')
-                ->select(array('tt.price AS price'))
+                ->select(array('t.netto AS netto', 't.brutto AS brutto'))
                 ->where('g.id', '=', $game->getId())
                 ->get();
 
             foreach ($ticketsData as $ticketData)
             {
-                $bruttoIncome += $ticketData->price;
-                $nettoIncome += $bruttoIncome * (100 - $transactionCoeffA) * (100 - $ticketCoeffA) / 10000 - $transactionCoeffB - $ticketCoeffB;
+                $bruttoIncome += $ticketData->brutto;
+                $nettoIncome += $ticketData->netto;
             }
 
             $gameData[$game->getId()] = $game;
