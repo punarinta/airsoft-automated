@@ -6,7 +6,7 @@
 
 @section('content')
 <fieldset class="dialog-box-1" style="width:280px">
-    <legend>Sign-in</legend>
+    <legend>Sign-up</legend>
     <table id="register-form">
         <tr>
             <td>Email:</td>
@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td colspan="3">
-                <button class="my-btn submit" onclick="signUp()">Sign-up! :)</button>
+                <button class="my-btn submit" onclick="signUp()">Sign-up</button>
             </td>
         </tr>
     </table>
