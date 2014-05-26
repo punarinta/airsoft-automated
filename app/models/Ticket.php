@@ -135,4 +135,36 @@ class Ticket extends Eloquent
     {
         $this->game_party_id = $game_party_id;
     }
+
+    /**
+     * @return string
+     */
+    public function getNetto()
+    {
+        return $this->netto;
+    }
+
+    /**
+     * @param string $netto
+     */
+    public function setNetto($netto)
+    {
+        $this->netto = $netto;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrutto()
+    {
+        return $this->brutto;
+    }
+
+    /**
+     * @param string $brutto
+     */
+    public function setBrutto($brutto)
+    {
+        $this->brutto = $brutto;
+    }
 }

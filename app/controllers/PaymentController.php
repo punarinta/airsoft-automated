@@ -89,6 +89,27 @@ class PaymentController extends BaseController
 
         $paymentId = 0;
 
+        // get charging scheme of the game owner
+        $game = Game::find($ticketSessionData['game_id']);
+        $owner = User::find($game->getOwnerId());
+        $settings = $owner->getSettingsArray();
+
+        if (isset ($settings['charges']))
+        {
+            $transactionCoeffA  = $settings['charges']['transaction_a'];
+            $transactionCoeffB  = $settings['charges']['transaction_a'];
+            $ticketCoeffA       = $settings['charges']['ticket_a'];
+            $ticketCoeffB       = $settings['charges']['ticket_b'];
+        }
+        else
+        {
+            $transactionCoeffA  = 2.95;      // percents
+            $transactionCoeffB  = 300;       // monetary units
+            $ticketCoeffA       = 0;         // percents
+            $ticketCoeffB       = 0;         // monetary units
+        }
+
+
         if (!Input::get('is-cash'))
         {
             // process payment provider
@@ -146,7 +167,16 @@ class PaymentController extends BaseController
                 $payment->save();
 
                 $paymentId = $payment->getId();
+
+                $bruttoIncome = $payment->getAmount();
+                $nettoIncome = $bruttoIncome * (100 - $transactionCoeffA) * (100 - $ticketCoeffA) / 10000 - $transactionCoeffB - $ticketCoeffB;
             }
+        }
+        else
+        {
+            // that's cash, it has no transaction charging
+            $bruttoIncome = $ticketSessionData['price'];
+            $nettoIncome = $bruttoIncome * (100 - $ticketCoeffA) / 100 - $ticketCoeffB;
         }
 
         // create a real ticket
@@ -156,6 +186,8 @@ class PaymentController extends BaseController
         $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
         $ticket->setPaymentId($paymentId);
         $ticket->setStatus(Ticket::STATUS_READY);
+        $ticket->setNetto($nettoIncome);
+        $ticket->setBrutto($bruttoIncome);
         $ticket->save();
 
         // inform user by email
