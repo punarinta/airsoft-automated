@@ -106,7 +106,7 @@ class DashboardController extends BaseController
             foreach ($ticketsData as $ticketData)
             {
                 $bruttoIncome += $ticketData->price;
-                $nettoIncome += $bruttoIncome * (100 - $transactionCoeffA) * (100 - $ticketCoeffA) / 10000 - $transactionCoeffB + $ticketCoeffB;
+                $nettoIncome += $bruttoIncome * (100 - $transactionCoeffA) * (100 - $ticketCoeffA) / 10000 - $transactionCoeffB - $ticketCoeffB;
             }
 
             $gameData[$game->getId()] = $game;
