@@ -136,7 +136,7 @@ class UserController extends BaseController
             ));
         }
 
-        return Redirect::back()->with('flash_notice', Lang::get('OK'));
+        return Redirect::to('/')->with('flash_notice', Lang::get('Check email'));
     }
 
     /**
