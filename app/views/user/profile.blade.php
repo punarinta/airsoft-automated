@@ -18,12 +18,18 @@
         1. You cannot organize games. <a href="{{ URL::route('organizer-dashboard') }}">Read here how to validate yourself.</a>
         @endif
         <br/>
-        @if ($team_editable && $team_present)
-        2. You can edit your team as it was you who added it to the system.
-        @elseif ($team_present)
-        2. You cannot edit your team, as you did not create it.
+        @if (Auth::user()->getIsEmailValidated())
+        2. You have passed email validation and can participate in games.
         @else
-        2. You may create your team or join an existing one.
+        2. You cannot participate in games. Check your email for a confirmation link.</a>
+        @endif
+        <br/>
+        @if ($team_editable && $team_present)
+        3. You can edit your team as it was you who added it to the system.
+        @elseif ($team_present)
+        3. You cannot edit your team, as you did not create it.
+        @else
+        3. You may create your team or join an existing one.
         @endif
     </fieldset>
 
