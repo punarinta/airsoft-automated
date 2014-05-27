@@ -76,6 +76,11 @@ class GameController extends BaseController
             return Redirect::route('games')->with('flash_error', 'Game does not exist');
         }
 
+        if (!Auth::user()->getIsEmailValidated())
+        {
+            return View::make('user.email-validation-required');
+        }
+
         $game->parties = GameParty::where('game_id', '=', $game_id)->get();
         $game->ticket_templates = TicketTemplate::where('game_id', '=', $game_id)->get();
 
