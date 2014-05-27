@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| Home
+@stop
+
 @section('header')
 {{ HTML::style('/css/home.css') }}
 <link rel="prefetch" href="{{ URL::route('games') }}" />

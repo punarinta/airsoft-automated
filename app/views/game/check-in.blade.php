@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| Check-in
+@stop
+
 @section('header')
 <style>
 #barcode {font-size:36px;width:200px}

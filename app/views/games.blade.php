@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| Games
+@stop
+
 @section('header')
 {{ HTML::style('/css/games.css') }}
 @stop

@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| Your profile
+@stop
+
 @section('header')
 {{ HTML::style('/css/profile.css') }}
 @stop

@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| Organizer dashboard
+@stop
+
 @section('header')
 {{ HTML::style('/css/dashboard.css') }}
 @stop

@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| About
+@stop
+
 @section('content')
 <div class="padded-content" style="max-width:800px">
     <h3>About</h3>

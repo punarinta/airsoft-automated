@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| Organizer dashboard
+@stop
+
 @section('content')
 <div class="dialog-box-1" style="text-align:center">
     <p>

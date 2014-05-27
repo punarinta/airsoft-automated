@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| Game editor
+@stop
+
 @section('header')
 {{ HTML::style('/css/games.css') }}
 {{ HTML::style('/css/pikaday.css') }}

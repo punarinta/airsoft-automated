@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| Login
+@stop
+
 @section('content')
 <fieldset class="dialog-box-1" style="width:280px">
     <legend>Sign-in</legend>

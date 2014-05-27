@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| Register
+@stop
+
 @section('header')
 {{ HTML::style('/css/home.css') }}
 @stop

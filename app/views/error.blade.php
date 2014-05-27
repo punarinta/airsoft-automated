@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| Error
+@stop
+
 @section('content')
 <div class="dialog-box-1">
     <h4>An error occurred:</h4>

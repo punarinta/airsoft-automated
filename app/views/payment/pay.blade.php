@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| Pay
+@stop
+
 @section('content')
 <div class="dialog-box-1">
     <table>

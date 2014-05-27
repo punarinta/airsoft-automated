@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+| Specific game info
+@stop
+
 @section('header')
 <style>
 #ticket {border:1px solid #ddd;border-radius:3px}
