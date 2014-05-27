@@ -18,10 +18,12 @@
         1. You cannot organize games. <a href="{{ URL::route('organizer-dashboard') }}">Read here how to validate yourself.</a>
         @endif
         <br/>
-        @if ($team_editable)
+        @if ($team_editable && $team_present)
         2. You can edit your team as it was you who added it to the system.
-        @else
+        @elseif ($team_present)
         2. You cannot edit your team, as you did not create it.
+        @else
+        2. You may create your team or join an existing one.
         @endif
     </fieldset>
 
