@@ -33,7 +33,10 @@ function signUp()
     var re = /\S+@\S+\.\S+/, email = $('#register-form .email').val().trim()
     if (!re.test(email))
     {
-        az.showModal('Sorry, that´s not an email.')
+        az.showModal('Sorry, that´s not an email.', function()
+        {
+            $('.email').focus()
+        })
         return false
     }
 
