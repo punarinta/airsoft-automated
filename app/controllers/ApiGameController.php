@@ -160,8 +160,11 @@ class ApiGameController extends BaseController
         $barcode = str_pad(Bit::swap15($ticketData->id), 10, '0', STR_PAD_LEFT);
         $barcodeImage = (new Barcode39($barcode))->draw();
 
+        $width  = 500;
+        $height = 200;
+
         // create/resize image from file
-        $image = Image::make('app/data/ticket-1.png')->resize(500, 200);
+        $image = Image::make('app/data/ticket-1.png');
 
         $font = function($font)
         {
@@ -179,14 +182,16 @@ class ApiGameController extends BaseController
             $teamName = $team->getName();
         }
 
+        $image->rectangle(0, 0, 0, $width - 1, $height - 1, false);
+
         // game/player data
-        $image->text('Game: «' . $ticketData->game_name . '»', 20, 20, $font);
-        $image->text('Game party: «' . $ticketData->game_party_name . '»', 20, 40, $font);
-        $image->text('Player: ' . $ticketData->player_nick, 20, 60, $font);
-        $image->text('Team: ' . $teamName, 20, 80, $font);
+        $image->text('Game: «' . $ticketData->game_name . '»', 15, 25, $font);
+        $image->text('Game party: «' . $ticketData->game_party_name . '»', 15, 50, $font);
+        $image->text('Player: ' . $ticketData->player_nick, 15, 75, $font);
+        $image->text('Team: ' . $teamName, 15, 100, $font);
 
         // add barcode
-        $image->insert($barcodeImage, 100, 100);
+        $image->insert($barcodeImage, 10, 110);
 
         $response = Response::make($image->encode('png'));
         $response->header('Content-Type', 'image/png');
