@@ -1,6 +1,8 @@
 var az =
 {
     ajaxVerbosity: 2,
+    modalCallback : null,
+
     ajaxGet: function(object, id, callback)
     {
         $.ajax(
@@ -57,14 +59,16 @@ var az =
         if (az.ajaxVerbosity == 1 && json.errMsg) az.showModal(json.errMsg)
         if (az.ajaxVerbosity == 2) az.showModal(json.errMsg ? json.errMsg : 'Operation was successful.')
     },
-    showModal: function(content)
+    showModal: function(content, callback)
     {
+        if (callback) az.modalCallback = callback
         $('#modal .content').html(content)
         $('#modal, #modal-background').show()
-        $('#modal button').unbind('click').click(az.hideModal)
+        $('#modal button').unbind('click').click(az.hideModal).focus()
     },
     hideModal: function()
     {
         $('#modal, #modal-background').hide()
+        if (az.modalCallback) az.modalCallback()
     }
 }

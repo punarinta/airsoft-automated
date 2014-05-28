@@ -73,8 +73,10 @@ function signUp()
     {
         if (data)
         {
-            alert('Thanks. Check your email for a password.')
-            document.location.reload()
+            az.showModal('Thanks. Check your email for a password.', function()
+            {
+                document.location.reload()
+            })
         }
     })
 }
