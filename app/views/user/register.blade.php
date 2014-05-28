@@ -33,7 +33,7 @@ function signUp()
     var re = /\S+@\S+\.\S+/, email = $('#register-form .email').val().trim()
     if (!re.test(email))
     {
-        alert('Sorry, that´s not an email.')
+        az.showModal('Sorry, that´s not an email.')
         return false
     }
 
@@ -42,8 +42,10 @@ function signUp()
     {
         if (data)
         {
-            alert('Thanks. Check your email for a password.')
-            document.location.reload()
+            az.showModal('Thanks. Check your email for a password.', function()
+            {
+                document.location.reload()
+            })
         }
     })
 }

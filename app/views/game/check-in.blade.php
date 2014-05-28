@@ -64,7 +64,7 @@ function validate()
             }
         })
     }
-    else alert('Code should contain 10 digits')
+    else az.showModal('Code should contain 10 digits')
 }
 // allow digits only
 $('#barcode').bind('change keyup', function()
@@ -90,7 +90,7 @@ $('#btn-check-in').click(function()
             $('td:eq(2)', '.ticket-' + data.id).html('+')
         })
     }
-    else alert('Code should contain 10 digits')
+    else az.showModal('Code should contain 10 digits')
 })
 </script>
 @stop

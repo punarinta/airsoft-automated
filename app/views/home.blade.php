@@ -64,7 +64,7 @@ function signUp()
     var re = /\S+@\S+\.\S+/, email = $('#sign-up-form .email').val().trim()
     if (!re.test(email))
     {
-        alert('Sorry, that´s not an email.')
+        az.showModal('Sorry, that´s not an email.')
         return false
     }
 
