@@ -3,6 +3,8 @@
 class DashboardController extends BaseController
 {
     /**
+     * Shows participant dashboard
+     *
      * @return \Illuminate\View\View
      */
     public function playerForm()
@@ -47,6 +49,8 @@ class DashboardController extends BaseController
     }
 
     /**
+     * Shows organizer dashboard
+     *
      * @return \Illuminate\View\View
      */
     public function organizerForm()

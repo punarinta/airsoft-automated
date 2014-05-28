@@ -23,20 +23,22 @@ class UserController extends BaseController
 
         if (Auth::attempt($user))
         {
-            return Redirect::route('home')->with('flash_notice', 'You are successfully logged in.');
+            return Redirect::route('home')->with('flash_notice', 'You were successfully logged in.');
         }
 
-        // authentication failure! lets go back to the login page
-        return Redirect::route('login')->with('flash_error', 'Your username/password combination was incorrect.')->withInput();
+        // Authentication failure. Let's go back to the login page.
+        return Redirect::route('login')->with('flash_error', 'Either username or password were incorrect.')->withInput();
 	}
 
     /**
+     * Logs you out and redirects to the home dashboard
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function logout()
     {
         Auth::logout();
-        return Redirect::route('home')->with('flash_notice', 'You are successfully logged out.');
+        return Redirect::route('home')->with('flash_notice', 'You were successfully logged out.');
     }
 
     /**
@@ -109,9 +111,9 @@ class UserController extends BaseController
         $email = Input::input('email');
         $user = User::where('email', '=', $email)->first();
 
-        if (empty($user))
+        if (empty ($user))
         {
-            return Redirect::back()->with('flash_notice', Lang::get('not OK'));
+            return Redirect::back()->with('flash_notice', Lang::get('User does not exist'));
         }
 
         $token = md5(microtime(true) . 'some-stuff');
@@ -188,6 +190,8 @@ class UserController extends BaseController
     }
 
     /**
+     * Final stage of email confirmation
+     *
      * @param string $token
      * @return \Illuminate\View\View
      */
@@ -195,7 +199,7 @@ class UserController extends BaseController
     {
         $user = User::find(Bit::decrypt(base64_decode(str_replace('-', '/', $token)), 'S=pi*r^2'));
 
-        if (empty($user))
+        if (empty ($user))
         {
             return View::make('user.email-validation-failed');
         }

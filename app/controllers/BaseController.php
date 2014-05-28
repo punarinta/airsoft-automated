@@ -15,23 +15,21 @@ class BaseController extends Controller
 		}
 	}
 
+    /**
+     * Wrapper for a JSON API endpoint
+     *
+     * @param string $insetFunction
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function execute($insetFunction = '')
     {
         try
         {
-            $insetResult = $insetFunction();
-
-            $json = array
-            (
-                'data' => $insetResult,
-            );
+            $json = array('data' => $insetFunction());
         }
         catch (\Exception $e)
         {
-            $json = array
-            (
-                'errMsg' => $e->getMessage(),
-            );
+            $json = array('errMsg' => $e->getMessage());
         }
 
         return Response::json($json);

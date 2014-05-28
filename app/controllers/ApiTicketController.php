@@ -22,7 +22,7 @@ class ApiTicketController extends BaseController
     }
 
     /**
-     * Checks-is a ticket by its barcode
+     * Checks-in a ticket by its barcode
      *
      * @param int $barcode
      * @return \Illuminate\Http\JsonResponse

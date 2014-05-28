@@ -3,6 +3,8 @@
 class ApiRegionController extends BaseController
 {
     /**
+     * Shows all the Regions by the Country they belong to
+     *
      * @param $country_id
      * @return \Illuminate\Http\JsonResponse
      */

@@ -3,7 +3,7 @@
 class ApiUserController extends BaseController
 {
     /**
-     * Quickly register user by providing his email only
+     * Quickly registers user by providing his email only
      *
      * @return \Illuminate\View\View
      */
@@ -87,6 +87,8 @@ class ApiUserController extends BaseController
     }
 
     /**
+     * Updates information about User (you only)
+     *
      * @param int $user_id
      * @return \Illuminate\Http\JsonResponse
      */
