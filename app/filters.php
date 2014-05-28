@@ -13,10 +13,10 @@
 
 /*App::before(function($request)
 {
-});
+    App::setLocale('se');
+});*/
 
-
-App::after(function($request, $response)
+/*App::after(function($request, $response)
 {
 });*/
 

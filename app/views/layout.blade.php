@@ -25,14 +25,14 @@
 <div id="main">
     <div id="navbar">
         <ul style="float:left">
-            <li><a class="first" href="{{ URL::route('home') }}">Home</a></li>
-            <li><a href="{{ URL::route('games') }}">Games</a></li>
+            <li><a class="first" href="{{ URL::route('home') }}">{{ trans('airsoft.menu.home') }}</a></li>
+            <li><a href="{{ URL::route('games') }}">{{ trans('airsoft.menu.games') }}</a></li>
             @if(Auth::check())
-            <li><a href="{{ URL::route('player-dashboard') }}">I play</a></li>
-            <li><a href="{{ URL::route('organizer-dashboard') }}">I organize</a></li>
-            <li><a href="{{ URL::route('user-profile') }}">Profile</a></li>
+            <li><a href="{{ URL::route('player-dashboard') }}">{{ trans('airsoft.menu.i_play') }}</a></li>
+            <li><a href="{{ URL::route('organizer-dashboard') }}">{{ trans('airsoft.menu.i_organize') }}</a></li>
+            <li><a href="{{ URL::route('user-profile') }}">{{ trans('airsoft.menu.profile') }}</a></li>
             @endif
-            <li><a class="last" href="{{ URL::route('about') }}">About</a></li>
+            <li><a class="last" href="{{ URL::route('about') }}">{{ trans('airsoft.menu.about') }}</a></li>
         </ul>
 
         @if(Session::has('flash_notice'))
@@ -44,9 +44,9 @@
 
         <ul style="float:right">
             @if(Auth::check())
-            <li><a class="alone" href="{{ URL::route('logout') }}">Sign out ({{ Auth::user()->nick ? Auth::user()->nick : 'no nick' }})</a></li>
+            <li><a class="alone" href="{{ URL::route('logout') }}">{{ trans('airsoft.menu.sign_out') }} ({{ Auth::user()->nick ? Auth::user()->nick : 'no nick' }})</a></li>
             @else
-            <li><a class="alone" href="{{ URL::route('login') }}">Sign in</a></li>
+            <li><a class="alone" href="{{ URL::route('login') }}">{{ trans('airsoft.menu.sign_in') }}</a></li>
             @endif
         </ul>
     </div>
