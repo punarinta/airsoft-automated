@@ -12,5 +12,6 @@ return array
         'about' => 'About',
         'sign_in' => 'Sign in',
         'sign_out' => 'Sign out',
+        'no_nick' => 'no nick',
     ),
 );

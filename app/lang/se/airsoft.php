@@ -12,5 +12,6 @@ return array
         'about' => 'Om oss',
         'sign_in' => 'Logga in',
         'sign_out' => 'Logga ut',
+        'no_nick' => 'inget nick',
     ),
 );
