@@ -109,4 +109,30 @@ class ApiUserController extends BaseController
             $user->save();
         });
     }
+
+    /**
+     * Allows the admin to incarnate as any user
+     *
+     * @param int $user_id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws Exception
+     */
+    public function incarnate($user_id = 0)
+    {
+        if (Auth::user()->getId() != 1)
+        {
+            throw new \Exception('Access denied');
+        }
+
+        $user = User::find($user_id);
+
+        if (empty ($user))
+        {
+            throw new \Exception('User does not exist');
+        }
+
+        Auth::login($user);
+
+        return Redirect::route('home')->with('flash_notice', 'You are now «' . $user->getNick() . '».');
+    }
 }
