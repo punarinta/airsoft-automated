@@ -9,6 +9,10 @@ Route::get('/about', array('as' => 'about', function ()
 {
     return View::make('about');
 }));
+Route::get('/about/tos', array('as' => 'about-tos', function ()
+{
+    return View::make('about-tos');
+}));
 
 
 // Forms
