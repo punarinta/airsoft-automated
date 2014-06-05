@@ -12,7 +12,7 @@ class ApiTicketController extends BaseController
     {
         return $this->execute(function() use ($barcode)
         {
-            $ticket = Ticket::find(Bit::swap15($barcode));
+            $ticket = Ticket::find(Bit::swap15(Bit::base36_decode(trim($barcode))));
 
             return array
             (
@@ -31,7 +31,7 @@ class ApiTicketController extends BaseController
     {
         return $this->execute(function() use ($barcode)
         {
-            $ticket = Ticket::find(Bit::swap15($barcode));
+            $ticket = Ticket::find(Bit::swap15(Bit::base36_decode(trim($barcode))));
 
             if (empty ($ticket))
             {

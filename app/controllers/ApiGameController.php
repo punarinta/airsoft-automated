@@ -157,7 +157,7 @@ class ApiGameController extends BaseController
             throw new \Exception('No ticket exist');
         }
 
-        $barcode = str_pad(Bit::swap15($ticketData->id), 10, '0', STR_PAD_LEFT);
+        $barcode = str_pad(Bit::base36_encode(Bit::swap15($ticketData->id)), 8, '0', STR_PAD_LEFT);
         $barcodeImage = (new Barcode39($barcode))->draw();
 
         $width  = 500;

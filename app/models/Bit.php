@@ -29,6 +29,28 @@ class Bit
     }
 
     /**
+     * Encode an integer into a Base-36 string
+     *
+     * @param $base10
+     * @return string
+     */
+    static public function base36_encode($base10)
+    {
+        return base_convert($base10, 10, 36);
+    }
+
+    /**
+     * Decode a Base-36 string to an integer
+     *
+     * @param $base36
+     * @return string
+     */
+    static public function base36_decode($base36)
+    {
+        return base_convert($base36, 36, 10);
+    }
+
+    /**
      * Returns an encrypted & utf8-encoded
      *
      * @param $pure_string

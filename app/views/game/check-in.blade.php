@@ -21,7 +21,7 @@
 
 @section('content')
 <div class="window-box-1">
-    <input type="text" class="my-input" id="barcode" maxlength="10" placeholder="0000000000" autofocus/>
+    <input type="text" class="my-input" id="barcode" maxlength="10" placeholder="XXXXXXXX" autofocus/>
     <div>
         <button id="btn-check-in" class="my-btn big">Check-in</button>
         <button id="btn-validate" class="my-btn big">Validate</button>
@@ -47,30 +47,21 @@
 <script>
 function validate()
 {
-    var code = $('#barcode').val()
-    if (code.length == 10)
+    az.ajaxGet('ticket/validate', $('#barcode').val(), function(data)
     {
-        az.ajaxGet('ticket/validate', code, function(data)
+        if (data.exists)
         {
-            if (data.exists)
-            {
-                $('#ticket-invalid').hide()
-                $('#ticket-valid').show()
-            }
-            else
-            {
-                $('#ticket-valid').hide()
-                $('#ticket-invalid').show()
-            }
-        })
-    }
-    else az.showModal('Code should contain 10 digits')
+            $('#ticket-invalid').hide()
+            $('#ticket-valid').show()
+        }
+        else
+        {
+            $('#ticket-valid').hide()
+            $('#ticket-invalid').show()
+        }
+    })
 }
-// allow digits only
-$('#barcode').bind('change keyup', function()
-{
-    $(this).val($(this).val().replace(/[^\d]/g, ''))
-}).keypress(function(e)
+$('#barcode').keypress(function(e)
 {
     if (e.keyCode == 13)
     {
@@ -82,15 +73,10 @@ $('#btn-validate').click(validate)
 
 $('#btn-check-in').click(function()
 {
-    var code = $('#barcode').val()
-    if (code.length == 10)
+    az.ajaxGet('ticket/check-in', $('#barcode').val(), function(data)
     {
-        az.ajaxGet('ticket/check-in', code, function(data)
-        {
-            $('td:eq(2)', '.ticket-' + data.id).html('+')
-        })
-    }
-    else az.showModal('Code should contain 10 digits')
+        $('td:eq(2)', '.ticket-' + data.id).html('+')
+    })
 })
 </script>
 @stop
