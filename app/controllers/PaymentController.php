@@ -5,6 +5,8 @@ class PaymentController extends BaseController
     // https://github.com/paymill/paymill-paybutton-examples
     // https://www.paymill.com/en-gb/documentation-3/reference/testing/
 
+    const VAT = 0.25;
+
     public function payForm()
     {
         $gameId = Input::get('game-id');
@@ -169,7 +171,8 @@ class PaymentController extends BaseController
                 $paymentId = $payment->getId();
 
                 $bruttoIncome = $payment->getAmount();
-                $nettoIncome = $bruttoIncome * (100 - $transactionCoeffA) * (100 - $ticketCoeffA) / 10000 - $transactionCoeffB - $ticketCoeffB;
+                $myIncome = $bruttoIncome * ($transactionCoeffA + $ticketCoeffA) + $transactionCoeffB + $ticketCoeffB;
+                $nettoIncome = $bruttoIncome - $myIncome * (1 + self::VAT);
             }
         }
         else

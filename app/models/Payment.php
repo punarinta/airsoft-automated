@@ -56,7 +56,7 @@ class Payment extends Eloquent
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getAmount()
     {
