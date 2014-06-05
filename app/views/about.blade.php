@@ -17,7 +17,7 @@
     <p>
         Yes, cookies are used here. I have to inform you about it according to the law. The only purpose for them to be used is to know if you are logged in or not.
         Information about your activity is not used anywhere else except the internals of this site. If you are still afraid, use
-        <a rel="nofollow" target="_blank" href="http://en.wikipedia.org/wiki/Privacy_mode">"incognito" mode</a> of your web-browser.
+        <a rel="nofollow" target="_blank" href="https://en.wikipedia.org/wiki/Privacy_mode">"incognito" mode</a> of your web-browser.
     </p>
 
     <h3>Liability disclaimer</h3>
