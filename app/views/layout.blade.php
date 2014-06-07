@@ -43,10 +43,18 @@
         @endif
 
         <ul style="float:right">
+            <li><a class="first" href="#">
+                    <select class="ddb-locale my-select">
+                        <option value="en">EN</option>
+                        <option value="se">SE</option>
+                        <option value="ru">RU</option>
+                    </select>
+            </a></li>
+
             @if(Auth::check())
-            <li><a class="alone" href="{{ URL::route('logout') }}">{{ trans('airsoft.menu.sign_out') }} ({{ Auth::user()->nick ? Auth::user()->nick : trans('airsoft.menu.no_nick') }})</a></li>
+            <li><a class="last" href="{{ URL::route('logout') }}">{{ trans('airsoft.menu.sign_out') }} ({{ Auth::user()->nick ? Auth::user()->nick : trans('airsoft.menu.no_nick') }})</a></li>
             @else
-            <li><a class="alone" href="{{ URL::route('login') }}">{{ trans('airsoft.menu.sign_in') }}</a></li>
+            <li><a class="last" href="{{ URL::route('login') }}">{{ trans('airsoft.menu.sign_in') }}</a></li>
             @endif
         </ul>
     </div>
@@ -54,13 +62,24 @@
     <div id="content">@yield('content')</div>
 </div>
 <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga')
+ga('create', 'UA-51418351-1', 'airsoft.zone')
+ga('send', 'pageview')
 
-    ga('create', 'UA-51418351-1', 'airsoft.zone');
-    ga('send', 'pageview');
+$('#navbar .ddb-locale').val('{{ App::getLocale() }}').change(function()
+{
+    $.ajax(
+    {
+        url: '/api/session',
+        type: 'PUT',
+        dataType: 'json',
+        data: JSON.stringify({locale:$('#navbar .ddb-locale').val()}),
+        success: function(){location.reload()}
+    })
+})
 </script>
 </body>
 </html>

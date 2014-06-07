@@ -43,6 +43,7 @@ Route::get('user/confirm-email/{token}', array('uses' => 'UserController@confirm
 
 // Non-REST API
 
+Route::put('api/session', array('uses' => 'ApiSessionController@update'));
 Route::post('api/user', array('uses' => 'ApiUserController@create'))->before('guest');
 Route::put('api/user/{user_id}', array('uses' => 'ApiUserController@update'))->before('auth');
 Route::get('api/user/incarnate/{user_id}', array('uses' => 'ApiUserController@incarnate'))->before('auth');

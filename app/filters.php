@@ -22,6 +22,13 @@ App::before(function($request)
             App::setLocale($settings['locale']);
         }
     }
+    else
+    {
+        if (Session::has('locale'))
+        {
+            App::setLocale(Session::get('locale'));
+        }
+    }
 });
 
 /*App::after(function($request, $response)
