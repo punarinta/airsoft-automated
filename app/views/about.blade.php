@@ -5,12 +5,12 @@
 @stop
 
 @section('content')
-<div class="padded-content" style="max-width:800px">
+<div class="padded-content" style="max-width:800px;background:#fff">
     <h3>About</h3>
     <p>
         I'm playing airsoft for 10 years and programming for 15 years. I'm bad at design, but not so bad at software development.
         The idea of this service is to automate as much in airsoft as possible, helping both those who play and those who arrange games.
-        I've started with some basic things, so don't expect too much right now. But the development is ongoing all the time and I'm always opened for your proposals.
+        I've started with some basic things, so don't expect too much right now. But the development is ongoing all the time, so more features are coming. And I'm always open for your proposals.
     </p>
 
     <h3>Cookies</h3>
