@@ -53,7 +53,7 @@
     <tr>
         <td colspan="2" id="sign-up-form">
             <input type="email" class="my-input email" autofocus placeholder="your email"/>
-            <button class="my-btn submit" onclick="signUp()">Sign-up now! :)</button>
+            <button class="my-btn submit" onclick="signUp()">Sign-up now!</button>
         </td>
     </tr>
     @endif
