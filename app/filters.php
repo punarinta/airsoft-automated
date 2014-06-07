@@ -11,10 +11,18 @@
 |
 */
 
-/*App::before(function($request)
+App::before(function($request)
 {
-    App::setLocale('se');
-});*/
+    // try to set language
+    if (Auth::check())
+    {
+        $settings = Auth::user()->getSettingsArray();
+        if (isset ($settings['locale']))
+        {
+            App::setLocale($settings['locale']);
+        }
+    }
+});
 
 /*App::after(function($request, $response)
 {
