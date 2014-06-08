@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 08, 2014 at 10:39 AM
+-- Generation Time: Jun 08, 2014 at 10:53 AM
 -- Server version: 5.5.37-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4
 
@@ -126,7 +126,14 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`id`, `provider_id`, `user_id`, `transaction_id`, `amount`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 'tran_fa915923b21c8034b606bba68115', 10000, 16, '2014-06-08 08:53:01', '2014-06-08 08:53:01');
 
 -- --------------------------------------------------------
 
@@ -214,14 +221,14 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `ticket`
 --
 
 INSERT INTO `ticket` (`id`, `game_party_id`, `ticket_template_id`, `user_id`, `payment_id`, `status`, `netto`, `brutto`, `vat_paid`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 2, 0, 2, 14257, 15000, 0, NULL, NULL);
+(2, 1, 2, 2, 1, 2, 9405, 10000, 0, '2014-06-08 08:53:01', '2014-06-08 08:53:01');
 
 -- --------------------------------------------------------
 
@@ -248,10 +255,10 @@ CREATE TABLE IF NOT EXISTS `ticket_template` (
 --
 
 INSERT INTO `ticket_template` (`id`, `game_id`, `game_party_id`, `price`, `price_date_start`, `price_date_end`, `is_cash`, `notes`, `created_at`, `updated_at`) VALUES
-(1, 1, 0, 15000, '2014-05-01 00:00:00', '2014-06-08 00:00:00', 0, NULL, NULL, NULL),
-(2, 1, 1, 10000, '2014-05-01 00:00:00', '2014-05-31 00:00:00', 0, NULL, NULL, NULL),
-(3, 1, 2, 11000, '2014-05-01 00:00:00', '2014-06-08 00:00:00', 1, NULL, NULL, NULL),
-(4, 1, 1, 12300, '2014-06-01 00:00:00', '2014-06-08 00:00:00', 0, NULL, NULL, NULL);
+(1, 1, 0, 15000, '2014-05-01 00:00:00', '2014-12-08 00:00:00', 0, NULL, NULL, NULL),
+(2, 1, 1, 10000, '2014-05-01 00:00:00', '2014-11-30 00:00:00', 0, NULL, NULL, NULL),
+(3, 1, 2, 11000, '2014-05-01 00:00:00', '2014-12-08 00:00:00', 1, NULL, NULL, NULL),
+(4, 1, 1, 12300, '2014-12-01 00:00:00', '2014-12-08 00:00:00', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
