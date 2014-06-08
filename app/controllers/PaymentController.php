@@ -98,19 +98,18 @@ class PaymentController extends BaseController
 
         if (isset ($settings['charges']))
         {
-            $transactionCoeffA  = $settings['charges']['transaction_a'];
-            $transactionCoeffB  = $settings['charges']['transaction_a'];
-            $ticketCoeffA       = $settings['charges']['ticket_a'];
-            $ticketCoeffB       = $settings['charges']['ticket_b'];
+            $ticketCoeffA = $settings['charges']['ticket_a'];
+            $ticketCoeffB = $settings['charges']['ticket_b'];
         }
         else
         {
-            $transactionCoeffA  = 2.95;      // percents
-            $transactionCoeffB  = 300;       // monetary units
-            $ticketCoeffA       = 0;         // percents
-            $ticketCoeffB       = 0;         // monetary units
+            $ticketCoeffA = 0;         // percents
+            $ticketCoeffB = 0;         // monetary units
         }
 
+        // depends on PP only
+        $transactionCoeffA  = 2.95;      // percents
+        $transactionCoeffB  = 300;       // monetary units
 
         if (!Input::get('is-cash'))
         {
@@ -171,7 +170,7 @@ class PaymentController extends BaseController
                 $paymentId = $payment->getId();
 
                 $bruttoIncome = $payment->getAmount();
-                $myIncome = $bruttoIncome * ($transactionCoeffA + $ticketCoeffA) + $transactionCoeffB + $ticketCoeffB;
+                $myIncome = $bruttoIncome * ($transactionCoeffA + $ticketCoeffA) / 100 + $transactionCoeffB + $ticketCoeffB;
                 $nettoIncome = $bruttoIncome - $myIncome * (1 + self::VAT);
             }
         }
@@ -179,7 +178,8 @@ class PaymentController extends BaseController
         {
             // that's cash, it has no transaction charging
             $bruttoIncome = $ticketSessionData['price'];
-            $nettoIncome = $bruttoIncome * (100 - $ticketCoeffA) / 100 - $ticketCoeffB;
+            $myIncome = $bruttoIncome * $ticketCoeffA / 100 + $ticketCoeffB;
+            $nettoIncome = $bruttoIncome - $myIncome * (1 + self::VAT);
         }
 
         // create a real ticket
