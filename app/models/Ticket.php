@@ -167,4 +167,20 @@ class Ticket extends Eloquent
     {
         $this->brutto = $brutto;
     }
+
+    /**
+     * @return string
+     */
+    public function getVatPaid()
+    {
+        return $this->vat_paid;
+    }
+
+    /**
+     * @param string $vat_paid
+     */
+    public function setVatPaid($vat_paid)
+    {
+        $this->vat_paid = $vat_paid;
+    }
 }

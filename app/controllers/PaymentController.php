@@ -170,8 +170,9 @@ class PaymentController extends BaseController
                 $paymentId = $payment->getId();
 
                 $bruttoIncome = $payment->getAmount();
-                $myIncome = $bruttoIncome * ($transactionCoeffA + $ticketCoeffA) / 100 + $transactionCoeffB + $ticketCoeffB;
-                $nettoIncome = $bruttoIncome - $myIncome * (1 + self::VAT);
+                $ppIncome = $bruttoIncome * $transactionCoeffA / 100 + $transactionCoeffB;
+                $myIncome = $bruttoIncome * $ticketCoeffA / 100 + $ticketCoeffB;
+                $nettoIncome = $bruttoIncome - $ppIncome - $myIncome * (1 + self::VAT);
             }
         }
         else
@@ -182,6 +183,8 @@ class PaymentController extends BaseController
             $nettoIncome = $bruttoIncome - $myIncome * (1 + self::VAT);
         }
 
+        $vatPaid = $myIncome * self::VAT;
+
         // create a real ticket
         $ticket = new Ticket;
         $ticket->setUserId(Auth::user()->getId());
@@ -191,6 +194,7 @@ class PaymentController extends BaseController
         $ticket->setStatus(Ticket::STATUS_READY);
         $ticket->setNetto($nettoIncome);
         $ticket->setBrutto($bruttoIncome);
+        $ticket->setVatPaid($vatPaid);
         $ticket->save();
 
         // inform user by email
