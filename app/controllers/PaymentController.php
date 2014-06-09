@@ -103,13 +103,13 @@ class PaymentController extends BaseController
         }
         else
         {
-            $ticketCoeffA = 0;         // percents
-            $ticketCoeffB = 0;         // monetary units
+            $ticketCoeffA = 0;           // percents
+            $ticketCoeffB = 300;         // monetary units
         }
 
         // depends on PP only
         $transactionCoeffA  = 2.95;      // percents
-        $transactionCoeffB  = 300;       // monetary units
+        $transactionCoeffB  = 0;         // monetary units, use with care due to currency exchange conversions
 
         if (!Input::get('is-cash'))
         {
