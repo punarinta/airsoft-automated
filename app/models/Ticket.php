@@ -179,7 +179,7 @@ class Ticket extends Eloquent
     /**
      * @param string $vat
      */
-    public function setVatPaid($vat)
+    public function setVat($vat)
     {
         $this->vat = $vat;
     }
