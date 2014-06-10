@@ -22,6 +22,12 @@ class GamesController extends BaseController
                 ->where('region.id', '=', $game->getRegionId())
                 ->first();
 
+            // check if the game hasn't yet started
+            if (strtotime($game->getStartsAt()) < time())
+            {
+                continue;
+            }
+
             $gameData[$game->getId()] = $game;
             $gameData[$game->getId()]->region_name = $geo->region_name;
             $gameData[$game->getId()]->country_name = $geo->country_name;
