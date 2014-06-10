@@ -192,9 +192,9 @@ class PaymentController extends BaseController
         $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
         $ticket->setPaymentId($paymentId);
         $ticket->setStatus(Ticket::STATUS_READY);
-        $ticket->setNetto($nettoIncome);
-        $ticket->setBrutto($bruttoIncome);
-        $ticket->setVatPaid($vatPaid);
+        $ticket->setNetto($nettoIncome);                    // amount that Organizer gets
+        $ticket->setBrutto($bruttoIncome);                  // amount that Player pays
+        $ticket->setVatPaid($vatPaid);                      // increment of my outgoing MOMS per this ticket
         $ticket->save();
 
         // inform user by email
