@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 20, 2014 at 09:09 AM
+-- Generation Time: Jun 10, 2014 at 12:20 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.4.17
 
@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   `starts_at` datetime DEFAULT NULL,
   `ends_at` datetime DEFAULT NULL,
   `is_visible` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `url` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
@@ -63,9 +64,9 @@ CREATE TABLE IF NOT EXISTS `game` (
 -- Dumping data for table `game`
 --
 
-INSERT INTO `game` (`id`, `name`, `owner_id`, `region_id`, `starts_at`, `ends_at`, `is_visible`, `created_at`, `updated_at`) VALUES
-(1, 'Test game 1', 1, 1, '2014-06-21 00:00:00', '2014-06-22 00:00:00', 1, NULL, NULL),
-(2, 'Test game 2', 1, 4, '2014-06-28 00:00:00', '2014-06-29 00:00:00', 1, NULL, NULL);
+INSERT INTO `game` (`id`, `name`, `owner_id`, `region_id`, `starts_at`, `ends_at`, `is_visible`, `url`, `created_at`, `updated_at`) VALUES
+(1, 'Test game 1', 1, 1, '2014-06-21 00:00:00', '2014-06-22 00:00:00', 1, NULL, NULL, NULL),
+(2, 'Test game 2', 1, 4, '2014-06-28 00:00:00', '2014-06-29 00:00:00', 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -117,7 +118,14 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `status` int(10) unsigned NOT NULL DEFAULT '1',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`id`, `provider_id`, `user_id`, `transaction_id`, `amount`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 'tran_fa915923b21c8034b606bba68115', 10000, 16, '2014-06-08 08:53:01', '2014-06-08 08:53:01');
 
 -- --------------------------------------------------------
 
@@ -197,16 +205,19 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `user_id` int(10) unsigned NOT NULL,
   `payment_id` int(10) unsigned DEFAULT NULL,
   `status` int(10) unsigned NOT NULL DEFAULT '1',
+  `netto` int(10) unsigned NOT NULL DEFAULT '0',
+  `brutto` int(10) unsigned NOT NULL DEFAULT '0',
+  `vat` int(10) unsigned NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `ticket`
 --
 
-INSERT INTO `ticket` (`id`, `game_party_id`, `ticket_template_id`, `user_id`, `payment_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 2, 0, 2, NULL, NULL);
+INSERT INTO `ticket` (`id`, `game_party_id`, `ticket_template_id`, `user_id`, `payment_id`, `status`, `netto`, `brutto`, `vat`, `created_at`, `updated_at`) VALUES
+(2, 1, 2, 2, 1, 2, 9405, 10000, 0, '2014-06-08 08:53:01', '2014-06-08 08:53:01');
 
 -- --------------------------------------------------------
 
@@ -232,10 +243,10 @@ CREATE TABLE IF NOT EXISTS `ticket_template` (
 --
 
 INSERT INTO `ticket_template` (`id`, `game_id`, `game_party_id`, `price`, `price_date_start`, `price_date_end`, `is_cash`, `notes`, `created_at`, `updated_at`) VALUES
-(1, 1, 0, 15000, '2014-05-01 00:00:00', '2014-06-08 00:00:00', 0, NULL, NULL, NULL),
-(2, 1, 1, 10000, '2014-05-01 00:00:00', '2014-05-31 00:00:00', 0, NULL, NULL, NULL),
-(3, 1, 2, 11000, '2014-05-01 00:00:00', '2014-06-08 00:00:00', 1, NULL, NULL, NULL),
-(4, 1, 1, 12300, '2014-06-01 00:00:00', '2014-06-08 00:00:00', 0, NULL, NULL, NULL);
+(1, 1, 0, 15000, '2014-05-01 00:00:00', '2014-12-08 00:00:00', 0, NULL, NULL, NULL),
+(2, 1, 1, 10000, '2014-05-01 00:00:00', '2014-11-30 00:00:00', 0, NULL, NULL, NULL),
+(3, 1, 2, 11000, '2014-05-01 00:00:00', '2014-12-08 00:00:00', 1, NULL, NULL, NULL),
+(4, 1, 1, 12300, '2014-12-01 00:00:00', '2014-12-08 00:00:00', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -252,6 +263,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `team_id` int(10) unsigned NOT NULL DEFAULT '0',
   `is_team_manager` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `is_validated` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `is_email_validated` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `settings` text,
   `remember_token` char(60) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
@@ -261,11 +274,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `password`, `nick`, `birth_date`, `team_id`, `is_team_manager`, `is_validated`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'org@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Organizer', '2014-05-01', 2, 0, 1, 'hSnr5umMTQzCxlvOHPxgAoJB9hTVObiDHB1jh3LePFSYByDFqcmCXvpHgGGJ', '2014-05-06 00:00:00', '2014-05-13 07:57:41'),
-(2, 'player-1@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 1', NULL, 1, 1, 0, '5fY7bA7RWoiUC4snYRONq9Bjjes5An4lIzrOC1gqlrdRKNuutWuLx2tq7rgr', '2014-05-06 00:00:00', '2014-05-19 13:06:57'),
-(3, 'player-2@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 2', NULL, 1, 0, 0, NULL, '2014-05-06 00:00:00', '2014-05-10 15:35:39'),
-(4, 'player-3@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 3', NULL, 1, 0, 0, NULL, '2014-05-06 00:00:00', '2014-05-10 15:35:39');
+INSERT INTO `user` (`id`, `email`, `password`, `nick`, `birth_date`, `team_id`, `is_team_manager`, `is_validated`, `is_email_validated`, `settings`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'org@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Organizer', '2014-05-01', 2, 0, 1, 1, '{"locale":"en"}', 'DQJamVeshTfLpwqWXCkhzwCYicwbfxuTOTuhtIswSlYbrpjcw0Ih9YiQhIo0', '2014-05-06 00:00:00', '2014-06-07 12:20:09'),
+(2, 'player-1@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 1', NULL, 1, 1, 0, 1, NULL, '5fY7bA7RWoiUC4snYRONq9Bjjes5An4lIzrOC1gqlrdRKNuutWuLx2tq7rgr', '2014-05-06 00:00:00', '2014-05-19 13:06:57'),
+(3, 'player-2@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 2', NULL, 1, 0, 0, 0, NULL, 'O6WNpkvw7Hxji4GTbFcGyO3jyPDATRnk2RP8FK5Zj7d4XxVH7BTt9R6O9rMs', '2014-05-06 00:00:00', '2014-06-07 11:05:16'),
+(4, 'player-3@jesp.ru', '$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW', 'Player 3', NULL, 1, 0, 0, 1, NULL, NULL, '2014-05-06 00:00:00', '2014-05-10 15:35:39');
 
 --
 -- Indexes for dumped tables
@@ -354,7 +367,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `region`
 --
@@ -369,7 +382,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ticket_template`
 --

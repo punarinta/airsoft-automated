@@ -171,16 +171,16 @@ class Ticket extends Eloquent
     /**
      * @return string
      */
-    public function getVatPaid()
+    public function getVat()
     {
-        return $this->vat_paid;
+        return $this->vat;
     }
 
     /**
-     * @param string $vat_paid
+     * @param string $vat
      */
-    public function setVatPaid($vat_paid)
+    public function setVatPaid($vat)
     {
-        $this->vat_paid = $vat_paid;
+        $this->vat = $vat;
     }
 }
