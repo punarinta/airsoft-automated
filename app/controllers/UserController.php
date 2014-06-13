@@ -64,6 +64,8 @@ class UserController extends BaseController
             ->where('team.id', '=', $teamId)
             ->first();
 
+        $profile = Auth::user()->getProfileArray();
+
         return View::make('user.profile', array
         (
             'user_id'           => Auth::user()->getId(),
@@ -78,6 +80,16 @@ class UserController extends BaseController
             'team_url'          => $teamData ? $teamData->team_url : '',
             'team_editable'     => (!$teamData || Auth::user()->getId() == $teamData->owner_id),
             'team_present'      => !empty ($teamData),
+
+            // optional
+            'first_name'        => isset ($profile['first_name']) ? $profile['first_name'] : '',
+            'last_name'         => isset ($profile['last_name']) ? $profile['last_name'] : '',
+            'ssn'               => isset ($profile['ssn']) ? $profile['ssn'] : '',
+            'phone'             => isset ($profile['phone'][0]) ? $profile['phone'][0] : '',
+            'addr_street'       => isset ($profile['addr_street']) ? $profile['addr_street'] : '',
+            'addr_zip'          => isset ($profile['addr_zip']) ? $profile['addr_zip'] : '',
+            'addr_city'         => isset ($profile['addr_city']) ? $profile['addr_city'] : '',
+            'addr_country'      => isset ($profile['addr_country']) ? $profile['addr_country'] : '',
         ));
     }
 
