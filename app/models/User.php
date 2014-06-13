@@ -287,4 +287,43 @@ class User extends Eloquent implements UserInterface, RemindableInterface
     {
         $this->settings = json_encode($settings);
     }
+
+    /**
+     * @return array
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * @param array $profile
+     */
+    public function setProfile($profile)
+    {
+        $this->profile = $profile;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProfileArray()
+    {
+        if (!strlen($this->profile))
+        {
+            return array();
+        }
+        $array = json_decode($this->profile, true);
+
+        return is_array($array) ? $array : array();
+    }
+
+    /**
+     * @param $profile
+     */
+    public function setProfileArray($profile)
+    {
+        $this->profile = json_encode($profile);
+    }
+
 }
