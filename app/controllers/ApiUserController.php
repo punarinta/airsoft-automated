@@ -106,6 +106,21 @@ class ApiUserController extends BaseController
             $user->setNick(Input::json('nick'));
             $user->setBirthDate(Input::json('birth_date'));
             $user->setTeamId(Input::json('team_id'));
+
+            // extra data that might be required by organizer
+            $profile = $user->getProfileArray();
+
+            if (Input::json('first_name')) $profile['first_name'] = Input::json('first_name');
+            if (Input::json('last_name')) $profile['last_name'] = Input::json('last_name');
+            if (Input::json('ssn')) $profile['ssn'] = Input::json('ssn');
+            if (Input::json('phone')) $profile['phone'][0] = Input::json('phone');
+            if (Input::json('addr_street')) $profile['address']['street'] = Input::json('addr_street');
+            if (Input::json('addr_zip')) $profile['address']['zip'] = Input::json('addr_zip');
+            if (Input::json('addr_city')) $profile['address']['city'] = Input::json('addr_city');
+            if (Input::json('addr_country')) $profile['address']['country'] = Input::json('addr_country');
+
+            $user->setProfileArray($profile);
+
             $user->save();
         });
     }
