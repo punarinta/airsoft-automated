@@ -243,7 +243,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
     }
 
     /**
-     * @param array $is_email_validated
+     * @param bool $is_email_validated
      */
     public function setIsEmailValidated($is_email_validated)
     {
