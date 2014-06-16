@@ -12,7 +12,7 @@ class TestingController extends BaseController
         return $this->execute(function()
         {
             // just a protection
-            if (Auth::user()->getId() != 1)
+            if (!Config::get('app.debug'))
             {
                 throw new \Exception('Access denied.');
             }
@@ -41,6 +41,7 @@ class TestingController extends BaseController
                 $user->setNick('User ' . $i);
                 $user->setEmail('user-' . $i . '@jesp.ru');
                 $user->setTeamId(mt_rand(1, $maxTeams));
+                $user->setIsValidated(1);
                 $user->setIsEmailValidated(1);
                 $user->setPassword('$2y$10$IiMiFJ5iuwGHXraFLPeBR..3QeUUVtPz6dP.Pndo5tLXZQpAZCnXW');
                 $user->save();
