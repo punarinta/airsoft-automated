@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <td>URL:</td>
-                <td><input type="text" class="my-input url" value="{{ $game->url }}"/></td>
+                <td><input type="text" class="my-input url" value="{{ $game->getSetting('url') }}"/></td>
             </tr>
         </table>
         @if ($game->id)

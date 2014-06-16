@@ -149,18 +149,57 @@ class Game extends Eloquent
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getUrl()
+    public function getSettings()
     {
-        return $this->url;
+        return $this->settings;
     }
 
     /**
-     * @param string $url
+     * @param array $settings
      */
-    public function setUrl($url)
+    public function setSettings($settings)
     {
-        $this->url = $url;
+        $this->settings = $settings;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSettingsArray()
+    {
+        if (!strlen($this->settings))
+        {
+            return array();
+        }
+        $array = json_decode($this->settings, true);
+
+        return is_array($array) ? $array : array();
+    }
+
+    /**
+     * @param $settings
+     */
+    public function setSettingsArray($settings)
+    {
+        $this->settings = json_encode($settings);
+    }
+
+    /**
+     * @param $key
+     * @return null
+     */
+    public function getSetting($key)
+    {
+        $array = $this->getSettingsArray();
+        if (isset ($array[$key]))
+        {
+            return $array[$key];
+        }
+        else
+        {
+            return null;
+        }
     }
 }

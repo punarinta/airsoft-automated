@@ -34,6 +34,7 @@ class GameController extends BaseController
 
             $game->country_id = $geo->country_id;
             $game->region_id = $geo->region_id;
+            $game->settingsArray = $game->getSettingsArray();
 
             $game->parties = GameParty::where('game_id', '=', $game_id)->get();
             $game->ticket_templates = TicketTemplate::where('game_id', '=', $game_id)->get();
@@ -53,6 +54,7 @@ class GameController extends BaseController
             $game->is_visible = 1;
             $game->country_id = 1;
             $game->region_id = 0;
+            $game->settingsArray = [];
 
             $game->parties = [];
             $game->ticket_templates = [];

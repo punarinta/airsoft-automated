@@ -75,7 +75,11 @@ class ApiGameController extends BaseController
             $game->setStartsAt(Input::json('starts_at'));
             $game->setEndsAt(Input::json('ends_at'));
             $game->setIsVisible(Input::json('is_visible'));
-            $game->setUrl(Input::json('url'));
+
+            $settings = [];
+            $settings['url'] = Input::json('url');
+            $game->setSettingsArray($settings);
+
             $game->save();
 
             return $game;
@@ -103,7 +107,11 @@ class ApiGameController extends BaseController
             $game->setStartsAt(Input::json('starts_at'));
             $game->setEndsAt(Input::json('ends_at'));
             $game->setIsVisible(Input::json('is_visible'));
-            $game->setUrl(Input::json('url'));
+
+            $settings = $game->getSettingsArray();
+            $settings['url'] = Input::json('url');
+            $game->setSettingsArray($settings);
+
             $game->save();
         });
     }
