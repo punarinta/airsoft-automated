@@ -103,17 +103,17 @@ class TicketTemplate extends Eloquent
     /**
      * @return string
      */
-    public function getInCash()
+    public function getIsCash()
     {
-        return $this->in_cash;
+        return $this->is_cash;
     }
 
     /**
-     * @param string $in_cash
+     * @param string $is_cash
      */
-    public function setInCash($in_cash)
+    public function setIsCash($is_cash)
     {
-        $this->in_cash = $in_cash;
+        $this->is_cash = $is_cash;
     }
 
     /**
