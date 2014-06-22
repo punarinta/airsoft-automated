@@ -16,6 +16,7 @@ class ApiTicketController extends BaseController
 
             return array
             (
+                'id' => $ticket->getId(),
                 'exists' => !empty ($ticket),
             );
         });

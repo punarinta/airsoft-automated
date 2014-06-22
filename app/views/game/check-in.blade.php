@@ -18,6 +18,7 @@
 .my-btn.big {font-size:20px}
 #player-list td.red {background-color:#ff3a20}
 #player-list span.code {color:#999}
+.checked {color: #02b500}
 </style>
 @stop
 
@@ -40,7 +41,7 @@
         </tr>
         @foreach($tickets as $ticket)
         <tr class="ticket-{{ $ticket->id }}">
-            <td>{{ $ticket->nick }} [{{ $ticket->team_name }}]<span class="code">, {{ strtoupper(str_pad(Bit::base36_encode(Bit::swap15($ticket->id)), 8, '0', STR_PAD_LEFT)) }}</span></td>
+            <td class="{{ $ticket->ticket_status & Ticket::STATUS_CHECKED ? 'checked' : '' }}">{{ $ticket->nick }} [{{ $ticket->team_name }}]<span class="code">, {{ strtoupper(str_pad(Bit::base36_encode(Bit::swap15($ticket->id)), 8, '0', STR_PAD_LEFT)) }}</span></td>
             <td>{{ $ticket->is_cash ? '+' : '–' }}</td>
             <td class="{{ $ticket->ticket_status & Ticket::STATUS_PAID ? '' : 'red' }}">{{ $ticket->ticket_status & Ticket::STATUS_PAID ? '+' : '–' }}</td>
             <td>{{ $ticket->ticket_status & Ticket::STATUS_CHECKED ? '+' : '–' }}</td>
@@ -57,6 +58,7 @@ function validate()
         {
             $('#ticket-invalid').hide()
             $('#ticket-valid').show()
+//            $('.ticket-' + data.id)[0].scrollIntoView( true )
         }
         else
         {
@@ -79,6 +81,7 @@ $('#btn-check-in').click(function()
 {
     az.ajaxGet('ticket/check-in', $('#barcode').val(), function(data)
     {
+        $('td:eq(0)', '.ticket-' + data.id).addClass('checked')
         $('td:eq(3)', '.ticket-' + data.id).html('+')
     })
 })
