@@ -38,7 +38,7 @@ class ApiTicketController extends BaseController
                 throw new \Exception('Ticket not found');
             }
 
-            $ticket->setStatus(Ticket::STATUS_CHECKED);
+            $ticket->setStatus($ticket->getStatus() | Ticket::STATUS_CHECKED);
             $ticket->save();
 
             return array

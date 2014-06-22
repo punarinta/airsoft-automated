@@ -7,8 +7,8 @@
 @section('header')
 <style>
 #barcode {font-size:36px;width:200px}
-#btn-check-in {background:#ff1a00;color:#333;border-color:#cc0000}
-#btn-check-in:hover {border-color:#b02b2c;color:#111;}
+/*#btn-check-in {background:#ff1a00;color:#333;border-color:#cc0000}
+#btn-check-in:hover {border-color:#b02b2c;color:#111}*/
 .ticket-validity {font-size:36px;display:none;padding-top:10px}
 #ticket-invalid {color:red}
 #ticket-valid {color:#008000}
@@ -16,6 +16,7 @@
 #player-list td:nth-child(1n+2) {text-align: center}
 /*#player-list td:nth-child(3):hover {background:#e8f0ff;cursor:pointer}*/
 .my-btn.big {font-size:20px}
+#player-list td.red {background-color:#ff3a20}
 </style>
 @stop
 
@@ -33,13 +34,15 @@
         <tr>
             <th>Player</th>
             <th>Pays in cash</th>
+            <th>Ticket paid</th>
             <th>Checked-in</th>
         </tr>
         @foreach($tickets as $ticket)
         <tr class="ticket-{{ $ticket->id }}">
-            <td>{{ $ticket->nick }} [{{ $ticket->team_name }}]</td>
+            <td>{{ $ticket->nick }} [{{ $ticket->team_name }}], {{ strtoupper(str_pad(Bit::base36_encode(Bit::swap15($ticket->id)), 8, '0', STR_PAD_LEFT)) }}</td>
             <td>{{ $ticket->is_cash ? '+' : '–' }}</td>
-            <td>{{ $ticket->ticket_status == Ticket::STATUS_CHECKED ? '+' : '–' }}</td>
+            <td class="{{ $ticket->ticket_status & Ticket::STATUS_PAID ? '' : 'red' }}">{{ $ticket->ticket_status & Ticket::STATUS_PAID ? '+' : '–' }}</td>
+            <td>{{ $ticket->ticket_status & Ticket::STATUS_CHECKED ? '+' : '–' }}</td>
         </tr>
         @endforeach
     </table>

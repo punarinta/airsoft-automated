@@ -110,6 +110,9 @@ class PaymentController extends BaseController
         $transactionCoeffA  = 2.95;      // percents
         $transactionCoeffB  = 0;         // monetary units, use with care due to currency exchange conversions
 
+        // create a real ticket
+        $ticket = new Ticket;
+
         if (!Input::get('is-cash'))
         {
             // process payment provider
@@ -173,6 +176,8 @@ class PaymentController extends BaseController
                 $myIncome = $bruttoIncome * $ticketCoeffA / 100 + $ticketCoeffB;
                 $nettoIncome = $bruttoIncome - $ppIncome - $myIncome * (1 + self::VAT);
             }
+
+            $ticket->setStatus(Ticket::STATUS_BOOKED | Ticket::STATUS_PAID);
         }
         else
         {
@@ -180,17 +185,16 @@ class PaymentController extends BaseController
             $bruttoIncome = $ticketSessionData['price'];
             $myIncome = $bruttoIncome * $ticketCoeffA / 100 + $ticketCoeffB;
             $nettoIncome = $bruttoIncome - $myIncome * (1 + self::VAT);
+
+            $ticket->setStatus(Ticket::STATUS_BOOKED);
         }
 
         $vatPaid = $myIncome * self::VAT;
 
-        // create a real ticket
-        $ticket = new Ticket;
         $ticket->setUserId(Auth::user()->getId());
         $ticket->setGamePartyId($ticketSessionData['game_party_id']);
         $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
         $ticket->setPaymentId($paymentId);
-        $ticket->setStatus(Ticket::STATUS_PAID);
         $ticket->setNetto($nettoIncome);                    // amount that Organizer gets
         $ticket->setBrutto($bruttoIncome);                  // amount that Player pays
         $ticket->setVat($vatPaid);                          // increment of my outgoing MOMS per this ticket
