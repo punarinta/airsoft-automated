@@ -157,7 +157,7 @@ class ApiGameController extends BaseController
             ->join('user AS u', 'u.id', '=', 't.user_id')
             ->where('tt.game_id', '=', $game_id)
             ->where('t.user_id', '=', Auth::user()->getId())
-            ->where('t.status', '=', Ticket::STATUS_READY)
+            ->where('t.status', '|', Ticket::STATUS_BOOKED | Ticket::STATUS_PAID)
             ->first();
 
         if (empty ($ticketData))

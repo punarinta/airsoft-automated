@@ -31,7 +31,16 @@
         <input type="submit" class="my-btn" value="Confirm"/>
     </form>
     @else
-    <div class="area-btn-paymill">
+    <div>
+        Available payment options:
+        <table class="my-table table-pp-list">
+            <tr>
+                <td><a href="{{ URL::route('bank-booking-done') }}"><img src="/gfx/pp-1.png" alt="Bank transfer"/></a></td>
+                <td><a class="my-link" href="{{ URL::route('bank-booking-done') }}">Bank transfer (0% charge)</a></td>
+            </tr>
+        </table>
+    </div>
+<!--    <div class="area-btn-paymill">
         <form action="{{ URL::route('booking-done') }}" method="post">
             <input type="hidden" name="is-cash" value="0"/>
             <script
@@ -48,7 +57,12 @@
                 >
             </script>
         </form>
-    </div>
+    </div>-->
     @endif
 </div>
+<style>
+    .table-pp-list {width:100%}
+    .table-pp-list td {padding-top:8px}
+    .table-pp-list a {color:#15c;text-decoration:none}
+</style>
 @stop

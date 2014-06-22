@@ -25,6 +25,7 @@ Route::get('game/check-in/{game_id}', array('uses' => 'GameController@checkInFor
 Route::get('player', array('uses' => 'DashboardController@playerForm', 'as' => 'player-dashboard'))->before('auth');
 Route::get('organizer', array('uses' => 'DashboardController@organizerForm', 'as' => 'organizer-dashboard'))->before('auth');
 Route::post('game/booked', array('uses' => 'PaymentController@bookingDoneForm', 'as' => 'booking-done'))->before('auth');
+Route::get('game/bank-booked', array('uses' => 'PaymentController@bankTransferForm', 'as' => 'bank-booking-done'))->before('auth');
 Route::post('game/pay-booked', array('uses' => 'PaymentController@payForm', 'as' => 'pay-booked'))->before('auth');
 
 

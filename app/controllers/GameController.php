@@ -125,10 +125,10 @@ class GameController extends BaseController
         $data = DB::table('game AS g')
             ->join('ticket_template AS tt', 'tt.game_id', '=', 'g.id')
             ->join('ticket AS t', 't.ticket_template_id', '=', 'tt.id')
-            ->select(array('g.id'))
+            ->select(array('g.id', 't.status'))
             ->where('g.id', '=', $game_id)
             ->where('t.user_id', '=', Auth::user()->getId())
-            ->where('t.status', '=', Ticket::STATUS_READY)
+            ->where('t.status', '|', Ticket::STATUS_BOOKED | Ticket::STATUS_PAID)
             ->first();
 
         if (empty ($data))

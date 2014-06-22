@@ -48,7 +48,7 @@
             <input type="hidden" name="game-id" class="game-id" value="{{ $game->id }}"/>
             <input type="hidden" name="game-party-id" class="game-party-id" value="0"/>
             <input type="hidden" name="ticket-template-id" class="ticket-template-id" value="0"/>
-            <input type="submit" class="my-btn" value="Confirm"/>
+            <input type="submit" class="confirm my-btn" value="Confirm"/>
         </form>
     </div>
 </div>
@@ -78,6 +78,17 @@ $('#ticket-template-id').change(function()
 $('#game-party-id').change(function()
 {
     $('#ticket-template-id').val(0)
+})
+
+$('#area-confirm .confirm').click(function()
+{
+    var p = $('.game-party-id').val() - 0
+    if (!p)
+    {
+        az.showModal('Please pick both a game party to play for and the ticket type.')
+        return false
+    }
+    return true
 })
 </script>
 @stop

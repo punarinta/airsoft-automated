@@ -75,7 +75,6 @@ class PaymentController extends BaseController
         ));
     }
 
-
     /**
      * Processes payment and shows a message after the game ticket is booked (and/or paid)
      *
@@ -191,7 +190,7 @@ class PaymentController extends BaseController
         $ticket->setGamePartyId($ticketSessionData['game_party_id']);
         $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
         $ticket->setPaymentId($paymentId);
-        $ticket->setStatus(Ticket::STATUS_READY);
+        $ticket->setStatus(Ticket::STATUS_PAID);
         $ticket->setNetto($nettoIncome);                    // amount that Organizer gets
         $ticket->setBrutto($bruttoIncome);                  // amount that Player pays
         $ticket->setVat($vatPaid);                          // increment of my outgoing MOMS per this ticket
@@ -247,6 +246,62 @@ class PaymentController extends BaseController
         return View::make('payment.done', array
         (
             'game_id' => $ticketSessionData['game_id'],
+        ));
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function bankTransferForm()
+    {
+        $ticketSessionData = Session::get('ticket-data');
+
+        // remove ticket data from the session
+    //    Session::forget('ticket-data');
+
+        $paymentId = 0;
+
+        // get charging scheme of the game owner
+        $game = Game::find($ticketSessionData['game_id']);
+        $owner = User::find($game->getOwnerId());
+        $settings = $owner->getSettingsArray();
+
+        if (isset ($settings['charges']))
+        {
+            $ticketCoeffA = $settings['charges']['ticket_a'];
+            $ticketCoeffB = $settings['charges']['ticket_b'];
+        }
+        else
+        {
+            $ticketCoeffA = 0;           // percents
+            $ticketCoeffB = 300;         // monetary units
+        }
+
+        $bruttoIncome = $ticketSessionData['price'];
+        $myIncome = $bruttoIncome * $ticketCoeffA / 100 + $ticketCoeffB;
+        $nettoIncome = $bruttoIncome - $myIncome * (1 + self::VAT);
+
+        $vatPaid = $myIncome * self::VAT;
+
+        // create a real ticket
+        $ticket = new Ticket;
+        $ticket->setUserId(Auth::user()->getId());
+        $ticket->setGamePartyId($ticketSessionData['game_party_id']);
+        $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
+        $ticket->setPaymentId($paymentId);
+        $ticket->setStatus(Ticket::STATUS_BOOKED);
+        $ticket->setNetto($nettoIncome);                    // amount that Organizer gets
+        $ticket->setBrutto($bruttoIncome);                  // amount that Player pays
+        $ticket->setVat($vatPaid);                          // increment of my outgoing MOMS per this ticket
+        $ticket->save();
+
+        // avoid everyday job with activation
+
+        return View::make('payment.bank', array
+        (
+            'game_id'       => $ticketSessionData['game_id'],
+            'price'         => number_format($ticketSessionData['price'] / 100, 2),
+            'ticket_code'   => strtoupper(Bit::base36_encode(Bit::swap15($ticket->getId()))),
         ));
     }
 }

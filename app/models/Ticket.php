@@ -3,8 +3,9 @@
 class Ticket extends Eloquent
 {
     const STATUS_NEW        = 1;
-    const STATUS_READY      = 2;
-    const STATUS_CHECKED    = 4;
+    const STATUS_BOOKED     = 2;
+    const STATUS_PAID       = 4;
+    const STATUS_CHECKED    = 8;
 
     protected $table = 'ticket';
 
