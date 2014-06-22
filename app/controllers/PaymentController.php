@@ -257,7 +257,7 @@ class PaymentController extends BaseController
         $ticketSessionData = Session::get('ticket-data');
 
         // remove ticket data from the session
-    //    Session::forget('ticket-data');
+        Session::forget('ticket-data');
 
         $paymentId = 0;
 
@@ -274,7 +274,7 @@ class PaymentController extends BaseController
         else
         {
             $ticketCoeffA = 0;           // percents
-            $ticketCoeffB = 300;         // monetary units
+            $ticketCoeffB = 0; //300;         // monetary units
         }
 
         $bruttoIncome = $ticketSessionData['price'];

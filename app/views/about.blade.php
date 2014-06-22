@@ -31,11 +31,11 @@
         I'm not responsible for any losses you had due to the usage of this system. I will try to help you if possible in case you had them, but I bear no legal responsibility. That's so simple.
     </p>
 
-    <h3>Payment providers</h3>
+<!--    <h3>Payment providers</h3>
     <p>
         To process payments safely all this job is delegated to so called payment providers. They treat users' data with care and also prevent fraud.
         They charge for it, so even if I'm not charging anything personally (due to a possible agreement with you) payment provider will still take some, usually that's around 3%.
-    </p>
+    </p>-->
 
     <h3>Copyright notice</h3>
     <p>

@@ -20,7 +20,7 @@
                 <th>Name</th>
                 <th>Region</th>
                 <th>Booked tickets</th>
-                <th>Earned incl. VAT</th>
+                <th>Credit</th>
                 <th>Edit</th>
                 <th>Check-in</th>
             </tr>
