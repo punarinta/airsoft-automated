@@ -66,7 +66,7 @@ class TestingController extends BaseController
                 $price = 100 * mt_rand(100, 600);
 
                 $bruttoIncome = $price;
-                $ppIncome = $bruttoIncome * 2.95 / 100 + 0;
+                $ppIncome = 0;
                 $myIncome = $bruttoIncome * 3 / 100 + 300;
                 $nettoIncome = $bruttoIncome - $ppIncome - $myIncome * 1.25;
                 $vatPaid = $myIncome * 0.25;
