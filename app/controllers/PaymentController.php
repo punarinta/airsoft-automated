@@ -166,7 +166,7 @@ class PaymentController extends BaseController
                 $payment->setAmount($transaction['amount']);
                 $payment->setUserId(Auth::user()->getId());
                 $payment->setStatus(Payment::STATUS_COMPLETED);
-                $payment->setProviderId(1);
+                $payment->setProviderId(2);     // 1 - bank transfer
                 $payment->save();
 
                 $paymentId = $payment->getId();
