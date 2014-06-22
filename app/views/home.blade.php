@@ -28,7 +28,7 @@
             <ul>
                 <li>Manage your team</li>
                 <li>Safely book tickets</li>
-                <li>Pay with a card or cash</li>
+                <li>Pay in cash or wireless</li>
                 <li>Receive all logistics via email</li>
                 <li>Enjoy automatic game check-in</li>
             </ul>

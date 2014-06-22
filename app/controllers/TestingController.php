@@ -5,6 +5,8 @@ class TestingController extends BaseController
     /**
      * Populate DB with random but logically linked values
      *
+     * GET /testing/populate
+     *
      * @throws Exception
      */
     public function populate()
@@ -52,7 +54,7 @@ class TestingController extends BaseController
             {
                 $game = new Game;
                 $game->setName('Game ' . $i);
-                $game->setOwnerId(mt_rand(10, $maxUsers));
+                $game->setOwnerId(1/*mt_rand(10, $maxUsers)*/);
                 $game->setRegionId(mt_rand(1, $maxRegions));
                 $game->setStartsAt(date('Y-m-d H:i:s', time() + 86400 * mt_rand(21, 30)));
                 $game->setEndsAt(date('Y-m-d H:i:s', time() + 86400 * mt_rand(31, 40)));
@@ -81,7 +83,7 @@ class TestingController extends BaseController
                 $ticketTemplate = new TicketTemplate;
                 $ticketTemplate->setGameId($gameId);
                 $ticketTemplate->setGamePartyId($gameParty->getId());
-                $ticketTemplate->setIsCash(0);
+                $ticketTemplate->setIsCash(mt_rand(0,100)>50 ? 1 : 0);
                 $ticketTemplate->setPrice($price);
                 $ticketTemplate->setPriceDateStart(date('Y-m-d H:i:s', time() + 86400 * mt_rand(-20, 0)));
                 $ticketTemplate->setPriceDateEnd(date('Y-m-d H:i:s', time() + 86400 * mt_rand(0, 20)));
@@ -96,7 +98,7 @@ class TestingController extends BaseController
                     $ticket->setTicketTemplateId($ticketTemplate->getId());
                     $ticket->setGamePartyId($gameParty->getId());
                     $ticket->setUserId(mt_rand(1, $maxUsers));
-                    $ticket->setStatus(Ticket::STATUS_READY);
+                    $ticket->setStatus(mt_rand(0,1) ? Ticket::STATUS_BOOKED : Ticket::STATUS_BOOKED | Ticket::STATUS_PAID);
                     $ticket->setBrutto($bruttoIncome);
                     $ticket->setNetto($nettoIncome);
                     $ticket->setVat($vatPaid);
