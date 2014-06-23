@@ -125,18 +125,23 @@ class GameController extends BaseController
         $data = DB::table('game AS g')
             ->join('ticket_template AS tt', 'tt.game_id', '=', 'g.id')
             ->join('ticket AS t', 't.ticket_template_id', '=', 'tt.id')
-            ->select(array('g.id', 't.status'))
+            ->select(array('g.id AS game_id', 't.id AS ticket_id', 't.status AS status', 'tt.price AS price'))
             ->where('g.id', '=', $game_id)
             ->where('t.user_id', '=', Auth::user()->getId())
             ->where('t.status', '|', Ticket::STATUS_BOOKED | Ticket::STATUS_PAID)
             ->first();
+
+        $data->ticket_code = strtoupper(Bit::base36_encode(Bit::swap15($data->ticket_id)));
 
         if (empty ($data))
         {
             return View::make('game.not-booked', array());
         }
 
-        return View::make('game.briefing', array('game_id' => $game_id));
+        return View::make('game.briefing', array
+        (
+            'data' => $data
+        ));
     }
 
     /**
