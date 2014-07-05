@@ -26,6 +26,11 @@ class ApiTicketTemplateController extends BaseController
         });
     }
 
+    /**
+     * Creates a Ticket Template
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store()
     {
         return $this->execute(function()
@@ -37,6 +42,8 @@ class ApiTicketTemplateController extends BaseController
             $ticketTemplate->setPriceDateStart(Input::json('price_date_start'));
             $ticketTemplate->setPriceDateEnd(Input::json('price_date_end'));
             $ticketTemplate->save();
+
+            return $ticketTemplate->toArray();
         });
     }
 

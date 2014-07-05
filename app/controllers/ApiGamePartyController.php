@@ -26,6 +26,11 @@ class ApiGamePartyController extends BaseController
         });
     }
 
+    /**
+     * Creates a Game Party
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store()
     {
         return $this->execute(function()
@@ -35,6 +40,8 @@ class ApiGamePartyController extends BaseController
             $gameParty->setGameId(Input::json('game_id'));
             $gameParty->setPlayersLimit(Input::json('players_limit'));
             $gameParty->save();
+
+            return $gameParty->toArray();
         });
     }
 

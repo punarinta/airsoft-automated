@@ -83,7 +83,7 @@ class ApiGameController extends BaseController
 
             $game->save();
 
-            return $game;
+            return $game->toArray();
         });
     }
 
