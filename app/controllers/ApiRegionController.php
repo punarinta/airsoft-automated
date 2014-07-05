@@ -13,7 +13,7 @@ class ApiRegionController extends BaseController
         return $this->execute(function() use ($country_id)
         {
             $regionsData = [];
-            $regions = Region::where('country_id', '=', $country_id)->get(array('id', 'name'));
+            $regions = Region::where('country_id', '=', $country_id)->orderBy('name', 'ASC')->get(array('id', 'name'));
 
             foreach ($regions as $region)
             {
