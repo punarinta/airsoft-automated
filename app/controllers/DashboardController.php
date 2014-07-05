@@ -97,8 +97,8 @@ class DashboardController extends BaseController
             }
 
             $gameData[$game->getId()] = $game;
-            $gameData[$game->getId()]->region_name = $geo->region_name;
-            $gameData[$game->getId()]->country_name = $geo->country_name;
+            $gameData[$game->getId()]->region_name = isset ($geo->region_name) ? $geo->region_name : '-';
+            $gameData[$game->getId()]->country_name = isset ($geo->country_name) ? $geo->country_name : '-';
             $gameData[$game->getId()]->total_booked = count($ticketsData);
             $gameData[$game->getId()]->total_brutto = number_format($bruttoIncome / 100, 2);
             $gameData[$game->getId()]->total_netto  = number_format($nettoIncome / 100, 2);

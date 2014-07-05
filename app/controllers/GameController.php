@@ -32,8 +32,8 @@ class GameController extends BaseController
                 ->where('region.id', '=', $game->getRegionId())
                 ->first();
 
-            $game->country_id = $geo->country_id;
-            $game->region_id = $geo->region_id;
+            $game->country_id = isset ($geo->country_id) ? $geo->country_id : 0;
+            $game->region_id = isset ($geo->region_id) ? $geo->region_id : 0;
             $game->settings_array = $game->getSettingsArray();
 
             $game->parties = GameParty::where('game_id', '=', $game_id)->get();
