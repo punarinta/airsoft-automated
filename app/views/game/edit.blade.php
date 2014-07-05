@@ -77,7 +77,7 @@
         <button class="my-btn save">Save</button>
         <button class="my-btn delete">Delete</button>
         @else
-        <button class="my-btn save">Create</button>
+        <button class="my-btn save hidden">Save</button>
         <button class="my-btn delete hidden">Delete</button>
         @endif
         <button class="my-btn add">Add new</button>
@@ -129,7 +129,7 @@
         <button class="my-btn save">Save</button>
         <button class="my-btn delete">Delete</button>
         @else
-        <button class="my-btn save">Create</button>
+        <button class="my-btn save hidden">Save</button>
         <button class="my-btn delete hidden">Delete</button>
         @endif
         <button class="my-btn add">Add new</button>
@@ -138,6 +138,51 @@
 </div>
 <script>
     var gameId = {{ $game->id ? $game->id : 0 }};
+
+    /*
+     Add buttons
+     */
+
+    $('#form-game-party .add').click(function()
+    {
+        var data = JSON.stringify(
+        {
+            name: $('#form-game-party .name').val(),
+            game_id: gameId,
+            players_limit: $('#form-game-party .players-limit').val()
+        })
+
+        az.ajaxPost('game-party', data, function(data)
+        {
+            $('.delete, .save', '#form-game-party').show()
+            $('#form-game-party .game-party-id').append('<option value="' + data.id + '">' + data.name + '</option>')
+            $('#form-ticket-template .game-party-id').append('<option value="' + data.id + '">' + data.name + '</option>')
+        })
+    })
+
+    $('#form-ticket-template .add').click(function()
+    {
+        var data = JSON.stringify(
+        {
+            game_id: gameId,
+            game_party_id: $('#form-ticket-template .game-party-id').val(),
+            price: $('#form-ticket-template .price').val(),
+            price_date_start: $('#form-ticket-template .price-date-start').val(),
+            price_date_end: $('#form-ticket-template .price-date-end').val(),
+            is_visible: $('#form-ticket-template .is-cash').is(':checked')
+        })
+
+        az.ajaxPost('ticket-template', data, function(data)
+        {
+            if (!data.name)
+            {
+                data.name = 'temp-' + data.id
+            }
+
+            $('.delete, .save', '#form-ticket-template').show()
+            $('#form-ticket-template .ticket-template-id').append('<option value="' + data.id + '">' + data.name + '</option>')
+        })
+    })
 
     /*
      Save buttons
@@ -179,17 +224,7 @@
             players_limit: $('#form-game-party .players-limit').val()
         })
 
-        if (!gamePartyId) az.ajaxPost('game-party', data, function(data)
-        {
-            $('#form-game-party .delete').show()
-            $('#form-game-party .save').text('Save')
-            $('#form-game-party .game-party-id').append('<option value="' + data.id + '">' + data.name + '</option>')
-            $('#form-ticket-template .game-party-id').append('<option value="' + data.id + '">' + data.name + '</option>')
-        })
-        else
-        {
-            az.ajaxPut('game', gamePartyId, data)
-        }
+        az.ajaxPut('game-party', gamePartyId, data)
     })
 
     $('#form-ticket-template .save').click(function()
@@ -206,16 +241,7 @@
             is_visible: $('#form-ticket-template .is-cash').is(':checked')
         })
 
-        if (!ticketTemplateId) az.ajaxPost('ticket-template', data, function(data)
-        {
-            $('#form-ticket-template .delete').show()
-            $('#form-ticket-template .save').text('Save')
-            $('#form-ticket-template .ticket-template-id').append('<option value="' + data.id + '">' + data.name + '</option>')
-        })
-        else
-        {
-            az.ajaxPut('ticket-template', ticketTemplateId, data)
-        }
+        az.ajaxPut('ticket-template', ticketTemplateId, data)
     })
 
     /*
