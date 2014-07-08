@@ -34,7 +34,7 @@
     <hr class="my-hr"/>
     <table id="player-list" class="my-table">
         <tr>
-            <th>Name</th>
+            <th>Name, ticket</th>
             <th>Team</th>
             <th>Party</th>
             <th>Pays in cash</th>
