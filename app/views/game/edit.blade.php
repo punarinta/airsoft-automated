@@ -254,6 +254,10 @@
     {
         if (confirm(confText + 'game «{{ $game->name }}»?'))
         {
+            az.modalCallback = function()
+            {
+                document.location.href = '/games'
+            }
             az.ajaxDelete('game', gameId)
         }
     })
