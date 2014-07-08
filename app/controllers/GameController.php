@@ -162,10 +162,19 @@ class GameController extends BaseController
         // get enriched ticket list
         $ticketsData = DB::table('ticket AS t')
             ->join('ticket_template AS tt', 'tt.id', '=', 't.ticket_template_id')
+            ->join('game_party AS gp', 'gp.id', '=', 'tt.game_party_id')
             ->join('game AS g', 'g.id', '=', 'tt.game_id')
             ->join('user AS u', 'u.id', '=', 't.user_id')
             ->join('team AS tm', 'tm.id', '=', 'u.team_id', 'left outer')
-            ->select(array('u.nick AS nick', 'tm.name AS team_name', 'tt.is_cash AS is_cash', 't.status AS ticket_status', 't.id AS id'))
+            ->select(array
+            (
+                'u.nick AS nick',
+                'tm.name AS team_name',
+                'gp.name AS game_party_name',
+                'tt.is_cash AS is_cash',
+                't.status AS ticket_status',
+                't.id AS id',
+            ))
             ->where('g.id', '=', $game_id)
             ->get();
 
