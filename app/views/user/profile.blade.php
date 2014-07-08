@@ -6,6 +6,9 @@
 
 @section('header')
 {{ HTML::style('/css/profile.css') }}
+{{ HTML::style('/css/pikaday.css') }}
+{{ HTML::script('/js/moment.min.js') }}
+{{ HTML::script('/js/pikaday.js') }}
 @stop
 
 @section('content')
@@ -44,7 +47,7 @@
             <tr>
                 <td>Birthday:</td>
                 <td>&nbsp;</td>
-                <td><input type="date" class="my-date birth-date" value="{{ $birth_date }}"/></td>
+                <td><input type="text" class="my-input birth-date" value="{{ $birth_date }}"/></td>
             </tr>
             <tr>
                 <td>Team:</td>
@@ -179,6 +182,13 @@
         @endif
 
         return false
+    })
+
+    new Pikaday(
+    {
+        field: $('#form-profile .birth-date')[0],
+        firstDay: 1,
+        format: 'YYYY-MM-DD'
     })
 </script>
 @stop
