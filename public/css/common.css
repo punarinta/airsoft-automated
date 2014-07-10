@@ -18,6 +18,7 @@ body {min-height:100%;margin:0 auto;padding:0;font:14px source-sans-pro, helveti
 .my-fieldset {border:1px solid #999;background:#fff;border-radius: 5px}
 .my-fieldset legend {background:#fff;border-radius:3px;padding:0 6px}
 .w100 {width:100px}
+.w200 {width:200px}
 
 .hidden {display:none}
 

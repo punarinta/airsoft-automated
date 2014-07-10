@@ -140,6 +140,38 @@
         @endif
         <button class="my-btn add">Add new</button>
     </fieldset>
+    <br/>
+
+    <fieldset class="my-fieldset" id="form-map"
+    @if (!$game->id)
+    disabled
+    @endif
+    >
+        <legend>Game map</legend>
+        <table>
+            <tr>
+                <td>Map type:</td>
+                <td>
+                    <select class="my-select map-type-id">
+                        <option value="1">Embedded GMap</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Source:</td>
+                <td><input type="text" class="my-input w200 map-source" value="{{ $game->getSetting('map.source') }}"/></td>
+            </tr>
+        </table>
+
+        <button class="my-btn save">Save</button>
+        <br/><br/>
+
+        <iframe class="map-frame
+        @if (!strlen(trim($game->getSetting('map.source'))))
+        hidden
+        @endif
+        >" src="https://mapsengine.google.com/map/embed?mid={{ $game->getSetting('map.source') }}" width="100%" height="480"></iframe>
+    </fieldset>
 
 </div>
 <script>
@@ -211,7 +243,7 @@
             gameId = data.id
             $('#form-game .delete').show()
             $('#form-game .save').text('Save')
-            $('#form-game-party, #form-ticket-template').removeAttr('disabled')
+            $('.my-fieldset').removeAttr('disabled')
         })
         else
         {
@@ -248,6 +280,33 @@
         })
 
         az.ajaxPut('ticket-template', ticketTemplateId, data)
+    })
+
+    $('#form-map .save').click(function()
+    {
+        var data = JSON.stringify(
+        {
+            game_id: gameId,
+            cmd_save_map: 1,
+            map_type_id: $('#form-map .map-type-id').val(),
+            map_source: $('#form-map .map-source').val()
+        })
+
+        az.modalCallback = function(json)
+        {
+            var s = JSON.parse(json.data.settings)
+            $('#form-map .map-source').val(s.map.source)
+            if (s.map.source.length)
+            {
+                $('#form-map .map-frame').show().attr('src','https://mapsengine.google.com/map/embed?mid=' + s.map.source)
+            }
+            else
+            {
+                $('#form-map .map-frame').hide()
+            }
+        }
+
+        az.ajaxPut('game', gameId, data)
     })
 
     /*

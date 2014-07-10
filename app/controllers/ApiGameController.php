@@ -104,16 +104,37 @@ class ApiGameController extends BaseController
                 throw new \Exception('Access denied.');
             }
 
-            $game->setRegionId(Input::json('region_id'));
-            $game->setStartsAt(Input::json('starts_at'));
-            $game->setEndsAt(Input::json('ends_at'));
-            $game->setIsVisible(Input::json('is_visible'));
-
             $settings = $game->getSettingsArray();
-            $settings['url'] = Input::json('url');
+
+            if (Input::json('cmd_save_map'))
+            {
+                if (Input::json('map_type_id') == 1)
+                {
+                    preg_match('/([A-Za-z0-9]{12}\.[A-Za-z0-9]{12})$/', Input::json('map_source'), $matches);
+                    $mapSrc = isset ($matches[0]) ? $matches[0] : '';
+                }
+                else
+                {
+                    $mapSrc = Input::json('map_source');
+                }
+                $settings['map']['source'] = $mapSrc;
+            }
+            else
+            {
+                $game->setRegionId(Input::json('region_id'));
+                $game->setStartsAt(Input::json('starts_at'));
+                $game->setEndsAt(Input::json('ends_at'));
+                $game->setIsVisible(Input::json('is_visible'));
+
+                $settings = $game->getSettingsArray();
+                $settings['url'] = Input::json('url');
+            }
+
             $game->setSettingsArray($settings);
 
             $game->save();
+
+            return $game->toArray();
         });
     }
 

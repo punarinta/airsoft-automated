@@ -193,13 +193,28 @@ class Game extends Eloquent
     public function getSetting($key)
     {
         $array = $this->getSettingsArray();
-        if (isset ($array[$key]))
+        if (strpos($key, '.'))
         {
-            return $array[$key];
+            $keys = explode('.', $key);
+            if (isset ($array[$keys[0]][$keys[1]]))
+            {
+                return $array[$keys[0]][$keys[1]];
+            }
+            else
+            {
+                return null;
+            }
         }
         else
         {
-            return null;
+            if (isset ($array[$key]))
+            {
+                return $array[$key];
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
