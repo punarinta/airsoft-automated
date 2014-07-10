@@ -159,7 +159,10 @@
             </tr>
             <tr>
                 <td>Source:</td>
-                <td><input type="text" class="my-input w200 map-source" value="{{ $game->getSetting('map.source') }}"/></td>
+                <td>
+                    <input type="text" class="my-input w200 map-source" value="{{ $game->getSetting('map.source') }}"/>
+                    <a class="map-edit-link" target="_blank" href="https://mapsengine.google.com/map/u/0/{{ strlen($game->getSetting('map.source')) ? 'edit?mid=' . $game->getSetting('map.source') : '' }}">edit</a>
+                </td>
             </tr>
         </table>
 
@@ -299,9 +302,11 @@
             if (s.map.source.length)
             {
                 $('#form-map .map-frame').show().attr('src','https://mapsengine.google.com/map/embed?mid=' + s.map.source)
+                $('#form-map .map-edit-link').attr('href', 'https://mapsengine.google.com/map/u/0/edit?mid=' + s.map.source)
             }
             else
             {
+                $('#form-map .map-edit-link').attr('href', 'https://mapsengine.google.com/map/u/0/')
                 $('#form-map .map-frame').hide()
             }
         }
