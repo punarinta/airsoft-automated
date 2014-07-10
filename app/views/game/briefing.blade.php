@@ -5,6 +5,7 @@
 @stop
 
 @section('header')
+{{ HTML::style('/css/games.css') }}
 <style>
 #ticket {border:1px solid #ddd;border-radius:3px}
 #bank-data {padding-bottom:30px}
@@ -15,8 +16,6 @@
 
 <div class="window-box-1">
     <p>
-        No specific information present on this game.
-        <br/>
         @if (!($data->status & Ticket::STATUS_PAID))
         Your ticket is booked but not paid.
         <div id="bank-data">
@@ -68,6 +67,13 @@
     <img id="ticket" src="{{ URL::route('game-ticket', array($data->game_id)) }}" alt="Your ticket"/>
     <br/><br/>
     <button id="btn-print-ticket" class="my-btn">Print ticket</button>
+
+    <hr class="my-hr"/>
+    @if ($map)
+    <iframe class="map-frame" src="{{ $map }}" width="100%" height="480"></iframe>
+    @else
+    No specific information present on this game.
+    @endif
 </div>
 <script>
 $('#btn-print-ticket').click(function()

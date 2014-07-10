@@ -118,6 +118,7 @@ class ApiGameController extends BaseController
                     $mapSrc = Input::json('map_source');
                 }
                 $settings['map']['source'] = $mapSrc;
+                $settings['map']['type'] = Input::json('map_type_id');
             }
             else
             {

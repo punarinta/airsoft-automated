@@ -125,7 +125,14 @@ class GameController extends BaseController
         $data = DB::table('game AS g')
             ->join('ticket_template AS tt', 'tt.game_id', '=', 'g.id')
             ->join('ticket AS t', 't.ticket_template_id', '=', 'tt.id')
-            ->select(array('g.id AS game_id', 't.id AS ticket_id', 't.status AS status', 'tt.price AS price'))
+            ->select(array
+            (
+                'g.id AS game_id',
+                't.id AS ticket_id',
+                't.status AS status',
+                'tt.price AS price',
+                'g.settings AS settings'
+            ))
             ->where('g.id', '=', $game_id)
             ->where('t.user_id', '=', Auth::user()->getId())
             ->where('t.status', '|', Ticket::STATUS_BOOKED | Ticket::STATUS_PAID)
@@ -138,9 +145,20 @@ class GameController extends BaseController
             return View::make('game.not-booked', array());
         }
 
+        $settings = json_decode($data->settings, true);
+        if (isset ($settings['map']['source']) && strlen ($settings['map']['source']) && $settings['map']['type'] == 1)
+        {
+            $mapSrc = 'https://mapsengine.google.com/map/embed?mid=' . $settings['map']['source'];
+        }
+        else
+        {
+            $mapSrc = null;
+        }
+
         return View::make('game.briefing', array
         (
-            'data' => $data
+            'data' => $data,
+            'map'  => $mapSrc,
         ));
     }
 
