@@ -219,20 +219,28 @@ class GameController extends BaseController
         }
 
         $settings = $game->getSettingsArray();
+        $game->map = null;
+        $game->poster = '/gfx/dummy-posters/' . mt_rand(1, 8) . '.jpg';
 
         if (isset ($settings['map']['source']) && strlen ($settings['map']['source']) && $settings['map']['type'] == 1)
         {
-            $mapSrc = 'https://mapsengine.google.com/map/embed?mid=' . $settings['map']['source'];
+            $game->map = 'https://mapsengine.google.com/map/embed?mid=' . $settings['map']['source'];
         }
-        else
+        if (isset ($settings['poster']) && strlen ($settings['poster']))
         {
-            $mapSrc = null;
+            $game->poster = $settings['poster'];
         }
+
+        $geo = DB::table('region')
+            ->join('country', 'country.id', '=', 'region.country_id')
+            ->select(array('region.name AS region_name', 'country.name AS country_name'))
+            ->where('region.id', '=', $game->getRegionId())
+            ->first();
 
         return View::make('game.card', array
         (
             'game' => $game,
-            'map'  => $mapSrc,
+            'geo'  => $geo,
         ));
     }
 }
