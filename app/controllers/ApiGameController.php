@@ -122,6 +122,7 @@ class ApiGameController extends BaseController
             }
             else
             {
+                $game->setName(Input::json('name'));
                 $game->setRegionId(Input::json('region_id'));
                 $game->setStartsAt(Input::json('starts_at'));
                 $game->setEndsAt(Input::json('ends_at'));
