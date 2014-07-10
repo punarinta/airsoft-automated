@@ -8,7 +8,7 @@
 {{ HTML::style('/css/games.css') }}
 {{ HTML::style('/css/pikaday.css') }}
 {{ HTML::script('/js/moment.min.js') }}
-{{ HTML::script('/js/pikaday.js') }}
+{{ HTML::script('/js/pikaday.min.js') }}
 @stop
 
 @section('content')
@@ -26,11 +26,17 @@
             </tr>
             <tr>
                 <td>Starts&nbsp;at:</td>
-                <td><input type="text" class="my-input starts-at" value="{{ date('Y-m-d', strtotime($game->starts_at)) }}"/></td>
+                <td>
+                    <input type="text" class="my-input w100 starts-at" value="{{ date('Y-m-d', strtotime($game->starts_at)) }}" placeholder="YYYY-MM-DD"/>
+                    <input type="text" class="my-input w100 starts-at-time" value="{{ date('H:i', strtotime($game->starts_at)) }}" placeholder="HH:MM"/>
+                </td>
             </tr>
             <tr>
                 <td>Ends&nbsp;at:</td>
-                <td><input type="text" class="my-input ends-at" value="{{ date('Y-m-d', strtotime($game->ends_at)) }}"/></td>
+                <td>
+                    <input type="text" class="my-input w100 ends-at" value="{{ date('Y-m-d', strtotime($game->ends_at)) }}" placeholder="YYYY-MM-DD"/>
+                    <input type="text" class="my-input w100 ends-at-time" value="{{ date('H:i', strtotime($game->ends_at)) }}" placeholder="HH:MM"/>
+                </td>
             </tr>
             <tr>
                 <td>Bookable:</td>
@@ -194,8 +200,8 @@
         {
             name: $('#form-game .name').val(),
             region_id: game_region_picker.getLocation()[1],
-            starts_at: $('#form-game .starts-at').val(),
-            ends_at: $('#form-game .ends-at').val(),
+            starts_at: $('#form-game .starts-at').val() + ' ' + $('#form-game .starts-at-time').val(),
+            ends_at: $('#form-game .ends-at').val() + ' ' + $('#form-game .ends-at-time').val(),
             is_visible: $('#form-game .is-visible').is(':checked'),
             url: $('#form-game .url').val()
         })

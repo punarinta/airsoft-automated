@@ -8,7 +8,7 @@
 {{ HTML::style('/css/profile.css') }}
 {{ HTML::style('/css/pikaday.css') }}
 {{ HTML::script('/js/moment.min.js') }}
-{{ HTML::script('/js/pikaday.js') }}
+{{ HTML::script('/js/pikaday.min.js') }}
 @stop
 
 @section('content')
