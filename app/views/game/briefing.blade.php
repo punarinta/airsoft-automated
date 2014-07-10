@@ -25,11 +25,11 @@
                 <table>
                     <tr>
                         <td>Account:</td>
-                        <td><b>0000 0000000</b></td>
+                        <td><b>5699 3477637</b></td>
                     </tr>
                     <tr>
                         <td>Amount:</td>
-                        <td><b>{{ $data->price }} SEK</b></td>
+                        <td><b>{{ number_format($data->price / 100, 2) }} SEK</b></td>
                     </tr>
                     <tr>
                         <td>Reference:</td>
@@ -47,15 +47,15 @@
                     </tr>
                     <tr>
                         <td>Recipient:</td>
-                        <td><b>0000 0000000</b></td>
+                        <td><b>5699 3477637</b></td>
                     </tr>
                     <tr>
                         <td>IBAN:</td>
-                        <td><b>SE****</b></td>
+                        <td><b>SE9550000000056993477637</b></td>
                     </tr>
                     <tr>
                         <td>SWIFT:</td>
-                        <td><b>SE****</b></td>
+                        <td><b>ESSESESS</b></td>
                     </tr>
                 </table>
             </fieldset>
