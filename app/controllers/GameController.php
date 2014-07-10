@@ -202,4 +202,37 @@ class GameController extends BaseController
             'tickets' => $ticketsData,
         ));
     }
+
+    /**
+     * Public game presentation
+     *
+     * @param int $game_id
+     * @return \Illuminate\View\View
+     */
+    public function cardForm($game_id = 0)
+    {
+        $game = Game::find($game_id);
+
+        if (empty ($game))
+        {
+            return Redirect::route('games')->with('flash_error', 'Game does not exist or no access');
+        }
+
+        $settings = $game->getSettingsArray();
+
+        if (isset ($settings['map']['source']) && strlen ($settings['map']['source']) && $settings['map']['type'] == 1)
+        {
+            $mapSrc = 'https://mapsengine.google.com/map/embed?mid=' . $settings['map']['source'];
+        }
+        else
+        {
+            $mapSrc = null;
+        }
+
+        return View::make('game.card', array
+        (
+            'game' => $game,
+            'map'  => $mapSrc,
+        ));
+    }
 }

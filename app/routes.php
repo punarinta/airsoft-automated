@@ -21,6 +21,7 @@ Route::get('games', array('uses' => 'GamesController@index', 'as' => 'games'));
 Route::get('game/edit/{game_id?}', array('uses' => 'GameController@editForm', 'as' => 'game-edit'))->before('auth');
 Route::get('game/book/{game_id}', array('uses' => 'GameController@bookForm', 'as' => 'game-book'))->before('auth');
 Route::get('game/briefing/{game_id}', array('uses' => 'GameController@briefingForm', 'as' => 'game-briefing'))->before('auth');
+Route::get('game/card/{game_id}', array('uses' => 'GameController@cardForm', 'as' => 'game-card'));
 Route::get('game/check-in/{game_id}', array('uses' => 'GameController@checkInForm', 'as' => 'game-check-in'))->before('auth');
 Route::get('player', array('uses' => 'DashboardController@playerForm', 'as' => 'player-dashboard'))->before('auth');
 Route::get('organizer', array('uses' => 'DashboardController@organizerForm', 'as' => 'organizer-dashboard'))->before('auth');

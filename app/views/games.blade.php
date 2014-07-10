@@ -18,14 +18,14 @@
         <table class="my-table">
             <tr>
                 <th>Date</th>
-                <th>Name</th>
+                <th>Game</th>
                 <th>Region</th>
                 <th>Booking</th>
             </tr>
             @foreach ($games as $game)
             <tr class="region-{{$game->region_id}}">
                 <td>{{ date('Y.m.d', strtotime($game->starts_at)) }}</td>
-                <td>{{ $game->name }}</td>
+                <td><a href="{{ URL::route('game-card', $game->id) }}">{{ $game->name }}</a></td>
                 <td>{{ $game->country_name }}, {{ $game->region_name; }}</td>
                 <td>
                     @if ($game->editable)
