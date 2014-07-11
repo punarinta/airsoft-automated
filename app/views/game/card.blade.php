@@ -56,7 +56,7 @@
                         <td style="vertical-align:top">Fractions:</td>
                         <td>
                             @foreach ($parties as $party)
-                            {{ $party->getName() }}
+                            {{ $party->getName() }} (max. {{ $party->getPlayersLimit() }} players)
                             <br/>
                             @endforeach
                         </td>
