@@ -64,7 +64,10 @@
                 </table>
             </td>
             <td>
-                <a href="#" title="Book tickets and pay"><img src="/gfx/ticket-icon.png" alt="Order tickets"/></a>
+                @if ($bookable)
+                <a href="{{ URL::route('game-book', $game->id) }}" title="Book tickets and pay"><img src="/gfx/ticket-icon.png" alt="Order tickets"/></a>
+                @else
+                @endif
             </td>
         </tr>
     </table>

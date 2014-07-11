@@ -237,13 +237,35 @@ class GameController extends BaseController
             ->where('region.id', '=', $game->getRegionId())
             ->first();
 
-        $parties = GameParty::where('game_id', '=', $game_id)->get();
+        $ticketsPresent = false;
+        $gameParties = GameParty::where('game_id', '=', $game_id)->get();
+
+        foreach ($gameParties as $gameParty)
+        {
+            // check if there are tickets
+            $booking = DB::table('ticket')
+                ->select(array(DB::raw('COUNT(id) as booked')))
+                ->where('game_party_id', '=', $gameParty->getId())
+                ->get();
+
+            $ticketsBooked = isset ($booking->booked) ? $booking->booked : 0;
+
+            $gameParty->ticketsBooked = $ticketsBooked;
+            $gameParty->ticketsLeft = $gameParty->getPlayersLimit() - $ticketsBooked;
+            $gameParty->callToAction = number_format($gameParty->ticketsLeft / $gameParty->getPlayersLimit(), 0);
+
+            if ($gameParty->ticketsLeft > 0 && $game->getIsVisible())
+            {
+                $ticketsPresent = true;
+            }
+        }
 
         return View::make('game.card', array
         (
             'game'      => $game,
             'geo'       => $geo,
-            'parties'   => $parties,
+            'parties'   => $gameParties,
+            'bookable'  => $ticketsPresent,
         ));
     }
 }
