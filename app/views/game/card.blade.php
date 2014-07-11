@@ -36,12 +36,18 @@
             <td>{{ date('d.m.Y \@ H:i', strtotime($game->ends_at)) }}</td>
         </tr>
         <tr>
-            <td>Location:</td>
+            <td>Region:</td>
             <td>{{ $geo->region_name }}, {{ $geo->country_name }}</td>
         </tr>
         <tr>
             <td>External info:</td>
-            <td><a target="_blank" rel="nofollow" href="{{ $game->getSetting('url') }}">{{ $game->getSetting('url') }}</a></td>
+            <td>
+                @if (strlen($game->getSetting('url')))
+                <a target="_blank" rel="nofollow" href="{{ $game->getSetting('url') }}">{{ $game->getSetting('url') }}</a>
+                @else
+                not present
+                @endif
+            </td>
         </tr>
     </table>
     <br/>
@@ -49,7 +55,7 @@
     @if ($game->map)
     <iframe class="map-frame" src="{{ $game->map }}" width="100%" height="550"></iframe>
     @else
-    No map present for this game.
+    No map yet present for this game.
     @endif
 </div>
 @stop
