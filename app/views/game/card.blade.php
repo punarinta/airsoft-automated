@@ -26,30 +26,49 @@
         </div>
     </div>
 
-    <table>
+    <table style="width:100%">
         <tr>
-            <td>Game starts:</td>
-            <td>{{ date('d.m.Y \@ H:i', strtotime($game->starts_at)) }}</td>
-        </tr>
-        <tr>
-            <td>Game ends:</td>
-            <td>{{ date('d.m.Y \@ H:i', strtotime($game->ends_at)) }}</td>
-        </tr>
-        <tr>
-            <td>Region:</td>
-            <td>{{ $geo->region_name }}, {{ $geo->country_name }}</td>
-        </tr>
-        <tr>
-            <td>External info:</td>
             <td>
-                @if (strlen($game->getSetting('url')))
-                <a target="_blank" rel="nofollow" href="{{ $game->getSetting('url') }}">{{ $game->getSetting('url') }}</a>
-                @else
-                not present
-                @endif
+                <table>
+                    <tr>
+                        <td>Game starts:</td>
+                        <td>{{ date('d.m.Y \@ H:i', strtotime($game->starts_at)) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Game ends:</td>
+                        <td>{{ date('d.m.Y \@ H:i', strtotime($game->ends_at)) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Region:</td>
+                        <td>{{ $geo->region_name }}, {{ $geo->country_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>External info:</td>
+                        <td>
+                            @if (strlen($game->getSetting('url')))
+                            <a target="_blank" rel="nofollow" href="{{ $game->getSetting('url') }}">{{ $game->getSetting('url') }}</a>
+                            @else
+                            not present
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align:top">Fractions:</td>
+                        <td>
+                            @foreach ($parties as $party)
+                            {{ $party->getName() }}
+                            <br/>
+                            @endforeach
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <a href="#" title="Book tickets and pay"><img src="/gfx/ticket-icon.png" alt="Order tickets"/></a>
             </td>
         </tr>
     </table>
+
     <br/>
 
     @if ($game->map)

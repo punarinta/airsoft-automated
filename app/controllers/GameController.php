@@ -237,10 +237,13 @@ class GameController extends BaseController
             ->where('region.id', '=', $game->getRegionId())
             ->first();
 
+        $parties = GameParty::where('game_id', '=', $game_id)->get();
+
         return View::make('game.card', array
         (
-            'game' => $game,
-            'geo'  => $geo,
+            'game'      => $game,
+            'geo'       => $geo,
+            'parties'   => $parties,
         ));
     }
 }
