@@ -40,7 +40,7 @@
                     </tr>
                     <tr>
                         <td>Region:</td>
-                        <td>{{ $geo->region_name }}, {{ $geo->country_name }}</td>
+                        <td>{{ @$geo->region_name ?: '&ndash;' }}, {{ @$geo->country_name ?: '&ndash;' }}</td>
                     </tr>
                     <tr>
                         <td>External info:</td>
