@@ -36,7 +36,7 @@ class ApiGamePartyController extends BaseController
         return $this->execute(function()
         {
             $gameParty = new GameParty;
-            $gameParty->setName(Input::json('name'));
+            $gameParty->setName(strip_tags(Input::json('name')));
             $gameParty->setGameId(Input::json('game_id'));
             $gameParty->setPlayersLimit(Input::json('players_limit'));
             $gameParty->save();
@@ -45,6 +45,10 @@ class ApiGamePartyController extends BaseController
         });
     }
 
+    /**
+     * @param int $game_party_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update($game_party_id = 0)
     {
         return $this->execute(function() use ($game_party_id)
@@ -58,13 +62,17 @@ class ApiGamePartyController extends BaseController
                 throw new \Exception('Access denied.');
             }
 
-            $gameParty->setName(Input::json('name'));
+            $gameParty->setName(strip_tags(Input::json('name')));
             $gameParty->setGameId(Input::json('game_id'));
             $gameParty->setPlayersLimit(Input::json('players_limit'));
             $gameParty->save();
         });
     }
 
+    /**
+     * @param int $game_party_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy($game_party_id = 0)
     {
         return $this->execute(function() use ($game_party_id)

@@ -103,7 +103,7 @@ class ApiUserController extends BaseController
             }
 
             $user = User::find($user_id);
-            $user->setNick(Input::json('nick'));
+            $user->setNick(strip_tags(Input::json('nick')));
             $user->setBirthDate(Input::json('birth_date'));
             $user->setTeamId(Input::json('team_id'));
 

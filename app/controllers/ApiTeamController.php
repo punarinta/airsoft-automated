@@ -37,10 +37,10 @@ class ApiTeamController extends BaseController
             }
 
             $team = new Team;
-            $team->setName($name);
+            $team->setName(strip_tags($name));
             $team->setRegionId(Input::json('region_id'));
             $team->setOwnerId(Auth::user()->getId());
-            $team->setUrl(Input::json('url'));
+            $team->setUrl(strip_tags(Input::json('url')));
             $team->save();
 
             $user = Auth::getUser();
@@ -73,8 +73,8 @@ class ApiTeamController extends BaseController
                 throw new \Exception('Access denied.');
             }
 
-            $team->setName($name);
-            $team->setUrl(Input::json('url'));
+            $team->setName(strip_tags($name));
+            $team->setUrl(strip_tags(Input::json('url')));
             $team->setRegionId(Input::json('region_id'));
             $team->save();
         });
