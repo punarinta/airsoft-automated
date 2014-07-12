@@ -55,6 +55,8 @@ class GameController extends BaseController
             $game->country_id = 1;
             $game->region_id = 0;
             $game->settings_array = [];
+            $game->starts_at = '+30 days noon';
+            $game->ends_at = '+31 days noon';
 
             $game->parties = [];
             $game->ticket_templates = [];
