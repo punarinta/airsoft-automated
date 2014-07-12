@@ -75,7 +75,7 @@
             </tr>
             <tr>
                 <td>Players&nbsp;limit:</td>
-                <td><input type="text" class="my-input players-limit" value="{{ isset($game->parties[0])?$game->parties[0]->players_limit:0 }}"/></td>
+                <td><input type="number" min="1" class="my-input w100 players-limit" value="{{ isset($game->parties[0])?$game->parties[0]->players_limit:0 }}"/></td>
             </tr>
         </table>
 
@@ -115,7 +115,7 @@
             </tr>
             <tr>
                 <td>Price:</td>
-                <td><input type="text" class="my-input price" value="{{ isset($game->ticket_templates[0]) ? $game->ticket_templates[0]->price:0 }}"/></td>
+                <td><input type="number" min="0" class="my-input w100 price" value="{{ isset($game->ticket_templates[0]) ? $game->ticket_templates[0]->price:0 }}"/></td>
             </tr>
             <tr>
                 <td>Valid&nbsp;from:</td>
