@@ -119,11 +119,11 @@
             </tr>
             <tr>
                 <td>Valid&nbsp;from:</td>
-                <td><input type="text" class="my-input price-date-start" value="{{ isset($game->ticket_templates[0]) ? date('Y-m-d', strtotime($game->ticket_templates[0]->price_date_start)):0 }}"/></td>
+                <td><input type="text" class="my-input price-date-start" value="{{ date('Y-m-d', strtotime(isset($game->ticket_templates[0]) ? $game->ticket_templates[0]->price_date_start:'today')) }}"/></td>
             </tr>
             <tr>
                 <td>Valid&nbsp;to:</td>
-                <td><input type="text" class="my-input price-date-end" value="{{ isset($game->ticket_templates[0]) ? date('Y-m-d', strtotime($game->ticket_templates[0]->price_date_end)):0 }}"/></td>
+                <td><input type="text" class="my-input price-date-end" value="{{ date('Y-m-d', strtotime(isset($game->ticket_templates[0]) ? $game->ticket_templates[0]->price_date_end:'+30 days')) }}"/></td>
             </tr>
             <tr>
                 <td>Cash&nbsp;only:</td>
