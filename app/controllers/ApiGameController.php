@@ -195,12 +195,14 @@ class ApiGameController extends BaseController
         $width  = 500;
         $height = 200;
 
-        // create/resize image from file
-        $image = Image::make('app/data/ticket-1.png');
+        $rootDir = Config::get('app.live') ? '/site/public/../' : '';
 
-        $font = function($font)
+        // create/resize image from file
+        $image = Image::make($rootDir . 'app/data/ticket-1.png');
+
+        $font = function($font) use ($rootDir)
         {
-            $font->file('app/data/deja-vu-sans.ttf');
+            $font->file($rootDir . 'app/data/deja-vu-sans.ttf');
             $font->size(16);
         };
 
