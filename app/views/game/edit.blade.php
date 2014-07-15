@@ -334,13 +334,17 @@
 
     $('#form-game-party .delete').click(function()
     {
-        if (confirm(confText + 'game party «' + $('#form-game-party .party-id option:selected').text() + '»?'))
+        if (confirm(confText + 'game party «' + $('#form-game-party .game-party-id option:selected').text() + '»?'))
         {
-            var val = $('#form-game-party .party-id').val()
+            var val = $('#form-game-party .game-party-id').val()
             az.ajaxDelete('game-party', val)
 
             // remove this game-party from ticket-template's GP list
             $('#form-ticket-template .game-party-id option[value="' + val + '"]').remove()
+
+            // remove it from the game parties list also and resync
+            $('#form-game-party .game-party-id option[value="' + val + '"]').remove()
+            $('#form-game-party .game-party-id').change()
         }
     })
 
