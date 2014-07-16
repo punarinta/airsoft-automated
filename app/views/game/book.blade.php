@@ -10,6 +10,8 @@
 
 @section('content')
 <div class="dialog-box-1">
+    <p>You are booking a ticket for the game «<b>{{ $game->name }}</b>» organized by <b>{{ $game->organizer }}</b>.</p>
+
     @if ($is_organizer)
     <p>Note: you are organizing this game</p>
     @endif

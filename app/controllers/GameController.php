@@ -88,6 +88,13 @@ class GameController extends BaseController
         $game->parties = GameParty::where('game_id', '=', $game_id)->get();
         $game->ticket_templates = TicketTemplate::where('game_id', '=', $game_id)->get();
 
+        $org = DB::table('user AS u')
+            ->join('team AS t', 't.id', '=', 'u.team_id')
+            ->select(array('t.name AS team_name', 'u.nick AS user_nick'))
+            ->where('u.id', '=', $game->getOwnerId())
+            ->first();
+        $game->organizer = $org->user_nick;
+
         if ($game->ticket_templates->isEmpty())
         {
             return Redirect::route('games')->with('flash_error', 'Organizer has not issued any tickets yet');
