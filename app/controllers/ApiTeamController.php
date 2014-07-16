@@ -36,6 +36,12 @@ class ApiTeamController extends BaseController
                 throw new \Exception('Team name cannot be empty');
             }
 
+            // disable team creation for unvalidated users
+            if (!Auth::user()->getIsEmailValidated())
+            {
+                throw new \Exception('Validate your email first');
+            }
+
             $team = new Team;
             $team->setName(strip_tags($name));
             $team->setRegionId(Input::json('region_id'));
@@ -71,6 +77,12 @@ class ApiTeamController extends BaseController
             if (Auth::user()->getId() != $team->getOwnerId())
             {
                 throw new \Exception('Access denied.');
+            }
+
+            // disable team creation for unvalidated users
+            if (!Auth::user()->getIsEmailValidated())
+            {
+                throw new \Exception('Validate your email first');
             }
 
             $team->setName(strip_tags($name));

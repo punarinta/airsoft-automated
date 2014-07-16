@@ -13,7 +13,7 @@
 
 @section('content')
 <div class="padded-content">
-    <fieldset class="my-fieldset" style="float:left">
+    <fieldset class="my-fieldset" style="display:inline-block">
         <legend>Status</legend>
         @if (Auth::user()->getIsValidated())
         1. You have passed validation and can organize games.
@@ -24,7 +24,7 @@
         @if (Auth::user()->getIsEmailValidated())
         2. You have passed email validation and can participate in games.
         @else
-        2. You cannot participate in games. Check your email for a confirmation link.</a>
+        2. You cannot participate in games and create a team. Check your email for a email confirmation link.</a>
         @endif
         <br/>
         @if ($team_editable && $team_present)
@@ -35,6 +35,8 @@
         3. You may create your team or join an existing one.
         @endif
     </fieldset>
+    <br/>
+    <br/>
 
     <fieldset class="my-fieldset" style="float:left" id="form-profile">
         <legend>Your profile</legend>
@@ -68,7 +70,11 @@
         </table>
     </fieldset>
 
-    <fieldset class="my-fieldset" style="float:left" id="form-team">
+    <fieldset class="my-fieldset" style="float:left" id="form-team"
+    @if (!Auth::user()->getIsEmailValidated())
+    disabled="disabled"
+    @endif
+    >
         <legend>Your team</legend>
         <table>
             @if ($team_editable)
