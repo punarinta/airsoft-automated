@@ -19,6 +19,7 @@
             <tr>
                 <th>Date</th>
                 <th>Game</th>
+                <th>Arranged by</th>
                 <th>Region</th>
                 <th>Booking</th>
             </tr>
@@ -26,7 +27,8 @@
             <tr class="region-{{$game->region_id}}">
                 <td>{{ date('Y.m.d', strtotime($game->starts_at)) }}</td>
                 <td><a href="{{ URL::route('game-card', $game->id) }}">{{ $game->name }}</a></td>
-                <td>{{ $game->country_name }}, {{ $game->region_name; }}</td>
+                <td>{{ $game->organizer }}</td>
+                <td>{{ $game->region_name }}, {{ $game->country_name }}</td>
                 <td>
                     @if ($game->editable)
                     <a href="{{ URL::route('game-edit', $game->id) }}">edit</a>
