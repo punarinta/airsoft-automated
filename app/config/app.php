@@ -123,6 +123,7 @@ return array(
 
         'Doxxon\LaravelMandrillRequest\LaravelMandrillRequestServiceProvider',
         'Intervention\Image\ImageServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
 	),
 
 	/*
@@ -191,6 +192,7 @@ return array(
 
         'Mandrill'        => 'Doxxon\LaravelMandrillRequest\Facades\MandrillRequest',
         'Image'           => 'Intervention\Image\Facades\Image',
+        'Excel'           => 'Maatwebsite\Excel\Facades\Excel',
 	),
 
     'emails' => array

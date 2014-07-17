@@ -7,7 +7,8 @@
 		"laravel/framework": "4.1.*",
         "mandrill/mandrill": "1.0.24",
         "doxxon/laravel-mandrill-request": "1.0.1",
-        "intervention/image": "1.*"
+        "intervention/image": "1.*",
+        "maatwebsite/excel": "1.*"
 	},
 	"autoload": {
 		"classmap": [
