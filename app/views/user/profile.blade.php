@@ -47,11 +47,6 @@
                 <td><input type="text" class="my-input nick" value="{{ $nick }}"/></td>
             </tr>
             <tr>
-                <td>Birthday:</td>
-                <td>&nbsp;</td>
-                <td><input type="text" class="my-input birth-date" value="{{ $birth_date }}"/></td>
-            </tr>
-            <tr>
                 <td>Team:</td>
                 <td>&nbsp;</td>
                 <td>
@@ -60,7 +55,22 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3">&nbsp;</td>
+                <td colspan="3">
+                    <i>These may be required by organizers:</i>
+                </td>
+            </tr>
+            <tr>
+                <td>Birthday:</td>
+                <td>&nbsp;</td>
+                <td><input type="text" class="my-input birth-date" value="{{ $birth_date }}"/></td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td>&nbsp;</td>
+                <td><input type="text" class="my-input phone" value="{{ $phone }}"/></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -141,6 +151,7 @@
             {
                 nick: $('#form-profile .nick').val(),
                 birth_date: $('#form-profile .birth-date').val(),
+                phone: $('#form-profile .phone').val(),
                 team_id: me_team_picker.getTeamId()
             }),
             success: az.ajaxResult
