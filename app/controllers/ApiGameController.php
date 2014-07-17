@@ -277,6 +277,7 @@ class ApiGameController extends BaseController
                     't.id AS id',
                 ))
                 ->where('g.id', '=', $game_id)
+                ->orderBy('nick')
                 ->get();
 
             Excel::create('participants', function($excel) use ($ticketsData)
@@ -287,12 +288,12 @@ class ApiGameController extends BaseController
 
                     $sheet->appendRow($i++, array
                     (
-                        'Ticket',
                         'Nickname',
                         'Team',
                         'Fraction',
                         'Cash payment',
                         'Paid',
+                        'Ticket ID',
                     ));
 
                     $sheet->cells('A1:F1', function($cells)
@@ -304,12 +305,12 @@ class ApiGameController extends BaseController
                     {
                         $sheet->appendRow($i++, array
                         (
-                            strtoupper(str_pad(Bit::base36_encode(Bit::swap15($item->id)), 8, '0', STR_PAD_LEFT)),
                             $item->nick,
                             $item->team_name,
                             $item->game_party_name,
                             $item->is_cash ? '+' : '–',
                             $item->ticket_status & Ticket::STATUS_PAID ? '+' : '–',
+                            strtoupper(str_pad(Bit::base36_encode(Bit::swap15($item->id)), 8, '0', STR_PAD_LEFT)),
                         ));
                     }
 
