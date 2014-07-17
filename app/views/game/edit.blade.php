@@ -49,9 +49,9 @@
             <tr>
                 <td>Extra:</td>
                 <td>
-                    <label><input type="checkbox" class="req-nick" {{ $game->getSetting('req.nick')?'checked="checked"':'' }}/> require nickname for booking</label><br/>
-                    <label><input type="checkbox" class="req-phone" {{ $game->getSetting('req.phone')?'checked="checked"':'' }}/> require phone for booking</label><br/>
-                    <label><input type="checkbox" class="req-age" {{ $game->getSetting('req.age')?'checked="checked"':'' }}/> require age for booking</label><br/>
+                    <label class="my-check"><input type="checkbox" class="req-nick" {{ $game->getSetting('req.nick')?'checked="checked"':'' }}/> require nickname for booking</label><br/>
+                    <label class="my-check"><input type="checkbox" class="req-phone" {{ $game->getSetting('req.phone')?'checked="checked"':'' }}/> require phone for booking</label><br/>
+                    <label class="my-check"><input type="checkbox" class="req-age" {{ $game->getSetting('req.age')?'checked="checked"':'' }}/> require age for booking</label><br/>
                 </td>
             </tr>
         </table>
