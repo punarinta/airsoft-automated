@@ -305,7 +305,7 @@ class ApiGameController extends BaseController
                     {
                         $sheet->appendRow($i++, array
                         (
-                            $item->nick,
+                            strlen($item->nick) ? $item->nick : $item->email,
                             $item->team_name,
                             $item->game_party_name,
                             $item->is_cash ? '+' : '–',
