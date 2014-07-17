@@ -196,6 +196,7 @@ class GameController extends BaseController
             ->select(array
             (
                 'u.nick AS nick',
+                'u.email AS email',
                 'tm.name AS team_name',
                 'gp.name AS game_party_name',
                 'tt.is_cash AS is_cash',

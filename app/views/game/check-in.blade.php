@@ -43,7 +43,7 @@
         </tr>
         @foreach($tickets as $ticket)
         <tr class="ticket-{{ $ticket->id }}">
-            <td class="{{ $ticket->ticket_status & Ticket::STATUS_CHECKED ? 'checked' : '' }}">{{ $ticket->nick }}<span class="code">, {{ strtoupper(str_pad(Bit::base36_encode(Bit::swap15($ticket->id)), 8, '0', STR_PAD_LEFT)) }}</span></td>
+            <td class="{{ $ticket->ticket_status & Ticket::STATUS_CHECKED ? 'checked' : '' }}">{{ strlen($ticket->nick) ? $ticket->nick : $ticket->email }}<span class="code">, {{ strtoupper(str_pad(Bit::base36_encode(Bit::swap15($ticket->id)), 8, '0', STR_PAD_LEFT)) }}</span></td>
             <td>{{ $ticket->team_name }}</td>
             <td>{{ $ticket->game_party_name }}</td>
             <td>{{ $ticket->is_cash ? '+' : '–' }}</td>
