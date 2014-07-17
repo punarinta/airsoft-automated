@@ -113,7 +113,7 @@ class ApiUserController extends BaseController
             if (Input::json('first_name')) $profile['first_name'] = Input::json('first_name');
             if (Input::json('last_name')) $profile['last_name'] = Input::json('last_name');
             if (Input::json('ssn')) $profile['ssn'] = Input::json('ssn');
-            if (Input::json('phone')) $profile['phone'][0] = Input::json('phone');
+            if (Input::json('phone')) $profile['phone'][0] = preg_replace('/\D+/', '', Input::json('phone'));
             if (Input::json('addr_street')) $profile['address']['street'] = Input::json('addr_street');
             if (Input::json('addr_zip')) $profile['address']['zip'] = Input::json('addr_zip');
             if (Input::json('addr_city')) $profile['address']['city'] = Input::json('addr_city');

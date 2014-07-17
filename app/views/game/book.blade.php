@@ -16,7 +16,26 @@
     <p>Note: you are organizing this game</p>
     @endif
 
-    <fieldset class="my-fieldset" id="form-ticket">
+    @if (!empty ($requirements))
+    <fieldset class="my-fieldset">
+        <legend>Requirements</legend>
+        <table>
+            @foreach ($requirements as $requirement)
+            <tr>
+                <td>{{ $requirement[0] }}:</td>
+                <td>{{ $requirement[1] ? 'OK' : '<span class="warn-span">add in the profile</span>' }}</td>
+            </tr>
+            @endforeach
+        </table>
+    </fieldset>
+    <br/>
+    @endif
+
+    <fieldset class="my-fieldset" id="form-ticket"
+        @if (!$requirements_ok)
+        disabled="disabled"
+        @endif
+        >
         <legend>Choose a ticket</legend>
         <table>
             <tr>

@@ -7,5 +7,8 @@
 .window-box-1 fieldset:disabled {border: 1px solid #bbb;color:#bbb}
 .window-box-1 fieldset:disabled * {color:#bbb}
 
+/* booking */
+.dialog-box-1 fieldset:disabled * {color:#bbb}
+
 .area-btn-paymill {margin:16px 2px 0}
 .map-frame {border:1px solid #ddd;border-radius:3px}

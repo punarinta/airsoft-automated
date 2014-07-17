@@ -115,10 +115,42 @@ class GameController extends BaseController
             $game->ticket_templates[$k]->name = date('M d', strtotime($v->getPriceDateStart())) . ' – ' . date('M d', strtotime($v->getPriceDateEnd())) . ', ' . ($x?($x->name):'all parties');
         }
 
+        $profile = Auth::user()->getProfileArray();
+
+        $requirements = [];
+        $requirementsOk = true;
+
+        if ($game->getSetting('req.nick') == 1)
+        {
+            if (!strlen(Auth::user()->getNick()))
+            {
+                $requirementsOk = false;
+            }
+            $requirements[] = array('Nickname', strlen(Auth::user()->getNick()) > 0);
+        }
+        if ($game->getSetting('req.phone') == 1)
+        {
+            if (!@strlen($profile['phone'][0]))
+            {
+                $requirementsOk = false;
+            }
+            $requirements[] = array('Phone', isset ($profile['phone'][0]) && strlen($profile['phone'][0]) > 0);
+        }
+        if ($game->getSetting('req.age') == 1)
+        {
+            if (!strlen(Auth::user()->getBirthDate()))
+            {
+                $requirementsOk = false;
+            }
+            $requirements[] = array('Age', strlen(Auth::user()->getBirthDate()) > 0);
+        }
+
         return View::make('game.book', array
         (
-            'game' => $game,
-            'is_organizer' => $game->getOwnerId() == Auth::user()->getId(),
+            'game'            => $game,
+            'is_organizer'    => $game->getOwnerId() == Auth::user()->getId(),
+            'requirements'    => $requirements,
+            'requirements_ok' => $requirementsOk,
         ));
     }
 
