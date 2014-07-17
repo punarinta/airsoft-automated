@@ -24,6 +24,7 @@
     <p>
         Your private data is yours. No private information is shared, although administrator can access it with maintenance purposes.
         Moreover, this site has SSL encryption which assures that your data reaches the server without being intercepted.
+        Your contact information will be accessible to the game organizer in case you book a ticket.
     </p>
 
     <h3>Liability disclaimer</h3>

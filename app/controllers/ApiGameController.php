@@ -259,9 +259,65 @@ class ApiGameController extends BaseController
                 throw new \Exception('Access denied.');
             }
 
-            Excel::create('participants', function($excel)
-            {
+            // get enriched ticket list
+            $ticketsData = DB::table('ticket AS t')
+                ->join('ticket_template AS tt', 'tt.id', '=', 't.ticket_template_id')
+                ->join('game_party AS gp', 'gp.id', '=', 'tt.game_party_id')
+                ->join('game AS g', 'g.id', '=', 'tt.game_id')
+                ->join('user AS u', 'u.id', '=', 't.user_id')
+                ->join('team AS tm', 'tm.id', '=', 'u.team_id', 'left outer')
+                ->select(array
+                (
+                    'u.nick AS nick',
+                    'u.email AS email',
+                    'tm.name AS team_name',
+                    'gp.name AS game_party_name',
+                    'tt.is_cash AS is_cash',
+                    't.status AS ticket_status',
+                    't.id AS id',
+                ))
+                ->where('g.id', '=', $game_id)
+                ->get();
 
+            Excel::create('participants', function($excel) use ($ticketsData)
+            {
+                $excel->sheet('Players', function($sheet) use ($ticketsData)
+                {
+                    $i = 1;
+
+                    $sheet->appendRow($i++, array
+                    (
+                        'Ticket',
+                        'Nickname',
+                        'Team',
+                        'Fraction',
+                        'Cash payment',
+                        'Paid',
+                    ));
+
+                    $sheet->cells('A1:F1', function($cells)
+                    {
+                        $cells->setFontWeight('bold');
+                    });
+
+                    foreach ($ticketsData as $item)
+                    {
+                        $sheet->appendRow($i++, array
+                        (
+                            strtoupper(str_pad(Bit::base36_encode(Bit::swap15($item->id)), 8, '0', STR_PAD_LEFT)),
+                            $item->nick,
+                            $item->team_name,
+                            $item->game_party_name,
+                            $item->is_cash ? '+' : '–',
+                            $item->ticket_status & Ticket::STATUS_PAID ? '+' : '–',
+                        ));
+                    }
+
+                    $sheet->setPageMargin(0.05);
+                    $sheet->setFont(array('size' => '10'));
+                    $sheet->freezeFirstRow();
+                    $sheet->setAutoSize(true);
+                });
             })->download('xls');
         });
     }
