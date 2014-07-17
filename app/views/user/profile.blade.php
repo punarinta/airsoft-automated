@@ -67,7 +67,7 @@
             <tr>
                 <td>Phone:</td>
                 <td>&nbsp;</td>
-                <td><input type="text" class="my-input phone" value="{{ $phone }}"/></td>
+                <td><input type="text" class="my-input phone" value="{{ $phone }}" placeholder="+X (XXX) XXXXXXX"/></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
