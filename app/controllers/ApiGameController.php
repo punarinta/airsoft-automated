@@ -79,6 +79,7 @@ class ApiGameController extends BaseController
 
             $settings = [];
             $settings['url'] = strip_tags(Input::json('url'));
+            $settings['poster'] = strip_tags(Input::json('poster'));
             $settings['req']['nick'] = Input::json('req_nick');
             $settings['req']['phone'] = Input::json('req_phone');
             $settings['req']['age'] = Input::json('req_age');
@@ -133,6 +134,7 @@ class ApiGameController extends BaseController
 
                 $settings = $game->getSettingsArray();
                 $settings['url'] = strip_tags(Input::json('url'));
+                $settings['poster'] = strip_tags(Input::json('poster'));
                 $settings['req']['nick'] = Input::json('req_nick');
                 $settings['req']['phone'] = Input::json('req_phone');
                 $settings['req']['age'] = Input::json('req_age');

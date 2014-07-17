@@ -43,8 +43,15 @@
                 <td><input class="is-visible" type="checkbox" {{ $game->is_visible?'checked':'' }}/></td>
             </tr>
             <tr>
-                <td>URL:</td>
-                <td><input type="text" class="my-input url" value="{{ $game->getSetting('url') }}"/></td>
+                <td>Game site:</td>
+                <td><input type="text" class="my-input url" value="{{ $game->getSetting('url') }}" placeholder="http://"/></td>
+            </tr>
+            <tr>
+                <td>Banner:</td>
+                <td>
+                    <input type="text" class="my-input poster" value="{{ $game->getSetting('poster') }}" placeholder="http://"/>
+                    &nbsp;<span class="poster-url-tester"></span>
+                </td>
             </tr>
             <tr>
                 <td>Extra:</td>
@@ -247,6 +254,7 @@
             ends_at: $('#form-game .ends-at').val() + ' ' + $('#form-game .ends-at-time').val(),
             is_visible: $('#form-game .is-visible').is(':checked') * 1,
             url: $('#form-game .url').val(),
+            poster: $('#form-game .poster').val(),
             req_nick: $('#form-game .req-nick').is(':checked') * 1,
             req_phone: $('#form-game .req-phone').is(':checked') * 1,
             req_age: $('#form-game .req-age').is(':checked') * 1
@@ -391,6 +399,34 @@
             $('#form-ticket-template .price-date-end').val(data.price_date_end)
             $('#form-ticket-template .is-cash').val(data.is_cash)
         })
+    })
+
+    $('#form-game .poster').change(function()
+    {
+        $('#form-game .poster-url-tester').text('testing...')
+
+        var i = new Image
+        i.onload = function()
+        {
+            if ('naturalHeight' in this)
+            {
+                if (this.naturalHeight + this.naturalWidth === 0)
+                {
+                    $('#form-game .poster-url-tester').html('<b>not an image!</b>')
+                }
+            }
+            else if (this.width + this.height == 0)
+            {
+                $('#form-game .poster-url-tester').html('<b>Not an image!</b>')
+            }
+            $('#form-game .poster-url-tester').html('<b>OK</b>')
+        }
+        i.onerror = function()
+        {
+            $('#form-game .poster-url-tester').html('<b>not an image!</b>')
+        }
+        i.src = $('#form-game .poster').val()
+        console.log(1)
     })
 
     // datepickers
