@@ -52,11 +52,11 @@ class GamesController extends BaseController
 
                 // get organizer team and nick
                 $org = DB::table('user AS u')
-                    ->join('team AS t', 't.id', '=', 'u.team_id')
+                    ->leftJoin('team AS t', 't.id', '=', 'u.team_id')
                     ->select(array('t.name AS team_name', 'u.nick AS user_nick'))
                     ->where('u.id', '=', $game->getOwnerId())
                     ->first();
-                $gameData[$game->getId()]->organizer = $org->user_nick;
+                $gameData[$game->getId()]->organizer = isset ($org->user_nick) ? $org->user_nick : '&mdash;';
             }
         }
 

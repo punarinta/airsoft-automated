@@ -89,11 +89,11 @@ class GameController extends BaseController
         $game->ticket_templates = TicketTemplate::where('game_id', '=', $game_id)->get();
 
         $org = DB::table('user AS u')
-            ->join('team AS t', 't.id', '=', 'u.team_id')
+            ->leftJoin('team AS t', 't.id', '=', 'u.team_id')
             ->select(array('t.name AS team_name', 'u.nick AS user_nick'))
             ->where('u.id', '=', $game->getOwnerId())
             ->first();
-        $game->organizer = $org->user_nick;
+        $game->organizer = isset ($org->user_nick) ? $org->user_nick : '&mdash;';
 
         if ($game->ticket_templates->isEmpty())
         {
