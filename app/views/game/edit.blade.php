@@ -426,7 +426,6 @@
             $('#form-game .poster-url-tester').html('<b>not an image!</b>')
         }
         i.src = $('#form-game .poster').val()
-        console.log(1)
     })
 
     // datepickers
