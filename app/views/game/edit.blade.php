@@ -46,6 +46,14 @@
                 <td>URL:</td>
                 <td><input type="text" class="my-input url" value="{{ $game->getSetting('url') }}"/></td>
             </tr>
+            <tr>
+                <td>Extra:</td>
+                <td>
+                    <label><input type="checkbox" class="req-nick" {{ $game->getSetting('req.nick')?'checked="checked"':'' }}/> require nickname for booking</label><br/>
+                    <label><input type="checkbox" class="req-phone" {{ $game->getSetting('req.phone')?'checked="checked"':'' }}/> require phone for booking</label><br/>
+                    <label><input type="checkbox" class="req-age" {{ $game->getSetting('req.age')?'checked="checked"':'' }}/> require age for booking</label><br/>
+                </td>
+            </tr>
         </table>
         @if ($game->id)
         <button class="my-btn save">Save</button>
@@ -237,8 +245,11 @@
             region_id: game_region_picker.getLocation()[1],
             starts_at: $('#form-game .starts-at').val() + ' ' + $('#form-game .starts-at-time').val(),
             ends_at: $('#form-game .ends-at').val() + ' ' + $('#form-game .ends-at-time').val(),
-            is_visible: $('#form-game .is-visible').is(':checked'),
-            url: $('#form-game .url').val()
+            is_visible: $('#form-game .is-visible').is(':checked') * 1,
+            url: $('#form-game .url').val(),
+            req_nick: $('#form-game .req-nick').is(':checked') * 1,
+            req_phone: $('#form-game .req-phone').is(':checked') * 1,
+            req_age: $('#form-game .req-age').is(':checked') * 1
         })
 
         if (!gameId) az.ajaxPost('game', data, function(data)
