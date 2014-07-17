@@ -401,7 +401,7 @@
         })
     })
 
-    $('#form-game .poster').change(function()
+    $('#form-game .poster').on('change focusout',function()
     {
         $('#form-game .poster-url-tester').text('testing...')
 
