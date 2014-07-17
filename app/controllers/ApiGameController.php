@@ -240,4 +240,29 @@ class ApiGameController extends BaseController
 
         return $response;
     }
+
+    /**
+     * Exports a participants list into an Excel file
+     *
+     * @param int $game_id
+     * @return \Illuminate\Http\Response
+     * @throws Exception
+     */
+    public function exportXls($game_id = 0)
+    {
+        return $this->execute(function() use ($game_id)
+        {
+            $game = Game::find($game_id);
+
+            if (Auth::user()->getId() != $game->getOwnerId())
+            {
+                throw new \Exception('Access denied.');
+            }
+
+            Excel::create('participants', function($excel)
+            {
+
+            })->download('xls');
+        });
+    }
 }
