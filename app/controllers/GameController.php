@@ -221,7 +221,7 @@ class GameController extends BaseController
         // get enriched ticket list
         $ticketsData = DB::table('ticket AS t')
             ->join('ticket_template AS tt', 'tt.id', '=', 't.ticket_template_id')
-            ->join('game_party AS gp', 'gp.id', '=', 'tt.game_party_id')
+            ->leftJoin('game_party AS gp', 'gp.id', '=', 'tt.game_party_id')
             ->join('game AS g', 'g.id', '=', 'tt.game_id')
             ->join('user AS u', 'u.id', '=', 't.user_id')
             ->join('team AS tm', 'tm.id', '=', 'u.team_id', 'left outer')

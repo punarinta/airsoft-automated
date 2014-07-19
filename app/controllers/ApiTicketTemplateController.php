@@ -82,6 +82,14 @@ class ApiTicketTemplateController extends BaseController
                 throw new \Exception('Access denied.');
             }
 
+            // check that there are no tickets fot this TT
+            $tickets = Ticket::where('ticket_template_id', '=', $ticketTemplate->getId())->get()->toArray();
+
+            if (!empty ($tickets))
+            {
+                throw new \Exception('Tickets of this type are already booked.<br>Try to edit the info instead.');
+            }
+
             $ticketTemplate->delete();
         });
     }
