@@ -86,6 +86,14 @@ class ApiGamePartyController extends BaseController
                 throw new \Exception('Access denied.');
             }
 
+            // check that there are no tickets fot this GP
+            $tickets = Ticket::where('game_party_id', '=', $gameParty->getId())->get()->toArray();
+
+            if (!empty ($tickets))
+            {
+                throw new \Exception('This party already has tickets booked, you cannot delete it.<br>Try to edit the info instead.');
+            }
+
             $gameParty->delete();
         });
     }
