@@ -62,10 +62,20 @@
             </tr>
         </table>
     </fieldset>
+    <br/>
+
+    <fieldset class="my-fieldset" id="form-options">
+        <legend>Options</legend>
+        <div>
+            Amount of persons: &nbsp;
+            <input type="number" value="1" class="my-input factor w30" min="1"/>
+        </div>
+    </fieldset>
 
     <div id="area-confirm" class="hidden">
         <br/>
         <form action="{{ URL::route('pay-booked') }}" method="post">
+            <input type="hidden" name="factor" class="factor" value="1"/>
             <input type="hidden" name="game-id" class="game-id" value="{{ $game->id }}"/>
             <input type="hidden" name="game-party-id" class="game-party-id" value="0"/>
             <input type="hidden" name="ticket-template-id" class="ticket-template-id" value="0"/>
@@ -109,6 +119,7 @@ $('#area-confirm .confirm').click(function()
         az.showModal('Please pick both a game party to play for and the ticket type.')
         return false
     }
+    $('#area-confirm .factor').val($('#form-options .factor').val())
     return true
 })
 </script>

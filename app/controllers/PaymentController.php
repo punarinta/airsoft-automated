@@ -12,6 +12,7 @@ class PaymentController extends BaseController
         $gameId = Input::get('game-id');
         $gamePartyId = Input::get('game-party-id');
         $ticketTemplateId = Input::get('ticket-template-id');
+        $factor = Input::get('factor');
 
         // check game existence and bookability
         $game = Game::find($gameId);
@@ -59,6 +60,7 @@ class PaymentController extends BaseController
 
         Session::put('ticket-data', array
         (
+            'factor'                => $factor,
             'game_id'               => $gameId,
             'game_party_id'         => $gamePartyId,
             'ticket_template_id'    => $ticketTemplateId,
@@ -69,9 +71,11 @@ class PaymentController extends BaseController
 
         return View::make('payment.pay', array
         (
-            'game'              => $game,
-            'game_party'        => $gameParty,
-            'ticket_template'   => $ticketTemplate,
+            'game'                  => $game,
+            'game_party'            => $gameParty,
+            'ticket_template'       => $ticketTemplate,
+            'price_readable_total'  => number_format($factor * $ticketTemplate->price / 100, 2),
+            'price_factor'          => $factor,
         ));
     }
 
@@ -277,8 +281,8 @@ class PaymentController extends BaseController
         }
         else
         {
-            $ticketCoeffA = 0;           // percents
-            $ticketCoeffB = 0; //300;         // monetary units
+            $ticketCoeffA = 0;              // percents
+            $ticketCoeffB = 0; //300;       // monetary units
         }
 
         $bruttoIncome = $ticketSessionData['price'];
@@ -287,25 +291,36 @@ class PaymentController extends BaseController
 
         $vatPaid = $myIncome * self::VAT;
 
-        // create a real ticket
-        $ticket = new Ticket;
-        $ticket->setUserId(Auth::user()->getId());
-        $ticket->setGamePartyId($ticketSessionData['game_party_id']);
-        $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
-        $ticket->setPaymentId($paymentId);
-        $ticket->setStatus(Ticket::STATUS_BOOKED);
-        $ticket->setNetto($nettoIncome);                    // amount that Organizer gets
-        $ticket->setBrutto($bruttoIncome);                  // amount that Player pays
-        $ticket->setVat($vatPaid);                          // increment of my outgoing MOMS per this ticket
-        $ticket->save();
+        $firstTicket = null;
+
+        // create real tickets (factored amount)
+        for ($i = 0; $i < $ticketSessionData['factor']; $i++)
+        {
+            $ticket = new Ticket;
+            $ticket->setUserId(Auth::user()->getId());
+            $ticket->setGamePartyId($ticketSessionData['game_party_id']);
+            $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
+            $ticket->setPaymentId($paymentId);
+            $ticket->setStatus(Ticket::STATUS_BOOKED);
+            $ticket->setNetto($nettoIncome);                    // amount that Organizer gets
+            $ticket->setBrutto($bruttoIncome);                  // amount that Player pays
+            $ticket->setVat($vatPaid);                          // increment of my outgoing MOMS per this ticket
+            $ticket->save();
+
+            // save for future reference
+            if (!$firstTicket)
+            {
+                $firstTicket = $ticket;
+            }
+        }
 
         // avoid everyday job with activation
 
         return View::make('payment.bank', array
         (
             'game_id'       => $ticketSessionData['game_id'],
-            'price'         => number_format($ticketSessionData['price'] / 100, 2),
-            'ticket_code'   => strtoupper(Bit::base36_encode(Bit::swap15($ticket->getId()))),
+            'price'         => number_format($ticketSessionData['factor'] * $ticketSessionData['price'] / 100, 2),
+            'ticket_code'   => strtoupper(Bit::base36_encode(Bit::swap15($firstTicket->getId()))),
         ));
     }
 }

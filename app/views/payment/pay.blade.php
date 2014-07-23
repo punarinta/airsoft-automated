@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <td>Price:</td>
-            <td>{{ @$ticket_template->price_readable }} SEK</td>
+            <td>{{ @$price_factor }} x {{ @$ticket_template->price_readable }} SEK &nbsp;=&nbsp; {{ @$price_readable_total }} SEK</td>
         </tr>
     </table>
     <br/>
@@ -49,7 +49,7 @@
                 data-label="Pay with credit card"
                 data-title="Ticket for"
                 data-description="«{{ @$game->name }}»"
-                data-submit-button="Pay {{ @$ticket_template->price_readable }} SEK"
+                data-submit-button="Pay {{ @$price_readable_total }} SEK"
                 data-amount="{{ @$ticket_template->price }}"
                 data-currency="SEK"
                 data-public-key="{{ Config::get('app.paymill.public_key') }}"
