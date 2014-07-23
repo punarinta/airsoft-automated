@@ -86,7 +86,7 @@ $('#btn-check-in').click(function()
     az.ajaxGet('ticket/check-in', $('#barcode').val(), function(data)
     {
         $('td:eq(0)', '.ticket-' + data.id).addClass('checked')
-        $('td:eq(3)', '.ticket-' + data.id).html('+')
+        $('td:eq(5)', '.ticket-' + data.id).html('+')
     })
 })
 </script>
