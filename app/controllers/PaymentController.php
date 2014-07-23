@@ -305,13 +305,18 @@ class PaymentController extends BaseController
             $ticket->setNetto($nettoIncome);                    // amount that Organizer gets
             $ticket->setBrutto($bruttoIncome);                  // amount that Player pays
             $ticket->setVat($vatPaid);                          // increment of my outgoing MOMS per this ticket
-            $ticket->save();
 
             // save for future reference
             if (!$firstTicket)
             {
                 $firstTicket = $ticket;
             }
+            else
+            {
+                $ticket->setHostTicketId($firstTicket->getId());
+            }
+
+            $ticket->save();
         }
 
         // avoid everyday job with activation
