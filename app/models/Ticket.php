@@ -184,4 +184,20 @@ class Ticket extends Eloquent
     {
         $this->vat = $vat;
     }
+
+    /**
+     * @return string
+     */
+    public function getHostTicketId()
+    {
+        return $this->host_ticket_id;
+    }
+
+    /**
+     * @param string $host_ticket_id
+     */
+    public function setHostTicketId($host_ticket_id)
+    {
+        $this->host_ticket_id = $host_ticket_id;
+    }
 }
