@@ -25,6 +25,7 @@ class DashboardController extends BaseController
                 'game.id AS game_id',
                 'game.name AS game_name',
                 'game.starts_at AS game_starts_at',
+                'ticket.host_ticket_id AS host_id',
             ))
             ->where('ticket.user_id', '=', Auth::user()->getId())
             ->get();
@@ -36,6 +37,12 @@ class DashboardController extends BaseController
 
         foreach ($tickets as $ticket)
         {
+            // skip slave tickets (until they are not bound to an exact person)
+            if ($ticket->host_id)
+            {
+                continue;
+            }
+
             $gameObj->setId($ticket->game_id);
             $gameObj->setName($ticket->game_name);
             $gameObj->setStartsAt($ticket->game_starts_at);
