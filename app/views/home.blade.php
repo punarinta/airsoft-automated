@@ -36,24 +36,25 @@
     </tr>
     <tr>
         <td>
-            <div @if(!Auth::check()) class="guest-hidden" @endif>
+            <div class="cell-dash @if(!Auth::check()) guest-hidden @endif">
                 <a href="{{ URL::route('organizer-dashboard') }}">Organizer dashboard</a>
             </div>
         </td>
         <td>
-            <div @if(!Auth::check()) class="guest-hidden" @endif>
+            <div class="cell-dash @if(!Auth::check()) guest-hidden @endif">
                 <a href="{{ URL::route('player-dashboard') }}">Player dashboard</a>
             </div>
         </td>
     </tr>
     @if(!Auth::check())
     <tr>
-        <td colspan="2">&nbsp;</td>
-    </tr>
-    <tr>
-        <td colspan="2" id="sign-up-form">
-            <input type="email" class="my-input email" autofocus placeholder="your email"/>
-            <button class="my-btn submit" onclick="signUp()">Sign-up now!</button>
+        <td colspan="2">
+            <div id="sign-up-form">
+                <div>
+                    <input type="email" class="my-input email" autofocus placeholder="your email"/>
+                    <button class="my-btn submit" onclick="signUp()">Sign-up now!</button>
+                </div>
+            </div>
         </td>
     </tr>
     @endif
