@@ -28,7 +28,11 @@
                     </tr>
                     <tr>
                         <td>Amount:</td>
-                        <td><b>{{ number_format($data->price / 100, 2) }} SEK</b></td>
+                        <td><b>{{ number_format($data->price / 100, 2) }} SEK</b>
+                            @if ($data->factor != 1)
+                            (ticket for {{ $data->factor }} persons)
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <td>Reference:</td>

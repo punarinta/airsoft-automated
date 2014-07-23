@@ -196,6 +196,13 @@ class GameController extends BaseController
             $mapSrc = null;
         }
 
+        // check if there's a factor
+        $tickets = Ticket::where('host_ticket_id', '=', $data->ticket_id)->get();
+        $factor = 1 + count($tickets);
+
+        $data->price = $data->price * $factor;
+        $data->factor = $factor;
+
         return View::make('game.briefing', array
         (
             'data' => $data,
