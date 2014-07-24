@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-| Participant dashboard
+| {{ trans('airsoft.player-dash.title') }}
 @stop
 
 @section('header')
@@ -16,17 +16,17 @@
         </div>
         <table class="my-table">
             <tr>
-                <th>Date</th>
-                <th>Name</th>
-                <th>Region</th>
-                <th>Logistics</th>
+                <th>{{ trans('airsoft.player-dash.head-date') }}</th>
+                <th>{{ trans('airsoft.player-dash.head-name') }}</th>
+                <th>{{ trans('airsoft.player-dash.head-region') }}</th>
+                <th>{{ trans('airsoft.player-dash.head-logistics') }}</th>
             </tr>
             @foreach ($games as $game)
             <tr class="region-{{$game->region_id}}">
                 <td>{{ date('Y.m.d', strtotime($game->starts_at)) }}</td>
                 <td>{{ $game->name }}</td>
                 <td>{{ $game->country_name }}, {{ $game->region_name }}</td>
-                <td><a href="{{ URL::route('game-briefing', $game->id) }}">view</a></td>
+                <td><a href="{{ URL::route('game-briefing', $game->id) }}">{{ trans('airsoft.util.do-view') }}</a></td>
             </tr>
             @endforeach
         </table>
