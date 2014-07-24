@@ -49,15 +49,16 @@ class GamesController extends BaseController
                     ->first();
 
                 $gameData[$game->getId()]->is_booked = !empty ($ticket);
-
-                // get organizer team and nick
-                $org = DB::table('user AS u')
-                    ->leftJoin('team AS t', 't.id', '=', 'u.team_id')
-                    ->select(array('t.name AS team_name', 'u.nick AS user_nick'))
-                    ->where('u.id', '=', $game->getOwnerId())
-                    ->first();
-                $gameData[$game->getId()]->organizer = isset ($org->user_nick) ? $org->user_nick : '&mdash;';
             }
+
+            // get organizer team and nick
+            $org = DB::table('user AS u')
+                ->leftJoin('team AS t', 't.id', '=', 'u.team_id')
+                ->select(array('t.name AS team_name', 'u.nick AS user_nick'))
+                ->where('u.id', '=', $game->getOwnerId())
+                ->first();
+
+            $gameData[$game->getId()]->organizer = isset ($org->user_nick) ? $org->user_nick : '&mdash;';
         }
 
         return View::make('games', array('games' => $gameData));
