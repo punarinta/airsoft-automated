@@ -24,7 +24,7 @@
     @if ($ticket_template->is_cash)
     <p>
         This ticket has payment by cash only.
-        You will have to bring <b>{{ @$ticket_template->price_readable }} SEK</b> to the game check-in area before the game.
+        You will have to bring <b>{{ @$price_readable_total }} SEK</b> to the game check-in area before the game.
     </p>
     <form action="{{ URL::route('booking-done') }}" method="post">
         <input type="hidden" name="is-cash" value="1"/>

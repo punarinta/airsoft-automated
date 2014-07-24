@@ -107,6 +107,13 @@ class ApiUserController extends BaseController
             $user->setBirthDate(Input::json('birth_date'));
             $user->setTeamId(Input::json('team_id'));
 
+            $settings = $user->getSettingsArray();
+
+            if (Input::json('locale')) $settings['locale'] = Input::json('locale');
+
+            $user->setSettingsArray($settings);
+
+
             // extra data that might be required by organizer
             $profile = $user->getProfileArray();
 

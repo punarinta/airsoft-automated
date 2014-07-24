@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-| Home
+| {{ trans('airsoft.home.title') }}
 @stop
 
 @section('header')
@@ -14,35 +14,35 @@
 <table id="about-table">
     <tr>
         <td>
-            <h3>For organizers</h3>
+            <h3>{{ trans('airsoft.home.ad.o0') }}</h3>
             <ul>
-                <li>Create a game in a couple of clicks</li>
-                <li>Don't care about tickets</li>
-                <li>Don't care about informing everyone</li>
-                <li>Save time with automatic game check-in</li>
-                <li>Analyse statistics</li>
+                <li>{{ trans('airsoft.home.ad.o1') }}</li>
+                <li>{{ trans('airsoft.home.ad.o2') }}</li>
+                <li>{{ trans('airsoft.home.ad.o3') }}</li>
+                <li>{{ trans('airsoft.home.ad.o4') }}</li>
+                <li>{{ trans('airsoft.home.ad.o5') }}</li>
             </ul>
         </td>
         <td>
-            <h3>For players</h3>
+            <h3>{{ trans('airsoft.home.ad.p0') }}</h3>
             <ul>
-                <li>Manage your team</li>
-                <li>Safely book tickets</li>
-                <li>Pay in cash or wireless</li>
-                <li>Receive all logistics via email</li>
-                <li>Enjoy automatic game check-in</li>
+                <li>{{ trans('airsoft.home.ad.p1') }}</li>
+                <li>{{ trans('airsoft.home.ad.p2') }}</li>
+                <li>{{ trans('airsoft.home.ad.p3') }}</li>
+                <li>{{ trans('airsoft.home.ad.p4') }}</li>
+                <li>{{ trans('airsoft.home.ad.p5') }}</li>
             </ul>
         </td>
     </tr>
     <tr>
         <td>
             <div class="cell-dash @if(!Auth::check()) guest-hidden @endif">
-                <a href="{{ URL::route('organizer-dashboard') }}">Organizer dashboard</a>
+                <a href="{{ URL::route('organizer-dashboard') }}">{{ trans('airsoft.home.dash-org') }}</a>
             </div>
         </td>
         <td>
             <div class="cell-dash @if(!Auth::check()) guest-hidden @endif">
-                <a href="{{ URL::route('player-dashboard') }}">Player dashboard</a>
+                <a href="{{ URL::route('player-dashboard') }}">{{ trans('airsoft.home.dash-player') }}</a>
             </div>
         </td>
     </tr>
@@ -52,7 +52,7 @@
             <div id="sign-up-form">
                 <div>
                     <input type="email" class="my-input email" autofocus placeholder="your email"/>
-                    <button class="my-btn submit" onclick="signUp()">Sign-up now!</button>
+                    <button class="my-btn submit" onclick="signUp()">{{ trans('airsoft.home.sign-up') }}</button>
                 </div>
             </div>
         </td>
@@ -65,7 +65,7 @@ function signUp()
     var re = /\S+@\S+\.\S+/, email = $('#sign-up-form .email').val().trim()
     if (!re.test(email))
     {
-        az.showModal('Sorry, that´s not an email.', function()
+        az.showModal('{{ trans('airsoft.home.non-email') }}', function()
         {
             $('.email').focus()
         })
@@ -77,7 +77,7 @@ function signUp()
     {
         if (data)
         {
-            az.showModal('Thanks. Check your email for a password.', function()
+            az.showModal('{{ trans('airsoft.home.check-email') }}', function()
             {
                 document.location.reload()
             })

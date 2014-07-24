@@ -1,11 +1,11 @@
 @extends('layout')
 
 @section('title')
-| Participant dashboard
+| {{ trans('airsoft.player-dash.title') }}
 @stop
 
 @section('content')
-<div class="dialog-box-1">
-    You are not participating in any game. Please go to <a href="{{ URL::route('games') }}">games list</a> to book tickets.
+<div class="dialog-box-1" style="text-align:center">
+    {{ sprintf(trans('airsoft.player-dash.empty-message'), URL::route('games')) }}
 </div>
 @stop

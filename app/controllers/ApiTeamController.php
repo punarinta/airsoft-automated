@@ -51,6 +51,7 @@ class ApiTeamController extends BaseController
 
             $user = Auth::getUser();
             $user->setTeamId($team->getId());
+            $user->setIsTeamManager(1);
             $user->save();
         });
     }

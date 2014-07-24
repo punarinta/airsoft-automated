@@ -114,8 +114,8 @@ class PaymentController extends BaseController
         $transactionCoeffA  = 2.95;      // percents
         $transactionCoeffB  = 0;         // monetary units, use with care due to currency exchange conversions
 
-        // create a real ticket
-        $ticket = new Ticket;
+        // save ticket status for looped ticked creation
+        $ticketStatus = 0;
 
         if (!Input::get('is-cash'))
         {
@@ -181,7 +181,7 @@ class PaymentController extends BaseController
                 $nettoIncome = $bruttoIncome - $ppIncome - $myIncome * (1 + self::VAT);
             }
 
-            $ticket->setStatus(Ticket::STATUS_BOOKED | Ticket::STATUS_PAID);
+            $ticketStatus = Ticket::STATUS_BOOKED | Ticket::STATUS_PAID;
         }
         else
         {
@@ -190,19 +190,38 @@ class PaymentController extends BaseController
             $myIncome = $bruttoIncome * $ticketCoeffA / 100 + $ticketCoeffB;
             $nettoIncome = $bruttoIncome - $myIncome * (1 + self::VAT);
 
-            $ticket->setStatus(Ticket::STATUS_BOOKED);
+            $ticketStatus = Ticket::STATUS_BOOKED;
         }
 
         $vatPaid = $myIncome * self::VAT;
 
-        $ticket->setUserId(Auth::user()->getId());
-        $ticket->setGamePartyId($ticketSessionData['game_party_id']);
-        $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
-        $ticket->setPaymentId($paymentId);
-        $ticket->setNetto($nettoIncome);                    // amount that Organizer gets
-        $ticket->setBrutto($bruttoIncome);                  // amount that Player pays
-        $ticket->setVat($vatPaid);                          // increment of my outgoing MOMS per this ticket
-        $ticket->save();
+        $firstTicket = null;
+
+        // create real tickets (factored amount)
+        for ($i = 0; $i < $ticketSessionData['factor']; $i++)
+        {
+            $ticket = new Ticket;
+            $ticket->setStatus($ticketStatus);
+            $ticket->setUserId(Auth::user()->getId());
+            $ticket->setGamePartyId($ticketSessionData['game_party_id']);
+            $ticket->setTicketTemplateId($ticketSessionData['ticket_template_id']);
+            $ticket->setPaymentId($paymentId);
+            $ticket->setNetto($nettoIncome);                    // amount that Organizer gets
+            $ticket->setBrutto($bruttoIncome);                  // amount that Player pays
+            $ticket->setVat($vatPaid);                          // increment of my outgoing MOMS per this ticket
+
+            // save for future reference
+            if (!$firstTicket)
+            {
+                $firstTicket = $ticket;
+            }
+            else
+            {
+                $ticket->setHostTicketId($firstTicket->getId());
+            }
+
+            $ticket->save();
+        }
 
         // inform user by email
         if (Config::get('mail.mandrill_on'))
