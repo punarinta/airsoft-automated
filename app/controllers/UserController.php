@@ -80,7 +80,7 @@ class UserController extends BaseController
             'team_id'           => $teamId,
             'team_name'         => $teamData ? $teamData->team_name : '',
             'team_url'          => $teamData ? $teamData->team_url : '',
-            'team_editable'     => (!$teamData || Auth::user()->getId() == $teamData->owner_id),
+            'team_editable'     => (!$teamData || Auth::user()->getId() == $teamData->owner_id && Auth::user()->getIsTeamManager()),
             'team_present'      => !empty ($teamData),
 
             // optional
