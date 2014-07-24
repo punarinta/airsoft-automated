@@ -64,13 +64,15 @@ class UserController extends BaseController
             ->where('team.id', '=', $teamId)
             ->first();
 
-        $profile = Auth::user()->getProfileArray();
+        $profile  = Auth::user()->getProfileArray();
+        $settings = Auth::user()->getSettingsArray();
 
         return View::make('user.profile', array
         (
             'user_id'           => Auth::user()->getId(),
             'nick'              => Auth::user()->getNick(),
             'birth_date'        => Auth::user()->getBirthDate(),
+            'locale'            => isset ($settings['locale']) ? $settings['locale'] : 'en',
             'team_country_id'   => $teamData ? $teamData->team_country_id : 0,
             'team_region_id'    => $teamData ? $teamData->team_region_id : 0,
             'team_country_name' => $teamData ? $teamData->team_country_name : '',

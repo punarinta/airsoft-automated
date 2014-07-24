@@ -55,7 +55,18 @@
                 </td>
             </tr>
             <tr>
+                <td>Language:</td>
+                <td>&nbsp;</td>
+                <td>
+                    <select id="locale" class="my-select locale">
+                        <option value="en" @if($locale == 'en') selected="selected" @endif>English</option>
+                        <option value="se" @if($locale == 'se') selected="selected" @endif>Svenska</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="3">
+                    <br/>
                     <i>These may be required by organizers:</i>
                 </td>
             </tr>
@@ -151,6 +162,7 @@
             {
                 nick: $('#form-profile .nick').val(),
                 birth_date: $('#form-profile .birth-date').val(),
+                locale: $('#form-profile .locale').val(),
                 phone: $('#form-profile .phone').val(),
                 team_id: me_team_picker.getTeamId()
             }),
