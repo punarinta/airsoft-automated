@@ -17,6 +17,8 @@ return array
     'util' => array
     (
         'do-view' => 'titta på',
+        'do-edit' => 'redigera',
+        'do-book' => 'boka',
     ),
     'home' => array
     (
@@ -48,7 +50,15 @@ return array
     ),
     'games' => array
     (
-
+        'title' => 'Spel',
+        'head-date' => 'Datum',
+        'head-name' => 'Spel',
+        'head-arranger' => 'Arranged by',
+        'head-region' => 'Område',
+        'head-booking' => 'Bokning',
+        'no-tickets' => 'inga bijetter',
+        'info-booked' => 'bokad',
+        'add-own' => 'Skapa ditt spel!',
     ),
     'player-dash' => array
     (

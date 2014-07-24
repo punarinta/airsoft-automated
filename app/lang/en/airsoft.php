@@ -17,6 +17,8 @@ return array
     'util' => array
     (
         'do-view' => 'view',
+        'do-edit' => 'edit',
+        'do-book' => 'book',
     ),
     'home' => array
     (
@@ -48,7 +50,15 @@ return array
     ),
     'games' => array
     (
-
+        'title' => 'Games',
+        'head-date' => 'Date',
+        'head-name' => 'Game',
+        'head-arranger' => 'Arranged by',
+        'head-region' => 'Region',
+        'head-booking' => 'Booking',
+        'no-tickets' => 'no tickets',
+        'info-booked' => 'booked',
+        'add-own' => 'Create your own!',
     ),
     'player-dash' => array
     (
