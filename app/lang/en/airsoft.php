@@ -31,4 +31,11 @@ return array
         'head-region' => 'Region',
         'head-logistics' => 'Logistics',
     ),
+    'validate-org' => array
+    (
+        'title' => 'Validate yourself',
+        'text' => '<p>To protect players and their finances we need to validate all game organizers.</p>
+        <p>Just write a couple of words about you as an organizer on <a target="_blank" href="mailto:%s?subject=I am an organizer">%s</a> email and we will answer you as soon as possible. :)</p>
+        The system is now in development version, so there are <b>no charges</b> for the game management.',
+    ),
 );
