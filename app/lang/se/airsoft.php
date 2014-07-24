@@ -18,6 +18,34 @@ return array
     (
         'do-view' => 'titta på',
     ),
+    'home' => array
+    (
+        'title' => 'Hem',
+        'non-email' => 'Tyvärr är det inte ett email.',
+        'check-email' => 'Tack. Kolla ditt email för ett lösenord.',
+        'sign-up' => 'Registrera dig nu!',
+        'dash-org' => 'Arrangörens panel',
+        'dash-player' => 'Spelarens panel',
+        'ad' => array
+        (
+            'o0' => 'För arrangörer',
+            'o1' => 'Skapa ett spel i ett par klick',
+            'o2' => 'Bryr dig inte om biljetter',
+            'o3' => 'Bryr dig inte om att informera alla',
+            'o4' => 'Spara tid med automatiska incheckningen',
+            'o5' => 'Analysera statistik',
+            'p0' => 'För spelare',
+            'p1' => 'Hantera ditt lag',
+            'p2' => 'Boka biljetter säkert',
+            'p3' => 'Betala med kontant eller trådlöst',
+            'p4' => 'Få logistik via e-post',
+            'p5' => 'Njut av automatiska incheckningen',
+        ),
+    ),
+    'profile' => array
+    (
+
+    ),
     'games' => array
     (
 

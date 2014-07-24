@@ -18,6 +18,34 @@ return array
     (
         'do-view' => 'view',
     ),
+    'home' => array
+    (
+        'title' => 'Home',
+        'non-email' => 'Sorry, that´s not an email.',
+        'check-email' => 'Thanks. Check your email for a password.',
+        'sign-up' => 'Sign-up now!',
+        'dash-org' => 'Organizer dashboard',
+        'dash-player' => 'Player dashboard',
+        'ad' => array
+        (
+            'o0' => 'For organizers',
+            'o1' => 'Create a game in a couple of clicks',
+            'o2' => 'Don\'t care about tickets',
+            'o3' => 'Don\'t care about informing everyone',
+            'o4' => 'Save time with automatic game check-in',
+            'o5' => 'Analyse statistics',
+            'p0' => 'For players',
+            'p1' => 'Manage your team',
+            'p2' => 'Safely book tickets',
+            'p3' => 'Pay in cash or wireless',
+            'p4' => 'Receive all logistics via email',
+            'p5' => 'Enjoy automatic game check-in',
+        ),
+    ),
+    'profile' => array
+    (
+
+    ),
     'games' => array
     (
 
