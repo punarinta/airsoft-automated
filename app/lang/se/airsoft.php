@@ -46,7 +46,35 @@ return array
     ),
     'profile' => array
     (
-
+        'title' => 'Din profil',
+        'head-status' => 'Status',
+        'head-profile' => 'Din profil',
+        'head-team' => 'Ditt lag',
+        'stat' => array
+        (
+            '1a' => 'Du har klarat validering och kan arrangöra spel.',
+            '1b' => 'Du kan inte arrangöra spel. <a href="%s">Läs här hur du kan validera dig själv.</a>',
+            '2a' => 'Du har klarat e-validering och kan delta i spel.',
+            '2b' => 'Du kan inte delta i spel eller skapa ett lag. Kolla ditt mail för en bekräftelselänk.',
+            '3a' => 'Du kan redigera ditt lag eftersom det var du som lagt till det i systemet.',
+            '3b' => 'Du kan inte redigera ditt lag, eftersom det var inte du som skapade det.',
+            '3c' => 'Du får skapa ditt lag eller gå med i det befintliga.',
+        ),
+        'you-nick' => 'Nick',
+        'you-team' => 'Lag',
+        'you-lang' => 'Språk',
+        'you-bday' => 'Födelsedag',
+        'you-phone' => 'Telefon',
+        'you-org-area' => 'Dessa kan krävas av arrangörerna',
+        'team-name' => 'Namn',
+        'team-location' => 'Område',
+        'team-url' => 'URL',
+        'team-region' => 'Område',
+        'save-profile' => 'Spara profilen',
+        'save-team' => 'Spara laget',
+        'create-team' => 'Spara ett lag',
+        'not-team-owner' => 'Endast lag skapare kan redigera laget',
+        'check-team' => 'Vi rekommenderar dig att kontrollera att ditt lag inte finns i systemet. Har du gjort det?',
     ),
     'games' => array
     (
@@ -63,7 +91,7 @@ return array
     'player-dash' => array
     (
         'title' => 'Deltagarens panel',
-        'empty-message' => 'Du deltar inte i något spel. Gå gärna till %sspel lista%s för att boka biljetter.',
+        'empty-message' => 'Du deltar inte i något spel. Gå gärna till <a href="%s">spel lista</a> för att boka biljetter.',
         'head-date' => 'Datum',
         'head-name' => 'Namn',
         'head-region' => 'Område',

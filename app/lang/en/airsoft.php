@@ -46,7 +46,35 @@ return array
     ),
     'profile' => array
     (
-
+        'title' => 'Your profile',
+        'head-status' => 'Status',
+        'head-profile' => 'Your profile',
+        'head-team' => 'Your team',
+        'stat' => array
+        (
+            '1a' => 'You have passed validation and can organize games.',
+            '1b' => 'You cannot organize games. <a href="%s">Read here how to validate yourself.</a>',
+            '2a' => 'You have passed email validation and can participate in games.',
+            '2b' => 'You cannot participate in games and create a team. Check your email for a email confirmation link.',
+            '3a' => 'You can edit your team as it was you who added it to the system.',
+            '3b' => 'You cannot edit your team, as you did not create it.',
+            '3c' => 'You may create your team or join an existing one.',
+        ),
+        'you-nick' => 'Nick',
+        'you-team' => 'Team',
+        'you-lang' => 'Language',
+        'you-bday' => 'Birthday',
+        'you-phone' => 'Phone',
+        'you-org-area' => 'These may be required by organizers',
+        'team-name' => 'Name',
+        'team-location' => 'Location',
+        'team-url' => 'URL',
+        'team-region' => 'Region',
+        'save-profile' => 'Save profile',
+        'save-team' => 'Save team',
+        'create-team' => 'Create team',
+        'not-team-owner' => 'Only team creator can edit the team',
+        'check-team' => 'We recommend you to check that your team does not exist in the system. Have you done it?',
     ),
     'games' => array
     (
@@ -63,7 +91,7 @@ return array
     'player-dash' => array
     (
         'title' => 'Participant dashboard',
-        'empty-message' => 'You are not participating in any game. Please go to %sgames list%s to book tickets.',
+        'empty-message' => 'You are not participating in any game. Please go to <a href="%s">games list</a> to book tickets.',
         'head-date' => 'Date',
         'head-name' => 'Name',
         'head-region' => 'Region',

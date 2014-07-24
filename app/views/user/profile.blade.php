@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-| Your profile
+| {{ trans('airsoft.profile.title') }}
 @stop
 
 @section('header')
@@ -14,40 +14,40 @@
 @section('content')
 <div class="padded-content">
     <fieldset class="my-fieldset" style="display:inline-block">
-        <legend>Status</legend>
+        <legend>{{ trans('airsoft.profile.head-status') }}</legend>
         @if (Auth::user()->getIsValidated())
-        1. You have passed validation and can organize games.
+        1. {{ trans('airsoft.profile.stat.1a') }}
         @else
-        1. You cannot organize games. <a href="{{ URL::route('organizer-dashboard') }}">Read here how to validate yourself.</a>
+        1. {{ sprintf(trans('airsoft.profile.stat.1b'), URL::route('organizer-dashboard')) }}
         @endif
         <br/>
         @if (Auth::user()->getIsEmailValidated())
-        2. You have passed email validation and can participate in games.
+        2. {{ trans('airsoft.profile.stat.2a') }}
         @else
-        2. You cannot participate in games and create a team. Check your email for a email confirmation link.</a>
+        2. {{ trans('airsoft.profile.stat.2b') }}
         @endif
         <br/>
         @if ($team_editable && $team_present)
-        3. You can edit your team as it was you who added it to the system.
+        3. {{ trans('airsoft.profile.stat.3a') }}
         @elseif ($team_present)
-        3. You cannot edit your team, as you did not create it.
+        3. {{ trans('airsoft.profile.stat.3b') }}
         @else
-        3. You may create your team or join an existing one.
+        3. {{ trans('airsoft.profile.stat.3c') }}
         @endif
     </fieldset>
     <br/>
     <br/>
 
     <fieldset class="my-fieldset" style="float:left" id="form-profile">
-        <legend>Your profile</legend>
+        <legend>{{ trans('airsoft.profile.head-profile') }}</legend>
         <table>
             <tr>
-                <td>Nick:</td>
+                <td>{{ trans('airsoft.profile.you-nick') }}:</td>
                 <td>&nbsp;</td>
                 <td><input type="text" class="my-input nick" value="{{ $nick }}"/></td>
             </tr>
             <tr>
-                <td>Team:</td>
+                <td>{{ trans('airsoft.profile.you-team') }}:</td>
                 <td>&nbsp;</td>
                 <td>
                     @include('partial/team-picker', ['placement' => 'vertical', 'defaults' => [$team_country_id, $team_region_id, $team_id], 'prefix' => 'me_'])
@@ -55,7 +55,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Language:</td>
+                <td>{{ trans('airsoft.profile.you-lang') }}:</td>
                 <td>&nbsp;</td>
                 <td>
                     <select id="locale" class="my-select locale">
@@ -67,16 +67,16 @@
             <tr>
                 <td colspan="3">
                     <br/>
-                    <i>These may be required by organizers:</i>
+                    <i>{{ trans('airsoft.profile.you-org-area') }}:</i>
                 </td>
             </tr>
             <tr>
-                <td>Birthday:</td>
+                <td>{{ trans('airsoft.profile.you-bday') }}:</td>
                 <td>&nbsp;</td>
                 <td><input type="text" class="my-input birth-date" value="{{ $birth_date }}"/></td>
             </tr>
             <tr>
-                <td>Phone:</td>
+                <td>{{ trans('airsoft.profile.you-phone') }}:</td>
                 <td>&nbsp;</td>
                 <td><input type="text" class="my-input phone" value="{{ $phone }}" placeholder="+X (XXX) XXXXXXX"/></td>
             </tr>
@@ -85,7 +85,7 @@
             </tr>
             <tr>
                 <td colspan="3">
-                    <a href="#" class="my-btn save">Save profile</a>
+                    <a href="#" class="my-btn save">{{ trans('airsoft.profile.save-profile') }}</a>
                 </td>
             </tr>
         </table>
@@ -96,16 +96,16 @@
     disabled="disabled"
     @endif
     >
-        <legend>Your team</legend>
+        <legend>{{ trans('airsoft.profile.head-team') }}</legend>
         <table>
             @if ($team_editable)
             <tr>
-                <td>Name:</td>
+                <td>{{ trans('airsoft.profile.team-name') }}:</td>
                 <td>&nbsp;</td>
                 <td><input type="text" class="my-input name" value="{{ $team_name }}"/></td>
             </tr>
             <tr>
-                <td>Location:</td>
+                <td>{{ trans('airsoft.profile.team-location') }}:</td>
                 <td>&nbsp;</td>
                 <td>
                     @include('partial/region-picker', ['placement' => 'vertical', 'defaults' => [$team_country_id, $team_region_id,], 'prefix' => 'team_'])
@@ -113,7 +113,7 @@
                 </td>
             </tr>
             <tr>
-                <td>URL:</td>
+                <td>{{ trans('airsoft.profile.team-url') }}:</td>
                 <td>&nbsp;</td>
                 <td><input type="text" class="my-input url" value="{{ $team_url }}"/></td>
             </tr>
@@ -125,24 +125,24 @@
                 <td colspan="3">
                     <a href="#" class="my-btn save">
                         @if ($team_id)
-                        Save team
+                        {{ trans('airsoft.profile.save-team') }}
                         @else
-                        Create team
+                        {{ trans('airsoft.profile.create-team') }}
                         @endif
                     </a>
                 </td>
             </tr>
             @else
             <tr>
-                <td colspan="3"><span class="warn-span">Only team creator can edit the team</span></td>
+                <td colspan="3"><span class="warn-span">{{ trans('airsoft.profile.not-team-owner') }}</span></td>
             </tr>
             <tr>
-                <td>Name:</td>
+                <td>{{ trans('airsoft.profile.team-name') }}:</td>
                 <td>&nbsp;</td>
                 <td>{{ $team_name }}</td>
             </tr>
             <tr>
-                <td>Region:</td>
+                <td>{{ trans('airsoft.profile.team-region') }}:</td>
                 <td>&nbsp;</td>
                 <td>{{ $team_country_name }}, {{ $team_region_name }}</td>
             </tr>
@@ -190,7 +190,7 @@
         })
         @else
 
-        if (!confirm('We recommend you to check that your team does not exist in the system. Have you done it?'))
+        if (!confirm('{{ trans('airsoft.profile.check-team') }}'))
         {
             return false
         }
