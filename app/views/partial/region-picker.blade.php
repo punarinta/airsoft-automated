@@ -33,7 +33,7 @@ $defaults = isset ($defaults) ? $defaults : array(0,0);
                     html += '<option ' + sel + ' value="' + json.data[i].id + '">' + json.data[i].name + '</option>'
                 }
 
-                {{$prefix}}region_picker.ddbC.html('<option value="0">Any country</option>' + html)
+                {{$prefix}}region_picker.ddbC.html('<option value="0">{{ trans('airsoft.util.any-country') }}</option>' + html)
 
                 if (!{{$prefix}}region_picker.defRegionId)
                 {
@@ -76,7 +76,7 @@ $defaults = isset ($defaults) ? $defaults : array(0,0);
                     html += '<option ' + sel + ' value="' + json.data[i].id + '">' + json.data[i].name + '</option>'
                 }
 
-                {{$prefix}}region_picker.ddbR.html('<option value="0">Any region</option>' + html)
+                {{$prefix}}region_picker.ddbR.html('<option value="0">{{ trans('airsoft.util.any-region') }}</option>' + html)
 
                 if (callback) callback()
             })

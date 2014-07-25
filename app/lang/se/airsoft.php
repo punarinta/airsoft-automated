@@ -16,6 +16,9 @@ return array
     ),
     'util' => array
     (
+        'any-country' => 'Alla länder',
+        'any-region' => 'Alla område',
+        'any-team' => 'Alla lag',
         'do-view' => 'titta på',
         'do-edit' => 'redigera',
         'do-book' => 'boka',

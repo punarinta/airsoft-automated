@@ -16,6 +16,9 @@ return array
     ),
     'util' => array
     (
+        'any-country' => 'Any country',
+        'any-region' => 'Any region',
+        'any-team' => 'Any team',
         'do-view' => 'view',
         'do-edit' => 'edit',
         'do-book' => 'book',
