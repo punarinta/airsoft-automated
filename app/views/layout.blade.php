@@ -5,6 +5,7 @@
     <title>Airsoft Zone @yield('title')</title>
     <meta name="description" content="Airsoft automation system">
     <meta name="keywords" content="airsoft,game,automation">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
     <link rel="icon" href="/favicon.ico">
     {{ HTML::style('/css/common.css') }}
     @yield('header')
