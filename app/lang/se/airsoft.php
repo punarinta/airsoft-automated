@@ -135,4 +135,15 @@ return array
         'pick-both' => 'Vänligen plocka både en spelsida och en biljettyp.',
         'do-fill-profile' => 'lägg till i profilen',
     ),
+    'card' => array
+    (
+        'head-starts-at' => 'Spelstart',
+        'head-ends-at' => 'Spelslut',
+        'head-region' => 'Området',
+        'head-external' => 'Extern info',
+        'head-parties' => 'Fraktioner',
+        'no-map' => 'Ingen karta finns ändå.',
+        'no-info' => 'finns inte',
+        'players' => 'spelare',
+    ),
 );

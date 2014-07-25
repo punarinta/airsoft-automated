@@ -135,4 +135,15 @@ return array
         'pick-both' => 'Please pick both a game party to play for and the ticket type.',
         'do-fill-profile' => 'add in the profile',
     ),
+    'card' => array
+    (
+        'head-starts-at' => 'Game starts',
+        'head-ends-at' => 'Game ends',
+        'head-region' => 'Region',
+        'head-external' => 'External info',
+        'head-parties' => 'Fractions',
+        'no-map' => 'No map yet present for this game. ',
+        'no-info' => 'not present',
+        'players' => 'players',
+    ),
 );

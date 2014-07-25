@@ -31,32 +31,32 @@
             <td>
                 <table>
                     <tr>
-                        <td>Game starts:</td>
+                        <td>{{ trans('airsoft.card.head-starts-at') }}:</td>
                         <td>{{ date('d.m.Y \@ H:i', strtotime($game->starts_at)) }}</td>
                     </tr>
                     <tr>
-                        <td>Game ends:</td>
+                        <td>{{ trans('airsoft.card.head-ends-at') }}:</td>
                         <td>{{ date('d.m.Y \@ H:i', strtotime($game->ends_at)) }}</td>
                     </tr>
                     <tr>
-                        <td>Region:</td>
+                        <td>{{ trans('airsoft.card.head-region') }}:</td>
                         <td>{{ @$geo->region_name ?: '&ndash;' }}, {{ @$geo->country_name ?: '&ndash;' }}</td>
                     </tr>
                     <tr>
-                        <td>External info:</td>
+                        <td>{{ trans('airsoft.card.head-external') }}:</td>
                         <td>
                             @if (strlen($game->getSetting('url')))
                             <a target="_blank" rel="nofollow" href="{{ $game->getSetting('url') }}">{{ $game->getSetting('url') }}</a>
                             @else
-                            not present
+                            {{ trans('airsoft.card.no-info') }}
                             @endif
                         </td>
                     </tr>
                     <tr>
-                        <td style="vertical-align:top">Fractions:</td>
+                        <td style="vertical-align:top">{{ trans('airsoft.card.head-parties') }}:</td>
                         <td>
                             @foreach ($parties as $party)
-                            {{ $party->getName() }} (max. {{ $party->getPlayersLimit() }} players)
+                            {{ $party->getName() }} (max. {{ $party->getPlayersLimit() }} {{ trans('airsoft.card.players') }})
                             <br/>
                             @endforeach
                         </td>
@@ -77,7 +77,7 @@
     @if ($game->map)
     <iframe class="map-frame" src="{{ $game->map }}" width="100%" height="550"></iframe>
     @else
-    No map yet present for this game.
+    {{ trans('airsoft.card.no-map') }}
     @endif
 </div>
 @stop
