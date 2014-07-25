@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ App::getLocale() }}">
 <head>
     <meta charset="utf-8">
     <title>Airsoft Zone @yield('title')</title>
