@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-| Booking a ticket
+| {{ trans('airsoft.booking.title') }}
 @stop
 
 @section('header')
@@ -10,20 +10,20 @@
 
 @section('content')
 <div class="dialog-box-1">
-    <p>You are booking a ticket for the game «<b>{{ $game->name }}</b>» organized by <b>{{ $game->organizer }}</b>.</p>
+    <p>{{ sprintf(trans('airsoft.booking.game-info'), $game->name, $game->organizer) }}</p>
 
     @if ($is_organizer)
-    <p>Note: you are organizing this game</p>
+    <p>{{ trans('airsoft.booking.you-organize') }}</p>
     @endif
 
     @if (!empty ($requirements))
     <fieldset class="my-fieldset">
-        <legend>Requirements</legend>
+        <legend>{{ trans('airsoft.booking.head-requirements') }}</legend>
         <table>
             @foreach ($requirements as $requirement)
             <tr>
                 <td>{{ $requirement[0] }}:</td>
-                <td>{{ $requirement[1] ? 'OK' : '<span class="warn-span">add in the profile</span>' }}</td>
+                <td>{{ $requirement[1] ? 'OK' : '<span class="warn-span">' . trans('airsoft.booking.do-fill-profile') . '</span>' }}</td>
             </tr>
             @endforeach
         </table>
@@ -36,10 +36,10 @@
         disabled="disabled"
         @endif
         >
-        <legend>Choose a ticket</legend>
+        <legend>{{ trans('airsoft.booking.head-ticket') }}</legend>
         <table>
             <tr>
-                <td>Game party:</td>
+                <td>{{ trans('airsoft.booking.head-party') }}:</td>
                 <td>
                     <select class="my-select" id="game-party-id">
                         <option value="0">Not specified</option>
@@ -50,7 +50,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Available tickets:</td>
+                <td>{{ trans('airsoft.booking.head-available-tickets') }}:</td>
                 <td>
                     <select class="my-select" id="ticket-template-id">
                         <option value="0">Not specified</option>
@@ -65,9 +65,9 @@
     <br/>
 
     <fieldset class="my-fieldset" id="form-options">
-        <legend>Options</legend>
+        <legend>{{ trans('airsoft.booking.head-options') }}</legend>
         <div>
-            Amount of persons: &nbsp;
+            {{ trans('airsoft.booking.head-persons-count') }}: &nbsp;
             <input type="number" value="1" class="my-input factor w30" min="1"/>
         </div>
     </fieldset>
@@ -116,7 +116,7 @@ $('#area-confirm .confirm').click(function()
     var p = $('.game-party-id').val() - 0
     if (!p)
     {
-        az.showModal('Please pick both a game party to play for and the ticket type.')
+        az.showModal('{{ trans('airsoft.booking.pick-both') }}')
         return false
     }
     $('#area-confirm .factor').val($('#form-options .factor').val())

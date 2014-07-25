@@ -121,4 +121,18 @@ return array
         'do-print-ticket' => 'Print ticket',
         'person-count' => 'ticket for %d person|ticket for %d persons',
     ),
+    'booking' => array
+    (
+        'title' => 'Booking a ticket',
+        'head-requirements' => 'Requirements',
+        'head-ticket' => 'Choose a ticket',
+        'head-options' => 'Options',
+        'head-party' => 'Game party',
+        'head-available-tickets' => 'Available tickets',
+        'head-persons-count' => 'Amount of persons',
+        'you-organize' => 'Note: you are organizing this game',
+        'game-info' => 'You are booking a ticket for the game «<b>%s</b>» organized by <b>%s</b>.',
+        'pick-both' => 'Please pick both a game party to play for and the ticket type.',
+        'do-fill-profile' => 'add in the profile',
+    ),
 );

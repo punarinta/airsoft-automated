@@ -121,4 +121,18 @@ return array
         'do-print-ticket' => 'Skriv ut biljett',
         'person-count' => 'biljett för %d person|biljett för %d personer',
     ),
+    'booking' => array
+    (
+        'title' => 'Biljettbokning',
+        'head-requirements' => 'Krav',
+        'head-ticket' => 'Välj en biljett',
+        'head-options' => 'Options',
+        'head-party' => 'Spelsidan',
+        'head-available-tickets' => 'Tillgängliga biljetter',
+        'head-persons-count' => 'Antal personer',
+        'you-organize' => 'Obs: du organiserar det här spelet',
+        'game-info' => 'Du bokar en biljett till spelet «<b>%s</b>» arrangerad av <b>%s</b>.',
+        'pick-both' => 'Vänligen plocka både en spelsida och en biljettyp.',
+        'do-fill-profile' => 'lägg till i profilen',
+    ),
 );
