@@ -8,11 +8,9 @@
     <link rel="icon" href="/favicon.ico">
     {{ HTML::style('/css/common.css') }}
     @yield('header')
-    <script src="//use.edgefonts.net/source-sans-pro:n3,i3,n4,i4,n6,i6,n7,i7.js"></script>
-    <script src="//use.edgefonts.net/source-code-pro.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')</script>
-    <script src="/js/az-core.js"></script>
+    <script src="/js/az-core.min.js"></script>
 </head>
 <body>
 <div id="modal-background">
@@ -81,5 +79,7 @@ $('#navbar .ddb-locale').val('{{ App::getLocale() }}').change(function()
     })
 })
 </script>
+<script src="//use.edgefonts.net/source-sans-pro:n3,i3,n4,i4,n6,i6,n7,i7.js"></script>
+<script src="//use.edgefonts.net/source-code-pro.js"></script>
 </body>
 </html>
