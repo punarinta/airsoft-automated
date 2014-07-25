@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-| Specific game info
+| {{ trans('airsoft.briefing.title') }}
 @stop
 
 @section('header')
@@ -17,32 +17,32 @@
 <div class="window-box-1">
     <p>
         @if (!($data->status & Ticket::STATUS_PAID))
-        Your ticket is booked but not paid.
+        {{ trans('airsoft.briefing.not-paid') }}
         <div id="bank-data">
             <fieldset class="my-fieldset">
-                <legend>Payment information:</legend>
+                <legend>{{ trans('airsoft.briefing.head-payment') }}:</legend>
                 <table>
                     <tr>
-                        <td>Account:</td>
+                        <td>{{ trans('airsoft.briefing.head-account') }}:</td>
                         <td><b>5699 3477637</b></td>
                     </tr>
                     <tr>
-                        <td>Amount:</td>
+                        <td>{{ trans('airsoft.briefing.head-amount') }}:</td>
                         <td><b>{{ number_format($data->price / 100, 2) }} SEK</b>
                             @if ($data->factor != 1)
-                            (ticket for {{ $data->factor }} persons)
+                            ({{ sprintf(Lang::choice('airsoft.briefing.person-count', $data->factor), $data->factor) }})
                             @endif
                         </td>
                     </tr>
                     <tr>
-                        <td>Reference:</td>
+                        <td>{{ trans('airsoft.briefing.head-reference') }}:</td>
                         <td><b>AZ-{{ $data->ticket_code }}</b></td>
                     </tr>
                 </table>
             </fieldset>
             <br/>
             <fieldset class="my-fieldset">
-                <legend>Additional info for international players:</legend>
+                <legend>{{ trans('airsoft.briefing.head-payment-int') }}:</legend>
                 <table>
                     <tr>
                         <td>Bank name:</td>
@@ -65,18 +65,18 @@
         </div>
 
         @else
-        You can print your ticket and you're done.
+        {{ trans('airsoft.briefing.print-ticket') }}
         @endif
     </p>
     <img id="ticket" src="{{ URL::route('game-ticket', array($data->game_id)) }}" alt="Your ticket"/>
     <br/><br/>
-    <button id="btn-print-ticket" class="my-btn">Print ticket</button>
+    <button id="btn-print-ticket" class="my-btn">{{ trans('airsoft.briefing.do-print-ticket') }}</button>
 
     <hr class="my-hr"/>
     @if ($map)
     <iframe class="map-frame" src="{{ $map }}" width="100%" height="480"></iframe>
     @else
-    No specific information present on this game.
+    {{ trans('airsoft.briefing.no-map') }}
     @endif
 </div>
 <script>

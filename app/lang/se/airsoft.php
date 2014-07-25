@@ -107,4 +107,18 @@ return array
         <p>Skriv gärna ett par ord om dig som en arrangör till <a target="_blank" href="mailto:%s?subject=I am an organizer">%s</a> email och vi ska svara så snart som möjligt. :)</p>
         Systemet är nu i utvecklingsversion, så det finns <b>inga avgifter</b> för hanteringen.',
     ),
+    'briefing' => array
+    (
+        'title' => 'Specifik spelinfo',
+        'head-payment' => 'Information om betalning',
+        'head-payment-int' => 'Additional info for international players',
+        'head-amount' => 'Belopp',
+        'head-account' => 'Konto',
+        'head-reference' => 'Referens',
+        'no-map' => 'Ingen specifik information finns på det här spelet.',
+        'not-paid' => 'Din biljett är bokad men inte betald.',
+        'print-ticket' => 'Du kan skriva ut din biljett och du är klar.',
+        'do-print-ticket' => 'Skriv ut biljett',
+        'person-count' => 'biljett för %d person|biljett för %d personer',
+    ),
 );

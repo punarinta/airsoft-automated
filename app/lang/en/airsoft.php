@@ -107,4 +107,18 @@ return array
         <p>Just write a couple of words about you as an organizer on <a target="_blank" href="mailto:%s?subject=I am an organizer">%s</a> email and we will answer you as soon as possible. :)</p>
         The system is now in development version, so there are <b>no charges</b> for the game management.',
     ),
+    'briefing' => array
+    (
+        'title' => 'Specific game info',
+        'head-payment' => 'Payment information',
+        'head-payment-int' => 'Additional info for international players',
+        'head-amount' => 'Amount',
+        'head-account' => 'Account',
+        'head-reference' => 'Reference',
+        'no-map' => 'No specific information present on this game.',
+        'not-paid' => 'Your ticket is booked but not paid.',
+        'print-ticket' => 'You can print your ticket and you\'re done.',
+        'do-print-ticket' => 'Print ticket',
+        'person-count' => 'ticket for %d person|ticket for %d persons',
+    ),
 );
