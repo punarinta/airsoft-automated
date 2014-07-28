@@ -33,7 +33,7 @@ body {min-height:100%;margin:0 auto;padding:0;font:14px source-sans-pro, helveti
 #navbar .first {border-bottom-left-radius:5px;}
 #navbar .last {border-bottom-right-radius:5px;border-right:1px solid #999}
 #navbar .alone {border-bottom-left-radius:5px;border-bottom-right-radius:5px;border-right:1px solid #999;border-left:1px solid #999;}
-#navbar .ddb-locale {padding: 0 1px}
+#navbar .ddb-locale {padding:0 1px;margin-bottom:1px}
 
 .flashbar {background:rgba(0,0,0,.3);margin:7px 5px 0 20px;border-radius:5px;display:inline-block;padding:0 6px}
 #flash_notice {color:#406aeb}
