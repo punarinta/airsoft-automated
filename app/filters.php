@@ -24,7 +24,12 @@ App::before(function($request)
     }
     else
     {
-        if (Session::has('locale'))
+        if ($lang = $request->input('lang'))
+        {
+            Session::set('locale', $lang);
+            App::setLocale($lang);
+        }
+        else if (Session::has('locale'))
         {
             App::setLocale(Session::get('locale'));
         }
