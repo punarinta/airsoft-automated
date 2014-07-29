@@ -112,6 +112,7 @@ class ApiGameController extends BaseController
 
             if (Input::json('cmd_save_map'))
             {
+                // allow saving empty
                 if (Input::json('map_type_id') == 1)
                 {
                     preg_match('/([A-Za-z0-9]{12}\.[A-Za-z0-9]{12})$/', Input::json('map_source'), $matches);

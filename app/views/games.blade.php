@@ -26,7 +26,7 @@
             @foreach ($games as $game)
             <tr class="region-{{$game->region_id}}">
                 <td>{{ date('Y.m.d', strtotime($game->starts_at)) }}</td>
-                <td><a href="{{ URL::route('game-card', $game->id) }}">{{ $game->name }}</a></td>
+                <td><a href="{{ URL::route('game-card', $game->id) }}" title="{{ $game->name }}">{{ $game->name }}</a></td>
                 <td>{{ $game->organizer }}</td>
                 <td>{{ $game->region_name }}, {{ $game->country_name }}</td>
                 <td>
