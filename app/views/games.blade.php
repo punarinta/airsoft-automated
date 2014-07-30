@@ -53,10 +53,7 @@ games_region_picker.change(function(geo)
         $('#calendar tr:gt(0)').hide()
         $('#calendar tr.region-' + geo[1]).show()
     }
-    else
-    {
-        $('#calendar tr').show()
-    }
+    else $('#calendar tr').show()
 })
 </script>
 @stop
