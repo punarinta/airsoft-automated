@@ -39,6 +39,7 @@ class ApiGamePartyController extends BaseController
             $gameParty->setName(strip_tags(Input::json('name')));
             $gameParty->setGameId(Input::json('game_id'));
             $gameParty->setPlayersLimit(Input::json('players_limit'));
+            $gameParty->setDescription(strip_tags(Input::json('description')));
             $gameParty->save();
 
             return $gameParty->toArray();
@@ -65,6 +66,7 @@ class ApiGamePartyController extends BaseController
             $gameParty->setName(strip_tags(Input::json('name')));
             $gameParty->setGameId(Input::json('game_id'));
             $gameParty->setPlayersLimit(Input::json('players_limit'));
+            $gameParty->setDescription(strip_tags(Input::json('description')));
             $gameParty->save();
         });
     }

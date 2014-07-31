@@ -95,6 +95,10 @@ $mapType = $game->getSetting('map.type');
                 <td>Players&nbsp;limit:</td>
                 <td><input type="number" min="1" class="my-input w100 players-limit" value="{{ isset($game->parties[0])?$game->parties[0]->players_limit:0 }}"/></td>
             </tr>
+            <tr>
+                <td>Description:</td>
+                <td><textarea class="my-text description">{{ isset($game->parties[0])?$game->parties[0]->description:'' }}</textarea></td>
+            </tr>
         </table>
 
         @if (isset($game->parties[0]))
@@ -297,7 +301,8 @@ $mapType = $game->getSetting('map.type');
         {
             name: $('#form-game-party .name').val(),
             game_id: gameId,
-            players_limit: $('#form-game-party .players-limit').val()
+            players_limit: $('#form-game-party .players-limit').val(),
+            description: $('#form-game-party .description').val()
         })
 
         az.ajaxPut('game-party', gamePartyId, data)
