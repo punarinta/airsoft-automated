@@ -80,4 +80,9 @@
     {{ trans('airsoft.card.no-map') }}
     @endif
 </div>
+
+<div class="localized hidden">
+    <a href="{{ URL::route('game-card', $game->id) }}?lang=en" title="{{ $game->name }} in English">{{ $game->name }} in English</a>
+    <a href="{{ URL::route('game-card', $game->id) }}?lang=se" title="{{ $game->name }} på svenska">{{ $game->name }} på svenska</a>
+</div>
 @stop
