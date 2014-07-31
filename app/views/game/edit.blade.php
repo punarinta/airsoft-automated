@@ -97,7 +97,7 @@ $mapType = $game->getSetting('map.type');
             </tr>
             <tr>
                 <td>Description:</td>
-                <td><textarea class="my-text description">{{ isset($game->parties[0])?$game->parties[0]->description:'' }}</textarea></td>
+                <td><textarea placeholder="Add game party description if necessary..." rows="8" cols="50" class="my-text description">{{ isset($game->parties[0])?$game->parties[0]->description:'' }}</textarea></td>
             </tr>
         </table>
 
