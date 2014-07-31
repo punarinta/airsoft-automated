@@ -99,4 +99,20 @@ class GameParty extends Eloquent
     {
         $this->players_limit = $players_limit;
     }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 }
