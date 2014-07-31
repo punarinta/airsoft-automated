@@ -12,6 +12,9 @@
 @stop
 
 @section('content')
+<?php
+$mapType = $game->getSetting('map.type');
+?>
 <div class="window-box-1">
     <fieldset class="my-fieldset" id="form-game">
         <legend>General</legend>
@@ -168,15 +171,20 @@
                 <td>Map type:</td>
                 <td>
                     <select class="my-select map-type-id">
-                        <option value="1">Embedded GMap</option>
+                        <option value="1" {{ $mapType == 1 ? 'selected="selected"' : '' }}>Embedded GMap</option>
+                        <option value="2" {{ $mapType == 2 ? 'selected="selected"' : '' }}>Image (URL)</option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>Source:</td>
                 <td>
+                    @if ($mapType <= 1)
                     <input type="text" class="my-input w200 map-source" value="{{ $game->getSetting('map.source') }}"/>
                     <a class="map-edit-link" target="_blank" href="https://mapsengine.google.com/map/u/0/{{ strlen($game->getSetting('map.source')) ? 'edit?mid=' . $game->getSetting('map.source') : '' }}">edit</a>
+                    @elseif ($mapType == 2)
+                    <input type="text" class="my-input map-source" value="{{ $game->getSetting('map.source') }}"/>
+                    @endif
                 </td>
             </tr>
         </table>
@@ -184,11 +192,19 @@
         <button class="my-btn save">Save</button>
         <br/><br/>
 
+        @if ($mapType <= 1)
         <iframe class="map-frame
         @if (!strlen(trim($game->getSetting('map.source'))))
         hidden
         @endif
         >" src="https://mapsengine.google.com/map/embed?mid={{ $game->getSetting('map.source') }}" width="100%" height="480"></iframe>
+        @elseif ($mapType == 2)
+        <img src="{{ $game->getSetting('map.source') }}" alt="Game map" width="100%" class="map-frame
+        @if (!strlen(trim($game->getSetting('map.source'))))
+        hidden
+        @endif
+        >"/>
+        @endif
     </fieldset>
 
 </div>
@@ -306,11 +322,13 @@
 
     $('#form-map .save').click(function()
     {
+        var map_type_id = $('#form-map .map-type-id').val()
+
         var data = JSON.stringify(
         {
             game_id: gameId,
             cmd_save_map: 1,
-            map_type_id: $('#form-map .map-type-id').val(),
+            map_type_id: map_type_id,
             map_source: $('#form-map .map-source').val()
         })
 
@@ -318,7 +336,7 @@
         {
             var s = JSON.parse(json.data.settings)
             $('#form-map .map-source').val(s.map.source)
-            if (s.map.source.length)
+            if (s.map.source.length && map_type_id == 1)
             {
                 $('#form-map .map-frame').show().attr('src','https://mapsengine.google.com/map/embed?mid=' + s.map.source)
                 $('#form-map .map-edit-link').attr('href', 'https://mapsengine.google.com/map/u/0/edit?mid=' + s.map.source)
@@ -426,6 +444,19 @@
             $('#form-game .poster-url-tester').html('<b>not an image!</b>')
         }
         i.src = $('#form-game .poster').val()
+    })
+
+    $('#form-map .map-type-id').change(function()
+    {
+        switch ($(this).val() - 0)
+        {
+            case 1:
+                $('#form-map .map-edit-link').show()
+                break
+
+            case 2:
+                $('#form-map .map-edit-link').hide()
+        }
     })
 
     // datepickers
