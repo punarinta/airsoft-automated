@@ -56,7 +56,7 @@
                         <td style="vertical-align:top">{{ trans('airsoft.card.head-parties') }}:</td>
                         <td>
                             @foreach ($parties as $party)
-                            {{ $party->getName() . ' ' . ($party->getPlayersLimit() ? '(max. ' . $party->getPlayersLimit() . ') ' . trans('airsoft.card.players') : '') }}
+                            {{ $party->getName() . ' ' . ($party->getPlayersLimit() ? '(max. ' . $party->getPlayersLimit() . ' ' . trans('airsoft.card.players') . ')' : '') }}
                             <br/>
                             @endforeach
                         </td>
