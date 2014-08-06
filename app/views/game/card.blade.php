@@ -61,6 +61,16 @@
                             @endforeach
                         </td>
                     </tr>
+                    @if (!$game->owner_id)
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                            This game is a dummy. If you are an organizer and want to use the system for game management, please contact via
+                            <a href="mailto:{{ Config::get('app.emails.office') }}">{{ Config::get('app.emails.office') }}</a>.
+                            <br/>
+                        </td>
+                    </tr>
+                    @endif
                 </table>
             </td>
             <td>
