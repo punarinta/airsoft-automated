@@ -301,7 +301,15 @@ class GameController extends BaseController
 
             $gameParty->ticketsBooked = $ticketsBooked;
             $gameParty->ticketsLeft = $gameParty->getPlayersLimit() - $ticketsBooked;
-            $gameParty->callToAction = number_format($gameParty->ticketsLeft / $gameParty->getPlayersLimit(), 0);
+
+            if ($gameParty->getPlayersLimit())
+            {
+                $gameParty->callToAction = number_format($gameParty->ticketsLeft / $gameParty->getPlayersLimit(), 0);
+            }
+            else
+            {
+                $gameParty->callToAction = '0';
+            }
 
             if ($gameParty->ticketsLeft > 0 && $game->getIsVisible())
             {
