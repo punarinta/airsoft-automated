@@ -149,6 +149,36 @@
             @endif
         </table>
     </fieldset>
+
+    <fieldset class="my-fieldset
+    @if (!Auth::user()->getIsValidated())
+    hidden
+    @endif
+    " style="float:left" id="form-bank">
+        <legend>Bank data</legend>
+        <table>
+            <tr>
+                <td>Account:</td>
+                <td>&nbsp;</td>
+                <td><input type="text" class="my-input bank-account" value="{{ $bank_account }}"/></td>
+            </tr>
+            <tr>
+                <td>IBAN:</td>
+                <td>&nbsp;</td>
+                <td><input type="text" class="my-input bank-iban" value="{{ $bank_iban }}"/></td>
+            </tr>
+            <tr>
+                <td>SWIFT:</td>
+                <td>&nbsp;</td>
+                <td><input type="text" class="my-input bank-swift" value="{{ $bank_swift }}"/></td>
+            </tr>
+            <tr>
+                <td>Bank name:</td>
+                <td>&nbsp;</td>
+                <td><input type="text" class="my-input bank-name" value="{{ $bank_name }}"/></td>
+            </tr>
+        </table>
+    </fieldset>
 </div>
 <script>
     $('#form-profile .save').click(function()

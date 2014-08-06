@@ -88,10 +88,16 @@ class UserController extends BaseController
             'last_name'         => isset ($profile['last_name']) ? $profile['last_name'] : '',
             'ssn'               => isset ($profile['ssn']) ? $profile['ssn'] : '',
             'phone'             => isset ($profile['phone'][0]) ? $profile['phone'][0] : '',
-            'addr_street'       => isset ($profile['addr_street']) ? $profile['addr_street'] : '',
-            'addr_zip'          => isset ($profile['addr_zip']) ? $profile['addr_zip'] : '',
-            'addr_city'         => isset ($profile['addr_city']) ? $profile['addr_city'] : '',
-            'addr_country'      => isset ($profile['addr_country']) ? $profile['addr_country'] : '',
+            'addr_street'       => isset ($profile['address']['street']) ? $profile['address']['street'] : '',
+            'addr_zip'          => isset ($profile['address']['zip']) ? $profile['address']['zip'] : '',
+            'addr_city'         => isset ($profile['address']['city']) ? $profile['address']['city'] : '',
+            'addr_country'      => isset ($profile['address']['country']) ? $profile['address']['country'] : '',
+
+            // bank
+            'bank_account'      => isset ($profile['bank']['account']) ? $profile['bank']['account'] : '',
+            'bank_iban'         => isset ($profile['bank']['iban']) ? $profile['bank']['iban'] : '',
+            'bank_swift'        => isset ($profile['bank']['swift']) ? $profile['bank']['swift'] : '',
+            'bank_name'         => isset ($profile['bank']['name']) ? $profile['bank']['name'] : '',
         ));
     }
 
