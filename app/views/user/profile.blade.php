@@ -194,7 +194,12 @@
                 birth_date: $('#form-profile .birth-date').val(),
                 locale: $('#form-profile .locale').val(),
                 phone: $('#form-profile .phone').val(),
-                team_id: me_team_picker.getTeamId()
+                team_id: me_team_picker.getTeamId(),
+
+                bank_account: $('#form-bank .bank-account').val(),
+                bank_iban: $('#form-bank .bank-iban').val(),
+                bank_swift: $('#form-bank .bank-swift').val(),
+                bank_name: $('#form-bank .bank-name').val()
             }),
             success: az.ajaxResult
         })

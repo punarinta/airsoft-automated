@@ -117,14 +117,20 @@ class ApiUserController extends BaseController
             // extra data that might be required by organizer
             $profile = $user->getProfileArray();
 
-            if (Input::json('first_name')) $profile['first_name'] = Input::json('first_name');
-            if (Input::json('last_name')) $profile['last_name'] = Input::json('last_name');
-            if (Input::json('ssn')) $profile['ssn'] = Input::json('ssn');
+            if (Input::json('first_name')) $profile['first_name'] = strip_tags(Input::json('first_name'));
+            if (Input::json('last_name')) $profile['last_name'] = strip_tags(Input::json('last_name'));
+            if (Input::json('ssn')) $profile['ssn'] = strip_tags(Input::json('ssn'));
             if (Input::json('phone')) $profile['phone'][0] = preg_replace('/\D+/', '', Input::json('phone'));
-            if (Input::json('addr_street')) $profile['address']['street'] = Input::json('addr_street');
-            if (Input::json('addr_zip')) $profile['address']['zip'] = Input::json('addr_zip');
-            if (Input::json('addr_city')) $profile['address']['city'] = Input::json('addr_city');
-            if (Input::json('addr_country')) $profile['address']['country'] = Input::json('addr_country');
+
+            if (Input::json('addr_street')) $profile['address']['street'] = strip_tags(Input::json('addr_street'));
+            if (Input::json('addr_zip')) $profile['address']['zip'] = preg_replace('/\D+/', '', Input::json('addr_zip'));
+            if (Input::json('addr_city')) $profile['address']['city'] = strip_tags(Input::json('addr_city'));
+            if (Input::json('addr_country')) $profile['address']['country'] = strip_tags(Input::json('addr_country'));
+
+            if (Input::json('bank_account')) $profile['bank']['account'] = strip_tags(Input::json('bank_account'));
+            if (Input::json('bank_iban')) $profile['bank']['iban'] = strip_tags(Input::json('bank_iban'));
+            if (Input::json('bank_swift')) $profile['bank']['swift'] = strip_tags(Input::json('bank_swift'));
+            if (Input::json('bank_name')) $profile['bank']['name'] = strip_tags(Input::json('bank_name'));
 
             $user->setProfileArray($profile);
 
