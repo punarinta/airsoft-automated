@@ -269,12 +269,24 @@ class GameController extends BaseController
 
         $settings = $game->getSettingsArray();
         $game->map = null;
+        $game->mapType = 0;
         $game->poster = '/gfx/dummy-posters/' . mt_rand(1, 8) . '.jpg';
 
-        if (isset ($settings['map']['source']) && strlen ($settings['map']['source']) && $settings['map']['type'] == 1)
+        if (isset ($settings['map']['type']))
         {
-            $game->map = 'https://mapsengine.google.com/map/embed?mid=' . $settings['map']['source'];
+            $type = (int) $settings['map']['type'];
+            $game->mapType = $type;
+
+            if (strlen($settings['map']['source']) && $type == 1)
+            {
+                $game->map = 'https://mapsengine.google.com/map/embed?mid=' . $settings['map']['source'];
+            }
+            if (strlen($settings['map']['source']) && $type == 2)
+            {
+                $game->map = $settings['map']['source'];
+            }
         }
+
         if (isset ($settings['poster']) && strlen ($settings['poster']))
         {
             $game->poster = $settings['poster'];

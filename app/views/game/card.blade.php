@@ -85,7 +85,11 @@
     <br/>
 
     @if ($game->map)
-    <iframe class="map-frame" src="{{ $game->map }}" width="100%" height="550"></iframe>
+        @if ($game->mapType == 1)
+        <iframe class="map-frame" src="{{ $game->map }}" width="100%" height="550"></iframe>
+        @elseif ($game->mapType == 2)
+        <img src="{{ $game->map }}" alt="Game map" width="100%" />
+        @endif
     @else
     {{ trans('airsoft.card.no-map') }}
     @endif
