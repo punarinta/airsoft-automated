@@ -31,15 +31,15 @@ class ScanMarketItem
      */
 	public function jsonp()
 	{
-		$res = '{"type": "'   . $this->rq($this->type);
-		$res.= '","id": "'    . $this->rq($this->id);
-		$res.= '","stock": "' . $this->rq($this->stock);
-		$res.= '","name": "'  . $this->rq($this->name);
+		$res = '{"type": '    . $this->rq($this->type);
+		$res.= ',"id": "'     . $this->rq($this->id);
+		$res.= '","stock": '  . $this->rq($this->stock);
+		$res.= ',"name": "'   . $this->rq($this->name);
 		$res.= '","descr": "' . $this->rq($this->descr);
 		$res.= '","img": "'   . $this->rq($this->img);
 		$res.= '","code": "'  . $this->rq($this->code);
 		$res.= '","url": "'   . $this->rq($this->url);
-		$res.= '","price": "' . $this->rq($this->price);
+		$res.= '","price": '  . $this->rq($this->price);
 		$res.= '}';
 
 		return $res;
