@@ -23,25 +23,29 @@ class ScanMarketItem
 	{
 		return str_replace(array("\\", '&qu'), array('&#92;', '&qqu;'), htmlspecialchars(trim($t)));
 	}
-  
+
+    /**
+     * Fast JSONP assembling
+     *
+     * @return string
+     */
 	public function jsonp()
 	{
-		$res = '{';
-		$res.= '"type": "'  . $this->rq($this->type) . '",';
-		$res.= '"id": "'    . $this->rq($this->id) . '",';
-		$res.= '"stock": "' . $this->rq($this->stock) . '",';
-		$res.= '"name": "'  . $this->rq($this->name) . '",';
-		$res.= '"descr": "' . $this->rq($this->descr) . '",';
-		$res.= '"img": "'   . $this->rq($this->img) . '",';
-		$res.= '"code": "'  . $this->rq($this->code) . '",';
-		$res.= '"url": "'   . $this->rq($this->url) . '",';
-		$res.= '"price": "' . $this->rq($this->price) . '"';
+		$res = '{"type": "'   . $this->rq($this->type);
+		$res.= '","id": "'    . $this->rq($this->id);
+		$res.= '","stock": "' . $this->rq($this->stock);
+		$res.= '","name": "'  . $this->rq($this->name);
+		$res.= '","descr": "' . $this->rq($this->descr);
+		$res.= '","img": "'   . $this->rq($this->img);
+		$res.= '","code": "'  . $this->rq($this->code);
+		$res.= '","url": "'   . $this->rq($this->url);
+		$res.= '","price": "' . $this->rq($this->price);
 		$res.= '}';
 
 		return $res;
 	}
 
-	public function grab($from, $t1, $t2, $plus=0)
+	public function grab($from, $t1, $t2, $plus = 0)
 	{
 		$m1 = strpos($from, $t1, $this->textPosition);
 		if ($m1 === false)

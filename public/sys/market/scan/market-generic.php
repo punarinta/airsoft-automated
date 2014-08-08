@@ -90,7 +90,7 @@ class ScanMarket
 		return trim(substr($from, $m1 + $ofs, $m2 - $m1 - $ofs));
 	}
   
-	protected function GetPage($url)
+	protected function getPage($url)
 	{
 		$options = array
         (
@@ -118,7 +118,7 @@ class ScanMarket
 		return $page;
 	}
 	
-	protected function PostPage($url, $payload)
+	protected function postPage($url, $payload)
 	{
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
@@ -158,7 +158,7 @@ class ScanMarket
      * @param $item
      * @return int
      */
-    protected function push_row($item)
+    protected function pushRow($item)
 	{
         // skip priceless item OR skip out of stock item
 		if (!$this->showNoPrice && !$item->price || !$this->showNoStock && !$item->stock)
@@ -185,9 +185,11 @@ class ScanMarket
 			return 0;
 		}
 		
-		if ($this->minPrice > 0 && $item->price < $this->minPrice) return 0;
-		if ($this->maxPrice > 0 && $item->price > $this->maxPrice) return 0;
-		
+		if ($this->minPrice > 0 && $item->price < $this->minPrice || $this->maxPrice > 0 && $item->price > $this->maxPrice)
+        {
+            return 0;
+        }
+
 		// item post-filters
 		if ($item->code == '')
         {
@@ -219,8 +221,13 @@ class ScanMarket
 		
 		//	shop post-filters
 	}
-  
-	public function jsonp()
+
+    /**
+     * Fast JSONP assembling
+     *
+     * @return string
+     */
+    public function jsonp()
 	{
 		if (!$this->finishedAt)
         {
@@ -237,14 +244,17 @@ class ScanMarket
 		$max = sizeof($this->items);
 		for ($i = 0; $i < $max; $i++)
 		{
-			$res.= $this->items[$i]->jsonp();
-			if ($i < $max - 1) $res.= ',';
+			$res .= $this->items[$i]->jsonp();
+			if ($i < $max - 1)
+            {
+                $res .= ',';
+            }
 		}
     
 		$res.= '],';
-		$res.= '"isError": "' . ($this->isError ? '1':'0') . '",';
-		$res.= '"logic": "' . $this->shopLogic . '",';
-		$res.= '"elapsed": "' . $dt . '",';
+		$res.= '"isError": "'  . ($this->isError ? '1':'0') . '",';
+		$res.= '"logic": "'    . $this->shopLogic . '",';
+		$res.= '"elapsed": "'  . $dt . '",';
 		$res.= '"over9000": "' . ($this->tooMuchFound ? '1':'0') . '"});';
         
 		return $res;
