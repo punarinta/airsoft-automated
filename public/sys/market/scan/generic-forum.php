@@ -1,6 +1,6 @@
 <?php
 
-require_once 'market-generic.php';
+require_once 'generic-market.php';
 
 class ScanForum extends ScanMarket
 {

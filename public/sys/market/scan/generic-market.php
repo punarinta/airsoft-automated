@@ -1,6 +1,6 @@
 <?php
 
-require_once 'item-generic.php';
+require_once 'generic-item.php';
 
 class ScanMarket
 {
