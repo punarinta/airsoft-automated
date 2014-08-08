@@ -27,7 +27,7 @@ class ScanMarket
   
 	protected $textPosition = 0;					// used as temporary "file pointer"
     
-	public function __construct($name, $id, $char = 'UTF-8', $type = 1)
+	public function __construct($name, $char = 'UTF-8', $type = 1)
 	{
 		$this->startedAt = microtime(true);
 		$this->shopName  = $name;

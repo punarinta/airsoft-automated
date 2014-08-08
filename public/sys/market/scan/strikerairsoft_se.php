@@ -64,6 +64,6 @@ class Strikerairsoft_Se extends ScanMarket
     }
 }
 
-$shop = new Strikerairsoft_Se('Striker Airsoft', 1, 'UTF-8');
+$shop = new Strikerairsoft_Se('Striker Airsoft', 'UTF-8');
 $shop->scan();
 echo $shop->jsonp();
