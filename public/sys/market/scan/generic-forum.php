@@ -17,9 +17,9 @@ class ScanForum extends ScanMarket
 	{
 		$cmp = mb_strtolower($text);
 
-		if (mb_strpos($cmp, 'продано', 0) !== false) return 0;
-		if (mb_strpos($cmp, 'wts', 0) === false && mb_strpos($cmp, 'прода', 0) === false) return 0;
-		
+		if (mb_strpos($cmp, 'såld', 0) !== false) return 0;
+		if (mb_strpos($cmp, 'lås', 0) !== false) return 0;
+
 		if ($wtsOnly)
         {
             return 1;
