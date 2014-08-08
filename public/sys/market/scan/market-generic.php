@@ -5,7 +5,6 @@ require_once 'item-generic.php';
 class ScanMarket
 {
 	public $shopName = '';							// official shop name
-	public $shopId = 0;								// internal shop ID (same as in DB)
 	public $shopLogic = 1;							// 1 - AND; 2 - OR; 3 - complex; 4 - exact phrase
 	public $itemsType = 1;							// 1 - search; 2 - search & buy
     
@@ -32,7 +31,6 @@ class ScanMarket
 	{
 		$this->startedAt = microtime(true);
 		$this->shopName  = $name;
-		$this->shopId    = $id;
 		$this->itemsType = $type;
 		$this->charset   = $char;
 		$this->items     = array();
@@ -239,7 +237,7 @@ class ScanMarket
         }
     
 		$res = '_jqjsp({"shopName":"' . $this->shopName . '",';
-		$res.= '"shopId":"' . $this->shopId . '", "body": [';
+		$res.= '"body": [';
     
 		$max = sizeof($this->items);
 		for ($i = 0; $i < $max; $i++)
