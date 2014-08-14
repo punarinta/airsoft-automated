@@ -101,6 +101,7 @@ class Airsoftsverige_Com extends ScanForum
                 $data = $this->readItem($url);
 
                 $item->descr = $data['descr'];
+                $item->price = (int) $data['price'];
 
                 if (count($data['links']))
                 {
@@ -131,7 +132,7 @@ class Airsoftsverige_Com extends ScanForum
 
         $grabber = new ScanMarket('dummy-name');
 
-        $descr = $grabber->grab($html, '<div class="content">', '</div>');
+        $descr = $grabber->grab($html, '<div class="content">', '</div>'."\n");
 
         preg_match_all('/\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$]/i', $descr, $result, PREG_PATTERN_ORDER);
         $result = $result[0];
@@ -139,6 +140,7 @@ class Airsoftsverige_Com extends ScanForum
         return array
         (
             'descr' => $descr,
+            'price' => 0,
             'links' => $result,
         );
     }
