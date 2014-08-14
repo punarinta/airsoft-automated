@@ -19,6 +19,7 @@ class ScanForum extends ScanMarket
 
 		if (mb_strpos($cmp, 'såld', 0) !== false) return 0;
 		if (mb_strpos($cmp, 'lås', 0) !== false) return 0;
+		if (mb_strpos($cmp, 'arkivera', 0) !== false) return 0;
 
 		if ($wtsOnly)
         {

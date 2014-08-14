@@ -3,6 +3,8 @@ require_once 'generic-forum.php';
 
 class Airsoftsverige_Com extends ScanForum
 {
+    protected $ch;
+
     protected function scanner()
     {
         $username = 'punarinta';
@@ -15,15 +17,15 @@ class Airsoftsverige_Com extends ScanForum
 
         $payload = 'username=' . $username . '&password=' . $password . '&redirect=.%2Fucp.php%3Fmode%3Dlogin&sid=' . $sessionId . '&redirect=index.php&login=Logga+in';
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://airsoftsverige.com/forum/ucp.php?mode=login');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        $response = curl_exec($ch);
+        $this->ch = curl_init();
+        curl_setopt($this->ch, CURLOPT_URL, 'http://airsoftsverige.com/forum/ucp.php?mode=login');
+        curl_setopt($this->ch, CURLOPT_POST, true);
+        curl_setopt($this->ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($this->ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($this->ch, CURLOPT_HEADER, 1);
+        $response = curl_exec($this->ch);
         list ($header, $dummy) = explode("\r\n\r\n", $response, 2);
 
         $headers = explode("\r\n", $header);
@@ -45,9 +47,9 @@ class Airsoftsverige_Com extends ScanForum
 
         // 2. Configure GET-batch
 
-        curl_setopt($ch, CURLOPT_POST, false);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_COOKIE, 'phpbb3_pxzxx_u=' . $userId . ';phpbb3_pxzxx_k=; phpbb3_pxzxx_sid=' . $sessionId );
+        curl_setopt($this->ch, CURLOPT_POST, false);
+        curl_setopt($this->ch, CURLOPT_HEADER, 0);
+        curl_setopt($this->ch, CURLOPT_COOKIE, 'phpbb3_pxzxx_u=' . $userId . ';phpbb3_pxzxx_k=; phpbb3_pxzxx_sid=' . $sessionId );
 
 
         // 3. Make GET-requests with the session
@@ -56,8 +58,8 @@ class Airsoftsverige_Com extends ScanForum
 
         foreach ($forumIds as $forumId)
         {
-            curl_setopt($ch, CURLOPT_URL, 'http://airsoftsverige.com/forum/viewforum.php?f=' . $forumId);
-            $html = curl_exec($ch);
+            curl_setopt($this->ch, CURLOPT_URL, 'http://airsoftsverige.com/forum/viewforum.php?f=' . $forumId);
+            $html = curl_exec($this->ch);
 
             // set pointer
             $this->grab($html, '<table class="forums ">', null);
@@ -71,13 +73,27 @@ class Airsoftsverige_Com extends ScanForum
                     break;
                 }
 
-                $item->url = 'http://airsoftsverige.com/forum' . $this->grab($html, '</a>  <a href=".', '" class');
+                $url = 'http://airsoftsverige.com/forum' . $this->grab($html, '<a href=".', '" class');
                 $title = $this->grab($html, 'topictitle">', '</a>');
-                $item->name = $title;
 
-                if (!$this->parseForum($title, 1))
+                if (!$this->parseForum($title))
                 {
                     continue;
+                }
+
+                $item->name = $title;
+                $item->url = $url;
+                $item->id = explode('t=', $url);
+                $item->id = (int) end($item->id);
+                
+                // get description
+                $data = $this->readItem($url);
+
+                $item->descr = $data['descr'];
+
+                if (count($data['links']))
+                {
+                    $item->img = $data['links'][0];
                 }
 
                 if ($this->pushRow($item) == -1)
@@ -87,9 +103,33 @@ class Airsoftsverige_Com extends ScanForum
             }
         }
 
-        curl_close($ch);
+        curl_close($this->ch);
 
         return 0;
+    }
+
+    /**
+     * @param $url
+     * @return array
+     */
+    protected function readItem($url)
+    {
+        $url = str_replace('&amp;', '&', $url);
+        curl_setopt($this->ch, CURLOPT_URL, $url);
+        $html = curl_exec($this->ch);
+
+        $grabber = new ScanMarket('dummy-name');
+
+        $descr = $grabber->grab($html, '<div class="content">', '</div>');
+
+        preg_match_all('/\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$]/i', $descr, $result, PREG_PATTERN_ORDER);
+        $result = $result[0];
+
+        return array
+        (
+            'descr' => $descr,
+            'links' => $result,
+        );
     }
 }
 
