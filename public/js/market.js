@@ -23,6 +23,11 @@ var market =
         {
             if(e.keyCode == 13) go()
         })
+
+        $('#results table').on('click', 'tr', function()
+        {
+        //    az.showModal($(this).find('.hidden').html())
+        })
     },
 
     search: function(what)
@@ -56,6 +61,7 @@ var market =
                             else img = '&mdash;'
 
                             item.name = item.name.replace(/(&amp;)/gm, '&').replace(/(&quot;)/gm, '"')
+                            item.descr = item.descr.replace(/(&lt;)/gm, '<').replace(/(&gt;)/gm, '>').replace(/(&qqu;ot;)/gm, '"').replace(/(&amp;)/gm, '&').replace(/(&quot;)/gm, '"')
 
                             name = item.name
 
@@ -64,7 +70,10 @@ var market =
                             html += '<td>' + price + '</td>'
                             html += '<td>' + stores[i].name + '</td>'
                             html += '<td>' + img + '</td>'
+                            html += '<td class="hidden">' + item.descr + '</td>'
                             html += '</tr>'
+
+                            console.log(item.descr)
 
                             $('#results table').show()
                             $('#btn-search').text('Find')

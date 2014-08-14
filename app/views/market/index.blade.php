@@ -32,7 +32,7 @@
 <script>
 var stores =
 [
-  //  {scan:'airsoftsverige_com',name:'AirsoftSverige'},
+    {scan:'airsoftsverige_com',name:'AirsoftSverige'},
     {scan:'strikerairsoft_se',name:'Striker Airsoft'}
 ]
 </script>
