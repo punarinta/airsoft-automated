@@ -174,13 +174,13 @@ class ScanMarket
 
 			$str = strtolower($item->name);
 
-			if
+		/*	if
 			(
 				mb_strpos($str, 'пулемет') === false	&&
 				mb_strpos($str, 'автомат') === false	&&
 				mb_strpos($str, 'винтовк') === false
 			)
-			return 0;
+			return 0;*/
 		}
 		
 		if ($this->minPrice > 0 && $item->price < $this->minPrice || $this->maxPrice > 0 && $item->price > $this->maxPrice)
