@@ -11,7 +11,7 @@
 @section('content')
 <div class="window-box-1">
     <div id="controls">
-        <input type="text" class="my-input" id="inp-search" autocomplete="on" value="mp5"/>
+        <input type="text" class="my-input" id="inp-search" autocomplete="on" value="mp5" placeholder="What do you want to find?"/>
         <button id="btn-search">Find</button>
     </div>
     <div id="results">

@@ -2,59 +2,85 @@ var market =
 {
     init: function()
     {
-        $('#btn-search').click(function()
+        var go = function()
         {
             var what = $('#inp-search').val().trim()
-            market.search(what)
+
+            if (!what.length)
+            {
+                az.showModal('Please type in the search term')
+            }
+            else
+            {
+                $('#results tbody').html('')
+                market.search(what)
+            }
+        }
+
+        $('#btn-search').click(go)
+        $('#inp-search').keydown(function(e)
+        {
+            if(e.keyCode == 13) go()
         })
     },
 
     search: function(what)
     {
-        var i, store
+        var i
 
         for (i in stores)
         {
-            store = stores[i]
-            $.ajax(
+            (function(i)
             {
-                url: '/sys/market/scan/' + store.scan + '.php?showNoStock=1&showNoPrice=1&searchText=' + encodeURIComponent(what),
-                type: 'GET',
-                success: function(json)
+                $.ajax(
                 {
-                    json = JSON.parse(json.replace(/(\r\n|\n|\r)/gm, "<br>"))
-
-                    var j, item, html, price, img
-                    for (j in json.body)
+                    url: '/sys/market/scan/' + stores[i].scan + '.php?showNoStock=1&showNoPrice=1&searchText=' + encodeURIComponent(what),
+                    type: 'GET',
+                    success: function(json)
                     {
-                        item = json.body[j]
+                        json = JSON.parse(json.replace(/(\r\n|\n|\r)/gm, "<br>"))
 
-                        price = item.price
-                        if (price - 0 === 0) price = '&mdash;'
-
-                        if (item.img.length)
+                        var j, item, html, price, img, name
+                        for (j in json.body)
                         {
-                            img = '<img class="item-icon" src="' + item.img + '" onerror=market.imageCheck(this)>'
+                            item = json.body[j]
+
+                            price = item.price
+                            if (price - 0 === 0) price = '&mdash;'
+
+                            if (item.img.length)
+                            {
+                                img = '<a target="_blank" href="' + item.img + '"><img class="item-icon" src="' + item.img + '" onerror=market.reloadImage(this)></a>'
+                            }
+                            else img = '&mdash;'
+
+                            item.name = item.name.replace(/(&amp;)/gm, '&').replace(/(&quot;)/gm, '"')
+
+                            if (item.descr.length)
+                            {
+                                name = '<div>' + item.name + '</div>'
+                                name += '<div></div>'
+                            }
+                            else name = item.name
+
+                            html = '<tr>'
+                            html += '<td>' + name + '</td>'
+                            html += '<td>' + price + '</td>'
+                            html += '<td>' + stores[i].name + '</td>'
+                            html += '<td>' + img + '</td>'
+                            html += '</tr>'
+
+                            $('#results tbody').append(html)
                         }
-                        else img = '&mdash;'
-
-                        html = '<tr>'
-                        html += '<td>' + item.name + '</td>'
-                        html += '<td>' + price + '</td>'
-                        html += '<td>' + store.name + '</td>'
-                        html += '<td>' + img + '</td>'
-                        html += '</tr>'
-
-                        $('#results tbody').append(html)
                     }
-                }
-            })
+                })
+            })(i);
         }
     },
 
-    imageCheck: function(obj)
+    reloadImage: function(obj)
     {
-        $(obj).parent().html('<a target="_blank" href="' + $(obj).attr('src') + '">[ reload ]</a>')
+        $(obj).parent().html('[ reload ]')
     }
 }
 
