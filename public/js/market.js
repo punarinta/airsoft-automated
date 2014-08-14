@@ -13,12 +13,13 @@ var market =
             else
             {
                 $('#results tbody').html('')
+                $('#btn-search').text('Searching...')
                 market.search(what)
             }
         }
 
         $('#btn-search').click(go)
-        $('#inp-search').keydown(function(e)
+        $('#inp-search').keypress(function(e)
         {
             if(e.keyCode == 13) go()
         })
@@ -50,18 +51,13 @@ var market =
 
                             if (item.img.length)
                             {
-                                img = '<a target="_blank" href="' + item.img + '"><img class="item-icon" src="' + item.img + '" onerror=market.reloadImage(this)></a>'
+                                img = '<a target="_blank" href="' + item.img + '"><img class="item-icon" title="Open in original size" src="' + item.img + '" onerror=market.reloadImage(this)></a>'
                             }
                             else img = '&mdash;'
 
                             item.name = item.name.replace(/(&amp;)/gm, '&').replace(/(&quot;)/gm, '"')
 
-                            if (item.descr.length)
-                            {
-                                name = '<div>' + item.name + '</div>'
-                                name += '<div></div>'
-                            }
-                            else name = item.name
+                            name = item.name
 
                             html = '<tr>'
                             html += '<td>' + name + '</td>'
@@ -69,6 +65,9 @@ var market =
                             html += '<td>' + stores[i].name + '</td>'
                             html += '<td>' + img + '</td>'
                             html += '</tr>'
+
+                            $('#results table').show()
+                            $('#btn-search').text('Find')
 
                             $('#results tbody').append(html)
                         }
