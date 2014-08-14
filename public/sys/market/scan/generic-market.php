@@ -236,7 +236,7 @@ class ScanMarket
             $dt = sprintf("%01.3f", $this->finishedAt - $this->startedAt);
         }
     
-		$res = '_jqjsp({"shopName":"' . $this->shopName . '",';
+		$res = '{"shopName":"' . $this->shopName . '",';
 		$res.= '"body": [';
     
 		$max = sizeof($this->items);
@@ -253,7 +253,7 @@ class ScanMarket
 		$res.= '"isError": "'  . ($this->isError ? '1':'0') . '",';
 		$res.= '"logic": "'    . $this->shopLogic . '",';
 		$res.= '"elapsed": "'  . $dt . '",';
-		$res.= '"over9000": "' . ($this->tooMuchFound ? '1':'0') . '"});';
+		$res.= '"over9000": "' . ($this->tooMuchFound ? '1':'0') . '"}';
         
 		return $res;
 	}
