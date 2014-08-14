@@ -7,7 +7,7 @@ class ScanMarket
 	public $shopName = '';							// official shop name
 	public $shopLogic = 1;							// 1 - AND; 2 - OR; 3 - complex; 4 - exact phrase
 	public $itemsType = 1;							// 1 - search; 2 - search & buy
-    
+
     protected $debug = false;						// for in-vivo debugging
 	protected $showNoStock = false;					// set TRUE to allow items being out of stock
 	protected $showNoPrice = false;					// set TRUE to allow items with unknown price
@@ -24,8 +24,8 @@ class ScanMarket
 	protected $minPrice = 0;						// minimum price, can be either submitted or postfiltered
 	protected $maxPrice = 0;						// maximum price, --//--
 	protected $category = 0;						// 0 - all, 1 - rifles
-  
-	protected $textPosition = 0;					// used as temporary "file pointer"
+    protected $categoryManual = false;			    // true to control it manually
+  	protected $textPosition = 0;					// used as temporary "file pointer"
     
 	public function __construct($name, $char = 'UTF-8', $type = 1)
 	{
@@ -68,7 +68,7 @@ class ScanMarket
      */
     protected function grab($from, $t1, $t2, $plus = 0)
 	{
-		$m1 = strpos($from, $t1, $this->textPosition);
+		$m1 = @strpos($from, $t1, $this->textPosition);
 
 		if ($m1 === false)
         {
@@ -165,9 +165,9 @@ class ScanMarket
         }
 
         // be accurate here
-		if ($this->category == 1)
+		if ($this->category == 1 && !$this->categoryManual)
 		{
-			if ($item->price && $item->price < 2000)
+			if ($item->price && $item->price < 1000)
             {
                 return 0;
             }

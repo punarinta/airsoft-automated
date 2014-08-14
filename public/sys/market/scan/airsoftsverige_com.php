@@ -11,7 +11,13 @@ class Airsoftsverige_Com extends ScanForum
         $password = 'MyAirsoftsverige';
         $userId  = 0;
         $sessionId = '';
-        $forumIds = [247];
+        $forumIds =
+        [
+            247=>1,250=>1,251=>1,252=>1,253=>1,254=>1,
+            248,249,255,256,257,258,259,260,261,
+        ];
+
+        $this->categoryManual = true;
 
         // 1. Connect with my credentials
 
@@ -56,8 +62,13 @@ class Airsoftsverige_Com extends ScanForum
 
         $this->forumInit();
 
-        foreach ($forumIds as $forumId)
+        foreach ($forumIds as $forumId => $category)
         {
+            if ($this->category && $this->category != $category)
+            {
+                continue;
+            }
+
             curl_setopt($this->ch, CURLOPT_URL, 'http://airsoftsverige.com/forum/viewforum.php?f=' . $forumId);
             $html = curl_exec($this->ch);
 
