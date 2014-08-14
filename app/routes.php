@@ -58,6 +58,10 @@ Route::get('api/ticket/check-in/{barcode}', array('uses' => 'ApiTicketController
 Route::get('testing/populate', array('uses' => 'TestingController@populate'));
 
 
+// Market
+Route::get('/market', array('uses' => 'Tools\MarketController@index', 'as' => 'market'));
+
+
 // REST API
 
 Route::resource('api/country', 'ApiCountryController');
