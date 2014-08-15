@@ -29,27 +29,21 @@
     <div id="aux">BB with a mass of &nbsp;<input id="sp3" class="my-input" maxlength="5" value="0.2">&nbsp; gram will have energy of <span id="J">0.8281</span> J.</div>
 </div>
 <script type="text/javascript">
-var sp,m
-$('#sp1,#sp2').keyup(function()
-{
-    sp = parseInt($(this).val(),10)
-    if(!sp) return
-    if($(this).attr('id')=='sp1') $('#sp2').val((sp/3.28084).toString().substr(0,5))
-    else $('#sp1').val((sp*3.28084).toString().substr(0,6))
-    $('#sp3').keyup()
-})
-$('#sp3').keyup(function()
-{
-    sp = parseInt($('#sp2').val(),10)
-    m = parseFloat($(this).val())
-    if(!m) return
-    $('#J').html((sp*sp*m/2000).toString().substr(0,6))
-})
+var v,m
+$('#sp1,#sp2').keyup(function(){
+v=parseInt($(this).val(),10)
+if(!v)return
+if($(this).attr('id')=='sp1')$('#sp2').val((v/3.28084).toString().substr(0,5))
+else $('#sp1').val((v*3.28084).toString().substr(0,6))
+$('#sp3').keyup()})
+$('#sp3').keyup(function(){
+v=parseInt($('#sp2').val(),10)
+m=parseFloat($(this).val())
+if(!m)return
+$('#J').html((v*v*m/2000).toString().substr(0,6))})
 $('#sp1').focus()
-$('#btn-aux').click(function()
-{
-    $('#aux').slideToggle(400)
-    return false
-})
+$('#btn-aux').click(function(){
+$('#aux').slideToggle(400)
+return false})
 </script>
 @stop
