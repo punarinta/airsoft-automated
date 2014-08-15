@@ -59,7 +59,8 @@ Route::get('testing/populate', array('uses' => 'TestingController@populate'));
 
 
 // Market
-Route::get('/market', array('uses' => 'Tools\MarketController@index', 'as' => 'market'));
+Route::get('/market', array('uses' => 'Extra\MarketController@index', 'as' => 'market'));
+Route::get('/tools/fps', array('uses' => 'Extra\ToolsController@fps', 'as' => 'fps'));
 
 
 // REST API

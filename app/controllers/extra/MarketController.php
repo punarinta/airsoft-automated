@@ -1,6 +1,6 @@
 <?php
 
-namespace Tools;
+namespace Extra;
 
 class MarketController extends \BaseController
 {
