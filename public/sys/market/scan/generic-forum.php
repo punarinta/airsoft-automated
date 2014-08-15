@@ -29,7 +29,7 @@ class ScanForum extends ScanMarket
 		$found = 0;
 		foreach ($this->queryArray as $a)
         {
-            if (mb_strpos($cmp, $a, 0) !== false)
+            if (mb_strpos($cmp, mb_strtolower($a), 0) !== false)
             {
                 $found++;
             }
