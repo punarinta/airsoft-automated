@@ -62,7 +62,8 @@ var stores =
     {scan:'airsoftsverige_com',name:'AirsoftSverige'},
     {scan:'strikerairsoft_se',name:'Striker Airsoft'},
     {scan:'rodastjarnan_com',name:'Röda Stjärnan'},
-    {scan:'frysen_nu',name:'Frysen Airsoft'}
+    {scan:'frysen_nu',name:'Frysen Airsoft'},
+    {scan:'airsoftbutiken_se',name:'Airsoftbutiken'}
 ]
 </script>
 <script src="/js/jquery.tinysort.min.js"></script>
