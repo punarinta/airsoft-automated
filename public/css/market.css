@@ -1,5 +1,5 @@
 #controls {background:#f0f0f0;border-radius:5px;padding:10px;white-space:nowrap;text-align:center}
-#inp-search {width:50%;background:url('/gfx/si/zoom.png') left no-repeat;background-color:#fff;padding:0 5px 0 23px;font-size:16px;height:28px;color:#444;width:850px;background-position:4px 5px;box-shadow:inset 0 2px 3px 1px rgba(160,160,160,0.1);outline:none;border-radius:5px}
+#inp-search {width:50%;background:url('/gfx/si/zoom.png') left no-repeat;background-color:#fff;padding:0 5px 0 23px;font-size:16px;height:28px;color:#444;background-position:4px 5px;box-shadow:inset 0 2px 3px 1px rgba(160,160,160,0.1);outline:none;border-radius:5px}
 #btn-search {font-size:16px;font-weight:normal;border-radius:5px;padding-bottom:3px;height:31px}
 .item-icon {max-height:75px;border:2px solid transparent;border-radius:4px}
 .item-icon:hover {border-color:#4096EE}
