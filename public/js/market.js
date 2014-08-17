@@ -55,6 +55,10 @@ var market =
         {
             window.open(market.currentItem.url, '_blank')
         })
+        $('#btn-show-filters').click(function()
+        {
+            $('#filter-area').toggle(400)
+        })
 
         var q = market.getHash('q')
         if (q.length)

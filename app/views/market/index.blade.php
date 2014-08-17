@@ -11,8 +11,26 @@
 @section('content')
 <div class="window-box-1">
     <div id="controls">
+        <button id="btn-show-filters" class="my-btn">Filters</button>
         <input type="text" class="my-input" id="inp-search" autocomplete="on" placeholder="What do you want to find today?" autofocus/>&nbsp;
         <button id="btn-search" class="my-btn">Find</button>
+        <div id="filter-area" class="hidden">
+            <hr class="my-hr"/>
+            <table>
+                <tr>
+                    <td>Stock only:</td>
+                    <td><input type="checkbox" class="show-oos"/></td>
+                </tr>
+                <tr>
+                    <td>Min. price:</td>
+                    <td><input type="text" class="my-input min-price w30"/></td>
+                </tr>
+                <tr>
+                    <td>Max. price:</td>
+                    <td><input type="text" class="my-input max-price w30"/></td>
+                </tr>
+            </table>
+        </div>
     </div>
     <div id="item-viewer" class="hidden">
         <hr class="my-hr"/>
