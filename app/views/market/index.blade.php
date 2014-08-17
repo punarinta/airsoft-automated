@@ -45,9 +45,9 @@
         <table class="my-table">
             <thead>
             <tr>
-                <th><a class="link" href="javascript:market.sortTable(0)">Item</a></th>
-                <th><a class="link" href="javascript:market.sortTable(1)">Price</a></th>
-                <th><a class="link" href="javascript:market.sortTable(2)">Store</a></th>
+                <th><a class="link" onclick="market.sortTable(this,0)">Item</a> <span></span></th>
+                <th><a class="link" onclick="market.sortTable(this,1)">Price</a> <span></span></th>
+                <th><a class="link" onclick="market.sortTable(this,2)">Store</a> <span></span></th>
                 <th>Image</th>
             </tr>
             </thead>

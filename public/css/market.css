@@ -13,5 +13,5 @@
 #filter-area .my-hr {background:#ccc}
 #filter-area .show-oos {margin-top:7px}
 #filter-area .my-input {width:50px}
-#results a {color:#15C;text-decoration:none}
+#results a {color:#15C;text-decoration:none;cursor:pointer}
 #results a:hover {color:#DD4B39}

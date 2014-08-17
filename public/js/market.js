@@ -165,10 +165,12 @@ var market =
         $(obj).parent().html('[ reload ]')
     },
 
-    sortTable: function(nr)
+    sortTable: function(that, nr)
     {
         aAsc[nr] = aAsc[nr]=='asc'?'desc':'asc'
+        $(that).parent().find('span').html(aAsc[nr]=='asc'?'&#9650;':'&#9660;')
         $('#results>table>tbody>tr').tsort('td:eq('+nr+')[abbr]',{order:aAsc[nr]})
+        return false
     }
 }
 
