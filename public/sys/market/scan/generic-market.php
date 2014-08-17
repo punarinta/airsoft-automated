@@ -68,11 +68,18 @@ class ScanMarket
      */
     protected function grab($from, $t1, $t2, $plus = 0)
 	{
-		$m1 = @strpos($from, $t1, $this->textPosition);
-
-		if ($m1 === false)
+        if ($t1 != null)
         {
-            return null;
+            $m1 = @strpos($from, $t1, $this->textPosition);
+
+            if ($m1 === false)
+            {
+                return null;
+            }
+        }
+        else
+        {
+            $m1 = $this->textPosition;
         }
 
 		if (!$t2)

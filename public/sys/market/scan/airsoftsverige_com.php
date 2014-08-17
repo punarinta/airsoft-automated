@@ -62,87 +62,55 @@ class Airsoftsverige_Com extends ScanForum
 
         $this->forumInit();
 
-        foreach ($forumIds as $forumId => $category)
+        $url = 'http://www.airsoftsverige.com/forum/search.php?terms=all&author=&fid%5B%5D=21&sc=1&sf=titleonly&sr=posts&sk=t&sd=d&st=0&ch=-1&t=0&submit=S%C3%B6k&keywords='.$this->query;
+        curl_setopt($this->ch, CURLOPT_URL, $url);
+        $html = curl_exec($this->ch);
+
+        if ($this->grab($html, 'Inga inlägg hittades', null))
         {
-            if ($this->category && $this->category != $category)
+            return 2;
+        }
+
+        while (1)
+        {
+            if (!$firstgrab = $this->grab($html, '<div class="postbody">', null))
+            {
+                break;
+            }
+
+            $item = new ScanMarketItem($this->itemsType);
+
+            $item->url = 'http://airsoftsverige.com/forum' . $this->grab($html, '<a href=".', '">');
+            $name = strip_tags($this->grab($html, null, '</a></h3>'));
+            $name = str_replace('">', '', $name);
+
+            if (!$this->parseForum($name))
             {
                 continue;
             }
 
-            curl_setopt($this->ch, CURLOPT_URL, 'http://airsoftsverige.com/forum/viewforum.php?f=' . $forumId);
-            $html = curl_exec($this->ch);
+            $item->name = $name;
 
-            // set pointer
-            $this->grab($html, '<table class="forums ">', null);
+            $descr = $this->grab($html, '<div class="content">', '</div>'."\n");
+            $item->descr = $descr;
 
-            while (1)
+            preg_match_all('/\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$]/i', $descr, $result, PREG_PATTERN_ORDER);
+            $result = $result[0];
+
+            if (count($result))
             {
-                $item = new ScanMarketItem($this->itemsType);
+                $item->img = $result[0];
+            }
 
-                if (!$this->grab($html, '<td class="topic">', null))
-                {
-                    break;
-                }
-
-                $url = 'http://airsoftsverige.com/forum' . $this->grab($html, '<a href=".', '" class');
-                $title = $this->grab($html, 'topictitle">', '</a>');
-
-                if (!$this->parseForum($title))
-                {
-                    continue;
-                }
-
-                $item->name = $title;
-                $item->url = $url;
-                $item->id = explode('t=', $url);
-                $item->id = (int) end($item->id);
-                
-                // get description
-                $data = $this->readItem($url);
-
-                $item->descr = $data['descr'];
-                $item->price = (int) $data['price'];
-
-                if (count($data['links']))
-                {
-                    $item->img = $data['links'][0];
-                }
-
-                if ($this->pushRow($item) == -1)
-                {
-                    break;
-                }
+            if ($this->pushRow($item) == -1)
+            {
+                break;
             }
         }
 
         curl_close($this->ch);
 
         return 0;
-    }
-
-    /**
-     * @param $url
-     * @return array
-     */
-    protected function readItem($url)
-    {
-        $url = str_replace('&amp;', '&', $url);
-        curl_setopt($this->ch, CURLOPT_URL, $url);
-        $html = curl_exec($this->ch);
-
-        $grabber = new ScanMarket('dummy-name');
-
-        $descr = $grabber->grab($html, '<div class="content">', '</div>'."\n");
-
-        preg_match_all('/\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$]/i', $descr, $result, PREG_PATTERN_ORDER);
-        $result = $result[0];
-
-        return array
-        (
-            'descr' => $descr,
-            'price' => 0,
-            'links' => $result,
-        );
     }
 }
 
