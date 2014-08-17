@@ -1,5 +1,6 @@
 var market =
 {
+    documentTitle: document.title,
     init: function()
     {
         var go = function()
@@ -22,12 +23,43 @@ var market =
         $('#inp-search').keypress(function(e)
         {
             if(e.keyCode == 13) go()
+        }).keyup(function()
+        {
+            var q = $(this).val().trim()
+            if (!q.length) document.title = market.documentTitle
+            else document.title = 'Search for: ' + q
+            market.setupHash()
         })
 
         $('#results table').on('click', 'tr', function()
         {
         //    az.showModal($(this).find('.hidden').html())
         })
+
+        var q = market.getHash('q')
+        if (q.length)
+        {
+            setTimeout(function(){$('#inp-search').val(q);go()}, 500)
+        }
+    },
+
+    setupHash: function()
+    {
+        var hash = '', q = $('#inp-search').val().trim()
+        if (q.length) hash = 'q=' + q
+        location.hash = hash
+    },
+
+    getHash: function(k)
+    {
+        var i, p, h = window.location.hash.substr(1)
+        h = h.split('&')
+        for (i in h)
+        {
+            p=h[i].split('=')
+            if (p.length == 2 && p[0] == k) return p[1]
+        }
+        return ''
     },
 
     search: function(what)
