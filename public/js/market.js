@@ -32,7 +32,7 @@ var market =
 
     search: function(what)
     {
-        var i
+        var i, scanCounter = 0
 
         for (i in stores)
         {
@@ -79,6 +79,12 @@ var market =
                             $('#btn-search').text('Find')
 
                             $('#results tbody').append(html)
+                        }
+
+                        scanCounter++
+                        if (scanCounter == stores.length)
+                        {
+                            $('#btn-search').text('Find')
                         }
                     }
                 })
