@@ -92,6 +92,7 @@ class Airsoftsverige_Com extends ScanForum
             $item->name = $name;
 
             $descr = $this->grab($html, '<div class="content">', '</div>'."\n");
+
             $item->descr = $descr;
 
             preg_match_all('/\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)[-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$]/i', $descr, $result, PREG_PATTERN_ORDER);

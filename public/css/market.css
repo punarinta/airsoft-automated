@@ -7,3 +7,5 @@
 #results table tr td:nth-child(1) {text-align:left}
 #results tbody td {cursor:pointer;height:89px}
 #results tbody tr:hover td {background:#f0f0ff}
+#item-viewer {width:100%;height:100%}
+#item-viewer .inline-attachment {display:none}

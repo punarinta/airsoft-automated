@@ -1,6 +1,8 @@
 var market =
 {
+    currentItem: null,
     documentTitle: document.title,
+
     init: function()
     {
         var go = function()
@@ -33,7 +35,25 @@ var market =
 
         $('#results table').on('click', 'tr', function()
         {
-        //    az.showModal($(this).find('.hidden').html())
+            market.currentItem = JSON.parse(decodeURIComponent($(this).data('item')))
+
+            $('#item-viewer').show()
+                .find('.content').html(market.currentItem.descr).show()
+                .find('img').on('error', function()
+            {
+                $(this).hide()
+            })
+            $('#results').hide()
+        })
+
+        $('#item-viewer .back').click(function()
+        {
+            $('#results,#item-viewer').toggle()
+        })
+
+        $('#item-viewer .open').click(function()
+        {
+            window.open(market.currentItem.url, '_blank')
         })
 
         var q = market.getHash('q')
@@ -92,20 +112,22 @@ var market =
                             }
                             else img = '&mdash;'
 
+                            // hellfire
+                            item.url = item.url.replace(/(&amp;)/gm, '&').replace(/(&quot;)/gm, '"').replace(/(&amp;)/gm, '&').replace(/(&quot;)/gm, '"')
+
                             item.name = item.name.replace(/(&amp;)/gm, '&').replace(/(&quot;)/gm, '"')
                             item.descr = item.descr.replace(/(&lt;)/gm, '<').replace(/(&gt;)/gm, '>').replace(/(&qqu;ot;)/gm, '"').replace(/(&amp;)/gm, '&').replace(/(&quot;)/gm, '"')
 
                             name = item.name
 
-                            html = '<tr>'
+                            html = '<tr data-item="'+encodeURIComponent(JSON.stringify(item))+'">'
                             html += '<td>' + name + '</td>'
                             html += '<td>' + price + '</td>'
                             html += '<td>' + stores[i].name + '</td>'
                             html += '<td>' + img + '</td>'
-                            html += '<td class="hidden">' + item.descr + '</td>'
                             html += '</tr>'
 
-                            console.log(item.descr)
+                        //    console.log(item.descr)
 
                             $('#results table').show()
                             $('#btn-search').text('Find')
