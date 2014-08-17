@@ -60,7 +60,9 @@
 var stores =
 [
     @foreach($shops as $shop)
+    @if ($shop->active)
     {scan:'{{ $shop->plugin }}',name:'{{ $shop->name }}'},
+    @endif
     @endforeach
 ]
 </script>

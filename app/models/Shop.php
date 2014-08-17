@@ -51,4 +51,20 @@ class Shop extends Eloquent
     {
         $this->plugin = $plugin;
     }
+
+    /**
+     * @return int
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param int $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    }
 }

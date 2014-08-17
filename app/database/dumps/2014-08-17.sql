@@ -196,6 +196,7 @@ CREATE TABLE `shop` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `plugin` varchar(64) NOT NULL,
+  `active` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -206,7 +207,7 @@ CREATE TABLE `shop` (
 
 LOCK TABLES `shop` WRITE;
 /*!40000 ALTER TABLE `shop` DISABLE KEYS */;
-INSERT INTO `shop` VALUES (1,'AirsoftSverige','airsoftsverige_com'),(2,'Röda Stjärnan','rodastjarnan_com'),(3,'Frysen Airsoft','frysen_nu'),(4,'Airsoftbutiken','airsoftbutiken_se'),(5,'Wizeguy','wizeguy_se'),(6,'Striker Airsoft','strikerairsoft_se');
+INSERT INTO `shop` VALUES (1,'AirsoftSverige','airsoftsverige_com',1),(2,'Röda Stjärnan','rodastjarnan_com',1),(3,'Frysen Airsoft','frysen_nu',1),(4,'Airsoftbutiken','airsoftbutiken_se',1),(5,'Wizeguy','wizeguy_se',1),(6,'Striker Airsoft','strikerairsoft_se',1);
 /*!40000 ALTER TABLE `shop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,4 +374,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-17 18:03:13
+-- Dump completed on 2014-08-17 18:51:40
