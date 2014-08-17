@@ -143,11 +143,7 @@ var market =
                             html += '<td>' + img + '</td>'
                             html += '</tr>'
 
-                        //    console.log(item.descr)
-
                             $('#results table').show()
-                            $('#btn-search').text('Find')
-
                             $('#results tbody').append(html)
                         }
 

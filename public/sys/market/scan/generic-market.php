@@ -26,7 +26,8 @@ class ScanMarket
 	protected $category = 0;						// 0 - all, 1 - rifles
     protected $categoryManual = false;			    // true to control it manually
   	protected $textPosition = 0;					// used as temporary "file pointer"
-    
+  	protected $canBeVoted = false;				    // whether user can vote for this shop
+
 	public function __construct($name, $char = 'UTF-8', $type = 1)
 	{
 		$this->startedAt = microtime(true);

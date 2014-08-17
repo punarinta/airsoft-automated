@@ -35,7 +35,7 @@ class Airsoftbutiken_Se extends ScanMarket
             $stock = $this->grab($html, '<div class="variant_stock">', '</div>');
 
             $item->stock = (strpos($stock, 'I Lager') !== false) ? 1 : 0;
-            $item->price = (int) trim($this->grab($html, '<div class="price">', '</div>'));
+            $item->price = (int) preg_replace('/[^0-9,]/', '', trim($this->grab($html, '<div class="price">', '</div>')));
 
             if ($this->pushRow($item) == -1)
             {
