@@ -17,6 +17,9 @@ class ApiCountryController extends BaseController
             foreach ($countries as $country)
             {
                 $countriesData[] = $country->toArray();
+
+                // TODO: this is a temporary plug to show Sweden only
+                break;
             }
 
             return $countriesData;
