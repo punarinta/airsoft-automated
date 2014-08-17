@@ -11,4 +11,5 @@
 #item-viewer .inline-attachment {display:none}
 #filter-area {text-align:left;padding-top:3px}
 #filter-area .my-hr {background:#ccc}
-.show-oos {margin-top:7px}
+#filter-area .show-oos {margin-top:7px}
+#filter-area .my-input {width:50px}

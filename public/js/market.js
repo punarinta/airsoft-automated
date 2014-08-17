@@ -94,9 +94,17 @@ var market =
         {
             (function(i)
             {
+                var suffix = '&showNoPrice=1'
+
+                if ($('.show-oos','#controls').is(':checked')) suffix += '&showNoStock=0'
+                else suffix += '&showNoStock=1'
+
+                if ($('.min-price','#controls').val().trim().length) suffix += '&minPrice=' + $('.min-price','#controls').val()
+                if ($('.max-price','#controls').val().trim().length) suffix += '&maxPrice=' + $('.max-price','#controls').val()
+
                 $.ajax(
                 {
-                    url: '/sys/market/scan/' + stores[i].scan + '.php?showNoStock=1&showNoPrice=1&searchText=' + encodeURIComponent(what),
+                    url: '/sys/market/scan/' + stores[i].scan + '.php?searchText=' + encodeURIComponent(what) + suffix,
                     type: 'GET',
                     success: function(json)
                     {

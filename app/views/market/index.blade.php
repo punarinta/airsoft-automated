@@ -23,11 +23,11 @@
                 </tr>
                 <tr>
                     <td>Min. price:</td>
-                    <td><input type="text" class="my-input min-price w30"/></td>
+                    <td><input type="text" class="my-input min-price"/></td>
                 </tr>
                 <tr>
                     <td>Max. price:</td>
-                    <td><input type="text" class="my-input max-price w30"/></td>
+                    <td><input type="text" class="my-input max-price"/></td>
                 </tr>
             </table>
         </div>
