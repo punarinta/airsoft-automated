@@ -134,6 +134,8 @@ var market =
 
                             name = item.name
 
+                            if (!item.stock) name += '&nbsp; <span class="oos">(out of stock)</span>'
+
                             html = '<tr data-item="'+encodeURIComponent(JSON.stringify(item))+'">'
                             html += '<td abbr="' + encodeURIComponent(name) + '">' + name + '</td>'
                             html += '<td abbr="' + price + '">' + price + '</td>'
