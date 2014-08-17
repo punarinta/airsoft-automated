@@ -84,7 +84,7 @@ class Airsoftsverige_Com extends ScanForum
             $name = strip_tags($this->grab($html, null, '</a></h3>'));
             $name = str_replace('">', '', $name);
 
-            if (!$this->parseForum($name))
+            if (!$this->parseForum($name, true))
             {
                 continue;
             }

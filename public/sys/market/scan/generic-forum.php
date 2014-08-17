@@ -15,9 +15,11 @@ class ScanForum extends ScanMarket
 	
 	protected function parseForum($text, $wtsOnly = false)				// works with UTF-8
 	{
-		$cmp = mb_strtolower($text);
+		$cmp = strtolower($text);
 
+		if (mb_strpos($cmp, 'sÅld', 0) !== false) return 0;
 		if (mb_strpos($cmp, 'såld', 0) !== false) return 0;
+		if (mb_strpos($cmp, 'lÅs', 0) !== false) return 0;
 		if (mb_strpos($cmp, 'lås', 0) !== false) return 0;
 		if (mb_strpos($cmp, 'arkivera', 0) !== false) return 0;
 
