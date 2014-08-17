@@ -45,9 +45,9 @@
         <table class="my-table">
             <thead>
             <tr>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Store</th>
+                <th><a class="link" href="javascript:market.sortTable(0)">Item</a></th>
+                <th><a class="link" href="javascript:market.sortTable(1)">Price</a></th>
+                <th><a class="link" href="javascript:market.sortTable(2)">Store</a></th>
                 <th>Image</th>
             </tr>
             </thead>
@@ -63,5 +63,6 @@ var stores =
     {scan:'strikerairsoft_se',name:'Striker Airsoft'}
 ]
 </script>
+<script src="/js/jquery.tinysort.min.js"></script>
 <script src="/js/market.js"></script>
 @stop

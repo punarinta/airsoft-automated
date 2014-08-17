@@ -1,3 +1,4 @@
+var aAsc = []
 var market =
 {
     currentItem: null,
@@ -35,6 +36,7 @@ var market =
 
         $('#results table').on('click', 'tr', function()
         {
+            if (!$(this).data('item')) return
             market.currentItem = JSON.parse(decodeURIComponent($(this).data('item')))
 
             $('#item-viewer').show()
@@ -133,9 +135,9 @@ var market =
                             name = item.name
 
                             html = '<tr data-item="'+encodeURIComponent(JSON.stringify(item))+'">'
-                            html += '<td>' + name + '</td>'
-                            html += '<td>' + price + '</td>'
-                            html += '<td>' + stores[i].name + '</td>'
+                            html += '<td abbr="' + encodeURIComponent(name) + '">' + name + '</td>'
+                            html += '<td abbr="' + price + '">' + price + '</td>'
+                            html += '<td abbr="' + encodeURIComponent(stores[i].name) + '">' + stores[i].name + '</td>'
                             html += '<td>' + img + '</td>'
                             html += '</tr>'
 
@@ -161,6 +163,12 @@ var market =
     reloadImage: function(obj)
     {
         $(obj).parent().html('[ reload ]')
+    },
+
+    sortTable: function(nr)
+    {
+        aAsc[nr] = aAsc[nr]=='asc'?'desc':'asc'
+        $('#results>table>tbody>tr').tsort('td:eq('+nr+')[abbr]',{order:aAsc[nr]})
     }
 }
 
