@@ -9,6 +9,11 @@ class MarketController extends \BaseController
      */
     public function index()
     {
-        return \View::make('market.index');
+        $shops = \Shop::all();
+
+        return \View::make('market.index', array
+        (
+            'shops' => $shops,
+        ));
     }
 }

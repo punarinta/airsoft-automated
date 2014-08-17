@@ -59,12 +59,9 @@
 <script>
 var stores =
 [
-    {scan:'airsoftsverige_com',name:'AirsoftSverige'},
-    {scan:'strikerairsoft_se',name:'Striker Airsoft'},
-    {scan:'rodastjarnan_com',name:'Röda Stjärnan'},
-    {scan:'frysen_nu',name:'Frysen Airsoft'},
-    {scan:'airsoftbutiken_se',name:'Airsoftbutiken'},
-    {scan:'wizeguy_se',name:'Wizeguy'}
+    @foreach($shops as $shop)
+    {scan:'{{ $shop->plugin }}',name:'{{ $shop->name }}'},
+    @endforeach
 ]
 </script>
 <script src="/js/jquery.tinysort.min.js"></script>
