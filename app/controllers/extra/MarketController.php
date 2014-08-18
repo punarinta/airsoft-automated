@@ -11,6 +11,16 @@ class MarketController extends \BaseController
     {
         $shops = \Shop::all();
 
+        foreach ($shops as $k => $shop)
+        {
+            $votes = \DB::table('shop_vote')
+                ->select(array(\DB::raw('SUM(vote) as rating')))
+                ->where('shop_id', '=', $shop->getId())
+                ->get();
+
+            $shops[$k]->rating = (int) $votes[0]->rating;
+        }
+
         return \View::make('market.index', array
         (
             'shops' => $shops,
