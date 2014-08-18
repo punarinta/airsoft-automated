@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 18, 2014 at 09:21 AM
+-- Generation Time: Aug 18, 2014 at 12:02 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.4.17
 
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `shop` (
   `name` varchar(64) NOT NULL,
   `plugin` varchar(64) NOT NULL,
   `active` tinyint(3) unsigned NOT NULL DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `shop`
@@ -194,7 +194,8 @@ INSERT INTO `shop` (`id`, `name`, `plugin`, `active`) VALUES
 (5, 'Wizeguy', 'wizeguy_se', 1),
 (6, 'Striker Airsoft', 'strikerairsoft_se', 1),
 (7, 'Airsoftstore', 'airsoftstore_se', 1),
-(8, 'Tactical Store', 'tacticalstore_se', 1);
+(8, 'Tactical Store', 'tacticalstore_se', 1),
+(9, 'Combatzone', 'combatzone_se', 1);
 
 -- --------------------------------------------------------
 
@@ -426,7 +427,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 -- AUTO_INCREMENT for table `shop`
 --
 ALTER TABLE `shop`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `team`
 --

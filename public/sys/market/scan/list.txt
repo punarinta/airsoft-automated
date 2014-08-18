@@ -4,7 +4,7 @@
 + airsoftstore.se
 + tacticalstore.se
 - malmoairsoft.se
-- combatzone.se
++ combatzone.se
 - garderoben.se
 - miltac.se
 - batalj.com
