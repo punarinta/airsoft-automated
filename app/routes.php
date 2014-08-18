@@ -60,6 +60,7 @@ Route::get('testing/populate', array('uses' => 'TestingController@populate'));
 
 // Market
 Route::get('/market', array('uses' => 'Extra\MarketController@index', 'as' => 'market'));
+Route::get('/market/vote/{shop_id}', array('uses' => 'Extra\MarketController@vote', 'as' => 'market-vote'))->before('auth');
 Route::get('/tools/fps', array('uses' => 'Extra\ToolsController@fps', 'as' => 'fps'));
 
 
