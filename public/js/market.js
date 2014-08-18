@@ -162,7 +162,7 @@ var market =
 
                             if (!item.stock) name += '&nbsp; <span class="oos">(out of stock)</span>'
 
-                            var storeName = stores[i].name + '<br>votes: ' + stores[i].rating + ' <a class="vote-shop link" data-shop-id="' + stores[i].id + '">[upvote]</a>'
+                            var storeName = stores[i].name + '<br>' + stores[i].rating + ' x <div class="thumb"></div>&nbsp; <a class="vote-shop link" data-shop-id="' + stores[i].id + '">[upvote]</a>'
 
                             html = '<tr data-item="' + encodeURIComponent(JSON.stringify(item)) + '">'
                             html += '<td abbr="' + encodeURIComponent(name) + '">' + name + '</td>'
