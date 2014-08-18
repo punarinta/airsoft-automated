@@ -31,8 +31,12 @@ class Rodastjarnan_Com extends ScanMarket
             $item->img = $this->grab($html, '<img src="', '">');
             $item->id = $this->grab($html, 'Produkt</td><td>', '</td><td><a');
             $item->code = $item->id;
-            $item->name = $this->grab($html, 'searchproduct">', '</a>');
-            $item->descr = $item->name;
+            $name = $this->grab($html, 'searchproduct">', '</a>');
+
+            if (strpos($name, 'Airsoft: ') === 0) $name = str_replace('Airsoft: ', '', $name);
+
+            $item->name = $name;
+            $item->descr = $name;
             $item->price = $this->grab($html, '<nowrap>', ' kr</nowrap>');
 
             $item->stock = ($this->grab($html, 'Webb: ', ' st') == '0') ? 0 : 1;
