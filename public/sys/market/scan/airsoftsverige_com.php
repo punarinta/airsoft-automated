@@ -109,6 +109,10 @@ class Airsoftsverige_Com extends ScanForum
             }
         }
 
+        // logout
+        curl_setopt($this->ch, CURLOPT_URL, 'http://airsoftsverige.com/forum/ucp.php?mode=logout&sid=' . $sessionId);
+        curl_exec($this->ch);
+
         curl_close($this->ch);
 
         return 0;
