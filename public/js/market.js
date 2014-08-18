@@ -46,6 +46,22 @@ var market =
                 $(this).hide()
             })
             $('#results').hide()
+        }).on('click', 'a.vote-shop', function(e)
+        {
+            if (!loggedIn) az.showModal('You need to be logged in to be abe to vote')
+            else
+            {
+                $.ajax(
+                {
+                    url: '/market/vote/' + ($(this).data('shop-id') - 0),
+                    type: 'GET',
+                    success: function(json)
+                    {
+                        az.showModal(json.data ? 'Thanks' : 'You have already voted for this shop')
+                    }
+                })
+            }
+            e.stopPropagation()
         })
 
         $('#item-viewer .back').click(function()
@@ -136,10 +152,12 @@ var market =
 
                             if (!item.stock) name += '&nbsp; <span class="oos">(out of stock)</span>'
 
-                            html = '<tr data-item="'+encodeURIComponent(JSON.stringify(item))+'">'
+                            var storeName = stores[i].name + '<br>votes: ' + stores[i].rating + ' <a class="vote-shop link" data-shop-id="' + stores[i].id + '">[upvote]</a>'
+
+                            html = '<tr data-item="' + encodeURIComponent(JSON.stringify(item)) + '">'
                             html += '<td abbr="' + encodeURIComponent(name) + '">' + name + '</td>'
                             html += '<td abbr="' + price + '">' + price + '</td>'
-                            html += '<td abbr="' + encodeURIComponent(stores[i].name) + '">' + stores[i].name + '</td>'
+                            html += '<td abbr="' + stores[i].rating + '">' + storeName + '</td>'
                             html += '<td>' + img + '</td>'
                             html += '</tr>'
 

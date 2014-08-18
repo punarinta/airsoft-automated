@@ -61,10 +61,11 @@ var stores =
 [
     @foreach($shops as $shop)
     @if ($shop->active)
-    {scan:'{{ $shop->plugin }}',name:'{{ $shop->name }}',rating:'{{ $shop->rating }}'},
+    {id:{{ $shop->id }},scan:'{{ $shop->plugin }}',name:'{{ $shop->name }}',rating:'{{ $shop->rating }}'},
     @endif
     @endforeach
 ]
+var loggedIn = {{ Auth::check()*1 }}
 </script>
 <script src="/js/jquery.tinysort.min.js"></script>
 <script src="/js/market.js"></script>
