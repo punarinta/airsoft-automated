@@ -11,7 +11,7 @@ class Tacticalstore_Se extends ScanMarket
         }
 
         // check if results present and set pointer if success
-        if ($this->grab($html, 'Antal träffar: 0', null))
+        if ($this->grab($html, 'gav inte n', null))
         {
             return 2;
         }
