@@ -110,6 +110,16 @@ var market =
 
         for (i in stores)
         {
+            if (!$('#sw-shop-' + stores[i].id).is(':checked'))
+            {
+                scanCounter++
+                if (scanCounter == stores.length)
+                {
+                    $('#btn-search').text('Find')
+                }
+                continue
+            }
+
             (function(i)
             {
                 var suffix = '&showNoPrice=1'

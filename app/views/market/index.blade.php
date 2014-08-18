@@ -30,6 +30,14 @@
                     <td><input type="text" class="my-input max-price"/></td>
                 </tr>
             </table>
+            <hr class="my-hr"/>
+            <div class="shops-list">
+                @foreach($shops as $shop)
+                @if ($shop->active)
+                <label><input type="checkbox" id="sw-shop-{{ $shop->id }}" checked/>{{ $shop->name }}</label><br/>
+                @endif
+                @endforeach
+            </div>
         </div>
     </div>
     <div id="item-viewer" class="hidden">
