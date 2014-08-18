@@ -1,7 +1,7 @@
 + rodastjarnan.com
 + airsoftbutiken.se
 + frysen.nu
-- airsoftstore.se
++ airsoftstore.se
 - tacticalstore.se
 - malmoairsoft.se
 - combatzone.se
@@ -9,7 +9,7 @@
 - miltac.se
 - batalj.com
 + shop.wizeguy.se
-* strikerairsoft.se
++ strikerairsoft.se
 - cyberphoto.se
 - cabom.se
 - mesafe.se
