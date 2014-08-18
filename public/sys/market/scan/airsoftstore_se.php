@@ -44,6 +44,6 @@ class Airsoftstore_Se extends ScanMarket
     }
 }
 
-$shop = new Airsoftstore_Se('Röda Stjärnan', 'UTF-8');
+$shop = new Airsoftstore_Se('Airsoftstore', 'UTF-8');
 $shop->scan();
 echo $shop->jsonp();

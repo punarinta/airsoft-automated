@@ -2,7 +2,7 @@
 + airsoftbutiken.se
 + frysen.nu
 + airsoftstore.se
-- tacticalstore.se
++ tacticalstore.se
 - malmoairsoft.se
 - combatzone.se
 - garderoben.se
