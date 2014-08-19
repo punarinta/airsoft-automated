@@ -13,6 +13,7 @@ return array
         'sign_in' => 'Sign in',
         'sign_out' => 'Sign out',
         'no_nick' => 'no nick',
+        'extra' => 'Extra',
     ),
     'util' => array
     (
@@ -22,6 +23,13 @@ return array
         'do-view' => 'view',
         'do-edit' => 'edit',
         'do-book' => 'book',
+    ),
+    'extra' => array
+    (
+        'title' => 'Extra tools',
+        'head' => 'Additional tools',
+        'item-market' => 'Search in different airsoft shops',
+        'item-tools-fps' => 'FPS converter',
     ),
     'home' => array
     (

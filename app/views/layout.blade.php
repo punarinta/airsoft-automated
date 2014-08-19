@@ -31,6 +31,7 @@
             <li><a href="{{ URL::route('organizer-dashboard') }}">{{ trans('airsoft.menu.i_organize') }}</a></li>
             <li><a href="{{ URL::route('user-profile') }}">{{ trans('airsoft.menu.profile') }}</a></li>
             @endif
+            <li><a href="{{ URL::route('extra') }}">{{ trans('airsoft.menu.extra') }}</a></li>
             <li><a class="last" href="{{ URL::route('about') }}">{{ trans('airsoft.menu.about') }}</a></li>
         </ul>
 

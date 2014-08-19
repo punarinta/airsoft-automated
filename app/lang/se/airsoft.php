@@ -13,6 +13,7 @@ return array
         'sign_in' => 'Logga in',
         'sign_out' => 'Logga ut',
         'no_nick' => 'inget nick',
+        'extra' => 'Extra',
     ),
     'util' => array
     (
@@ -22,6 +23,13 @@ return array
         'do-view' => 'titta på',
         'do-edit' => 'redigera',
         'do-book' => 'boka',
+    ),
+    'extra' => array
+    (
+        'title' => 'Extra verktyg',
+        'head' => 'Ytterligare tools',
+        'item-market' => 'Sök genom olika airsoft butiker',
+        'item-tools-fps' => 'FPS konverter',
     ),
     'home' => array
     (

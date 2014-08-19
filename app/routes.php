@@ -58,10 +58,11 @@ Route::get('api/ticket/check-in/{barcode}', array('uses' => 'ApiTicketController
 Route::get('testing/populate', array('uses' => 'TestingController@populate'));
 
 
-// Market
+// Extra
+Route::get('/extra', array('uses' => 'Extra\ToolsController@extra', 'as' => 'extra'));
 Route::get('/market', array('uses' => 'Extra\MarketController@index', 'as' => 'market'));
 Route::get('/market/vote/{shop_id}', array('uses' => 'Extra\MarketController@vote', 'as' => 'market-vote'))->before('auth');
-Route::get('/tools/fps', array('uses' => 'Extra\ToolsController@fps', 'as' => 'fps'));
+Route::get('/tools/fps', array('uses' => 'Extra\ToolsController@fps', 'as' => 'tool-fps'));
 
 
 // REST API

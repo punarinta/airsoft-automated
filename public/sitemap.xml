@@ -8,6 +8,8 @@
 <url><loc>https://airsoft.zone/about?lang=se</loc><priority>0.85</priority></url>
 <url><loc>https://airsoft.zone/user/login</loc><priority>0.69</priority></url>
 <url><loc>https://airsoft.zone/user/register</loc><priority>0.69</priority></url>
+<url><loc>https://airsoft.zone/extra</loc><priority>0.69</priority></url>
+<url><loc>https://airsoft.zone/extra?lang=se</loc><priority>0.69</priority></url>
 <url><loc>https://airsoft.zone/market</loc><priority>0.69</priority></url>
 <url><loc>https://airsoft.zone/tools/fps</loc><priority>0.69</priority></url>
 <url><loc>https://airsoft.zone/game/card/1</loc><priority>0.69</priority></url>
@@ -16,4 +18,3 @@
 <url><loc>https://airsoft.zone/game/card/4</loc><priority>0.69</priority></url>
 <url><loc>https://airsoft.zone/game/card/5</loc><priority>0.69</priority></url>
 </urlset>
- 
