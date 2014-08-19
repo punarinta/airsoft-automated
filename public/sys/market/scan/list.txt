@@ -5,7 +5,7 @@
 + tacticalstore.se
 - malmoairsoft.se
 + combatzone.se
-- garderoben.se
++ garderoben.se
 + miltac.se
 - batalj.com
 + shop.wizeguy.se
