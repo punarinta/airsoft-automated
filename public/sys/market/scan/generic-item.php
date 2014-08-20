@@ -11,6 +11,7 @@ class ScanMarketItem
 	public $code    = '';			// article ID, can be string
 	public $url     = '';
 	public $price   = 0;
+	public $vendor  = '';
 
 	protected $textPosition = 0;
 
