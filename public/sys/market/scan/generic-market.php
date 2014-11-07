@@ -27,6 +27,7 @@ class ScanMarket
     protected $categoryManual = false;			    // true to control it manually
   	protected $textPosition = 0;					// used as temporary "file pointer"
   	protected $canBeVoted = false;				    // whether user can vote for this shop
+    protected $shopCountry = 'SE';
 
 	public function __construct($name, $char = 'UTF-8', $type = 1)
 	{
@@ -245,6 +246,7 @@ class ScanMarket
         }
     
 		$res = '{"shopName":"' . $this->shopName . '",';
+		$res.= '"shopCountry":"' . $this->shopCountry . '",';
 		$res.= '"body": [';
     
 		$max = sizeof($this->items);
